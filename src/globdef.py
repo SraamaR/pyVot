@@ -10,7 +10,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 Cï¿½drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -30,20 +30,20 @@ import os,os.path,sys, wx
 
 #
 # Les deuxlignes suivantes permettent de lancer le script PyVot.py depuis n'importe
-# quel répertoire (par exemple : C:\python .\0.3\PyVot.py) sans que l'utilisation de chemins
-# relatifs ne soit perturbée
+# quel rï¿½pertoire (par exemple : C:\python .\0.3\PyVot.py) sans que l'utilisation de chemins
+# relatifs ne soit perturbï¿½e
 #
 PATH = os.path.dirname(os.path.abspath(sys.argv[0]))
 #PATH = os.path.split(PATH)[0]
 os.chdir(PATH)
 sys.path.append(PATH)
-print "Chemin de l'application :",PATH
+print("Chemin de l'application :",PATH)
 
 SAMPLEPATH = os.path.join(PATH,"../Exemples")
 HELPPATH = os.path.join(PATH,"../Aide")
 
 #
-# Définition du numéro de version
+# Dï¿½finition du numï¿½ro de version
 #
 MAJOR=0
 MINOR=62
@@ -58,8 +58,8 @@ LANGUAGE=None
 #
 # Diverses options
 #
-INSTALLED_LANG = None #le language installé par défaut
-USE_PSYCO=True # utilisation optionnelle de psyco pour exécuter le programme plus rapidement (mais empreinte mémoire plus importante)
+INSTALLED_LANG = None #le language installï¿½ par dï¿½faut
+USE_PSYCO=True # utilisation optionnelle de psyco pour exï¿½cuter le programme plus rapidement (mais empreinte mï¿½moire plus importante)
 
 #
 # Option d'analyse
@@ -77,7 +77,7 @@ DISTANCE_DEMONTAGE_RLT_LONG = 500
 
 HACHURER_EN_EDITION = True
 
-# Tags utilisés pour reconnaitre les items appartenant à l'arbre ou à l'alésage
+# Tags utilisï¿½s pour reconnaitre les items appartenant ï¿½ l'arbre ou ï¿½ l'alï¿½sage
 TAG_ARBRE = "GrpArbre"
 TAG_ALESAGE = "GrpAlesage"
 

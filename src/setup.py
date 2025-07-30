@@ -12,7 +12,7 @@ shutil.rmtree("build", ignore_errors=True)
 #    sys.argv += ['--install-script', 'install.py']
 
 
-# Inculsion des fichiers de données
+# Inculsion des fichiers de donnï¿½es
 #################################################################################################
 includefiles = []
 includefiles.extend([#('Microsoft.VC90.CRT', "Microsoft.VC90.CRT"),
@@ -23,13 +23,12 @@ includefiles.extend([#('Microsoft.VC90.CRT', "Microsoft.VC90.CRT"),
                      ('../Exemples', "../Exemples"),
                      ])
 
-if sys.platform == "win32":
-    includefiles.extend([('C:\Users\Cedrick\Documents\Developp\Microsoft.VC90.CRT', "Microsoft.VC90.CRT"),])
-
+#if sys.platform == "win32":
+#    includefiles.extend([('C:\Users\Cedrick\Documents\Developp\Microsoft.VC90.CRT', "Microsoft.VC90.CRT"),])
 
 # pour que les bibliotheques binaires de /usr/lib soient recopiees aussi sous Linux
 binpathincludes = []
-if sys.platform == "linux2":
+if sys.platform == "linux":
     binpathincludes += ["/usr/lib"]
 
 # Dependencies are automatically detected, but it might need fine tuning.
@@ -58,7 +57,7 @@ if sys.platform == "win32":
 
 name = u"pyVot"
 version = globdef.VERSION
-author = u"Cédrick FAURY"
+author = u"Cï¿½drick FAURY"
 author_email = "cedrick.faury@ac-clermont.fr"
 description = u"pyVot"
 url = "https://github.com/cedrick-f/pyVot"
@@ -93,7 +92,7 @@ if sys.platform == "win32":
 
 else:
     from setuptools import setup, find_packages
-    print "PACKAGES", find_packages()
+    print("PACKAGES", find_packages())
     setup(  name = name,
             version = version,
             author = author,
@@ -102,7 +101,7 @@ else:
             description = description,
             long_description = long_description,
             license = license,
-            scripts=["pyvot.py"],
+            scripts=["PyVot.py"],
             package_dir = {'':''},
             packages = find_packages(),
             install_requires=['python-wxgtk3.0',
