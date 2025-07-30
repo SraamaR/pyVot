@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 CÈdrick FAURY
+## Copyright (C) 2006-2009 C√©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -80,9 +79,9 @@ class MySplashScreen(wx.SplashScreen):
 
     def ShowMain(self):
         NomFichier = None
-        if len(sys.argv)>1: #un paramËtre a ÈtÈ passÈ
+        if len(sys.argv)>1: #un param√®tre a √©t√© pass√©
             parametre=sys.argv[1]
-            # on verifie que le fichier passÈ en paramËtre existe
+            # on verifie que le fichier pass√© en param√®tre existe
             if os.path.isfile(parametre):
                 NomFichier = parametre
         frame = FenPrincipale.wxPyVot(None, "PyVot", NomFichier)
@@ -142,7 +141,7 @@ def main():
 
 # def PyVotRunning():
 #     #
-#     # Cette fonction teste si PyVot.exe est dÈj‡ lancÈ, auquel cas on arrete tout.
+#     # Cette fonction teste si PyVot.exe est d√©j√† lanc√©, auquel cas on arrete tout.
 #     #
 #     if not HAVE_WMI:
 #         return False
@@ -163,11 +162,11 @@ def main():
 if __name__ == '__main__':
 #     __name__ = 'Main'
     #
-    # On teste si PyVot est dÈj‡ lancÈ
+    # On teste si PyVot est d√©j√† lanc√©
     #
 #    PyVotRunning()
     #
-    # AmÈlioration de la vitesse de traitement en utilisant psyco
+    # Am√©lioration de la vitesse de traitement en utilisant psyco
     #
 #     if USE_PSYCO:
 #         try:

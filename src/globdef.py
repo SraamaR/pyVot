@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 C�drick FAURY
+## Copyright (C) 2006-2009 Cédrick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -30,8 +29,8 @@ import os,os.path,sys, wx
 
 #
 # Les deuxlignes suivantes permettent de lancer le script PyVot.py depuis n'importe
-# quel r�pertoire (par exemple : C:\python .\0.3\PyVot.py) sans que l'utilisation de chemins
-# relatifs ne soit perturb�e
+# quel répertoire (par exemple : C:\python .\0.3\PyVot.py) sans que l'utilisation de chemins
+# relatifs ne soit perturbée
 #
 PATH = os.path.dirname(os.path.abspath(sys.argv[0]))
 #PATH = os.path.split(PATH)[0]
@@ -43,7 +42,7 @@ SAMPLEPATH = os.path.join(PATH,"../Exemples")
 HELPPATH = os.path.join(PATH,"../Aide")
 
 #
-# D�finition du num�ro de version
+# Définition du numéro de version
 #
 MAJOR=0
 MINOR=62
@@ -58,8 +57,8 @@ LANGUAGE=None
 #
 # Diverses options
 #
-INSTALLED_LANG = None #le language install� par d�faut
-USE_PSYCO=True # utilisation optionnelle de psyco pour ex�cuter le programme plus rapidement (mais empreinte m�moire plus importante)
+INSTALLED_LANG = None #le language installé par défaut
+USE_PSYCO=True # utilisation optionnelle de psyco pour exécuter le programme plus rapidement (mais empreinte mémoire plus importante)
 
 #
 # Option d'analyse
@@ -77,7 +76,7 @@ DISTANCE_DEMONTAGE_RLT_LONG = 500
 
 HACHURER_EN_EDITION = True
 
-# Tags utilis�s pour reconnaitre les items appartenant � l'arbre ou � l'al�sage
+# Tags utilisés pour reconnaitre les items appartenant à l'arbre ou à l'alésage
 TAG_ARBRE = "GrpArbre"
 TAG_ALESAGE = "GrpAlesage"
 

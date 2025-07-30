@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -295,7 +294,7 @@ class wxPyVot(wx.Frame):
         
         self.version = globdef.VERSION
         
-        self.SetMinSize((1024,850)) # Taille mini d'écran : 1024x768
+        self.SetMinSize((1024,850)) # Taille mini d'Ã©cran : 1024x768
 
         # Use a panel under the AUI panes in order to work around a
         # bug on PPC Macs
@@ -308,7 +307,7 @@ class wxPyVot(wx.Frame):
         # On applique l'icone
         self.SetIcon(Icones.getIconeFenetreIcon())
 
-        # On centre la fenêtre dans l'écran ...
+        # On centre la fenÃªtre dans l'Ã©cran ...
         self.Centre(wx.BOTH)
         
         #
@@ -337,10 +336,10 @@ class wxPyVot(wx.Frame):
         # Instanciation d'une analyse du montage
         self.analyse = Analyse.Analyse()
         
-        # On fait un copie des propriétés des éléments
+        # On fait un copie des propriÃ©tÃ©s des Ã©lÃ©ments
         self.CopieListeElements = Elements.dictCopy(Elements.listeElements)
         
-        # Taille des roulements à inserer
+        # Taille des roulements Ã  inserer
         self.taillelem = "P"
         
         #
@@ -500,7 +499,7 @@ class wxPyVot(wx.Frame):
         
         
         #
-        # On ouvre le fichier .pyv passé en argument
+        # On ouvre le fichier .pyv passÃ© en argument
         #
         if nomFichier is not None:
             self.ouvrir(nomFichier)
@@ -509,7 +508,7 @@ class wxPyVot(wx.Frame):
         self.definirNomFichierCourant(nomFichier)
         
         #
-        # On met à jour le cout
+        # On met Ã  jour le cout
         #
         self.MiseAJourCout()
        
@@ -521,7 +520,7 @@ class wxPyVot(wx.Frame):
         if 'wxMac' in wx.PlatformInfo:
             useMetal = self.cb.IsChecked()
             
-        dlg = Elements.Propriete(self, -1, u"Propriétés", size=(350, 200),
+        dlg = Elements.Propriete(self, -1, u"PropriÃ©tÃ©s", size=(350, 200),
                          #style=wx.CAPTION | wx.SYSTEM_MENU | wx.THICK_FRAME,
                          style=wx.DEFAULT_DIALOG_STYLE, # & ~wx.CLOSE_BOX,
                          num = num, useMetal=useMetal,
@@ -533,7 +532,7 @@ class wxPyVot(wx.Frame):
     
     #############################################################################
     def definirNomFichierCourant(self, nomFichier = '', modif = False):
-#        if modif : print "Fichier courant modifié !"
+#        if modif : print "Fichier courant modifiÃ© !"
         self.fichierCourant = nomFichier
         self.fichierCourantModifie = modif
         if self.fichierCourant == '':
@@ -558,7 +557,7 @@ class wxPyVot(wx.Frame):
 
      #############################################################################            
     def Escape(self, event):
-        "Op. à effectuer quand la touche <Echap> est pressée"
+        "Op. Ã  effectuer quand la touche <Echap> est pressÃ©e"
 #        print "Escape"
         if not self.suppression:
             if self.elemProv.num is not None:
@@ -571,12 +570,12 @@ class wxPyVot(wx.Frame):
         
         self.elemProv.num = None
 
-        # Remise à la normale du curseur
+        # Remise Ã  la normale du curseur
         self.mtg.frame.effaceCurseur()
 ##        self.master["cursor"] = 'arrow'
 ##        self.mtg.frame["cursor"] = 'arrow'
 
-        # Remise à la normale des boutons
+        # Remise Ã  la normale des boutons
         if not self.mtg.deuxrlt():
             self.barreElements.activer_desactiverBoutonPG(1)
         if self.elemProv.num is not None:
@@ -603,7 +602,7 @@ class wxPyVot(wx.Frame):
         self.MarquerFichierCourantModifie()
         self.mtgComplet.CdCF.MaJ()
         
-        # Recréation de l'arbre de montage
+        # RecrÃ©ation de l'arbre de montage
         if self.nbGauche.GetSelectionId() == 1:
             self.nbGauche.tree.RecreateTree()
             
@@ -620,12 +619,12 @@ class wxPyVot(wx.Frame):
         else:
             depass = False
         self.statusBar.MiseAJourCout(self.mtgComplet.mtg.cout, depass)
-#        self.statusBar.SetStatusText("Coût : "+str(self.mtgComplet.mtg.cout),1)
+#        self.statusBar.SetStatusText("CoÃ»t : "+str(self.mtgComplet.mtg.cout),1)
             
     def OnMtgModified(self, event = None):
         self.MarquerFichierCourantModifie()
         
-        # Recréation de l'arbre de montage
+        # RecrÃ©ation de l'arbre de montage
         if self.nbGauche.GetSelectionId() == 1:
             self.tree.RecreateTree()
     
@@ -634,11 +633,11 @@ class wxPyVot(wx.Frame):
 
 
     def OnElemClick(self, event):
-#        print "Bouton elem n°",event.GetId()
+#        print "Bouton elem nÂ°",event.GetId()
         self.nbGauche.tbElem.desactiverBouton(self.zMont.numElemProv)
         self.zMont.numElemProv = event.GetId()
         self.changerCurseur(elem = self.zMont.numElemProv)
-#        self.statusBar.PushStatusText(u"Choisir un emplacement pour cet élément sur le montage ...",0) 
+#        self.statusBar.PushStatusText(u"Choisir un emplacement pour cet Ã©lÃ©ment sur le montage ...",0) 
         
     def OnElemDeclick(self, event = None):
         if self.zMont.numElemProv != None:
@@ -681,7 +680,7 @@ class wxPyVot(wx.Frame):
         """
         self.Freeze()
         
-        # On lance l'analyse si ce n'est pas déja fait ...
+        # On lance l'analyse si ce n'est pas dÃ©ja fait ...
         if self.analyse.estPerimee:
             self.analyse.lancerAnalyse(self.mtgComplet, self.zMont)
             self.nbGauche.InitTBAnalyse()
@@ -773,7 +772,7 @@ class wxPyVot(wx.Frame):
                 aideAbsente()
 
         
-#        dlg = wx.MessageDialog(self, u"Cette fonctionnalité n'est pas encore disponible ...",
+#        dlg = wx.MessageDialog(self, u"Cette fonctionnalitÃ© n'est pas encore disponible ...",
 #                               'Aide de PyVot',
 #                               wx.OK | wx.ICON_INFORMATION
 #                               #wx.YES_NO | wx.NO_DEFAULT | wx.CANCEL | wx.ICON_INFORMATION
@@ -790,13 +789,13 @@ class wxPyVot(wx.Frame):
         # Dossier d'enregistrement
         self.DossierSauvegarde = self.options.optGenerales["RepCourant"]
   
-        # Propriétés des éléments
-            # Propriétés personnalisées
+        # PropriÃ©tÃ©s des Ã©lÃ©ments
+            # PropriÃ©tÃ©s personnalisÃ©es
         if options.optElements["ProprietesDefaut"] != 0: 
             ElementTable.Exporter(options.optElements["FichierProprietes"], 
                                   Elements.listeElements)
             
-            # Propriétés par défaut
+            # PropriÃ©tÃ©s par dÃ©faut
         else:                                        
             Elements.listeElements = Elements.dictCopy(self.CopieListeElements)
         
@@ -1052,7 +1051,7 @@ class wxPyVot(wx.Frame):
                 return sys.exc_info()[2]
         
         def MaJ():
-#            print "Ouverture réussie !"
+#            print "Ouverture rÃ©ussie !"
             self.tree.RecreateTree(mtgComplet = self.mtgComplet)
             self.mtgComplet.mtg.rafraichirAffichage(self.zMont)
             self.analyse.estPerimee = True
@@ -1080,9 +1079,9 @@ class wxPyVot(wx.Frame):
         elif Erreur06 == 1:
             Erreur03 = ouvrir03()
             if Erreur03 == 0:
-                mess = u'Le fichier %s a été enregistré\n\
+                mess = u'Le fichier %s a Ã©tÃ© enregistrÃ©\n\
 par la version 0.3 de PyVot.\n\n\
-Attention! il sera enregistré par défaut\n\
+Attention! il sera enregistrÃ© par dÃ©faut\n\
 au format de la version 0.6 !!' %nomFichier
                 dlg = wx.MessageDialog(self, mess  ,
                                        u'Version ancienne',
@@ -1090,7 +1089,7 @@ au format de la version 0.6 !!' %nomFichier
                 dlg.ShowModal()
                 dlg.Destroy()
                 MaJ()
-                # On marque "modifié" car version 0.3
+                # On marque "modifiÃ©" car version 0.3
                 self.MarquerFichierCourantModifie()
                 
             else:
@@ -1146,18 +1145,18 @@ au format de la version 0.6 !!' %nomFichier
 
             # make the image into a cursor
             cursor = wx.CursorFromImage(image)
-            texte = u"Choisir un emplacement pour cet élément sur le montage ..."
+            texte = u"Choisir un emplacement pour cet Ã©lÃ©ment sur le montage ..."
             
         else:
             cursor = wx.StockCursor(curs)
             if curs == globdef.CURSEUR_DEFAUT:
                 texte = u""
             elif curs == globdef.CURSEUR_INTERDIT:
-                texte = u"Impossible de placer l'élément sélectionné ici ..."
+                texte = u"Impossible de placer l'Ã©lÃ©ment sÃ©lectionnÃ© ici ..."
             elif curs == globdef.CURSEUR_ORIENTATION:
-                texte = u"Déplacer la souris pour choisir l'orientation du roulement ... puis cliquer ..."
+                texte = u"DÃ©placer la souris pour choisir l'orientation du roulement ... puis cliquer ..."
             elif curs == globdef.CURSEUR_OK:
-                texte = u"Cliquer pour placer l'élément sélectionné ici ..."      
+                texte = u"Cliquer pour placer l'Ã©lÃ©ment sÃ©lectionnÃ© ici ..."      
         
         self.SetCursor(cursor)
         self.statusBar.SetStatusText(texte, 0)
@@ -1172,7 +1171,7 @@ au format de la version 0.6 !!' %nomFichier
             self.fermerPyVot(event)
             return
         
-        texte = u"Le projet à été modifié.\nVoulez vous enregistrer les changements ?"
+        texte = u"Le projet Ã  Ã©tÃ© modifiÃ©.\nVoulez vous enregistrer les changements ?"
         if self.fichierCourant != '':
             texte += "\n\n\t"+self.fichierCourant+"\n"
             
@@ -1208,7 +1207,7 @@ au format de la version 0.6 !!' %nomFichier
 
 
 ######################################################################################################
-# Arbre présentant les boutons de selection d'élément
+# Arbre prÃ©sentant les boutons de selection d'Ã©lÃ©ment
 ######################################################################################################
 #class ArbreElements(wx.Treebook):
 #    def __init__(self, parent):
@@ -1247,7 +1246,7 @@ class NbGauche(wx.Notebook):
         
         self.AfficherArbre = afficherArbre
         
-        self.NomPages = {0 : u'Eléments',
+        self.NomPages = {0 : u'ElÃ©ments',
                          1 : u'Projet',
                          2 : u'Analyse'}
         self.IdPages = {0 : 0,
@@ -1255,7 +1254,7 @@ class NbGauche(wx.Notebook):
                         2 : 2}
         
         num = 0
-        # TreeBook des éléments (boutons) (page 0)
+        # TreeBook des Ã©lÃ©ments (boutons) (page 0)
         #-----------------------------------------
         self.tbElem = Panel_ArbreElements(self, app)
         self.AddPage(self.tbElem, self.NomPages[0], imageId=0)
@@ -1370,11 +1369,11 @@ class NbGauche(wx.Notebook):
         progBarr.Avancer(20)
         
         self.zMont.modeAnalyse = True
-        # On revient à la page "Analyse"
+        # On revient Ã  la page "Analyse"
         self.SetSelectionId(2)
         progBarr.Avancer(5)
         
-        # On revient à la page d'analyse sauvegardée
+        # On revient Ã  la page d'analyse sauvegardÃ©e
         self.tbAnalys.ChangeSelection(p)
         progBarr.Avancer(100)
         
@@ -1397,7 +1396,7 @@ class panelRoulement(wx.Panel):
             sampleList, 2, wx.RA_SPECIFY_COLS
             )        
         self.Bind(wx.EVT_RADIOBOX, self.EvtRadioBox, rb)
-        rb.SetToolTip(wx.ToolTip(u"Selectionne la taille du roulement à placer"))
+        rb.SetToolTip(wx.ToolTip(u"Selectionne la taille du roulement Ã  placer"))
         bs.Add(rb, flag = wx.EXPAND)
         
         nb = wx.Notebook(self, -1, style = wx.BORDER_NONE )
@@ -1792,7 +1791,7 @@ class MenuPrincipal(wx.MenuBar):
         menu = wx.Menu()
         
         item = wx.MenuItem(menu, 1010, '&Nouveau projet',
-                           'Créer un nouveau montage')
+                           'CrÃ©er un nouveau montage')
         item.SetBitmap(lstImg['BRAZ'])
         menu.AppendItem(item)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnNewClick, item)
@@ -1826,7 +1825,7 @@ class MenuPrincipal(wx.MenuBar):
         exitItem = wx.MenuItem(menu, 1100, '&Quitter\tCtrl-Q', u"Quitter l'application")
 #         exitItem.SetBitmap(Icones.getexitBitmap())
         menu.AppendItem(exitItem)
-        # à faire ...
+        # Ã  faire ...
         self.parent.Bind(wx.EVT_MENU, self.parent.OnFileExit, exitItem)
         
         wx.App.SetMacExitMenuItemId(exitItem.GetId())
@@ -1856,12 +1855,12 @@ class MenuPrincipal(wx.MenuBar):
         def ajoutFamElem(menu, famille):
             sub = wx.Menu()
             for e in famille[1]:
-                if famille[0][0] == u"à":
+                if famille[0][0] == u"Ã ":
                     ch = u""
                     lch = Elements.listeElements[e]['nom']
                     if lch.split()[2] == u"rotule":
                         lch = lch.split()[2:]
-                    elif lch.split()[0] == u"Butée":
+                    elif lch.split()[0] == u"ButÃ©e":
                         lch = lch.split()[0::3]
                     else:
                         lch = lch.split()[3:]
@@ -1870,7 +1869,7 @@ class MenuPrincipal(wx.MenuBar):
                 else:
                     ch = Elements.listeElements[e]['nom']
                 item = wx.MenuItem(sub, e, ch,
-                                  u"Insérer un "+Elements.listeElements[e]['nom'])
+                                  u"InsÃ©rer un "+Elements.listeElements[e]['nom'])
                 img = Images.Img_Elem(e).ConvertToImage()
                 item.SetBitmap(img.Rescale(30,30,wx.IMAGE_QUALITY_HIGH).ConvertToBitmap())
                 sub.AppendItem(item)
@@ -1955,7 +1954,7 @@ class MenuPrincipal(wx.MenuBar):
         menu.AppendItem(retItem)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnRetourneClick, retItem)
         
-        retItem = wx.MenuItem(menu, 1042, '&Analyser montage', u"Execute l'analyse complète du montage")
+        retItem = wx.MenuItem(menu, 1042, '&Analyser montage', u"Execute l'analyse complÃ¨te du montage")
         retItem.SetBitmap(lstImg['BAnalys'])
         menu.AppendItem(retItem)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnAnalysClick, retItem)
@@ -1987,7 +1986,7 @@ class MenuPrincipal(wx.MenuBar):
         wx.App.SetMacAboutMenuItemId(aproposItem.GetId())
         menu.AppendItem(aproposItem)
         
-        # à faire ...
+        # Ã  faire ...
         self.parent.Bind(wx.EVT_MENU, self.parent.OnAboutClick, aproposItem)
 #        self.parent.Bind(wx.EVT_MENU, self.parent.OnHelpAbout, aproposItem)
         
@@ -2066,12 +2065,12 @@ class ArbreMontage(ExpansionState, wx.TreeCtrl):
                           },
         # Images de l'arbre
         #-------------------
-        _treeLabelList = {1  : u"Propriétés",
+        _treeLabelList = {1  : u"PropriÃ©tÃ©s",
                           10 : u"Version",
                           11 : u"Auteur",
                           2  : u"Montage",
                           3  : u"CdCF",
-                          4  : u"Spécifications",
+                          4  : u"SpÃ©cifications",
                          },
         _treeData = {1  : None,
                      10 : wx.GetApp().version,
@@ -2103,7 +2102,7 @@ class ArbreMontage(ExpansionState, wx.TreeCtrl):
     def RecreateTree(self, event = None, mtgComplet = None):
         if mtgComplet is not None:
             self.mtgComplet = mtgComplet
-#        print "Recréation arbre montage :\n", self.mtgComplet.mtg
+#        print "RecrÃ©ation arbre montage :\n", self.mtgComplet.mtg
 #        print self.mtgComplet.CdCF
         
         if event is not None:
@@ -2205,7 +2204,7 @@ class StructureArbre(object):
     #################################################################################################
     def construitArbre(self, arbre, item):
         """ Construit un arbre wx.TreeCtrl
-            à partir de la structure <item>
+            Ã  partir de la structure <item>
         """
         
         def recurs(parent, e):
@@ -2227,7 +2226,7 @@ class StructureArbre(object):
             else:
                 item = arbre.AppendItem(parent, text+dat, data = None)
             
-            # On affiche en GRAS les informations présentes dans le CdCF
+            # On affiche en GRAS les informations prÃ©sentes dans le CdCF
             if   (isinstance(d,Elements.Element) and (d.num is not None)) \
                 or (isinstance(d,CdCF.Indice)) or (isinstance(d,CdCF.IntVar)) \
                 or type(d) == unicode :                                     
@@ -2300,13 +2299,13 @@ class StructureArbre(object):
 
     ####################################""
     def ActualiserDepuisET(self, branche):
-        """ Actualise les données de l'arbre
+        """ Actualise les donnÃ©es de l'arbre
             depuis une branche ElementTree
-            (après ouverture fichier)
+            (aprÃ¨s ouverture fichier)
         """
 #        print "Debut Actualisation ..."
         
-        # Données provisoires ...
+        # DonnÃ©es provisoires ...
         self._treeDataProv = self.TreeDataCopy()
         
         def actualiseSub(elem, struct):
@@ -2414,7 +2413,7 @@ class ZoneCout(wx.Panel):
         self.SetFont(font)
         self.SetForegroundColour(wx.BLACK)
         
-        label = wx.StaticText(self,-1, u" Coût indicatif : ")
+        label = wx.StaticText(self,-1, u" CoÃ»t indicatif : ")
         sz.Add(label)
         
         
@@ -2515,7 +2514,7 @@ class A_propos(wx.Dialog):
         sizer.Add(wx.StaticBitmap(self, -1, Icones.getLogoSplashBitmap()),
                   flag=wx.ALIGN_CENTER)
         
-        sizer.Add(wx.StaticText(self, -1, u"CopyLeft 2006-2008 Cédrick FAURY"), 
+        sizer.Add(wx.StaticText(self, -1, u"CopyLeft 2006-2008 CÃ©drick FAURY"), 
                   border = 10)
 #        sizer.Add(20)
         nb = wx.Notebook(self, -1, style=
@@ -2533,7 +2532,7 @@ class A_propos(wx.Dialog):
         auteurs = wx.Panel(nb, -1)
         fgs1 = wx.FlexGridSizer(cols=2, vgap=4, hgap=4)
         
-        lstActeurs = ((u"Développement :",(u"Cédrick FAURY",)),
+        lstActeurs = ((u"DÃ©veloppement :",(u"CÃ©drick FAURY",)),
                      (u"Soutien, Tests, ... :",(u"Thomas PAVIOT", u"Franck VITTE", u"Arnaud DUBOIS")), 
                      (u"Site Web :" ,(u"Franck VITTE",)),
                      (u"Version LINUX :",(u"Arnaud DUBOIS",)))
@@ -2565,7 +2564,7 @@ class A_propos(wx.Dialog):
         # Description
         #-------------
         descrip = wx.Panel(nb, -1)
-        wx.StaticText(descrip, -1, wordwrap(u"""PyVot est un logiciel éducatif de construction et d'analyse de liaisons PIVOT réalisées avec des roulements""",
+        wx.StaticText(descrip, -1, wordwrap(u"""PyVot est un logiciel Ã©ducatif de construction et d'analyse de liaisons PIVOT rÃ©alisÃ©es avec des roulements""",
             500, wx.ClientDC(self))) 
         
         nb.AddPage(descrip, "Description")

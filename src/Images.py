@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -54,7 +53,7 @@ def Img_Icones(key):
             }
      return lst[key]
 
-# Boutons des éléments
+# Boutons des Ã©lÃ©ments
 def Img_Elem(key):
     lst =  {0 : Icones.get_0Bitmap(),
             1 : Icones.get_1Bitmap(),
@@ -82,7 +81,7 @@ def Img_Elem(key):
             }
     return lst[key]
 
-# Icones des ensembles d'éléments
+# Icones des ensembles d'Ã©lÃ©ments
 def Img_IconesEns(key):
      lst = {1     : Icones.getIcon_RoultsBitmap(), 
             2     : Icones.getIcon_ArretsBitmap(), 
@@ -90,7 +89,7 @@ def Img_IconesEns(key):
             }
      return lst[key]
 
-# Boutons Analyse Montabilité 
+# Boutons Analyse MontabilitÃ© 
 def Img_BoutonMont(key, ajout = False):
     
     def ajouteSensInterdit(ico):
@@ -169,7 +168,7 @@ def Img_BoutonMont(key, ajout = False):
 #####################################################################################
 #####################################################################################
 class ImagePlus:
-    """ Classe définissant  une(des) wxImage(s)    : .orig = []
+    """ Classe dÃ©finissant  une(des) wxImage(s)    : .orig = []
                             une wxImage "courante" : .img  ,
                             une wxBitmap           : .bmp
                             un offset (en pixels)  : .ofst      
@@ -196,7 +195,7 @@ class ImagePlus:
         if len(self.orig) > 0:
             self.img = self.orig[0]
             self.bmp = self.img.ConvertToBitmap()
-            # Pour débuggage :
+            # Pour dÃ©buggage :
             self.nom = lstFichiersImage[0]
         else:
             self.nom = '_'
@@ -236,7 +235,7 @@ class ImagePlus:
     
 
     def fondu(self, bmp1, bmp2, niv):
-        """ Renvoie une image fondue à <niv> % avec <bmp>
+        """ Renvoie une image fondue Ã  <niv> % avec <bmp>
         """
         def AdjustAlpha(bmp, alpha):
             return wx.BitmapFromImage(wx.ImageFromBitmap(bmp).AdjustChannels(1.0, 1.0, 1.0, alpha))
@@ -248,7 +247,7 @@ class ImagePlus:
         alpha = (1.001*niv)/100
         bmp0 = AdjustAlpha(bmp1, alpha)
         
-        # Création d'une copie de l'image ... ou d'une image vide
+        # CrÃ©ation d'une copie de l'image ... ou d'une image vide
         if bmp2 is not None:
             bmpf = bmp2.GetSubBitmap(wx.Rect(0, 0, bmp2.GetWidth(), bmp2.GetHeight()))
             memdc = wx.MemoryDC(bmpf)
@@ -358,31 +357,31 @@ class ImagePlus:
 ##                 offset = None):
 ##        "Calcul de la position en x d'une image"
 ##        
-##        # Palier Opposé
+##        # Palier OpposÃ©
 ##        if palier == "G":
 ##            palierOpp = "D"
 ##        else:
 ##            palierOpp = "G"
 ##
-##        # Sens du coté Intérieur / Extérieur au montage
+##        # Sens du cotÃ© IntÃ©rieur / ExtÃ©rieur au montage
 ##        if pAligne == None:
 ##            pAligne = self.pAligne
-##        if pAligne == "I":      # coté Intérieur
+##        if pAligne == "I":      # cotÃ© IntÃ©rieur
 ##            sm = 1
-##        elif pAligne == "O":    # coté Opposé
+##        elif pAligne == "O":    # cotÃ© OpposÃ©
 ##            sm = 1
 ##            palier = palierOpp
-##        else:                   # coté Extérieur
+##        else:                   # cotÃ© ExtÃ©rieur
 ##            sm = -1
 ##
-##         # Sens du coté Palier
+##         # Sens du cotÃ© Palier
 ##        if palier == "G":
 ##            sp = 1
 ##        else:
 ##            sp = -1
 ##
 ##
-##        # Sens du coté affichage
+##        # Sens du cotÃ© affichage
 ##        if pAffich == None:
 ##            pAffich = self.pAffich
 ##        if pAffich == "I":
@@ -390,7 +389,7 @@ class ImagePlus:
 ##        else:
 ##            sa = -1
 ##
-##        # Largeur du roulement associé
+##        # Largeur du roulement associÃ©
 ##        if largRlt is None:
 ##            largRlt = mtg.tailleRltDefaut
 ##        
@@ -451,7 +450,7 @@ class ImagePlus:
                
 
 
-# Images des éléments ###########################################################################################
+# Images des Ã©lÃ©ments ###########################################################################################
 imageElem = {}
 def charger_imageElem():
     dosrlt = os.path.join(dosImg['root'], dosImg['roulements'])
@@ -578,7 +577,7 @@ def charger_imageElem():
 
 
 #####################################################################################################
-# Images d'Alésage ##################################################################################
+# Images d'AlÃ©sage ##################################################################################
 imageAl = {}
 def charger_imagesAl():
     dos = os.path.join(dosImg['root'], dosImg['arbrales'])
@@ -596,9 +595,9 @@ def charger_imagesAl():
 imageAr = {}
 def charger_imagesAr():
     dos = os.path.join(dosImg['root'], dosImg['arbrales'])
-            # Eléments FIXES :
+            # ElÃ©ments FIXES :
             #taille  : G ou P
-            # bout  : B = bout chanfreiné (arrêté) ; F = "infini"
+            # bout  : B = bout chanfreinÃ© (arrÃªtÃ©) ; F = "infini"
             #  dim  : P = petit ; N = normal ; G = grand
     imageAr["GBN"] = ImagePlus(dos, ('g_BoutArbreG.png',)            ,-20     )
     imageAr["PBN"] = ImagePlus(dos, ('BoutArbreG.png',)              ,-20        )
@@ -618,8 +617,8 @@ def charger_imagesAr():
     imageAr["GFG"] = ImagePlus(dos, ('g_BoutArbre_Infini_G_SurEpaul.png',),-20)
     imageAr["PFG"] = ImagePlus(dos, ('BoutArbre_Infini_G_SurEpaul.png',)  ,-20   )
 
-                # à l'Intérieur du montage :
-                # E = épaulement
+                # Ã  l'IntÃ©rieur du montage :
+                # E = Ã©paulement
     imageAr["PE" ] = ImagePlus(dos, ('g_InterArbre_Epaul_G.png',)    ,40        )
     imageAr["P"  ] = ImagePlus(dos, ('InterArbre_G.png',)            ,30        )
     imageAr["G"  ] = ImagePlus(dos, ('g_InterArbre_G.png',)          ,40     )
@@ -628,9 +627,9 @@ def charger_imagesAr():
     imageAr["GM" ] = ImagePlus(dos, ('g_LogementArbre_M.png',)               )
     imageAr["PM" ] = ImagePlus(dos, ('LogementArbre_M.png',)                 )
             
-                # Eléments MOBILE (selon les éléments du montage)
-                #     autour de l'arrêt (ou du bord du roulement)
-                # I = intérieur ; E = extérieur
+                # ElÃ©ments MOBILE (selon les Ã©lÃ©ments du montage)
+                #     autour de l'arrÃªt (ou du bord du roulement)
+                # I = intÃ©rieur ; E = extÃ©rieur
     imageAr["GRI"] = ImagePlus(dos, ('g_BordLogementArbre_Inter.png',)        )
     imageAr["PRI"] = ImagePlus(dos, ('BordLogementArbre_Inter.png',)          )
     imageAr["GRE"] = ImagePlus(dos, ('g_BordLogementArbre_Exter.png',)        )
@@ -650,7 +649,7 @@ def charger_imagesAr():
 
 
 ###################################################################################################
-# Images du Schéma de CdCF ##################################################################################
+# Images du SchÃ©ma de CdCF ##################################################################################
 imageSchema = {}
 dos = os.path.join(dosImg['root'], dosImg['schema'])
 def charger_imagesSchema():
@@ -704,7 +703,7 @@ def ombrer(bmp, e = 4):
 #    mask = bmp.GetMask()
 #    maskBrush = wx.BrushFromBitmap(ombr)
     
-    # Création du masque
+    # CrÃ©ation du masque
     bmpMask = wx.EmptyBitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
     maskDC = wx.MemoryDC(bmpMask)
     maskDC.SetBackground(wx.Brush(wx.WHITE))
@@ -740,7 +739,7 @@ def ombrer(bmp, e = 4):
 ##    maskDC.DrawBitmap(maskbmp, 0, 0, True)
 #    maskDC.SelectObject(wx.NullBitmap)
     
-    # Création de l'image ombrée
+    # CrÃ©ation de l'image ombrÃ©e
 #    ombr = bmp.ConvertToImage().AdjustChannels(0.5, 0.5, 0.5, 0.5).Blur(e).ConvertToBitmap()
     bmpOmbr = wx.EmptyBitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
     dc = wx.MemoryDC(bmpOmbr)

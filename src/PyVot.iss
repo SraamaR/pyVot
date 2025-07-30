@@ -1,7 +1,7 @@
 
 ;This file is part of PyVot.
 ;
-; Copyright (C) 2016 Cédrick FAURY
+; Copyright (C) 2016 CÃ©drick FAURY
 ;
 ;PyVot is free software; you can redistribute it and/or modify
 ;it under the terms of the GNU General Public License as published by
@@ -27,17 +27,17 @@
 
 
 [Setup]
-;Informations générales sur l'application
+;Informations gÃ©nÃ©rales sur l'application
 AppName={#AppName}
 AppVerName={#AppName} {#AppVersion}
 AppVersion={#AppVersion}
-AppPublisher=Cédrick Faury
-AppCopyright=Copyright © 2006-2017 Cédrick Faury
+AppPublisher=CÃ©drick Faury
+AppCopyright=Copyright Â© 2006-2017 CÃ©drick Faury
 AppPublisherURL={#AppURL}
 AppSupportURL={#AppURL}
 AppUpdatesURL={#AppURL}
 
-;Répertoire de base contenant les fichiers
+;RÃ©pertoire de base contenant les fichiers
 SourceDir=C:\Users\Cedrick\Documents\Developp\pyVot
 
 ;Repertoire d'installation
@@ -45,18 +45,18 @@ DefaultDirName={pf}\{#AppName}
 DefaultGroupName={#AppName}
 LicenseFile=LICENSE.txt
 
-;Paramètres de compression                               
+;ParamÃ¨tres de compression                               
 ;lzma ou zip
 Compression=lzma/max
 SolidCompression=yes
-;Par défaut, pas besoin d'être administrateur pour installer
+;Par dÃ©faut, pas besoin d'Ãªtre administrateur pour installer
 PrivilegesRequired=none
-;Nom du fichier généré et répertoire de destination
+;Nom du fichier gÃ©nÃ©rÃ© et rÃ©pertoire de destination
 OutputBaseFilename=setup_{#AppName}_{#AppVersionInfo}_win32
 OutputDir=releases
 
 UninstallDisplayIcon={app}\images\pyvot.ico
-;Fenêtre en background
+;FenÃªtre en background
 WindowResizable=false
 WindowStartMaximized=true
 WindowShowCaption=true
@@ -71,12 +71,12 @@ Name: fr; MessagesFile: "compiler:Languages\French.isl"
 ;
 ; French
 ;
-fr.uninstall=Désinstaller
+fr.uninstall=DÃ©sinstaller
 fr.gpl_licence=Prendre connaissance du contrat de licence pour le logiciel
-fr.fdl_licence=Prendre connaissance du contrat de licence pour la documentation associée
-fr.CreateDesktopIcon=Créer un raccourci sur le bureau vers
+fr.fdl_licence=Prendre connaissance du contrat de licence pour la documentation associÃ©e
+fr.CreateDesktopIcon=CrÃ©er un raccourci sur le bureau vers
 fr.AssocFileExtension=&Associer le programme {#AppName} aux extensions .pyv
-fr.CreateQuickLaunchIcon=Créer un icône dans la barre de lancement rapide
+fr.CreateQuickLaunchIcon=CrÃ©er un icÃ´ne dans la barre de lancement rapide
 
 fr.FileExtension={#AppName}.montage
 fr.FileExtensionName=Montage de roulements pyVot
@@ -117,9 +117,9 @@ Name: local;  Description: {cm:JustMe}; GroupDescription: {cm:InstallFor}; Flags
 [Icons]
 Name: {group}\{#AppName}; Filename: {app}\bin\pyvot.exe; WorkingDir: {app}\bin; IconFileName: {app}\bin\pyvot.exe
 Name: {group}\Aide {#AppName}; Filename: {app}\aide\pyvotaide.chm; Comment: Aide en ligne; IconFileName: {app}\aide\pyvotaide.chm
-Name: {group}\Désinstaller {#AppName}; Filename: {app}\unins000.exe;IconFileName: {app}\unins000.exe
+Name: {group}\DÃ©sinstaller {#AppName}; Filename: {app}\unins000.exe;IconFileName: {app}\unins000.exe
 ;
-; On ajoute sur le Bureau l'icône PyVot
+; On ajoute sur le Bureau l'icÃ´ne PyVot
 ;
 Name: {userdesktop}\{#AppName};   Filename: {app}\bin\pyvot.exe; WorkingDir: {app}\bin; MinVersion: 4,4; Tasks: desktopicon2; IconFileName: {app}\bin\pyvot.exe
 
@@ -143,7 +143,7 @@ Root: HKLM; Subkey: SOFTWARE\{#AppName}; ValueType: string; ValueName: Uninstall
 ;Root: HKCR; SubKey: Projet PyVot; ValueType: string; Flags: uninsdeletekey; ValueData: Projet PyVot
 ;Root: HKCR; SubKey: Projet PyVot\Shell\Open\Command; ValueType: string; ValueData: """{app}\bin\pyvot.exe"" ""%1"""; Flags: uninsdeletekey;
 ;Root: HKCR; Subkey: Projet PyVot\DefaultIcon; ValueType: string; ValueData: {app}\Images\fichier-pyv.ico,0; Flags: uninsdeletekey;
-; et une clef pour indiquer que pyvot est installé
+; et une clef pour indiquer que pyvot est installÃ©
 ;Root: HKLM; Subkey: SOFTWARE\PyVot; Flags: uninsdeletekey;
 ;Root: HKLM; Subkey: SOFTWARE\PyVot; ValueName: "UninstallPath" ; ValueType: string; ValueData: {uninstallexe}; Flags: uninsdeletekey;
 
@@ -176,9 +176,9 @@ var
   ResultCode: integer;
 begin
   if (CurPageID = wpWelcome) and (PyVotInstalled()) then
-    if MsgBox('Une précédente version de PyVot est déja installée !'#13 +
-              'Il est conseillé de la desinstaller.'#13#13 +
-              'Vouler vous désinstaller la version précédente de PyVot ?', mbConfirmation, MB_YESNO) = IDYES then
+    if MsgBox('Une prÃ©cÃ©dente version de PyVot est dÃ©ja installÃ©e !'#13 +
+              'Il est conseillÃ© de la desinstaller.'#13#13 +
+              'Vouler vous dÃ©sinstaller la version prÃ©cÃ©dente de PyVot ?', mbConfirmation, MB_YESNO) = IDYES then
     begin
       if Exec(GetUninstallPath(), '', '', SW_SHOW,
               ewWaitUntilTerminated, ResultCode) then
@@ -187,8 +187,8 @@ begin
         end
         else
         begin
-          MsgBox('La désinstallation automatique de PyVot à échouée !'#13#13 +
-                 'Veuillez désinstaller la version précédente de PyVot manuellement.', mbCriticalError, MB_OK);
+          MsgBox('La dÃ©sinstallation automatique de PyVot Ã  Ã©chouÃ©e !'#13#13 +
+                 'Veuillez dÃ©sinstaller la version prÃ©cÃ©dente de PyVot manuellement.', mbCriticalError, MB_OK);
           // handle failure if necessary; ResultCode contains the error code
         end;
     end;
@@ -199,13 +199,13 @@ end;
 
 procedure DesinstallerPyVot();
 begin
-  if MsgBox('Une précédente version de PyVot est déja installée ! Il est conseillé de la desinstaller. Vouler vous désinstaller PyVot avant d''en installer une nouvelle version ?', mbConfirmation, MB_YESNO) = IDYES then
+  if MsgBox('Une prÃ©cÃ©dente version de PyVot est dÃ©ja installÃ©e ! Il est conseillÃ© de la desinstaller. Vouler vous dÃ©sinstaller PyVot avant d''en installer une nouvelle version ?', mbConfirmation, MB_YESNO) = IDYES then
     begin
       //
     end;
 end;
 
-{ Renvoie le dossier "Application Data" à utiliser }
+{ Renvoie le dossier "Application Data" Ã  utiliser }
 function DefAppDataFolder(Param: String): String;
 begin
   if IsTaskSelected('common') then
@@ -217,7 +217,7 @@ end;
 //function InitializeSetup(): Boolean;
 //begin
 //  if PyVotInstalled then
-//    Msgbox('Une précédente version de PyVot est déja installée ! Désinstaller PyVot avant d'en installer une nouvelle version.',mbConfirmation,MB_Ok);
+//    Msgbox('Une prÃ©cÃ©dente version de PyVot est dÃ©ja installÃ©e ! DÃ©sinstaller PyVot avant d'en installer une nouvelle version.',mbConfirmation,MB_Ok);
 //end;
 
 //function GetPSPadPath(Default: String) : String;

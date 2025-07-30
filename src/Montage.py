@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -42,7 +41,7 @@ myEVT_DATA_CHANGED = wx.NewEventType()
 EVT_DATA_CHANGED = wx.PyEventBinder(myEVT_DATA_CHANGED, 1)
 
 ###############################################################################
-# Evenement indiquant que des données ont été modifiées dans le Montage
+# Evenement indiquant que des donnÃ©es ont Ã©tÃ© modifiÃ©es dans le Montage
 ###############################################################################
 class MtgModifiedEvent(wx.PyCommandEvent):
     def __init__(self, evtType):
@@ -141,7 +140,7 @@ EVT_MTG_MODIFIED = wx.PyEventBinder(myEVT_MTG_MODIFIED,1)
 #                      
 ##                      }
 ##        expansionState = self.GetExpansionState()
-#        print "Recréation arbre montage :\n", self.mtgComplet.mtg
+#        print "RecrÃ©ation arbre montage :\n", self.mtgComplet.mtg
 #        print self.mtgComplet.CdCF
 #        
 #        xml = self.mtgComplet.tree
@@ -236,7 +235,7 @@ EVT_MTG_MODIFIED = wx.PyEventBinder(myEVT_MTG_MODIFIED,1)
 #############################################################################
 #############################################################################
 class Palier:
-    "Classe définissant un palier = 1 rlt + 4 arrêts + joints"
+    "Classe dÃ©finissant un palier = 1 rlt + 4 arrÃªts + joints"
     
     
     def __init__(self, taille = "P"):
@@ -283,17 +282,17 @@ class Palier:
         # Labels de l'arbre
         #-------------------
         _treeLabelList = {1  : u"Roulement",
-                          2  : u"Arrêts sur Alésage",
+                          2  : u"ArrÃªts sur AlÃ©sage",
                           20 : u"gauche",
                           21 : u"droite",
-                          3  : u"Arrêts sur Arbre",
+                          3  : u"ArrÃªts sur Arbre",
                           30 : u"gauche",
                           31 : u"droite",
-                          4  : u"Dispositif d'étanchéité",
+                          4  : u"Dispositif d'Ã©tanchÃ©itÃ©",
                           40 : u"statique",
                           41 : u"dynamique"
                           },                           
-        # Données de l'arbre
+        # DonnÃ©es de l'arbre
         #--------------------
         _treeData = {1  : self.rlt,
                      2  : None,
@@ -331,7 +330,7 @@ class Palier:
         return ligne
 
 #    def creerBranche(self,branche):
-#        """ Crée une branche ElementTree
+#        """ CrÃ©e une branche ElementTree
 #            --> Pour sauvegarde
 #        """
 #        def strnum(num):
@@ -346,7 +345,7 @@ class Palier:
 #        rlt.attrib["num"] = strnum(self.rlt.num)
 #        rlt.attrib["taille"] = self.rlt.taille
 #        
-#        #Arrêts
+#        #ArrÃªts
 #        arrAr = ET.SubElement(branche,"arrAr")
 ##        arrAr.text = u'Arrets arbre'
 #        G = ET.SubElement(arrAr,"G")
@@ -357,7 +356,7 @@ class Palier:
 #        D.attrib["num"] = strnum(self.arr['Ar']["D"].num)
 #        
 #        arrAl = ET.SubElement(branche,"arrAl")
-##        arrAl.text = u'Arrets alésage'
+##        arrAl.text = u'Arrets alÃ©sage'
 #        G = ET.SubElement(arrAl,"G")
 ##        G.text = "gauche"
 #        G.attrib["num"] = strnum(self.arr['Al']["G"].num)
@@ -367,7 +366,7 @@ class Palier:
 #        
 #        # Joints
 #        jnt = ET.SubElement(branche,"jnt")
-##        jnt.text = u"Dispositifs d'étanchéité"
+##        jnt.text = u"Dispositifs d'Ã©tanchÃ©itÃ©"
 #        Al = ET.SubElement(jnt,"Al")
 ##        Al.text = u"statique"
 #        Al.attrib["num"] = strnum(self.jnt['Al'].num)
@@ -378,7 +377,7 @@ class Palier:
 #
 #    def actualiserDepuisBranche(self, branche):
 #        """ Actualise le Palier depuis une branche ElementTree
-#            --> après ouverture fichier
+#            --> aprÃ¨s ouverture fichier
 #        """
 #        
 #        def evalnum(str):
@@ -391,7 +390,7 @@ class Palier:
 #        rlt = branche.getiterator("rlt")[0]
 #        self.rlt = Element(evalnum(rlt.get("num")),rlt.get("taille"))
 #        
-#        #Arrêts
+#        #ArrÃªts
 #        arrAr = branche.getiterator("arrAr")[0]
 #        G = arrAr.getiterator("G")[0]
 #        D = arrAr.getiterator("D")[0]
@@ -417,7 +416,7 @@ class Palier:
 #    Montage    #
 ##########################################################################
 class Montage:
-    "Classe définissant une liaison pivot = 2 paliers"
+    "Classe dÃ©finissant une liaison pivot = 2 paliers"
     
     def __init__(self, parent, pascout = False):
 
@@ -443,7 +442,7 @@ class Montage:
         _treeLabelList = {1  : u"Palier Gauche",
                           2  : u"Palier Droit",
                           },                          
-        # Données de l'arbre
+        # DonnÃ©es de l'arbre
         #--------------------
         _treeData = {1  : None,
                      2  : None}
@@ -454,13 +453,13 @@ class Montage:
 #        if not pascout:
 #            
 
-        # Frame ou est affiché le montage
+        # Frame ou est affichÃ© le montage
 ##        self.frame = ZoneMontage(self.master , self)
 #        self.frame = self.master.zoneMontage
 ##        self.frame.afficherBoutArbre(self)
 
 #    def creerBranche(self,branche):
-#        """ Crée une branche ElementTree
+#        """ CrÃ©e une branche ElementTree
 #            --> Pour sauvegarde
 #        """
 #        PG = ET.SubElement(branche,"PalierG")
@@ -472,7 +471,7 @@ class Montage:
 #        
 #    def actualiserDepuisBranche(self, branche):
 #        """ Actualise le Montage depuis une branche ElementTree
-#            --> après ouverture fichier
+#            --> aprÃ¨s ouverture fichier
 #        """
 #        PG = branche.getiterator("PalierG")[0]
 #        self.palier["G"].miseAJour(PG)
@@ -534,7 +533,7 @@ class Montage:
 
     #############################################################################        
     def majCout(self):
-        """ Mise à jour du cout indicatif du montage """
+        """ Mise Ã  jour du cout indicatif du montage """
         self.devis = []
         self.cout = 0
         support = {"G" : 0, "D" : 0}
@@ -663,7 +662,7 @@ class Montage:
     
     ############################################################################
     def elemPos(self, pos):
-        """Renvoie l'élément à l'emplacement <pos>"""
+        """Renvoie l'Ã©lÃ©ment Ã  l'emplacement <pos>"""
         
         if pos is None:
             return Element()
@@ -681,7 +680,7 @@ class Montage:
 
     ############################################################################
     def clefElemPosCode(self,pcode):
-        """ Renvoi l'élément à l'emplacement codé <pcode> """
+        """ Renvoi l'Ã©lÃ©ment Ã  l'emplacement codÃ© <pcode> """
         
         elem = self.elemPos(PositionDansPivot().posCode(pcode))
         if elem.num is not None:
@@ -711,7 +710,7 @@ class Montage:
 
     #############################################################################
     def posCode(self,code):
-        "Renvoie la position à partir du code d'une position"
+        "Renvoie la position Ã  partir du code d'une position"
 ##        print code
         pos = PositionDansPivot(typelem = code[0],
                                 palier = code[1])
@@ -780,9 +779,9 @@ class Montage:
 
     #############################################################################
     def placeCompatible(self, pos, num):
-        "Renvoie <True> si la place <pos> est compatible avec l'élément <elem>"
+        "Renvoie <True> si la place <pos> est compatible avec l'Ã©lÃ©ment <elem>"
 
-##        print "Test élément :", elem.num,pos
+##        print "Test Ã©lÃ©ment :", elem.num,pos
         
         # pas de position valide
         if pos is None:
@@ -790,7 +789,7 @@ class Montage:
             return False
 
 
-        # mauvais type d'élément
+        # mauvais type d'Ã©lÃ©ment
         if self.typeNum(num) <> pos.typelem:
 #            print " ** mauvais type :",self.typeNum(num),"<>",pos.typelem
             return False
@@ -816,15 +815,15 @@ class Montage:
                 return False
             
                 
-##        # pas d'image définie
+##        # pas d'image dÃ©finie
 ##        if not 'imag' in elem.images.keys():
 ##            print " ** pas d'image"
 ##            return False
 
-##        # S'il y a déja une entretoise
+##        # S'il y a dÃ©ja une entretoise
 ##        if self.elemPos(pos).item.has_key('imag') and self.elemPos(pos).item['imag'] <> None \
 ##           and self.elemPos(pos).estEntretoise() and not self.estEpaulement(num):
-##            print " ** pas autorisé sous entretoise"
+##            print " ** pas autorisÃ© sous entretoise"
 ##            return False
 
         # Cas des entretoises
@@ -832,22 +831,22 @@ class Montage:
             elemOpp = self.elemPos(pos.opposee())
             
             if self.palier[pos.opposee().palier].rlt.num is None:
-#                print " ** pas de roulement de l'autre coté"
+#                print " ** pas de roulement de l'autre cotÃ©"
                 return False
 
             if elemOpp.estAffiche():
                 if not elemOpp.estEpaulement():
-#                    print " ** entretoise déja affichée"
+#                    print " ** entretoise dÃ©ja affichÃ©e"
                     return False
                 else:
                     if   pos.radiale == "Ar" and self.palier[pos.palier].taille == "P" \
                       or pos.radiale == "Al" and self.palier[pos.palier].taille == "G" \
                       or self.palier[pos.palier].taille == self.palier[pos.opposee().palier].taille:
-#                        print " ** tailles différentes"
+#                        print " ** tailles diffÃ©rentes"
                         return False
                     
 
-        # Cas des arrets de butée      
+        # Cas des arrets de butÃ©e      
         if self.typeNum(num)== "A":
             if self.palier[pos.palier].rlt.estButee():
                 p = pos
@@ -858,11 +857,11 @@ class Montage:
             
             if p and ((p.cotelem == self.palier[p.palier].rlt.orientation and p.radiale == "Al") \
                   or (p.cotelem <> self.palier[p.palier].rlt.orientation and p.radiale == "Ar")):
-#                print " ** butée en",p," : "
+#                print " ** butÃ©e en",p," : "
                 return False
 
 
-        # Imcompatibilité Arret + Joint     
+        # ImcompatibilitÃ© Arret + Joint     
         if self.typeNum(num) == "A" and pos.radiale == "Al" and not pos.interieur():
             if not self.estChapeau(num, pos) and self.yaUnJoint(pos.palier):
 #                print " ** ya un joint"
@@ -881,7 +880,7 @@ class Montage:
 
     ##############################################################################    
     def placerElem(self, num, pos, taille = "P"):
-        "Placer un élément dans le palier à la position <elem.pos>"
+        "Placer un Ã©lÃ©ment dans le palier Ã  la position <elem.pos>"
 
 
         ### Affectation de la taille
@@ -900,13 +899,13 @@ class Montage:
 ##            elem.item['opp'] = img
 
 
-        ### Initialisation de l'élément sur le montage
+        ### Initialisation de l'Ã©lÃ©ment sur le montage
         self.elemPos(pos).__init__(num, taille = taille,
                                    orientation = pos.cotelem,
                                    pos = pos)
             
         if self.estEntretoise(num) and self.placeLibre(pos.opposee()):
-#            print "Place opposée libre"
+#            print "Place opposÃ©e libre"
             self.elemPos(pos.opposee()).__init__(num, taille = taille,
                                        pos = pos.opposee())
 
@@ -929,7 +928,7 @@ class Montage:
              
     ##########################################################################
     def supprimerElem(self, pos):
-        "Supprimer un élément du palier"
+        "Supprimer un Ã©lÃ©ment du palier"
         elemSuppr = self.elemPos(pos)
 #        print "Supprimer",pos
         
@@ -941,7 +940,7 @@ class Montage:
 ##            if self.elemPos(pos.opposee()).estEntretoise():
 ##                self.supprimer1Elem(self.elemPos(pos.opposee()))
             elif elemSuppr.type == "R":
-                # Insérer ici message "attention"
+                # InsÃ©rer ici message "attention"
                 pp = PositionDansPivot()
                 pp = pos.copie()
                 pp.typelem = "A"
@@ -956,7 +955,7 @@ class Montage:
                 self.supprimerElem(pp)
             self.supprimer1Elem(pos)
            
-        #print u" -- élément supprimé :", pos
+        #print u" -- Ã©lÃ©ment supprimÃ© :", pos
         self.majCout()
         if self.parent.zMont.numElemProv == None:
             self.parent.GetEventHandler().ProcessEvent(MtgModifiedEvent(myEVT_MTG_MODIFIED))
@@ -966,7 +965,7 @@ class Montage:
 
     ##########################################################################
     def supprimer1Elem(self, pos):
-        "Supprimer un unique élément du palier"
+        "Supprimer un unique Ã©lÃ©ment du palier"
         elem = self.elemPos(pos)
         elem.efface()
         elem.__init__()
@@ -975,7 +974,7 @@ class Montage:
 
     ###########################################################################
     def effacerElem(self,elem):
-        "Effacer l'item d'un élément"
+        "Effacer l'item d'un Ã©lÃ©ment"
 ##        if elem.pos.palier is not None:
 ####            print elem.pos.palier
 ##            elem.taille = self.palier[elem.pos.palier].taille
@@ -1011,7 +1010,7 @@ class Montage:
             
     ###########################################################################
     def afficherElem(self, zoneMtg, elem, pos, hachurer = True):
-        "Afficher un élément <elem> à la place <pos>"
+        "Afficher un Ã©lÃ©ment <elem> Ã  la place <pos>"
 
 #        print "Affichage de :",elem, "hachurage =", hachurer
 
@@ -1027,7 +1026,7 @@ class Montage:
 ##            elem.pos = pos
 
             
-        ### Ajout d'un éventuel support (pour joints ou chapeau) : 'supp'
+        ### Ajout d'un Ã©ventuel support (pour joints ou chapeau) : 'supp'
         #################################################################
         
         if elem.type == "J" or elem.estChapeau():
@@ -1037,7 +1036,7 @@ class Montage:
                 zoneMtg.presenceSupport[elem.pos.palier] = True
 
         
-        ### Affichage de l'item par défaut : 'imag'
+        ### Affichage de l'item par dÃ©faut : 'imag'
         ### =======================================
                 
         zoneMtg.afficherItemElem(elem, 'imag', elem.pos, hachurer = hachurer)
@@ -1069,7 +1068,7 @@ class Montage:
 
 
 
-        ### Traitement des entretoise pour butées double effet : items 'supp'
+        ### Traitement des entretoise pour butÃ©es double effet : items 'supp'
         ######################################################################
                     
         if elem.type == "A" and pos.radiale == "Ar" and self.palier[pos.palier].rlt.estButeeDbl():
@@ -1077,15 +1076,15 @@ class Montage:
 
 
 
-        ### Traitement des roulements à bagues séparables : 'imagAr'
+        ### Traitement des roulements Ã  bagues sÃ©parables : 'imagAr'
         #############################################################
                     
-        if elem.estSeparable() or elem.nom == u'Roulement à billes à contact oblique':
+        if elem.estSeparable() or elem.nom == u'Roulement Ã  billes Ã  contact oblique':
             zoneMtg.afficherItemElem(elem, 'imagAr', pos, hachurer = hachurer)
 
 
 
-        ### Traitement des épaulements intérieurs : 'opp'
+        ### Traitement des Ã©paulements intÃ©rieurs : 'opp'
         ##################################################
             
         if elem.estEpaulement() and pos.interieur():
@@ -1096,14 +1095,14 @@ class Montage:
             if (tailleElemOpp == tailleElem and not arrOpp.estEpaulement()) \
                or ( pos.radiale == "Ar" and tailleElemOpp > tailleElem ) \
                or ( pos.radiale == "Al" and tailleElemOpp < tailleElem ):
-##                print "Affichage bout épaulement"
+##                print "Affichage bout Ã©paulement"
                 zoneMtg.afficherItemElem(elem, 'opp', pos.opposee(), hachurer = hachurer)
 
 
-        ### Affichage des éléments d'arbre et d'alésage
-##        print "Affiche arbre alésage et bouts ?",elem.pos
+        ### Affichage des Ã©lÃ©ments d'arbre et d'alÃ©sage
+##        print "Affiche arbre alÃ©sage et bouts ?",elem.pos
 ##        if elem.type == "R":
-####            print "  Affiche arbre alésage et bouts",elem.pos
+####            print "  Affiche arbre alÃ©sage et bouts",elem.pos
 ##            self.frame.afficherArbreAlesage(elem, self, elem.taille)
 ##            self.frame.afficherBoutArbre(elem.pos.palier, elem.taille)
 
@@ -1113,7 +1112,7 @@ class Montage:
 
     ##########################################################################
 #    def enregistrer(self,fichPyv):
-#        "Enregistre les données de montage dans le fichPyv ConfigParser"
+#        "Enregistre les donnÃ©es de montage dans le fichPyv ConfigParser"
 #
 ###        print "Enregistrement de :"
 ###        print self
@@ -1150,7 +1149,7 @@ class Montage:
 #        self.palier["G"].__init__(pickle.load(fichier))
 #        self.palier["D"].__init__(pickle.load(fichier))
 #
-#        # Arrets alésage
+#        # Arrets alÃ©sage
 #        self.palier["G"].arr["Al"]["G"].__init__(self.conv03(pickle.load(fichier)))
 #        self.palier["G"].arr["Al"]["D"].__init__(self.conv03(pickle.load(fichier)))
 #        self.palier["D"].arr["Al"]["G"].__init__(self.conv03(pickle.load(fichier)))
@@ -1200,14 +1199,14 @@ class Montage:
                     orient = ''
                     pass
 
-            # Lecture du numéro élément dans le fichier
+            # Lecture du numÃ©ro Ã©lÃ©ment dans le fichier
             try:
                 numElem = fichier.getint('Montage', poscode)
-            except: # Pas d'élément ici !
+            except: # Pas d'Ã©lÃ©ment ici !
                 numElem = None
                 pass
 
-            # Initialisation de l'élément du montage
+            # Initialisation de l'Ã©lÃ©ment du montage
             self.clefElemPosCode(poscode)[0].__init__(numElem,
                                                       self.palier[poscode[1]].taille,
                                                       orient)
@@ -1248,11 +1247,11 @@ class Montage:
             
 ##            print
 ##            print "Element",pos,elem.item.keys()
-##            print "Opposé",pos.opposee(),self.elemPos(pos.opposee()).item.keys()
+##            print "OpposÃ©",pos.opposee(),self.elemPos(pos.opposee()).item.keys()
             
             if (elem.num is not None) and not elem.estAffiche():
                 
-#                print "...test affichage élément :",elem.num, pos
+#                print "...test affichage Ã©lÃ©ment :",elem.num, pos
                 if elem.estOblique():
                     pos.cotelem = elem.orientation
                 
@@ -1263,7 +1262,7 @@ class Montage:
 #                print "    ...elem.item = ",elem.item
 #                print "    ...elem.image = ",elem.images.keys()
                 if self.placeCompatible(pos, elem.num):
-#                    print " ...affichage élément", pos
+#                    print " ...affichage Ã©lÃ©ment", pos
                     self.afficherElem(zoneMtg, elem, pos, hachurer = hachurer)
 ##                    if elem.estEntretoise() \
 ##                       and self.palier[pos.palier].taille == self.palier[pos.opposee().palier].taille:
@@ -1285,14 +1284,14 @@ class Montage:
 
 ##        self.frame["cursor"] = 'arrow'
 ##        print self
-##        print "Précédent :"
+##        print "PrÃ©cÃ©dent :"
 ##        print "......elem.pos = ",sauvelem.pos
 ##        print "......elem.item = ",sauvelem.item
 
 
     #############################################################################        
     def RAZ(self):
-        """ Réinitialiser le montage """
+        """ RÃ©initialiser le montage """
         for c in self.tousLesCodesPos():
             self.supprimer1Elem(PositionDansPivot().posCode(c))
         
@@ -1314,13 +1313,13 @@ class Montage:
     #################################################################################################
     #################################################################################################
     def testerInverserSensElem(self,app,elem):
-        "Test avant changement d'orientation de l'élément <elem>"
-        # Si l'élément est une butée
+        "Test avant changement d'orientation de l'Ã©lÃ©ment <elem>"
+        # Si l'Ã©lÃ©ment est une butÃ©e
         if elem.estButee():
             arrets = self.arretsButeeaSupprimer(elem.pos.palier, elem.sensOppose())
             if len(arrets) > 0:
                 dlg = wx.MessageDialog(app,self.texteArretsaSupprimer(arrets), 
-                               u"Suppression arrêt(s) de butée",
+                               u"Suppression arrÃªt(s) de butÃ©e",
                                wx.OK |wx.CANCEL| wx.ICON_WARNING
                                #wx.YES_NO | wx.NO_DEFAULT |  wx.ICON_INFORMATION
                                )
@@ -1344,7 +1343,7 @@ class Montage:
     #################################################################################################
     #################################################################################################
     def testerChangerTailleElem(self, app, elem):
-        "Test avant changement de taille de l'élément <elem>"
+        "Test avant changement de taille de l'Ã©lÃ©ment <elem>"
         
         def changerTailleElemEtSuppr(elem,dicElem,dicPos):
             for i in dicElem.keys():
@@ -1359,7 +1358,7 @@ class Montage:
                 nouvTaille = "G"
             self.parent.GetEventHandler().ProcessEvent(MtgModifiedEvent(myEVT_MTG_MODIFIED))
             
-    ##        # Suppression de l'entretoise ou l'épaulement incompatible #############
+    ##        # Suppression de l'entretoise ou l'Ã©paulement incompatible #############
     ##        if supprElem is not None:
     ####            print "Suppression de :", supprElem
     ##            self.supprimerElem(supprElem)
@@ -1372,7 +1371,7 @@ class Montage:
 
         palierOpp = self.palier[elem.pos.opposee().palier]
         
-        # Détermination du coté "intérieur" du palier ######################################
+        # DÃ©termination du cotÃ© "intÃ©rieur" du palier ######################################
         if elem.pos.palier == "D":
             i="D"
         else:
@@ -1381,13 +1380,13 @@ class Montage:
 #        changer = True
 #        elemASupprimer = []
         
-        # Toutes les positions contenant des séléments succeptibles d'être supprimés
+        # Toutes les positions contenant des sÃ©lÃ©ments succeptibles d'Ãªtre supprimÃ©s
         dicPos = {"Arentretoise" : None,
                   "Arepaulement" : None,
                   "Alentretoise" : None,
                   "Alepaulement" : None}
         
-        # Les éléments qui devront être supprimés
+        # Les Ã©lÃ©ments qui devront Ãªtre supprimÃ©s
         dicElem = {"Ar" : "entretoise",
                    "Al" : "entretoise"}
         
@@ -1423,7 +1422,7 @@ class Montage:
     #################################################################################################
     #################################################################################################
     def changerElemRoul(self,elem):
-##        print "Changement de type d'élément roulant ..."
+##        print "Changement de type d'Ã©lÃ©ment roulant ..."
 
         lstB = listeFamilles[0][1][0][1]
         lstR = listeFamilles[0][1][1][1]
@@ -1445,7 +1444,7 @@ class Montage:
 
     #############################################################################
     def arretsButeeaSupprimer(self, palier, orient):
-        "Renvoie la liste des arrêts à supprimer pour la butée <rlt>"
+        "Renvoie la liste des arrÃªts Ã  supprimer pour la butÃ©e <rlt>"
 
         arrets = []
             
@@ -1459,7 +1458,7 @@ class Montage:
                 or (pos.cotelem <> orient and pos.radiale == "Ar")):
                 arrets.append(pos.code())
                 
-##        print "Arrets à supprimer :",arrets
+##        print "Arrets Ã  supprimer :",arrets
 
         return arrets
 
@@ -1481,24 +1480,24 @@ class Montage:
             if a[3:] == "Ar":
                 sa = sa + u"/ arbre"
             else:
-                sa = sa + u"/ alésage"
+                sa = sa + u"/ alÃ©sage"
             
             sa += u" : "+self.clefElemPosCode(a)[0].nom
             ar.append(sa)
             
         if len(arrets) == 1:
-            t = u"L'arrêt suivant est incompatible\n"
+            t = u"L'arrÃªt suivant est incompatible\n"
         else:
-            t = u"Les arrêts suivants sont incompatibles\n"
+            t = u"Les arrÃªts suivants sont incompatibles\n"
 
-        t += u"avec une butée orientée dans le sens prévu :\n"
+        t += u"avec une butÃ©e orientÃ©e dans le sens prÃ©vu :\n"
         for tt in ar:
             t += u"  - "+tt+u"\n"
 
         if len(arrets) == 1:
-            t += u"\nIl sera supprimé ! "
+            t += u"\nIl sera supprimÃ© ! "
         else:
-            t += u"\nIls seront supprimés !"
+            t += u"\nIls seront supprimÃ©s !"
         
         return t
 
@@ -1507,7 +1506,7 @@ class Montage:
     #################################################################################################
     #################################################################################################
     def testerChangerTypeElem(self, app, elem, typ):
-        "Test avant changement de type de l'élément <elem> en <typ>"
+        "Test avant changement de type de l'Ã©lÃ©ment <elem> en <typ>"
             
         def changerTypeElem(elem, typ, oo = "G"):
 ##        print "Changement de type ...", typ
@@ -1523,7 +1522,7 @@ class Montage:
             
             self.parent.GetEventHandler().ProcessEvent(MtgModifiedEvent(myEVT_MTG_MODIFIED))    
                 
-        # Si le nouveau type est 'butée' simple effet
+        # Si le nouveau type est 'butÃ©e' simple effet
         if typ in [3,7]:
             if elem.estOblique():
                 arrets = self.arretsButeeaSupprimer(elem.pos.palier, elem.orientation)
@@ -1541,7 +1540,7 @@ class Montage:
                 
             if len(arrets) > 0:
                 dlg = wx.MessageDialog(app,self.texteArretsaSupprimer(arrets), 
-                               u"Suppression arrêt(s) de butée",
+                               u"Suppression arrÃªt(s) de butÃ©e",
                                wx.OK |wx.CANCEL| wx.ICON_WARNING
                                #wx.YES_NO | wx.NO_DEFAULT |  wx.ICON_INFORMATION
                                )
@@ -1577,7 +1576,7 @@ class Montage:
         for e in lstElem:
             zoneMtg.effacerItemElem(e)
         
-        # Rétablissament de la couleur normale
+        # RÃ©tablissament de la couleur normale
         for i in zoneMtg.lstItemMtg:
                 i.normale()
         
@@ -1589,7 +1588,7 @@ class Montage:
 
     ##########################################################################
     def elemProxim(self, x, y, zoneMtg, exist = False):
-        "Renvoyer la position de l'''élément à proximité d'un point"
+        "Renvoyer la position de l'''Ã©lÃ©ment Ã  proximitÃ© d'un point"
         
 ##        dy = 200
         
@@ -1661,7 +1660,7 @@ class Montage:
 
     ##########################################################################
     def elemProximExistant(self, x, y):
-        """Renvoie une liste de positions d'éléments existants à proximité d'un point"""
+        """Renvoie une liste de positions d'Ã©lÃ©ments existants Ã  proximitÃ© d'un point"""
         lst = []
 #        for tag in self.frame.gettags(self.frame.find_closest(x,y)):
 #            pos = PositionDansPivot().posCode(tag)
@@ -1736,7 +1735,7 @@ class Montage:
 #############################################################################
 #############################################################################
 class PositionDansPivot:
-    "Classe définissant l'emplacement d'un élément dans une liaison pivot"
+    "Classe dÃ©finissant l'emplacement d'un Ã©lÃ©ment dans une liaison pivot"
 
     def __init__(self, palier = None, typelem = None, cotelem = None, radiale = None, code = None):
         if code is None:
@@ -1780,7 +1779,7 @@ class PositionDansPivot:
 
     #############################################################################
     def posX(self):
-        """Renvoie la position en X à partir d'une position"""
+        """Renvoie la position en X Ã  partir d'une position"""
 
         pcode = self.code()
 
@@ -1789,7 +1788,7 @@ class PositionDansPivot:
 
     ############################################################################
     def posXCode(self,code):
-        """Renvoie la position en X à partir du code d'une position"""
+        """Renvoie la position en X Ã  partir du code d'une position"""
         x = 1
         if code[0] == "A":
             x += -1
@@ -1806,7 +1805,7 @@ class PositionDansPivot:
     
     #############################################################################
     def posCode(self,code):
-        "Renvoie la position à partir d'un code de position <code>"
+        "Renvoie la position Ã  partir d'un code de position <code>"
 ##        print "code",code
         if code == "":
             self = None
@@ -1829,11 +1828,11 @@ class PositionDansPivot:
         elif pcode[0] == "A":
             texte = u"arret palier"
         else:
-            texte = u"portée de roulement"
+            texte = u"portÃ©e de roulement"
             if pcode[3:5] == "Ar":
                 texte += u" arbre"
             else:
-                texte += u" alésage"
+                texte += u" alÃ©sage"
 
         if pcode[1] == "G":
             texte += u" gauche"
@@ -1842,21 +1841,21 @@ class PositionDansPivot:
 
         if pcode[0] == "R":
             if pcode[3:5] == "Ar":
-                texte += u" bague intérieure"
+                texte += u" bague intÃ©rieure"
             elif pcode[3:5] == "Al":
-                texte += u" bague extérieure"
+                texte += u" bague extÃ©rieure"
         else:
             if pcode[2] == "G":
-                texte += u" coté gauche"
+                texte += u" cotÃ© gauche"
             if pcode[2] == "D":
-                texte += u" coté droit"
+                texte += u" cotÃ© droit"
 
         return texte
         
 
     #############################################################################            
     def numPos(self, param):
-        "Renvoi <0> si le paramètre <param> est de type 'G' "
+        "Renvoi <0> si le paramÃ¨tre <param> est de type 'G' "
         if param == "cotelem":
             e = self.cotelem
         elif param == "palier":
@@ -1962,7 +1961,7 @@ class PositionDansPivot:
 
     #############################################################################
     def opposee(self):
-        "Renvoie la position opposée, sans modifier <self>"
+        "Renvoie la position opposÃ©e, sans modifier <self>"
         pp = PositionDansPivot()
         if self.palier == "G":
             pp.palier = "D"
@@ -1979,7 +1978,7 @@ class PositionDansPivot:
 
     #############################################################################
     def interieur(self):
-        u"Renvoie <True> s'il s'agit d'un arret intérieur"
+        u"Renvoie <True> s'il s'agit d'un arret intÃ©rieur"
         if self is None:
             return False
         if self.typelem == 'A' \
@@ -2002,7 +2001,7 @@ class PositionDansPivot:
 
     #############################################################################
     def egal(self,pos):
-        "Renvoie <True> si les 2 positions sont égales" 
+        "Renvoie <True> si les 2 positions sont Ã©gales" 
         if pos is None:
             return False
         return (self.typelem == pos.typelem) \
@@ -2013,7 +2012,7 @@ class PositionDansPivot:
 
     #############################################################################
     def __eq__(self,pos):
-        """ Teste l'égalité de deux positions """
+        """ Teste l'Ã©galitÃ© de deux positions """
         if pos is None: return False
         return (self.typelem == pos.typelem) \
                and (self.palier == pos.palier) \
@@ -2024,7 +2023,7 @@ class PositionDansPivot:
 
     #############################################################################
     def __ne__(self,pos):
-        """ Teste si deux positions sont différentes """
+        """ Teste si deux positions sont diffÃ©rentes """
         if pos is None or type(pos) != type(self): return True
         return     (self.typelem != pos.typelem) \
                or  (self.palier  != pos.palier) \
@@ -2036,23 +2035,23 @@ class PositionDansPivot:
 #############################################################################
 #############################################################################
 class FenChoixElementaSupprimer(wx.Dialog):
-    "Choix de l'élément incompatible à supprimer pour un changement de taille"
+    "Choix de l'Ã©lÃ©ment incompatible Ã  supprimer pour un changement de taille"
 
     def __init__(self, parent, dicElem, dicPos):
 
-        message = u"Un changement de taille du roulement entraînerait \n" +\
-                  u"une incompatibilité entre épaulement et entretoise !\n" + \
-                  u"Un ou plusieurs élément(s) doit(vent) être supprimé(s).\n\n" + \
-                  u"Sélectionner les éléments à supprimer :"
+        message = u"Un changement de taille du roulement entraÃ®nerait \n" +\
+                  u"une incompatibilitÃ© entre Ã©paulement et entretoise !\n" + \
+                  u"Un ou plusieurs Ã©lÃ©ment(s) doit(vent) Ãªtre supprimÃ©(s).\n\n" + \
+                  u"SÃ©lectionner les Ã©lÃ©ments Ã  supprimer :"
 
         messagefin = u'... ou "Annuler" pour ne rien changer.'
         
-        # Liste des éléments à supprimer
+        # Liste des Ã©lÃ©ments Ã  supprimer
         self.Selection = dicElem
        
         pre = wx.PreDialog()
         pre.SetExtraStyle(wx.DIALOG_EX_CONTEXTHELP)
-        pre.Create(parent, -1, u"Incompatibilité")
+        pre.Create(parent, -1, u"IncompatibilitÃ©")
         self.PostCreate(pre)
 
         # This extra style can be set after the UI object has been created.
@@ -2084,7 +2083,7 @@ class FenChoixElementaSupprimer(wx.Dialog):
                     t = u"arbre"
                     n = 0
                 else:
-                    t = u"alésage"
+                    t = u"alÃ©sage"
                     n = 1
                 rbox = wx.RadioBox(self, n, "Sur l'"+t+" :", 
                                    choices = lstChoix, name = i)
@@ -2094,7 +2093,7 @@ class FenChoixElementaSupprimer(wx.Dialog):
         sizer.Add(box, 0, wx.GROW|wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5)
 
         label = wx.StaticText(self, -1, messagefin)
-        label.SetHelpText(u"Aucun changement ne sera apporté au montage.")
+        label.SetHelpText(u"Aucun changement ne sera apportÃ© au montage.")
         sizer.Add(label, 0, wx.ALIGN_CENTRE|wx.ALL, 5)
 
         btnsizer = wx.StdDialogButtonSizer()
@@ -2105,7 +2104,7 @@ class FenChoixElementaSupprimer(wx.Dialog):
         
         btn = wx.Button(self, wx.ID_OK)
         btn.SetLabel("Supprimer")
-        btn.SetHelpText(u"Supprime les éléments selectionnés")
+        btn.SetHelpText(u"Supprime les Ã©lÃ©ments selectionnÃ©s")
         btn.SetDefault()
         btnsizer.AddButton(btn)
 

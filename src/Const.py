@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006 Cédrick FAURY
+## Copyright (C) 2006 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -83,7 +82,7 @@ arg2str = {0    : ("sens",u"droite"),
            "G"  : ("cote",u"gauche"),
            "GD" : ("cote",u""),
            "DG" : ("cote",u""),
-           "Al" : ("radi",u"alésage"),
+           "Al" : ("radi",u"alÃ©sage"),
            "Ar" : ("radi",u"arbre"),
            "EAl" : ("etanch",u"statique"),
            "EAr" : ("etanch",u"dynamique")
@@ -93,27 +92,27 @@ arg2str = {0    : ("sens",u"droite"),
 messagesAnalyse = { ''               : ('','black'),
                     'MontOk'         : (u"Montage correct","vert"),
 
-                    # Remarques générales
+                    # Remarques gÃ©nÃ©rales
                     'ManqueRlt'      : (u"Il manque un roulement pour faire une liaison pivot !", "rouge"),
                     'RltPasMaintenu' : (u"Une des bagues du roulement %(cote)s n'est pas maintenue.", "rouge"),
                     'RltPasMaintenus': (u"Une des bagues des roulements n'est pas maintenue.", "rouge"),
                     'RltsImcomp'     : (u"Roulements incompatibles.", "rouge"),
-                    'OrientIncorr'   : (u"L'orientation des roulements à contact oblique est incorrecte.", "rouge"),
-                    'RltPasArrete'   : (u"Le roulement %(cote)s devrait être arrêté des deux cotés sur l'%(radi)s.", "bleu"),
-                    'RltPasArretes'  : (u"Les deux roulements devraient être arrêtés des deux cotés sur l'%(radi)s.", "bleu"),
+                    'OrientIncorr'   : (u"L'orientation des roulements Ã  contact oblique est incorrecte.", "rouge"),
+                    'RltPasArrete'   : (u"Le roulement %(cote)s devrait Ãªtre arrÃªtÃ© des deux cotÃ©s sur l'%(radi)s.", "bleu"),
+                    'RltPasArretes'  : (u"Les deux roulements devraient Ãªtre arrÃªtÃ©s des deux cotÃ©s sur l'%(radi)s.", "bleu"),
 
                     # Immobilisation axiale du montage
-                    'ArretArbreSens' : (u"L'arbre n'est pas arrêté axialement vers la %(sens)s" , "rouge"),
+                    'ArretArbreSens' : (u"L'arbre n'est pas arrÃªtÃ© axialement vers la %(sens)s" , "rouge"),
                     'Hyperstatique'  : (u"hyperstatique." , "bleu"),
-                    'ImmobCorrect'   : (u"L'arbre est arrêté axialement." , "vert"),
-                    'ArbreArrete'    : (u"L'arbre est correctement arrêté axialement." , "vert"),
-                    'ArbrePasArrete' : (u"L'arbre n'est pas correctement arrêté axialement." , "rouge"),
+                    'ImmobCorrect'   : (u"L'arbre est arrÃªtÃ© axialement." , "vert"),
+                    'ArbreArrete'    : (u"L'arbre est correctement arrÃªtÃ© axialement." , "vert"),
+                    'ArbrePasArrete' : (u"L'arbre n'est pas correctement arrÃªtÃ© axialement." , "rouge"),
 
-                    # Résistance aux charges
+                    # RÃ©sistance aux charges
                         # axial
-                    'ChargeAxOk'     : (u"Le montage résiste à la charge axiale." , "vert"),
-                    'ChargeAxNo'     : (u"Le montage ne résiste pas à la charge axiale." , "rouge"),
-                    'ElemResistPas'  : (u"Les éléments suivants ne résistent pas :", "rouge"),
+                    'ChargeAxOk'     : (u"Le montage rÃ©siste Ã  la charge axiale." , "vert"),
+                    'ChargeAxNo'     : (u"Le montage ne rÃ©siste pas Ã  la charge axiale." , "rouge"),
+                    'ElemResistPas'  : (u"Les Ã©lÃ©ments suivants ne rÃ©sistent pas :", "rouge"),
                         # roult
                     'RltSupportePas' : (u"ne supporte pas" , "rouge"),
                     'RltSupporte'    : (u"supporte" , "vert"),
@@ -122,37 +121,37 @@ messagesAnalyse = { ''               : ('','black'),
                     'TRltSupporte'    : (u"Tous les roulements supportent la charge." , "vert"),
 
                         # 
-                    'ChargeRadOk'    : (u"Résiste à la charge radiale.", "vert"),
-                    'EffortRadial'   : (u"Ne résiste pas à la charge radiale.", "rouge"),
+                    'ChargeRadOk'    : (u"RÃ©siste Ã  la charge radiale.", "vert"),
+                    'EffortRadial'   : (u"Ne rÃ©siste pas Ã  la charge radiale.", "rouge"),
 
-                    # Montabilité
-                    'MontImposs'     : (u"Le Montage/Démontage de certains éléments est impossible !" , "rouge"),
+                    # MontabilitÃ©
+                    'MontImposs'     : (u"Le Montage/DÃ©montage de certains Ã©lÃ©ments est impossible !" , "rouge"),
                     'Possible'       : (u"possible" , "vert"),
                     'Impossible'     : (u"impossible" , "rouge"),
-                    'Collision'      : (u"Collision entre les éléments suivants :", "rouge"),
-                    'ElemNonDem'     : (u"L'élément %s n'est pas montable/démontable.", "rouge"),
-                    'RltGonfl'       : (u"Le roulement %(cote)s ne peut pas être monté sur l'%(radi)s !", "rouge"),
-                    'MontPoss'       : (u"Le Montage/Démontage des éléments est possible." , "vert"),
-                    'MontImpossRlt'  : (u"Le roulement %(cote)s ne peut pas être monté sur l'%(radi)s !", "rouge"),
-                    'CollisionRlt'   : (u"Collision avec les éléments suivants :" , "rouge"),
-                    'BagueIsolee'    : (u"Le roulement suivant\nn'est pas montable sur son logement sérré.", "rouge"),
-                    'BagueIsolees'   : (u"Les roulements suivants\nne sont pas montables sur leur logement sérré.", "rouge"),
+                    'Collision'      : (u"Collision entre les Ã©lÃ©ments suivants :", "rouge"),
+                    'ElemNonDem'     : (u"L'Ã©lÃ©ment %s n'est pas montable/dÃ©montable.", "rouge"),
+                    'RltGonfl'       : (u"Le roulement %(cote)s ne peut pas Ãªtre montÃ© sur l'%(radi)s !", "rouge"),
+                    'MontPoss'       : (u"Le Montage/DÃ©montage des Ã©lÃ©ments est possible." , "vert"),
+                    'MontImpossRlt'  : (u"Le roulement %(cote)s ne peut pas Ãªtre montÃ© sur l'%(radi)s !", "rouge"),
+                    'CollisionRlt'   : (u"Collision avec les Ã©lÃ©ments suivants :" , "rouge"),
+                    'BagueIsolee'    : (u"Le roulement suivant\nn'est pas montable sur son logement sÃ©rrÃ©.", "rouge"),
+                    'BagueIsolees'   : (u"Les roulements suivants\nne sont pas montables sur leur logement sÃ©rrÃ©.", "rouge"),
 
-                    # Entachéité
-                    'EtanchStat'      : (u"L'étanchéité statique est assurée." , "vert"),
-                    'PasEtanchStat'   : (u"L'étanchéité statique n'est pas assurée !" , "rouge"),
-                    'EtanchDyn'       : (u"L'étanchéité dynamique est assurée." , "vert"),
-                    'PasEtanchDyn'    : (u"L'étanchéité dynamique n'est pas assurée !" , "rouge"),
-                    'IncompLubHuil'   : (u"La lubrification à l'huile est impossible avec les chicanes !" , "rouge"),
-                    'IncompLubChic'   : (u"Les chicanes sont incompatibles avec la pression souhaitée !" , "rouge"),
-                    'ManqueJoint'     : (u"Il manque un dispositif d'étanchéité du coté %(cote)s.", "rouge"),
-                    'VitesseTrop'     : (u"La vitesse est trop élevée pour le joint du coté %(cote)s.", "rouge"),
-                    'FactPVTrop'      : (u"Le facteur PV est trop élevé pour le joint du coté %(cote)s.", "rouge"),
-                    'VittPVTrop'      : (u"La vitesse et le facteur PV sont trop élevés pour certains joints.", "rouge"),
-                    'PressTrop'       : (u"La pression est trop élevée pour le joint du coté %(cote)s.", "rouge"),
+                    # EntachÃ©itÃ©
+                    'EtanchStat'      : (u"L'Ã©tanchÃ©itÃ© statique est assurÃ©e." , "vert"),
+                    'PasEtanchStat'   : (u"L'Ã©tanchÃ©itÃ© statique n'est pas assurÃ©e !" , "rouge"),
+                    'EtanchDyn'       : (u"L'Ã©tanchÃ©itÃ© dynamique est assurÃ©e." , "vert"),
+                    'PasEtanchDyn'    : (u"L'Ã©tanchÃ©itÃ© dynamique n'est pas assurÃ©e !" , "rouge"),
+                    'IncompLubHuil'   : (u"La lubrification Ã  l'huile est impossible avec les chicanes !" , "rouge"),
+                    'IncompLubChic'   : (u"Les chicanes sont incompatibles avec la pression souhaitÃ©e !" , "rouge"),
+                    'ManqueJoint'     : (u"Il manque un dispositif d'Ã©tanchÃ©itÃ© du cotÃ© %(cote)s.", "rouge"),
+                    'VitesseTrop'     : (u"La vitesse est trop Ã©levÃ©e pour le joint du cotÃ© %(cote)s.", "rouge"),
+                    'FactPVTrop'      : (u"Le facteur PV est trop Ã©levÃ© pour le joint du cotÃ© %(cote)s.", "rouge"),
+                    'VittPVTrop'      : (u"La vitesse et le facteur PV sont trop Ã©levÃ©s pour certains joints.", "rouge"),
+                    'PressTrop'       : (u"La pression est trop Ã©levÃ©e pour le joint du cotÃ© %(cote)s.", "rouge"),
                     
                     'LubrifComp'      : (u"Les joints sont compatibles avec la lubrification choisie.", "vert"),
-                    'LubrifPasComp'   : (u"Les chicanes ne sont pas compatibles avec une lubrification à l'huile.", "rouge")
+                    'LubrifPasComp'   : (u"Les chicanes ne sont pas compatibles avec une lubrification Ã  l'huile.", "rouge")
                     }
 
 #########################################################################################
@@ -217,14 +216,14 @@ def afficherAide(options, clef):
 #     Zone de message     #
 ##############################################################################
 
-#messages = {'SelectElem' : u"Selectionner un élément à placer sur le montage",
-#            'FaireGliss' : u"Faire glisser l'élément sur le montage",
-#            'MenuContex' : u"Bouton droit de la souris pour modifier l'élément",
-#            'PlacerElem' : u"Cliquer pour placer l'élément sur le montage",
+#messages = {'SelectElem' : u"Selectionner un Ã©lÃ©ment Ã  placer sur le montage",
+#            'FaireGliss' : u"Faire glisser l'Ã©lÃ©ment sur le montage",
+#            'MenuContex' : u"Bouton droit de la souris pour modifier l'Ã©lÃ©ment",
+#            'PlacerElem' : u"Cliquer pour placer l'Ã©lÃ©ment sur le montage",
 #            'ModifCdCF'  : u"Modification du CdCF"}
 #
 #class ZoneMessage(Frame):
-#    "classe définissant la zone de message"
+#    "classe dÃ©finissant la zone de message"
 #    def __init__(self, master):
 #        Frame.__init__(self, bd = 2, relief = FLAT,
 #                       width = 400, height = 30, padx = 3, pady = 3)
@@ -257,36 +256,36 @@ bulles = {'vide'    : u"",
           'Enregi'  : u"Enregistrer le montage dans un fichier",
           'ModCdcf' : u"Modifier le CdCF",
           'Analyse' : u"Analyser le montage",
-          'Reinit'  : u"Réinitialiser le montage\nTous les éléments sont supprimés !",
+          'Reinit'  : u"RÃ©initialiser le montage\nTous les Ã©lÃ©ments sont supprimÃ©s !",
           'CdCFCurs'    : u"Faire glisser le curseur\npour modifier la faleur de l'indice",
           'CdCFAide'    : u"Affiche l'aide relative au CdCF",
-          'CdCFCharg'   : u"Répartition et indices des charges\nappliquées sur l'arbre",
-          'CdCFBague'   : u"Désigne la bague qui tourne\npar rapport à la charge radiale\nappliquée sur l'arbre",
+          'CdCFCharg'   : u"RÃ©partition et indices des charges\nappliquÃ©es sur l'arbre",
+          'CdCFBague'   : u"DÃ©signe la bague qui tourne\npar rapport Ã  la charge radiale\nappliquÃ©e sur l'arbre",
           'CdCF'        : u"Cahier des Charges Fonctionnel",
-          'CdCFCout'    : u"Indice de Coût maximum du montage",
+          'CdCFCout'    : u"Indice de CoÃ»t maximum du montage",
           'CdCFPress'   : u"Indice de Pression Relative dans la liaison",
           'CdCFVitt'    : u"Indice de Vitesse Angulaire de la liaison",
-          'AnalyAnim'   : u"Effectue une animation illustrant le manque d'arrêts",
-          'AnalyChai'   : u"Trace la chaîne d'action de l'effort axial",
-          'SelectRoul'  : u"Selectionner les éléments ne résistant pas à la charge axiale",
-          'AnalyHypr'   : u"La chaîne d'action est double ...",
-          'EnsPasDemont': u"Démonter l'ensemble pour pouvoir\n",
-          'Dem'         : u"Démonter",
+          'AnalyAnim'   : u"Effectue une animation illustrant le manque d'arrÃªts",
+          'AnalyChai'   : u"Trace la chaÃ®ne d'action de l'effort axial",
+          'SelectRoul'  : u"Selectionner les Ã©lÃ©ments ne rÃ©sistant pas Ã  la charge axiale",
+          'AnalyHypr'   : u"La chaÃ®ne d'action est double ...",
+          'EnsPasDemont': u"DÃ©monter l'ensemble pour pouvoir\n",
+          'Dem'         : u"DÃ©monter",
           'Rem'         : u"Remonter",
           'Ens'         : u"l'ensemble",
           'Rlt'         : u"le roulement",
           'G'           : u"gauche",
           'D'           : u"droit",
           'Al'          : u"arbre",
-          'Ar'          : u"alésage",
+          'Ar'          : u"alÃ©sage",
           'vers'        : u"vers la",
           'depuis'      : u"depuis la",
           'sens0'       : u"droite.",
           'sens1'       : u"gauche.",
-          'AnalyMtgEns': u"Effectue une animation de l'opération\nde démontage/montage de l'ensemble\nvers/depuis la droite",
-          'AnalyMtgEns1': u"Effectue une animation de l'opération\nde démontage/montage de l'ensemble\nvers/depuis la gauche",
-          'AnalyMtgRlt' : u"Effectue une animation de l'opération\nde démontage/montage du roulement %s\nvers/depuis la %s",
-          'AnalyMtgObs' : u"Met en évidence les différents obstacles au démontage"
+          'AnalyMtgEns': u"Effectue une animation de l'opÃ©ration\nde dÃ©montage/montage de l'ensemble\nvers/depuis la droite",
+          'AnalyMtgEns1': u"Effectue une animation de l'opÃ©ration\nde dÃ©montage/montage de l'ensemble\nvers/depuis la gauche",
+          'AnalyMtgRlt' : u"Effectue une animation de l'opÃ©ration\nde dÃ©montage/montage du roulement %s\nvers/depuis la %s",
+          'AnalyMtgObs' : u"Met en Ã©vidence les diffÃ©rents obstacles au dÃ©montage"
           }
 
 
@@ -367,7 +366,7 @@ class InfoBulleDetails:
 
 #################################################################################        
 class InfoBulleElem:
-    """ Classe définissant l'info-bulle pour un élément """
+    """ Classe dÃ©finissant l'info-bulle pour un Ã©lÃ©ment """
     
     def __init__(self, zone, numElem, taille = ["P","G"]):
         bulle = InfoBulle(zone)
@@ -408,7 +407,7 @@ class InfoBulleElem:
                   bg = bulle['bg'],
                   justify = RIGHT, anchor = E) \
                 .grid(row = 3, column = 0, sticky = E)
-            Label(bulle, text = u"combinée :",
+            Label(bulle, text = u"combinÃ©e :",
                   bg = bulle['bg'],
                   justify = RIGHT, anchor = E) \
                 .grid(row = 4, column = 0, sticky = E)
@@ -429,7 +428,7 @@ class InfoBulleElem:
                 c = 1
                 r += 1
 
-            Label(bulle, text = u"Indice de Coût :",
+            Label(bulle, text = u"Indice de CoÃ»t :",
                   bg = bulle['bg'],
                   justify = RIGHT, anchor = E,
                   font = Font_MessBulleG[0]) \
@@ -456,7 +455,7 @@ class InfoBulleElem:
                         .grid(row = 2, column = c)
                 c += 1
             
-            Label(bulle, text = u"Indice de Coût :",
+            Label(bulle, text = u"Indice de CoÃ»t :",
                   bg = bulle['bg'],
                   justify = RIGHT, anchor = E,
                   font = Font_MessBulleG[0]) \
@@ -596,7 +595,7 @@ class InfoBulleElem:
 ##        for m in range(len(self.lstClef) + len(self.lstMess)):
 ##            t = Label(self, bg = "lightyellow")
 ##            self.lstLabel.append(t)
-####        print "   ...",len(self.lstLabel)," labels ajoutés"
+####        print "   ...",len(self.lstLabel)," labels ajoutÃ©s"
 ##        self.majLabel()
 ##        
 ##
@@ -649,7 +648,7 @@ class InfoBulleElem:
 ##
 ####        print "  position avant =",posX,posY
 ##
-##        # Correction pour que ça rentre dans l'écran
+##        # Correction pour que Ã§a rentre dans l'Ã©cran
 ##        if posX + self.tipwidth > self.winfo_screenwidth():          
 ##            posX = posX - self.tipwidth
 ##        if posY + self.tipheight > self.winfo_screenheight():
@@ -658,7 +657,7 @@ class InfoBulleElem:
 ##            else:
 ##                posY = posY - self.tipheight
 ##
-####        print "  position après =",posX,posY
+####        print "  position aprÃ¨s =",posX,posY
 ##        #~ print posX,print posY
 ##        self.geometry('+%d+%d'%(posX,posY))
 ##        self.deiconify()
@@ -672,7 +671,7 @@ class InfoBulleElem:
 
 ############################################################################################
 ##class FrameBulleElem(Frame):
-##    """ Classe définissant l'info-bulle pour un élément """
+##    """ Classe dÃ©finissant l'info-bulle pour un Ã©lÃ©ment """
 ##    
 ##    def __init__(self, master, options):
 ##
@@ -720,7 +719,7 @@ class InfoBulleElem:
 ##                  bg = "lightyellow",
 ##                  justify = RIGHT, anchor = E) \
 ##                .grid(row = 3, column = 0, sticky = E)
-##            Label(self, text = u"combinée :",
+##            Label(self, text = u"combinÃ©e :",
 ##                  bg = "lightyellow",
 ##                  justify = RIGHT, anchor = E) \
 ##                .grid(row = 4, column = 0, sticky = E)
@@ -741,7 +740,7 @@ class InfoBulleElem:
 ##                c = 1
 ##                r += 1
 ##
-##            Label(self, text = u"Indice de Coût :",
+##            Label(self, text = u"Indice de CoÃ»t :",
 ##                  bg = "lightyellow",
 ##                  justify = RIGHT, anchor = E,
 ##                  font = Font_MessBulleG[0]) \
@@ -768,7 +767,7 @@ class InfoBulleElem:
 ##                        .grid(row = 2, column = c)
 ##                c += 1
 ##            
-##            Label(self, text = u"Indice de Coût :",
+##            Label(self, text = u"Indice de CoÃ»t :",
 ##                  bg = "lightyellow",
 ##                  justify = RIGHT, anchor = E,
 ##                  font = Font_MessBulleG[0]) \
@@ -794,13 +793,13 @@ typeCharge = {0 : u"aucune\ncharge",
               2 : u"charge\npurement axiale",
               3 : u"charge\npurement axiale",
               4 : u"charge\npurement radiale",
-              5 : u"charge\ncombinée",
-              6 : u"charge\ncombinée",
-              7 : u"charge\ncombinée"}
+              5 : u"charge\ncombinÃ©e",
+              6 : u"charge\ncombinÃ©e",
+              7 : u"charge\ncombinÃ©e"}
 
 
-adaptation = {0 : u"inadapté",
-              1 : u"peu adapté",
+adaptation = {0 : u"inadaptÃ©",
+              1 : u"peu adaptÃ©",
               2 : u"satisfaisant",
               3 : u"bon",
               4 : u"excellent"}

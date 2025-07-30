@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2008 Cédrick FAURY
+## Copyright (C) 2006-2008 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -28,7 +27,7 @@
 
 # Programme de compilation des images .png en un unique fichier icones.py
 #
-# !!!  Effacer toutes les lignes de icones.py après la remarque :
+# !!!  Effacer toutes les lignes de icones.py aprÃ¨s la remarque :
 #          " Supprimer tout ce qui suit avant compilation "
 #
 
@@ -134,7 +133,7 @@ IconesAnal = {'AnalysArret'    : dosicon + "Analyse_Arret.png",
               'AnalysDevis'    : dosicon + "Analyse_Devis.png",
               }
 
-# Bouton de l'analyse de la Montabilité ################################################################
+# Bouton de l'analyse de la MontabilitÃ© ################################################################
 BoutonMont = {'AnimEnsb0Ar' : dosbout + "AnalyseMontage_Ens_0_Ar.png",
               'AnimEnsb1Ar' : dosbout + "AnalyseMontage_Ens_1_Ar.png",
               'AnimEnsb0Al' : dosbout + "AnalyseMontage_Ens_1_Al.png",

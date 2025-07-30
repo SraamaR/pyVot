@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -57,7 +56,7 @@ class Alesage:
                                                  bout = "B")
              
 
-        # Structure "fixe" de l'alésage :
+        # Structure "fixe" de l'alÃ©sage :
         self.itemFix = {"M_"  : ItemArAl(zoneMtg, "Al" , posit = "M_", taille = "P"),
                         "GM" : None,
                         "GD" : None,
@@ -104,7 +103,7 @@ class Alesage:
             self.itemFix["DG"] = None
 
 
-# Liste ordonnée des itemMtg à afficher
+# Liste ordonnÃ©e des itemMtg Ã  afficher
 class ListeItemMtg(list):
     def __init__(self):
         list.__init__(self)
@@ -192,14 +191,14 @@ class Arbre:
                 for bout in ["E","R",""]:
                     self.lstItem[posit][taille][bout] = {}
                 
-                # Portées du roulement (1 morceau "R" en GM ou DM)
+                # PortÃ©es du roulement (1 morceau "R" en GM ou DM)
                 if posit[1] == "M":           
                     self.lstItem[posit][taille]["R"][""] =  ItemArAl(zoneMtg, "Ar" ,
                                                                     posit = posit,
                                                                     taille = taille,
                                                                     bout = "M",
                                                                     dim = "")
-                # Intérieur du montage (1 morceau "" en GD ou DG)
+                # IntÃ©rieur du montage (1 morceau "" en GD ou DG)
                 else:                         
                     self.lstItem[posit][taille][""][""] =  ItemArAl(zoneMtg, "Ar" ,
                                                                     posit = posit,
@@ -207,14 +206,14 @@ class Arbre:
                                                                     bout = "",
                                                                     dim = "")
         
-            # Intérieur du montage épaulement (1 morceau "E" en GD ou DG)
+            # IntÃ©rieur du montage Ã©paulement (1 morceau "E" en GD ou DG)
             self.lstItem[posit]["P"]["E"][""] =  ItemArAl(zoneMtg, "Ar" ,
                                                             posit = posit,
                                                             taille = "P",
                                                             bout = "E",
                                                             dim = "")
 
-        # items Mobiles axialement (en relation avec les éléments du montage)
+        # items Mobiles axialement (en relation avec les Ã©lÃ©ments du montage)
         for posit in self.itemMob:
             self.lstItem[posit] = {}
             for taille in ["P","G"]:
@@ -222,7 +221,7 @@ class Arbre:
                 for bout in ["B","F","R"]:
                     self.lstItem[posit][taille][bout] = {}
                 
-                # Extrémités de l'arbre (1 morceau "B" ou "F" -3 diamètres- en GGB ou DDB)
+                # ExtrÃ©mitÃ©s de l'arbre (1 morceau "B" ou "F" -3 diamÃ¨tres- en GGB ou DDB)
                 if posit[2] == "B":        
                     for bout in ["B","F"]:
                         for dim in ["P","N","G"]:
@@ -258,7 +257,7 @@ class Arbre:
 
 
     def affecterItem(self, mtg):
-        """ Affecte des items aux éléments de structure de l'arbre """
+        """ Affecte des items aux Ã©lÃ©ments de structure de l'arbre """
 ##        print
 ##        print "Affectation des items arbres :"
         
@@ -266,12 +265,12 @@ class Arbre:
         ####################################
         for clef in self.itemFix:
 
-            # Détermination de la dimension relative (dim)
+            # DÃ©termination de la dimension relative (dim)
             #---------------------------------------------
             if clef[1] == "M":
                 elem = mtg.palier[clef[0]].arr["Ar"][clef[0]]
                 dim = ""
-                if elem.num is not None and elem.estEcrou():        # pas de M si écrou
+                if elem.num is not None and elem.estEcrou():        # pas de M si Ã©crou
 ##                   and mtg.palier[clef[0]].taille == "P":
                     self.itemFix[clef] = None
                     continue                                        # fin de la boucle
@@ -295,11 +294,11 @@ class Arbre:
         # Affectation des items "mobiles" ...
         #####################################
         for clef in self.itemMob:
-            # On récupère ce qu'il y a "autour"
+            # On rÃ©cupÃ¨re ce qu'il y a "autour"
             arr = mtg.palier[clef[0]].arr["Ar"][clef[1]]
             rlt = mtg.palier[clef[0]].rlt
             
-            # On détermine quel est l'élément pour le positionnement relatif
+            # On dÃ©termine quel est l'Ã©lÃ©ment pour le positionnement relatif
             if arr.num is None:
                 if rlt.num is None:
                     elem = None
@@ -311,10 +310,10 @@ class Arbre:
                 else:
                     elem = arr
             
-            # Cas des extrémités de l'arbre
+            # Cas des extrÃ©mitÃ©s de l'arbre
             #-------------------------------
             if clef[2] == "B":    
-                # affectation du diamètre de l'extrémité selon le type d'arrêt ...
+                # affectation du diamÃ¨tre de l'extrÃ©mitÃ© selon le type d'arrÃªt ...
                 if arr.num is not None:                         
                     if arr.estEcrou():                         
                         dim = "P"
@@ -325,7 +324,7 @@ class Arbre:
                 else:
                     dim = "N"
                     
-                # Détermination du type d'extrémité (Chanfreiné ou infini)
+                # DÃ©termination du type d'extrÃ©mitÃ© (ChanfreinÃ© ou infini)
                 if mtg.palier[clef[0]].jnt["Ar"].estJointChapeau():
                     bout = "B"
                 else:
@@ -334,7 +333,7 @@ class Arbre:
                 self.itemMob[clef] = self.lstItem[clef][mtg.palier[clef[0]].taille][bout][dim]
                 self.itemMob[clef].calc_posX(rlt)
             
-            # Cas des bords de portée de roulement
+            # Cas des bords de portÃ©e de roulement
             #--------------------------------------
             else:
                 # Cas ou il ne faut pas en mettre
@@ -374,22 +373,22 @@ class Arbre:
 class ItemMtg():
     def __init__(self, zoneMtg, imagePlus):
         self.zoneMtg = zoneMtg
-        # Dict de toutes les images (de type ImagePlus !!) succeptibles d'être utiles
+        # Dict de toutes les images (de type ImagePlus !!) succeptibles d'Ãªtre utiles
         self.images = {}
-        self.images["def"] = imagePlus.copie() # L'image par défaut
+        self.images["def"] = imagePlus.copie() # L'image par dÃ©faut
         
-        # Paramètres de position en X 
+        # ParamÃ¨tres de position en X 
         #----------------------------
         self.xancre = 0
         self.ancre = "D"
-        # Réelle position en pixels
+        # RÃ©elle position en pixels
         self.pos = (0,0)
         # Profondeur
         self.prof = 0
         
         self.tag = []
         
-        # Image Bitmap à afficher 
+        # Image Bitmap Ã  afficher 
         #------------------------
         self.keybmp = "def"
 #        self.bmp = self.images.bmp
@@ -429,7 +428,7 @@ class ItemMtg():
         return s#+p
         
     def place(self, xancre = None, ancre = None):
-        """ Calcul la réelle position en pixels
+        """ Calcul la rÃ©elle position en pixels
             de l'image --> .pos
         """
         if ancre != None:
@@ -468,10 +467,10 @@ class ItemMtg():
 
     def hachurer(self, brush_hachure, pts = ((2,2),), simple = False):
         """ Hachurage de la bmp de l'item
-            à partir des points <pts> (repère LOCAL de l'item)
+            Ã  partir des points <pts> (repÃ¨re LOCAL de l'item)
         """
         
-        # On crée une image à la taille de la zone entière pour une bonne superposition des hachures ...
+        # On crÃ©e une image Ã  la taille de la zone entiÃ¨re pour une bonne superposition des hachures ...
         bmp = wx.EmptyBitmap(self.zoneMtg.maxWidth, self.zoneMtg.maxHeight)
         memdc = wx.MemoryDC(bmp)
         memdc.SetBackground(wx.Brush(wx.Colour(255,255,254, 255))) #
@@ -485,7 +484,7 @@ class ItemMtg():
         memdc.DrawBitmap(self.GetBmp(), self.pos[0], self.pos[1])
         
         for pt in pts:
-            # Calcul du point de hachurage dans le repère global
+            # Calcul du point de hachurage dans le repÃ¨re global
             if self.pos[0] > self.zoneMtg.milieuX:
                 pt = (self.GetWidth() - pt[0], pt[1])
             cx,cy = self.pos[0] + pt[0] , self.pos[1] + pt[1]
@@ -500,10 +499,10 @@ class ItemMtg():
 
         memdc.SelectObject(wx.NullBitmap)
         
-        # On découpe ...
+        # On dÃ©coupe ...
         bmp = bmp.GetSubBitmap(self.GetRect())
         
-        # On rétabli la transparence ...
+        # On rÃ©tabli la transparence ...
 #        img = wx.ImageFromBitmap(bmp)
 #        img = bmp.ConvertToImage()
 #        img.SetMaskColour(255,255,254)
@@ -521,7 +520,7 @@ class ItemMtg():
                       self.GetWidth(), self.GetHeight()))
 
         
-#        print "Durée hachurage",self.tag[0],",",nc,"cycles :",  time.clock()- tm
+#        print "DurÃ©e hachurage",self.tag[0],",",nc,"cycles :",  time.clock()- tm
         
     def efface(self):
 #        self.canvas.delete(self.id)
@@ -583,7 +582,7 @@ class ItemMtg():
 ###        print "Profondeur de", self.id,self.nom, "=",prof
 #        dessous = self.profJusteDessous(prof)
 #        if dessous != None:
-###            print "  ..placé dessous",dessous
+###            print "  ..placÃ© dessous",dessous
 #            
 #            self.canvas.tag_lower(self.id,dessous)
 ##        self.canvas.addtag_withtag("P"+str(prof),self.id)
@@ -621,7 +620,7 @@ class ItemMtg():
     def estAffiche():
         return self.zoneMtg.itemcget(state) == NORMAL
 
-#    # Gestion des déplacements
+#    # Gestion des dÃ©placements
 #    #==========================
 #    def debutDeplace(self):
 ##        self.zoneMtg.RefreshRect(self.GetRect(), True)
@@ -659,17 +658,17 @@ class ItemMtg():
 
 ##############################################################################
 #
-#    Items d'élément     #
+#    Items d'Ã©lÃ©ment     #
 #
 ##############################################################################
 class ItemElem(ItemMtg):
-    """ Item d'élément du montage """
+    """ Item d'Ã©lÃ©ment du montage """
     
     def __init__(self, zoneMtg, mtg, clefImageElem):
         ItemMtg.__init__(self, zoneMtg, Images.imageElem[clefImageElem])
         self.nom = clefImageElem
-        self.xancre = 0     # Abcisse élément
-        self.ancre = ""     # Ancrage élément
+        self.xancre = 0     # Abcisse Ã©lÃ©ment
+        self.ancre = ""     # Ancrage Ã©lÃ©ment
        
     def imagVide(self, clef):
         self.images["vid"] = Images.imageElem[clef].copie()
@@ -677,33 +676,33 @@ class ItemElem(ItemMtg):
     def calc_posX(self, pos, elem_rel = None, joint = False, elem = None, entre = False):
         """ Calcul de la position en x de l'item :
               pos = position dans le montage : <PositionDansPivot>
-              elem_rel = élément relatif
+              elem_rel = Ã©lÃ©ment relatif
               joint = <True> s'il s'agit d'un joint
-              elem = element à placer
-              entre = <True> si l'élément est une entretoise de butée double
+              elem = element Ã  placer
+              entre = <True> si l'Ã©lÃ©ment est une entretoise de butÃ©e double
         """
         
         # ... roulements :
         #-----------------
         if pos.typelem == "R":
             self.ancre = pos.cotelem
-            self.xancre = self.zoneMtg.milieuPalier[pos.palier]     # Abcisse élément
-            self.ancre = ""                                         # Ancrage élément
+            self.xancre = self.zoneMtg.milieuPalier[pos.palier]     # Abcisse Ã©lÃ©ment
+            self.ancre = ""                                         # Ancrage Ã©lÃ©ment
             return
 
 
-        # ... arrêts :
+        # ... arrÃªts :
         #-------------
-         # Coefficient de coté du roulement
+         # Coefficient de cotÃ© du roulement
         if pos.cotelem == "G": s = -1
         else: s = 1
 
-         # Largeur du roulement associé
-        if elem_rel is None or elem_rel.num is None:                    # pas d'élément
+         # Largeur du roulement associÃ©
+        if elem_rel is None or elem_rel.num is None:                    # pas d'Ã©lÃ©ment
             taille = self.zoneMtg.mtg.palier[pos.palier].taille
             largRlt = self.zoneMtg.largeurRltDefaut[taille]
 
-##            # On écarte si l'arrêt ne fait que porter un joint
+##            # On Ã©carte si l'arrÃªt ne fait que porter un joint
 ##            if joint:
 ##                ecart = self.canvas.ecartRoultJnt
 ##            else:
@@ -724,7 +723,7 @@ class ItemElem(ItemMtg):
             self.xancre = elem_rel.item['imag'].get_xbord(pos.cotelem)
             self.ancre = pos.opposee().cotelem
             
-            # cas des roulements à rouleaux coniques --> décalage
+            # cas des roulements Ã  rouleaux coniques --> dÃ©calage
             if elem_rel.num == 5:
 #                print "Rlt roul Con. !!", pos, elem_rel.orientation, elem_rel.taille
                 if elem_rel.orientation == pos.cotelem and pos.radiale == "Al" \
@@ -734,7 +733,7 @@ class ItemElem(ItemMtg):
                     else:
                         self.xancre += -s*12
 
-            # cas des butées double effet --> décalage
+            # cas des butÃ©es double effet --> dÃ©calage
             elif elem_rel.estButeeDbl() and elem is not None:
                 if pos.radiale == "Ar":
                     if elem.estEntretoise() or elem.estEpaulement():
@@ -749,7 +748,7 @@ class ItemElem(ItemMtg):
 #                            self.xancre += s*4
 #                        else:
 #                            self.xancre += s*6
-                        # si l'élément est entretoise de butée : entre
+                        # si l'Ã©lÃ©ment est entretoise de butÃ©e : entre
                         if entre:
 #                            self.xancre += s
                             self.ancre = pos.cotelem
@@ -757,14 +756,14 @@ class ItemElem(ItemMtg):
 
 ##############################################################################
 #
-#    Items d'arbre/alésage     #
+#    Items d'arbre/alÃ©sage     #
 #
 ##############################################################################
 tagArAl = {"Ar" : TAG_ARBRE,
            "Al" : TAG_ALESAGE}
 
 class ItemArAl(ItemMtg):
-    """ Item de morceau d'arbre/alésage """
+    """ Item de morceau d'arbre/alÃ©sage """
     
     def __init__(self, zoneMtg, rad , posit , taille, bout = "", dim = ""):
         
@@ -791,7 +790,7 @@ class ItemArAl(ItemMtg):
         if self.palier == "D":
             self.inverser()
 
-        # On place l'item à la bonne profondeur ...
+        # On place l'item Ã  la bonne profondeur ...
         #------------------------------------------
         if self.rad == "Al":
             if self.palier == "M":
@@ -837,8 +836,8 @@ class ItemArAl(ItemMtg):
     #########################################################################
     def get_xbordElem(self, cote, palier = None, elem = None, ecarter = False):
         """ Renvoie la position en X en pixel (absolue)
-            - du bord de l'élément <elem> si elem
-            - ecarté par rapport au centre du palier si pas d'elem
+            - du bord de l'Ã©lÃ©ment <elem> si elem
+            - ecartÃ© par rapport au centre du palier si pas d'elem
         """
         if cote == "G": s = -1
         else: s = 1
@@ -858,10 +857,10 @@ class ItemArAl(ItemMtg):
             
     ####################################################################################
     def calc_posX(self, elem = None):
-        """ Détermine la position en X du morceau 
-            selon l'éventuel <elem> relatif
+        """ DÃ©termine la position en X du morceau 
+            selon l'Ã©ventuel <elem> relatif
         """
-        # Milieu du montage (pour l'alésage seulement)
+        # Milieu du montage (pour l'alÃ©sage seulement)
         #----------------------------------------------
         if self.palier == "M":
             self.ancre = ""
@@ -870,7 +869,7 @@ class ItemArAl(ItemMtg):
 
 ##        print "Calcul X :", elem
 
-        # Portée du roulement
+        # PortÃ©e du roulement
         #---------------------
         if self.cote == "M":
             self.ancre = ""
@@ -895,11 +894,11 @@ class ItemArAl(ItemMtg):
             cote = self.cote
             ecarter = False
             
-            # Pas d'élément relatif
+            # Pas d'Ã©lÃ©ment relatif
             if elem is None or elem.num is None:
                 self.xancre = self.get_xbordElem(cote, palier = self.palier, ecarter = ecarter)
             
-            # Avec élément relatif
+            # Avec Ã©lÃ©ment relatif
             else:
                 if elem.type == "R":
                     cote = self.cote
@@ -907,7 +906,7 @@ class ItemArAl(ItemMtg):
                     cote = self.coteopp
                 self.xancre = self.get_xbordElem(cote, elem = elem)
                 
-                # Décalage en cas de butée double effet
+                # DÃ©calage en cas de butÃ©e double effet
                 if elem.estButeeDbl() and self.rad == "Ar" and self.cote == self.palier:
                     if cote == "G": s = -1
                     else: s = 1
@@ -946,20 +945,20 @@ class ZoneMontage(wx.Panel):
         self.SetMaxSize(size)
 #        self.SetVirtualSizeHints(10, 10, size[0], size[1])
         
-        # Le montage à afficher
+        # Le montage Ã  afficher
         self.mtg = mtg
         
-        # Liste ordonnée des itemMtg à afficher
+        # Liste ordonnÃ©e des itemMtg Ã  afficher
         self.lstItemMtg = ListeItemMtg()
         
-        # Définit si il doit y avoir surbrillance des élément au passage de la souris 
+        # DÃ©finit si il doit y avoir surbrillance des Ã©lÃ©ment au passage de la souris 
         self.SurBrillanceActive = True
 
-        # Permet de mémoriser si un support de joint ou de chapeau est déja dessiné
+        # Permet de mÃ©moriser si un support de joint ou de chapeau est dÃ©ja dessinÃ©
         self.presenceSupport = {"G" : False,
                                 "D" : False}
         
-        # Paramètres de la fenêtre
+        # ParamÃ¨tres de la fenÃªtre
         self.SetBackgroundColour("WHITE")
         
 #        self.SetScrollRate(5,5)
@@ -979,19 +978,19 @@ class ZoneMontage(wx.Panel):
         self.affichageEnCours = False
 #        self.curseurInterdit = False
         
-        # Indique qu'un élément est mis en surbrillance
+        # Indique qu'un Ã©lÃ©ment est mis en surbrillance
         self.surBrillanceEnCours = False
         
         # Indique qu'on est en mode analyse
         self.modeAnalyse = False
 
-        # Instanciation d'un élément provisoire
+        # Instanciation d'un Ã©lÃ©ment provisoire
         self.numElemProv = None
 
-        # Position précédente de la souris
+        # Position prÃ©cÃ©dente de la souris
         self.posPreced = None
 
-        # Paramètres de positionnement du montage
+        # ParamÃ¨tres de positionnement du montage
         #-----------------------------------------
         #  abscisses des centres des paliers
         self.milieuPalier = {"G":180,
@@ -999,18 +998,18 @@ class ZoneMontage(wx.Panel):
         #  centre du montage
         self.milieuX , self.milieuY = size[0]/2, size[1]/2
 
-        #  positions et dimensions des éléments (pour chaine)
+        #  positions et dimensions des Ã©lÃ©ments (pour chaine)
         self.centreRoult_Y = {"P":99,
                               "G":115}
         self.dimRoult_Y = {"P":100,
                            "G":112}
         
-        # Positions des éléments "fixes" d'arbre et d'alésage
+        # Positions des Ã©lÃ©ments "fixes" d'arbre et d'alÃ©sage
         #  par rapport au centre du palier
         self.positElemFixe = {"P" :  {"Al" : 79 , "Ar" : 96},  # 79  126
                               "G" :  {"Al" : 104, "Ar" : 106}} # 104 136
 
-        # Décalage sous butées doubles (avec et sans rondelle)
+        # DÃ©calage sous butÃ©es doubles (avec et sans rondelle)
         self.decalageButDbl = {"P" : 44,
                                "G" : 51}
         self.decalageRondButDbl = {"P" : -4,
@@ -1019,16 +1018,16 @@ class ZoneMontage(wx.Panel):
         # Ecarts entre le roulement et les supports de joint
         self.ecartRoultJnt = 10
         
-        # Définition des constantes
+        # DÃ©finition des constantes
         self.largeurRltDefaut = {"G" : 105 ,
                                  "P" : 89}
 
-        # Structure du montage (items affichés)
+        # Structure du montage (items affichÃ©s)
         #---------------------------------------
         #  Structure de l'ensemble Arbre
         self.arbre = Arbre(self)
 
-        #  Structure de l'ensemble Alésage
+        #  Structure de l'ensemble AlÃ©sage
         self.alesage = Alesage(self)
 
         #  Groupes d'item
@@ -1036,7 +1035,7 @@ class ZoneMontage(wx.Panel):
         self.grpAlesage = []
     
 
-        # Pour la surbrillance des éléments 
+        # Pour la surbrillance des Ã©lÃ©ments 
         #-----------------------------------
         self.itemCourant = None
         self.posCourant = None
@@ -1066,16 +1065,16 @@ class ZoneMontage(wx.Panel):
         
 #        self.scroller = wx.lib.dragscroller.DragScroller(self)
 #        self.scroller.SetSensitivity(0.04)
-#        print "Sensibilité Scroller :", self.scroller.GetSensitivity()
+#        print "SensibilitÃ© Scroller :", self.scroller.GetSensitivity()
         
-        # Pour débuggage ...
+        # Pour dÃ©buggage ...
         self.lstItemSousPointeurCourant = []
         
         
 
     #############################################################################            
     def Escape(self, event = None):
-        "Op. à effectuer quand la touche <Echap> est pressée"
+        "Op. Ã  effectuer quand la touche <Echap> est pressÃ©e"
 #        print "ECHAPPE"
         if event is None or event.GetKeyCode() == 27:
             if self.affichageEnCours:
@@ -1141,21 +1140,21 @@ class ZoneMontage(wx.Panel):
 
         
     def DessineTout(self, dc, analyse = None, offsetX = 0):
-        # Affichage "Arbre" et "Alésage"
+        # Affichage "Arbre" et "AlÃ©sage"
 #        print "/",
         dc.BeginDrawing()
         dc.SetBackground(wx.Brush(self.GetBackgroundColour()))
         dc.Clear()
         self.lstItemMtg.affiche(dc, offsetX = offsetX)
         
-        # Tracé des éléments d'analyse 
+        # TracÃ© des Ã©lÃ©ments d'analyse 
         #=============================
         if analyse is not None:
             analyse.tracerResultats(dc, self)
         
         dc.EndDrawing()
         
-#        # Tracé de la chaine d'action 
+#        # TracÃ© de la chaine d'action 
 #        #=============================
 #        for s,t in self.chaineTracee.items():
 #            if t is not None: self.tracerChaineAct(dc, t, s)
@@ -1200,7 +1199,7 @@ class ZoneMontage(wx.Panel):
         
     ############################################################################         
     def MiseAJourArbreAlesage(self, hachurer = True):
-#        print "Mise à Jour arbre/alésage"
+#        print "Mise Ã  Jour arbre/alÃ©sage"
 #        self.InitBuffer()
         self.alesage.miseAJour(self.mtg, hachurer = hachurer)
         self.arbre.miseAJour(self.mtg, hachurer = hachurer)
@@ -1221,7 +1220,7 @@ class ZoneMontage(wx.Panel):
         
     ###########################################################################
     def effacerItemElem(self, elem):
-        "Effacer les items d'un élément"
+        "Effacer les items d'un Ã©lÃ©ment"
 ##        print "Effacement ?",elem.num,elem.pos,elem.item.keys()
         for i in elem.item.values():
             i.efface()
@@ -1259,7 +1258,7 @@ class ZoneMontage(wx.Panel):
 ####        elem.pos.__init__()
 ##        elem.item = {}
 
-        # On Affiche le curseur par défaut
+        # On Affiche le curseur par dÃ©faut
         self.afficheCurseur()
 
 
@@ -1293,8 +1292,8 @@ class ZoneMontage(wx.Panel):
 
     ###########################################################################
     def afficherItemElem(self, elem, clef, pos,  hachurer = True):
-        """ Afficher l'item de clef <clef> d'un élément <elem>
-            à la position <pos> """
+        """ Afficher l'item de clef <clef> d'un Ã©lÃ©ment <elem>
+            Ã  la position <pos> """
 
 #        print "Affichage de", elem.num, clef, pos, elem.pos#, "Hachurage =", hachurer
         
@@ -1311,17 +1310,17 @@ class ZoneMontage(wx.Panel):
         # ... roulements :
         #-----------------
         if pos.typelem == "R":
-            elem.item[clef].calc_posX(pos)               # Abcisse élément
+            elem.item[clef].calc_posX(pos)               # Abcisse Ã©lÃ©ment
 
         #... arrets :
         #------------
         elif pos.typelem == "A":
 
-            # Cas du complément d'épaulement : item 'opp'
+            # Cas du complÃ©ment d'Ã©paulement : item 'opp'
             if elem.estEpaulement() and clef == 'opp' :
                 elem.item[clef].calc_posX(pos)
 
-            # Cas de l'entretoise pour butée double effet
+            # Cas de l'entretoise pour butÃ©e double effet
             elif clef == 'supp' and pos.radiale == "Ar":
                 elem.item[clef].calc_posX(pos, self.mtg.palier[pos.palier].rlt,
                                           elem = elem, entre = True)
@@ -1339,7 +1338,7 @@ class ZoneMontage(wx.Panel):
         #... joints :
         #------------
         elif pos.typelem == "J":
-            # le joint lui même
+            # le joint lui mÃªme
             if clef == "imag":
                 if 'supp' in elem.item.keys():              # il faut aussi un support
                     joint = elem.item['supp'].estAffiche
@@ -1349,7 +1348,7 @@ class ZoneMontage(wx.Panel):
                 elem.item[clef].calc_posX(pos, #self.mtg.palier[pos.palier].rlt,
                                           joint = True)#joint)
 
-            # le support du joint (type "arrêt")
+            # le support du joint (type "arrÃªt")
             else:
                 posSupp = pos.copie()
                 posSupp.typelem = "A"
@@ -1357,19 +1356,19 @@ class ZoneMontage(wx.Panel):
                                           joint = True)
             
             
-        # Ajout des tags par défaut
+        # Ajout des tags par dÃ©faut
         ##########################################################
         elem.item[clef].ajout_tag(elem.pos.code())
 
 
         # Regroupage des items - Ajout de tag ####################       
-        # Gestion des éléments spéciaux : 
-        #   - roulements séparables
-        #   - groupes "Arbre" et "Alésage"
+        # Gestion des Ã©lÃ©ments spÃ©ciaux : 
+        #   - roulements sÃ©parables
+        #   - groupes "Arbre" et "AlÃ©sage"
         #   - Joint
         ##########################################################
         if elem.type == "R":
-            if elem.estSeparable() or elem.nom == u'Roulement à billes à contact oblique':
+            if elem.estSeparable() or elem.nom == u'Roulement Ã  billes Ã  contact oblique':
                 if clef == 'imagAr':
                     tag = pos.code("Ar")
                 else:
@@ -1489,14 +1488,14 @@ class ZoneMontage(wx.Panel):
                                   elem.item[cle].pos[1])
         
 
-        # Ajout dans la liste des items à afficher ###############
+        # Ajout dans la liste des items Ã  afficher ###############
         ##########################################################
         self.lstItemMtg.append(elem.item[clef])
 
             
         # Hachurage ###############################################
         ###########################################################
-        # Hachurage du bâti
+        # Hachurage du bÃ¢ti
         #===================
         if hachurer:
             if 'GrpAlesage' in elem.item[clef].tag:
@@ -1512,7 +1511,7 @@ class ZoneMontage(wx.Panel):
                 b = wx.Brush(wx.NamedColour("dark green") , h)    
                 elem.item[clef].hachurer(b, pts = ((6,6),))
             
-            # Hachurage des écrous
+            # Hachurage des Ã©crous
             #======================
             elif elem.estEcrou():
                 elem.item[clef].hachurer(wx.Brush(wx.BLUE , wx.BDIAGONAL_HATCH), pts = ((70,74),), simple = True)
@@ -1541,7 +1540,7 @@ class ZoneMontage(wx.Panel):
 ##                self.coords("Rondelle"+pos.cotelem, xr, -200)
 
                 
-#        # On gère l'affichage de la rondelle ...
+#        # On gÃ¨re l'affichage de la rondelle ...
 #        if elem.type == "A" and pos.interieur() and pos.radiale == "Al" \
 #           and not elem.estEntretoise():
 #            self.afficherCacherRondelle(pos.cotelem,False)
@@ -1562,7 +1561,7 @@ class ZoneMontage(wx.Panel):
 ###                self.coords("Rondelle"+pos.cotelem, xr, -200)
 #
 #                
-#        # On gère l'affichage de la rondelle ...
+#        # On gÃ¨re l'affichage de la rondelle ...
 #        if elem.type == "A" and pos.interieur() and pos.radiale == "Al" \
 #           and not elem.estEntretoise():
 #            self.afficherCacherRondelle(pos.cotelem,False)
@@ -1573,9 +1572,9 @@ class ZoneMontage(wx.Panel):
 
     ############################################################################
     def coordsBordElem(self, mtg, pos, cote = None, rad = None, entretoise = False):
-        """ Renvoie les coordonnées du point au bord de l'élément 
-            situé à la position <pos>
-            du coté <cote> de l'élément
+        """ Renvoie les coordonnÃ©es du point au bord de l'Ã©lÃ©ment 
+            situÃ© Ã  la position <pos>
+            du cotÃ© <cote> de l'Ã©lÃ©ment
             
         """
 
@@ -1623,7 +1622,7 @@ class ZoneMontage(wx.Panel):
 
         # calcul du X ###
         #----------------
-          # Pas d'élément ...
+          # Pas d'Ã©lÃ©ment ...
         if pasDElem:
 ##            print "pas d'elem"
             if p == "D":
@@ -1687,11 +1686,11 @@ class ZoneMontage(wx.Panel):
         
     ##########################################################################    
     def surImage(self, pos = None):
-        """ Gèrer la mise en surbrillance des items du montage
+        """ GÃ¨rer la mise en surbrillance des items du montage
         """
     
         # 
-        # On sort si on n'est pas en mode d'édition
+        # On sort si on n'est pas en mode d'Ã©dition
         #
         if not self.SurBrillanceActive:
             return
@@ -1826,7 +1825,7 @@ class ZoneMontage(wx.Panel):
 
     #############################################################################
     def OnMove(self, evt = None):
-        """Op. à effectuer quand la souris se déplace
+        """Op. Ã  effectuer quand la souris se dÃ©place
         """
         
         if evt == None:
@@ -1837,17 +1836,17 @@ class ZoneMontage(wx.Panel):
             return
         
         #        
-        # Si on a cliqué sur le bouton d'un élément :
+        # Si on a cliquÃ© sur le bouton d'un Ã©lÃ©ment :
         #--------------------------------------------
         if self.numElemProv != None:
             x, y = evt.GetPosition()
             posSouris = self.mtg.elemProxim(x, y, self)
 
-            # Si la souris survole une position différente de la précédente
+            # Si la souris survole une position diffÃ©rente de la prÃ©cÃ©dente
             if posSouris != self.posPreced:
 #                print ">>> Nouvelle position",posSouris
                 rafraichir = False
-#                self.abortEvent.set() #Abandon du tracé
+#                self.abortEvent.set() #Abandon du tracÃ©
                 
                 if self.affichageEnCours:
 ##                    print ">>> Suppression affichage en cours",posSouris
@@ -1863,7 +1862,7 @@ class ZoneMontage(wx.Panel):
                    and posSouris.typelem == self.mtg.typeNum(self.numElemProv):
 ##                    print ">>> Type compatible ..."
 
-                    # Si la place est libre et compatible avec l'élément ...
+                    # Si la place est libre et compatible avec l'Ã©lÃ©ment ...
                     if self.mtg.placeLibre(posSouris) \
                         and self.mtg.placeCompatible(posSouris,self.numElemProv):
 #                        print ">>> Affichage ",posSouris          
@@ -1885,7 +1884,7 @@ class ZoneMontage(wx.Panel):
                 # On rafraichit l'affichage ...
                 if rafraichir:
 #                    print "Rafraichissement ..."
-#                    self.abortEvent.set() #Abandon du tracé
+#                    self.abortEvent.set() #Abandon du tracÃ©
 #                    self.abortEvent.clear()
 #                    self.jobID += 1
 #                    delayedresult.startWorker(self._resultConsumer, self._resultProducer, 
@@ -1901,7 +1900,7 @@ class ZoneMontage(wx.Panel):
            
             self.lstItemSousPointeur = self.LstItemSousPointeur(evt.GetPosition())
             
-            # Pour débuggage :
+            # Pour dÃ©buggage :
 #            if  self.lstItemSousPointeur <> self.lstItemSousPointeurCourant:
 ##                print
 #                try:
@@ -1915,7 +1914,7 @@ class ZoneMontage(wx.Panel):
             if len(self.lstItemSousPointeur) > 0: 
 #                print lstItemSousPointeur,
                 #
-                # On prend l'élément du dessus ...
+                # On prend l'Ã©lÃ©ment du dessus ...
                 #
                 item = self.lstItemSousPointeur[0]
                 posSouris = Montage.PositionDansPivot().posCode(item.tag[0])
@@ -1925,7 +1924,7 @@ class ZoneMontage(wx.Panel):
 
     #############################################################################            
     def mouseUp(self, event):
-        """ Op. à effectuer quand le bouton gauche de la souris est relâché
+        """ Op. Ã  effectuer quand le bouton gauche de la souris est relÃ¢chÃ©
         """
 #        print "MOUSE UP"
 #        x, y = event.m_x, event.m_y
@@ -1942,7 +1941,7 @@ class ZoneMontage(wx.Panel):
     #            self.app.barreElements.tacheEffectuee()
             self.app.changerCurseur()
             
-            # On met le hachures si elles n'aparaissaient pas en mode édition
+            # On met le hachures si elles n'aparaissaient pas en mode Ã©dition
             if not self.app.options.optGenerales["Hachurer"]:
                 self.mtg.rafraichirAffichage(self)
                 
@@ -2021,7 +2020,7 @@ class ZoneMontage(wx.Panel):
             
     def  LstItemSousPointeur(self, pt):
         lst = []
-#        print "Point écran :",pt
+#        print "Point Ã©cran :",pt
 #        pt = self.CalcUnscrolledPosition(pt)
 #        print "point ZoneVirt :",pt
         for i in self.lstItemMtg:
@@ -2033,15 +2032,15 @@ class ZoneMontage(wx.Panel):
         
     #############################################################################
     def creerElemProv(self, num):
-        "Création d'un élément provisoire et de son item"
-##        print u"Création d'un élément",num
+        "CrÃ©ation d'un Ã©lÃ©ment provisoire et de son item"
+##        print u"CrÃ©ation d'un Ã©lÃ©ment",num
 ##        if self.elemProv.num is not None:
 ##            self.barreElements.deverouille(self.elemProv.num)
 ##            self.barreElements.listeBouton[self.elemProv.num].configure(relief = RAISED)
 
         
         self.delete("Chaine")
-        self.numElemProv = num     #instanciation Elément PROVISOIRE
+        self.numElemProv = num     #instanciation ElÃ©ment PROVISOIRE
         self.master.changerCurseur(num)
 ##        self.barreElements.activer_desactiverBoutonPG(0)
 ##
@@ -2051,7 +2050,7 @@ class ZoneMontage(wx.Panel):
       
 
 ##############################################################################
-#    Point géométrique     #
+#    Point gÃ©omÃ©trique     #
 ##############################################################################
 class Point:
 
@@ -2150,7 +2149,7 @@ class Point:
 
                 
 ##############################################################################
-#    Ligne de points géométrique     #
+#    Ligne de points gÃ©omÃ©trique     #
 ##############################################################################
 class Ligne:
 
@@ -2174,15 +2173,15 @@ class Ligne:
 
     def partition(self, start, end, compare):
         while start < end:
-        # au début de cette boucle, notre élément permettant la partition 
-        # est à la valeur 'start'
+        # au dÃ©but de cette boucle, notre Ã©lÃ©ment permettant la partition 
+        # est Ã  la valeur 'start'
             while start < end:
                 if compare(self.lst[start].x, self.lst[end].x):
                     (self.lst[start], self.lst[end]) = (self.lst[end], self.lst[start])
                     break
                 end = end - 1
-        # au début de cette boucle, notre élément permettant la partition 
-        # est à la valeur 'end'
+        # au dÃ©but de cette boucle, notre Ã©lÃ©ment permettant la partition 
+        # est Ã  la valeur 'end'
             while start < end:
                 if compare(self.lst[start].x, self.lst[end].x):
                     (self.lst[start], self.lst[end]) = (self.lst[end], self.lst[start])
@@ -2191,7 +2190,7 @@ class Ligne:
         return start
  
     def quicksort(self, compare=lambda x, y: x > y, start=None, end=None):
-        """Le plus rapide des tris par échanges pour la plupart des usages."""
+        """Le plus rapide des tris par Ã©changes pour la plupart des usages."""
         if start is None: start = 0
         if end is None: end = len(self.lst)
         if start < end:
@@ -2222,7 +2221,7 @@ class MenuContextuel(wx.Menu):
 #                print "   elem:",self.elem.num
                 self.mtg = mtg
                 
-                titre = wx.MenuItem(self,100,self.elem.nom, u"Afficher les propriétés de l'élément")
+                titre = wx.MenuItem(self,100,self.elem.nom, u"Afficher les propriÃ©tÃ©s de l'Ã©lÃ©ment")
                 if 'wxMSW' in wx.PlatformInfo:
                     font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)
                     font.SetWeight(wx.BOLD)
@@ -2233,7 +2232,7 @@ class MenuContextuel(wx.Menu):
 #                titre.Enable(False)
                 self.AppendSeparator()
                 
-                self.Append(101,u"Supprimer", u"Supprimer définitivement cet élément du montage")
+                self.Append(101,u"Supprimer", u"Supprimer dÃ©finitivement cet Ã©lÃ©ment du montage")
                 
 #                self.menu.add_command(label   = self.elem.nom,
 #                                        font = Const.Font_TitreBulle[0],
@@ -2244,7 +2243,7 @@ class MenuContextuel(wx.Menu):
 #                                        command = lambda arg = pos : self.supprimer(arg))
                 if self.elem.type == "R":
                     if self.elem.estOblique():
-                        self.Append(102,u"Inverser le sens", u"Inverser le sens (orientation) du roulement à contact oblique")
+                        self.Append(102,u"Inverser le sens", u"Inverser le sens (orientation) du roulement Ã  contact oblique")
                 
 #                        self.menu.add_command(label   = "Inverser le sens", \
 #                                              command = self.inverserSens)
@@ -2252,14 +2251,14 @@ class MenuContextuel(wx.Menu):
 
 #                    self.menu.add_command(label   = "Changer la taille", \
 #                                          command = self.changerTaille)
-                    self.Append(104,u"Changer éléments roulants", u"Changer le type d'éléments roulants")
+                    self.Append(104,u"Changer Ã©lÃ©ments roulants", u"Changer le type d'Ã©lÃ©ments roulants")
 
-#                    self.menu.add_command(label   = "Changer éléments roulants", \
+#                    self.menu.add_command(label   = "Changer Ã©lÃ©ments roulants", \
 #                                          command = self.changerElemRoul)
-                self.Append(105,u"Changer le type", u"Changer le type d'élément")
+                self.Append(105,u"Changer le type", u"Changer le type d'Ã©lÃ©ment")
 
                 self.AppendSeparator()
-                self.Append(1001,u"Propriétés", u"Afficher les propriétés de l'élément")
+                self.Append(1001,u"PropriÃ©tÃ©s", u"Afficher les propriÃ©tÃ©s de l'Ã©lÃ©ment")
                 
 #                self.menu.add_command(label   = "Changer le type", \
 #                                      command = self.changerType) 
@@ -2347,7 +2346,7 @@ class MenuContextuel(wx.Menu):
 #                l = 1
 #                c+=1
 #
-#            # Création du bouton
+#            # CrÃ©ation du bouton
 #            bouton = Button(self, relief = RAISED,
 #                            command = lambda arg = num : self.selectionnerElem(arg))
 #            bouton.image = ImageTk.PhotoImage(Images.BoutonsElem[num])

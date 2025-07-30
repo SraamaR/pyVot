@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -35,42 +34,42 @@ import wx
 import  wx.lib.popupctl as  pop
 
 #############################################################################
-# Liste des éléments
+# Liste des Ã©lÃ©ments
 #############################################################################
-listeElements = {0 : {'nom'  : u'Roulement à billes à contact radial',
+listeElements = {0 : {'nom'  : u'Roulement Ã  billes Ã  contact radial',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 2,
                                      "axial"   : 2,
                                      "combi"   : 2},
                       'cout'  : 10},
-                 1 : {'nom'  : u'Roulement à billes à contact oblique',
+                 1 : {'nom'  : u'Roulement Ã  billes Ã  contact oblique',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 2,
                                       "axial"   : 2,
                                       "combi"   : 3},
                       'orientation' : None,
                       'cout' : 12},
-                 2 : {'nom'  : u'Roulement à rotule sur billes',
+                 2 : {'nom'  : u'Roulement Ã  rotule sur billes',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 2,
                                       "axial"   : 1,
                                       "combi"   : 1},
                       'cout' : 24},
-                 3 : {'nom'  : u'Butée à billes simple effet',
+                 3 : {'nom'  : u'ButÃ©e Ã  billes simple effet',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 0,
                                       "axial"   : 3,
                                       "combi"   : 0},
                       'orientation' : None,
                       'cout' : 14},
-                 4 : {'nom'  : u'Roulement à rouleaux cylindriques',
+                 4 : {'nom'  : u'Roulement Ã  rouleaux cylindriques',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 3,
                                       "axial"   : 0,
                                       "combi"   : 0},
                       'dimension' : 2,
                       'cout' : 14},
-                 5 : {'nom'  : u'Roulement à rouleaux coniques',
+                 5 : {'nom'  : u'Roulement Ã  rouleaux coniques',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 3,
                                       "axial"   : 3,
@@ -78,50 +77,50 @@ listeElements = {0 : {'nom'  : u'Roulement à billes à contact radial',
                       'orientation' : None,
                       'dimension' : 4,
                       'cout' : 16},
-                 6 : {'nom' : u'Roulement à rotule sur rouleaux',
+                 6 : {'nom' : u'Roulement Ã  rotule sur rouleaux',
                       'type': 'R',
                       'chargeAdm' : {"radial"  : 4,
                                       "axial"   : 2,
                                       "combi"   : 4},
                       'cout' : 26},
-                 7 : {'nom'  : u'Butée à rouleaux simple effet',
+                 7 : {'nom'  : u'ButÃ©e Ã  rouleaux simple effet',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 0,
                                       "axial"   : 4,
                                       "combi"   : 0},
                       'orientation' : None,
                       'cout' : 18},
-                 8 : {'nom'  : u'Butée à billes double effet',
+                 8 : {'nom'  : u'ButÃ©e Ã  billes double effet',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 0,
                                       "axial"   : 3,
                                       "combi"   : 0},
                       'cout' : 20},
-                 9 : {'nom'  : u'Butée à rouleaux double effet',
+                 9 : {'nom'  : u'ButÃ©e Ã  rouleaux double effet',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 0,
                                       "axial"   : 4,
                                       "combi"   : 0},
                       'cout' : 28},
-                 10: {'nom'  : u'Roulement à 2 rangées de billes à contact oblique',
+                 10: {'nom'  : u'Roulement Ã  2 rangÃ©es de billes Ã  contact oblique',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 4,
                                       "axial"   : 2,
                                       "combi"   : 4},
                       'cout' : 20},
-                 11: {'nom'  : u'Roulement à 2 rangées de rouleaux coniques',
+                 11: {'nom'  : u'Roulement Ã  2 rangÃ©es de rouleaux coniques',
                       'type' : 'R',
                       'chargeAdm' : {"radial"  : 5,
                                       "axial"   : 3,
                                       "combi"   : 5},
                       'cout' : 30},
                  
-                 100 : {'nom'  : u'Eléments filetés',
+                 100 : {'nom'  : u'ElÃ©ments filetÃ©s',
                         'type' : 'A',
                         'pos'  : 'E', 
                         'chargeAdm' : {"axial" : 7},
                         'cout' : 10},
-                 101 : {'nom'  : u'Anneau élastique',
+                 101 : {'nom'  : u'Anneau Ã©lastique',
                         'type' : 'A',
                         'pos'  : 'IE',
                         'chargeAdm' : {"axial" : 1},
@@ -138,7 +137,7 @@ listeElements = {0 : {'nom'  : u'Roulement à billes à contact radial',
                         'cout' : 2},
                  
 
-                 200 : {'nom'  : u'Joint à une lèvre',
+                 200 : {'nom'  : u'Joint Ã  une lÃ¨vre',
                         'type' : 'J',
                         'pos'  : ['Ar'],
                         'pressAdm' : {"Ar" : 2},
@@ -196,13 +195,13 @@ def listCopy(lst):
     return newLst
 
 #############################################################################
-# Classement des éléments
+# Classement des Ã©lÃ©ments
 #############################################################################
 listeFamilles = [
-                         [u'Roulements', [[u'à billes',  [0,1,10,2,3,8]],
-                                          [u'à rouleaux',[4,5,11,6,7,9]]]
+                         [u'Roulements', [[u'Ã  billes',  [0,1,10,2,3,8]],
+                                          [u'Ã  rouleaux',[4,5,11,6,7,9]]]
                          ],
-                         [u'Arrêts',range(100,104)],
+                         [u'ArrÃªts',range(100,104)],
                          [u'Joints',range(200,205)]
                         ]
 
@@ -233,12 +232,12 @@ def coefTaille(param, numElem, taille):
 #############################################################################        
 #############################################################################
 #                   #
-#      Elément      #
+#      ElÃ©ment      #
 #                   #
 #############################################################################
 #############################################################################
 class Element:
-    "Classe définissant un Element d'une liaison pivot"
+    "Classe dÃ©finissant un Element d'une liaison pivot"
     
     def __init__(self, num = None, taille = "P", orientation = '', pos = None):
         self.num = num
@@ -252,7 +251,7 @@ class Element:
             self.item = {}
 
         
-##        print u">Initialisation élément",num
+##        print u">Initialisation Ã©lÃ©ment",num
         if num <> None:
             self.nom = listeElements[num]['nom']
             self.type = listeElements[num]['type']
@@ -309,15 +308,15 @@ class Element:
 
     #############################################################################
     def definirImages(self, mtg, zoneMtg, taille,  pos = None):
-        """ Détermine toutes les images susceptibles de servir
-            pour l'élément, suivant sa position et sa taille,
+        """ DÃ©termine toutes les images susceptibles de servir
+            pour l'Ã©lÃ©ment, suivant sa position et sa taille,
             sous forme d'item.
             --> self.item : dic de ItemElem
             --> self.taille
            
         """
 #        print type(pos)
-        # Classe d'item d'élément
+        # Classe d'item d'Ã©lÃ©ment
         def itemElem(clef):
             return Affichage.ItemElem(zoneMtg, mtg, clef)
 
@@ -328,7 +327,7 @@ class Element:
             return
 ##        print pos
         
-        ##  (Re)Initialisation des images de l'élément   ##############################
+        ##  (Re)Initialisation des images de l'Ã©lÃ©ment   ##############################
         self.item = {}
 
         
@@ -344,10 +343,10 @@ class Element:
                     self.taille = "P"
             else:
                 self.taille = mtg.palier[pos.palier].taille
-##        print "...taille affectée :",self.taille
+##        print "...taille affectÃ©e :",self.taille
 
 
-        ## >>> Cas général (roulements non séparables) --> 'imag'
+        ## >>> Cas gÃ©nÃ©ral (roulements non sÃ©parables) --> 'imag'
         #--------------------------------------------------------
         clefImg = str(self.num) + self.taille
         if clefImg in imageElem.keys():
@@ -356,7 +355,7 @@ class Element:
                 self.item['imag'].inverser()
 
         
-        ## >>> Cas des roulements à bagues séparables --> 'imag' et 'imagAr'
+        ## >>> Cas des roulements Ã  bagues sÃ©parables --> 'imag' et 'imagAr'
         #-------------------------------------------------------------------
         if self.type == "R":
             if clefImg + "Al" in imageElem.keys():
@@ -403,7 +402,7 @@ class Element:
                     
 #                    self.item['vide'] = itemElem(clefImg+"V")
             
-                ## >>> cas des épaulement intérieurs --> 'opp'
+                ## >>> cas des Ã©paulement intÃ©rieurs --> 'opp'
                 #---------------------------------------------
                 if self.estEpaulement() and pos.interieur():
                     self.item['opp'] = itemElem(clefImg + "I")
@@ -415,7 +414,7 @@ class Element:
                 if not self.estEpaulement() and not self.estEntretoise():
                     self.item['supp'] = itemElem("89" + self.taille)
 
-                ## >>> cas des arrets nécessitant un support (chapeau) --> 'supp'
+                ## >>> cas des arrets nÃ©cessitant un support (chapeau) --> 'supp'
                 #----------------------------------------------------------------
                 if self.estChapeau(pos):
                     self.item['supp'] = itemElem("Sup"+self.taille+"Al")
@@ -431,7 +430,7 @@ class Element:
                     if clefImg + "E" in imageElem.keys():
                         self.item['imag'] = itemElem(clefImg + "E")
                         
-                ## >>> cas des joints nécessitant un support --> 'supp'
+                ## >>> cas des joints nÃ©cessitant un support --> 'supp'
                 #-------------------------------------------------------
                 if mtg.palier[pos.palier].arr["Al"][pos.palier].num is None:
                     self.item['supp'] = itemElem("Sup"+self.taille+"Al")
@@ -447,18 +446,18 @@ class Element:
 #                        inverser = False
                     self.item['imag'].imagVide(clefImg+"V")
                 
-            # Retournement des éléments coté 'droit'
+            # Retournement des Ã©lÃ©ments cotÃ© 'droit'
             if pos.cotelem == "D":
                 for i in self.item.values():
                     i.inverser()
 
 
-##        # Réinitialisation du dictionnaire des items
+##        # RÃ©initialisation du dictionnaire des items
 ##        for c in self.images.keys():
 ##            self.item[c] = None
 
             
-##        print "Images de l'élément :",self.images.keys()
+##        print "Images de l'Ã©lÃ©ment :",self.images.keys()
 
             
 
@@ -481,13 +480,13 @@ class Element:
 
 ##    #############################################################################
 ##    def codeTag(self,pos):
-##        "Renvoie un code comprenant la position et le numéro de l'élément"
+##        "Renvoie un code comprenant la position et le numÃ©ro de l'Ã©lÃ©ment"
 ##        return str(self.num)+pos.code()
 
 
     #############################################################################
     def doubler(self,pos):
-        "Détermine si un arrêt doit être doublé ou pas"
+        "DÃ©termine si un arrÃªt doit Ãªtre doublÃ© ou pas"
         if pos is None:
             return False
         if self.estEntretoise() and pos.interieur():
@@ -502,7 +501,7 @@ class Element:
 
     #############################################################################
     def supporteEffortAxial(self,sens = 0, pos = None):
-        "Détermine si un élément supporte un effort axial dans un sens"
+        "DÃ©termine si un Ã©lÃ©ment supporte un effort axial dans un sens"
 #        print self,
         if self.num is None:
             return False
@@ -542,7 +541,7 @@ class Element:
 
     #############################################################################
     def effortAxialSupporte(self):
-        "Renvoi l'indice de charge axiale supportée"
+        "Renvoi l'indice de charge axiale supportÃ©e"
         return self.coefTaille(self.chargeAdm["axial"])
        
 
@@ -558,7 +557,7 @@ class Element:
 
     #############################################################################
     def copier(self,elem):
-        u"Copier un élément à une position <pos>"
+        u"Copier un Ã©lÃ©ment Ã  une position <pos>"
         self.__init__(elem.num)
         if self.num is not None:
             self.item = elem.item.copy()
@@ -574,7 +573,7 @@ class Element:
 
     #############################################################################
     def copy(self):
-        "Renvoie la copie d'un élément"
+        "Renvoie la copie d'un Ã©lÃ©ment"
         elem = Element(self.num)
         elem.copier(self)
 ##        if self.num is not None:
@@ -594,7 +593,7 @@ class Element:
     
     #############################################################################
     def estDefini(self):
-        "Renvoie <True> si l'élément est défini"
+        "Renvoie <True> si l'Ã©lÃ©ment est dÃ©fini"
         if self.num == None:
             return False
         else:
@@ -603,7 +602,7 @@ class Element:
 
     #############################################################################
     def estEpaulement(self):
-        "Renvoie <True> si l'élément est un épaulement"
+        "Renvoie <True> si l'Ã©lÃ©ment est un Ã©paulement"
         if self.num is not None:
             if self.type == "A" and self.nom == u"Epaulement":
                 return True
@@ -612,16 +611,16 @@ class Element:
 
     #############################################################################
     def estRltRoulConiques(self):
-        "Renvoie <True> si l'élément est un roulements à rouleaux coniques"
+        "Renvoie <True> si l'Ã©lÃ©ment est un roulements Ã  rouleaux coniques"
         if self.num is not None:
-            if self.type == "R" and self.nom == u'Roulement à rouleaux coniques':
+            if self.type == "R" and self.nom == u'Roulement Ã  rouleaux coniques':
                 return True
         return False
 
 
     #############################################################################
     def estEntretoise(self):
-        "Renvoie <True> si l'élément est une entretoise"
+        "Renvoie <True> si l'Ã©lÃ©ment est une entretoise"
         if self.num is not None:
             if self.type == "A" and self.nom == u"Entretoise":
                 return True
@@ -631,7 +630,7 @@ class Element:
     #############################################################################
     def estEcrou(self):
         if self.num is not None:
-            if self.type == "A" and self.nom == u'Eléments filetés' \
+            if self.type == "A" and self.nom == u'ElÃ©ments filetÃ©s' \
                and self.pos.radiale == "Ar":
                 return True
         return False
@@ -676,17 +675,17 @@ class Element:
     
     #############################################################################
     def estSeparable(self):
-        "Renvoie <True> si l'élément est à bagues séparables"
+        "Renvoie <True> si l'Ã©lÃ©ment est Ã  bagues sÃ©parables"
         if self.num is not None:
-            if self.type == "R" and self.nom in [u'Roulement à rouleaux coniques', \
-                                                 u'Roulement à rouleaux cylindriques']:
+            if self.type == "R" and self.nom in [u'Roulement Ã  rouleaux coniques', \
+                                                 u'Roulement Ã  rouleaux cylindriques']:
                 return True
         return False
 
 
     #############################################################################
     def estSeparableSens(self,sens,bague):
-        "Renvoie <True> si la <bague> du roulement est séparable dans le sens <sens>"
+        "Renvoie <True> si la <bague> du roulement est sÃ©parable dans le sens <sens>"
         if self.estSeparable():
             if not self.estOblique():
                 return True
@@ -700,28 +699,28 @@ class Element:
 
     #############################################################################
     def estOblique(self):
-        "Renvoie <True> si l'élément est à contact oblique"
+        "Renvoie <True> si l'Ã©lÃ©ment est Ã  contact oblique"
         if self.num is not None:
-            if self.type == "R" and self.num in [1,3,5,7]:# in [u'Roulement à billes à contact oblique', \
-#                                                 u'Roulement à rouleaux coniques', \
-#                                                 u'Butée à billes simple effet', \
-#                                                 u'Butée à rouleaux simple effet']:
+            if self.type == "R" and self.num in [1,3,5,7]:# in [u'Roulement Ã  billes Ã  contact oblique', \
+#                                                 u'Roulement Ã  rouleaux coniques', \
+#                                                 u'ButÃ©e Ã  billes simple effet', \
+#                                                 u'ButÃ©e Ã  rouleaux simple effet']:
                 return True
         return False
     
 
     #############################################################################
     def estButee(self):
-        "Renvoie <True> si l'élément est une butée"
+        "Renvoie <True> si l'Ã©lÃ©ment est une butÃ©e"
         if self.num is not None:
-            if self.type == "R" and self.nom in [u'Butée à billes simple effet', \
-                                                 u'Butée à rouleaux simple effet']:
+            if self.type == "R" and self.nom in [u'ButÃ©e Ã  billes simple effet', \
+                                                 u'ButÃ©e Ã  rouleaux simple effet']:
                 return True
         return False
 
     #############################################################################
     def estButeeDbl(self):
-        "Renvoie <True> si l'élément est une butée double"
+        "Renvoie <True> si l'Ã©lÃ©ment est une butÃ©e double"
         if self.num is not None:
             if self.type == "R" and self.num in [8,9]:
                 return True
@@ -729,14 +728,14 @@ class Element:
 
     #############################################################################
     def pasDemontable(self, unSeulRlt, pos = None):
-        u"Renvoie <True> si l'élément n'est pas démontable"
+        u"Renvoie <True> si l'Ã©lÃ©ment n'est pas dÃ©montable"
 
-        # Pas d'élément
+        # Pas d'Ã©lÃ©ment
         if self.num == None:
             return False
 
-        # Elément a priori démontable
-        if self.nom in [u"Entretoise", u"Anneau élastique", u'Eléments filetés']:
+        # ElÃ©ment a priori dÃ©montable
+        if self.nom in [u"Entretoise", u"Anneau Ã©lastique", u'ElÃ©ments filetÃ©s']:
             if pos is not None and pos.interieur():
                 if not unSeulRlt:
                     return True
@@ -750,7 +749,7 @@ class Element:
 
     #############################################################################
     def profondeur(self):
-        """Renvoie la profondeur relative à laquelle doit être affiché l'élément"""
+        """Renvoie la profondeur relative Ã  laquelle doit Ãªtre affichÃ© l'Ã©lÃ©ment"""
         if self.estEpaulement():
             if self.pos.radiale == "Al":
                 if self.taille == "P":
@@ -769,9 +768,9 @@ class Element:
 
     #############################################################################
     def dimensions(self, radiale, int_ext, taille = None):
-        """Renvoie les dimensions de l'élément
-            radiale : coté arbre ou alésage
-            int_ext : vue de l'extérieur ou de l'intérieur
+        """Renvoie les dimensions de l'Ã©lÃ©ment
+            radiale : cotÃ© arbre ou alÃ©sage
+            int_ext : vue de l'extÃ©rieur ou de l'intÃ©rieur
             """
 
         # Format
@@ -788,7 +787,7 @@ class Element:
         else:
             t = 1
 
-        # Dimension de base logements intérieure/extérieure
+        # Dimension de base logements intÃ©rieure/extÃ©rieure
         if radiale == "Al":
             l = 5
         else:
@@ -802,7 +801,7 @@ class Element:
         else:
             s = 0
         
-        # S'il n'y a pas d'élément ==> dimension de l'arbre ou alésage
+        # S'il n'y a pas d'Ã©lÃ©ment ==> dimension de l'arbre ou alÃ©sage
         if self.num == None:
             dimension['entier'] = t + l
             dimension['demonte'] = dimension['entier']
@@ -826,7 +825,7 @@ class Element:
 
         # Cas des roulements
         elif self.type == "R":
-            # Dimension de base bague intérieure/extérieure
+            # Dimension de base bague intÃ©rieure/extÃ©rieure
             if int_ext == "I":
                 r = 0
             else:
@@ -834,9 +833,9 @@ class Element:
 
             dimension['entier'] = t + r
 
-            # Cas de roulements séparables
+            # Cas de roulements sÃ©parables
             if self.estSeparable():
-                if self.nom == u'Roulement à rouleaux coniques':
+                if self.nom == u'Roulement Ã  rouleaux coniques':
                     if int_ext == "I" and radiale == "Al":
                         r = 3
                     elif int_ext == "E" and radiale == "Ar":
@@ -866,7 +865,7 @@ class Element:
 
     #############################################################################
     def sensOppose(self):
-        "Renvoie le sens opposé de l'élément"
+        "Renvoie le sens opposÃ© de l'Ã©lÃ©ment"
         if self.orientation == "D":
             return "G"
         else:
@@ -971,7 +970,7 @@ class Propriete(wx.Dialog):
             sizer.Add(label, (l,2), flag = wx.ALIGN_CENTRE|wx.ALL, border = 5)
             
             l += 1
-            label = wx.StaticText(self, -1, u"Combinée :")
+            label = wx.StaticText(self, -1, u"CombinÃ©e :")
             sizer.Add(label, (l,0), flag = wx.ALIGN_RIGHT|wx.ALL, border = 5)
             label = wx.StaticText(self, -1, str(element.chargeAdm["combi"]))
             sizer.Add(label, (l,1), flag = wx.ALIGN_CENTRE|wx.ALL, border = 5)
@@ -1071,7 +1070,7 @@ class Propriete(wx.Dialog):
         self.SetFont(font)
         self.SetForegroundColour(wx.BLACK)
         
-        label = wx.StaticText(self, -1, u"Coût :")
+        label = wx.StaticText(self, -1, u"CoÃ»t :")
         sizer.Add(label, (l,0), flag = wx.ALIGN_RIGHT|wx.ALL, border = 5)
         
         font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)

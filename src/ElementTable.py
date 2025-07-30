@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2009 Cédrick FAURY
+## Copyright (C) 2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -387,8 +386,8 @@ class RoulementsDataTable(ElementsDataTable):
     def __init__(self):
         
         self.colLabels = [u'ID', u'Nom', u'Charge\nadmissible\nradiale', u'Charge\nadmissible\naxiale',
-                          u'Charge\nadmissible\ncombinée',
-                          u"Contact\noblique", u"Bagues\nséparables", u'Coût']
+                          u'Charge\nadmissible\ncombinÃ©e',
+                          u"Contact\noblique", u"Bagues\nsÃ©parables", u'CoÃ»t']
 
 
         self.dataTypes = [gridlib.GRID_VALUE_NUMBER + ':0,99',
@@ -407,7 +406,7 @@ class ArretsDataTable(ElementsDataTable):
     def __init__(self):
         
         self.colLabels = [u'ID', u'Nom', u'Charge\nadmissible\naxiale',
-                          u"Intérieur", u"Extérieur", u'Coût']
+                          u"IntÃ©rieur", u"ExtÃ©rieur", u'CoÃ»t']
 
         self.dataTypes = [gridlib.GRID_VALUE_NUMBER + ':100,199',
                           gridlib.GRID_VALUE_STRING,
@@ -422,10 +421,10 @@ class ArretsDataTable(ElementsDataTable):
 class JointsDataTable(ElementsDataTable):
     def __init__(self):
         
-        self.colLabels = [u'ID', u'Nom', u'Etanchéité\nStatique', u'Etanchéité\nDynamique',
-                          u"Pression\nadmissible\narbre", u"Pression\nadmissible\nalésage",
+        self.colLabels = [u'ID', u'Nom', u'EtanchÃ©itÃ©\nStatique', u'EtanchÃ©itÃ©\nDynamique',
+                          u"Pression\nadmissible\narbre", u"Pression\nadmissible\nalÃ©sage",
                           u"Vitesse\nadmissible", u"Produit PV\nadmissible",
-                          u'Coût']
+                          u'CoÃ»t']
 
         self.dataTypes = [gridlib.GRID_VALUE_NUMBER + ':200,299',
                           gridlib.GRID_VALUE_STRING,
@@ -482,7 +481,7 @@ class ElementGridFrame(wx.Frame):
     def __init__(self, parent, lstElements = None, lstFamilles = None, fichier = ''):
 
         wx.Frame.__init__(
-            self, parent, -1, u"Table des éléments"#, size=(640,480)
+            self, parent, -1, u"Table des Ã©lÃ©ments"#, size=(640,480)
             )
         self.parent = parent
         self.parser = ElementParser()
@@ -501,7 +500,7 @@ class ElementGridFrame(wx.Frame):
         bar.Add(bNo)
         
         # Le combobox
-        sb1 = wx.StaticBox(p, -1, u'Propriétés personnalisées')
+        sb1 = wx.StaticBox(p, -1, u'PropriÃ©tÃ©s personnalisÃ©es')
         sbs1 = wx.StaticBoxSizer(sb1, wx.HORIZONTAL)
            
         cbID = wx.NewId()
@@ -535,7 +534,7 @@ class ElementGridFrame(wx.Frame):
             self.Open(fichier = self.fichier)
         
         self.nb.AddPage(self.pages[0], u"Roulements")
-        self.nb.AddPage(self.pages[1], u"Arrêts")
+        self.nb.AddPage(self.pages[1], u"ArrÃªts")
         self.nb.AddPage(self.pages[2], u"Joints")
 
         bs = wx.BoxSizer(wx.VERTICAL)
@@ -552,7 +551,7 @@ class ElementGridFrame(wx.Frame):
         
 
     def Importer(self, lstElements, lstFamilles):
-        """ Import des propriétés par défaut des éléments
+        """ Import des propriÃ©tÃ©s par dÃ©faut des Ã©lÃ©ments
         """
         
         def LstId(lst, concat = False):
@@ -672,8 +671,8 @@ class ElementGridFrame(wx.Frame):
             self.Save(self.fichier)
             return True
         else:
-            dlg = wx.MessageDialog(self, u'Choisissez un nom de propriétés !',
-                               u'Nom de propriétés',
+            dlg = wx.MessageDialog(self, u'Choisissez un nom de propriÃ©tÃ©s !',
+                               u'Nom de propriÃ©tÃ©s',
                                wx.OK | wx.ICON_EXCLAMATION 
                                #wx.YES_NO | wx.NO_DEFAULT | wx.CANCEL | wx.ICON_INFORMATION
                                )
@@ -699,7 +698,7 @@ class ElementGridFrame(wx.Frame):
             self.Destroy()
             return
         
-        texte = u"Le tableau à été modifié.\nVoulez vous enregistrer les changements ?"
+        texte = u"Le tableau Ã  Ã©tÃ© modifiÃ©.\nVoulez vous enregistrer les changements ?"
         
         dialog = wx.MessageDialog(self, texte, 
                                   "Confirmation", wx.YES_NO | wx.CANCEL | wx.ICON_WARNING)

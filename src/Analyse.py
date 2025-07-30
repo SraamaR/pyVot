@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -60,7 +59,7 @@ def charger_styleText():
 
 
 #####################################################
-# Zone de résultats   ###############################
+# Zone de rÃ©sultats   ###############################
 #####################################################
 class ZoneResultats(wx.Panel):
     def __init__(self, parent, analyse, liaison = True):
@@ -149,7 +148,7 @@ class ZoneImmobAx(ZoneResultats):
         #####################
         self.MakeBoutonSizer("1", 4,10)        
         c = 0
-        for s in [1,0]: # différents sens ...
+        for s in [1,0]: # diffÃ©rents sens ...
             sizerResult = wx.BoxSizer(wx.VERTICAL)
             for mess in analyse.resultatImmobilisation[s]:
                 sizerResult.Add(self.StaticTextMessage(mess, style = "Normal", wrapFact = 2))
@@ -202,9 +201,9 @@ class ZoneImmobAx(ZoneResultats):
 
             c += 2
 
-        # Schéma de structure
+        # SchÃ©ma de structure
         #--------------------
-        self.MakeStaticBox("2", u"Schéma de structure")
+        self.MakeStaticBox("2", u"SchÃ©ma de structure")
         self.Add("2", wx.StaticBitmap(self, -1, analyse.imageSchema),
                  flag = wx.ALIGN_CENTRE, border = 0)
         
@@ -243,7 +242,7 @@ class ZoneImmobAx(ZoneResultats):
 
 
 #####################################################
-# Résistance aux Charges ############################
+# RÃ©sistance aux Charges ############################
 #####################################################
 class ZoneResistance(ZoneResultats):
     def __init__(self, parent, analyse):
@@ -254,9 +253,9 @@ class ZoneResistance(ZoneResultats):
         
         self.Freeze()
 
-        # Résistance axiale du montage
+        # RÃ©sistance axiale du montage
         #####################################################
-        self.MakeStaticBox("1", u"Résistance axiale du montage")
+        self.MakeStaticBox("1", u"RÃ©sistance axiale du montage")
 
         # Resultat principal
         self.Add("1", self.StaticTextMessage(analyse.messageResistanceAxiale))
@@ -273,7 +272,7 @@ class ZoneResistance(ZoneResultats):
                 sizerResult.Add(self.StaticTextMessage(mess, style = "Normal", wrapFact = 2))
             self.AddBouton("1", sizerResult,
                            (0,c), (1,1), wx.ALIGN_CENTRE|wx.EXPAND)
-            # Bouton "Détail"
+            # Bouton "DÃ©tail"
             #----------------
 #            if parent.master.options.proposerChaines.get() == 1 \
             if analyse.resultatEffortAxialMtg[s][0].clef == 'ElemResistPas':
@@ -325,14 +324,14 @@ class ZoneResistance(ZoneResultats):
 
             tag = None
         
-        # Résistance des roulements
+        # RÃ©sistance des roulements
         ########################################################################
-        self.MakeStaticBox("2", u"Résistance des roulements")
+        self.MakeStaticBox("2", u"RÃ©sistance des roulements")
 
-        # Message général
+        # Message gÃ©nÃ©ral
         self.Add("2", self.StaticTextMessage(analyse.messageResistanceRlt), border = 10)
         
-        # Schéma de structure
+        # SchÃ©ma de structure
         self.Add("2", wx.StaticBitmap(self, -1, analyse.imageSchemaCharges), 
                  flag = wx.ALIGN_CENTRE, border = 0)
         
@@ -345,7 +344,7 @@ class ZoneResistance(ZoneResultats):
         table.SetRowLabelSize(1)
         table.SetRowLabelAlignment(wx.ALIGN_RIGHT, wx.ALIGN_CENTRE)
 #        table.SetRowLabelValue(0, u"Type\nde charge")
-#        table.SetRowLabelValue(1, u"Résistance\ndu roulement")
+#        table.SetRowLabelValue(1, u"RÃ©sistance\ndu roulement")
         
         c = 0
         for p in ["G","D"]:
@@ -391,7 +390,7 @@ class ZoneResistance(ZoneResultats):
 #                                    style = wx.ALIGN_CENTRE)
 #                self.AddBouton("2", txt, (0,c), (1,1), wx.ALIGN_CENTRE|wx.EXPAND)
 #
-#                # Label "Résultat"
+#                # Label "RÃ©sultat"
 #                #----------------
 #                if analyse.typeCharge[p] <> 0:
 #                    StyleText["Messag"].applique(self, Couleur[analyse.resultatResistanceRlt[p].coul])
@@ -463,17 +462,17 @@ class ZoneMontabilite(ZoneResultats):
         self.Freeze()
         
         #####################################################
-        # Message principal (montabilité globale)
+        # Message principal (montabilitÃ© globale)
         #####################################################
         self.txt = self.StaticTextMessage(analyse.resultatMontabilite)
         self.sizer.Add(self.txt, flag = wx.ALIGN_CENTRE_VERTICAL|wx.ALIGN_LEFT|wx.TOP|wx.BOTTOM, border = 10)
         
         #####################################################
-        # Montabilité de l'ensemble monté "libre"
+        # MontabilitÃ© de l'ensemble montÃ© "libre"
         #####################################################
         if analyse.cdcf.bagueTournante == "I": ens = u"""arbre"""
-        else: ens = u"""alésage"""
-        self.MakeStaticBox("1", u"Montabilité de l'ensemble " + ens)
+        else: ens = u"""alÃ©sage"""
+        self.MakeStaticBox("1", u"MontabilitÃ© de l'ensemble " + ens)
         self.MakeBoutonSizer("1",0,0)
         StyleText["Titre2"].applique(self)
         cbs = wx.BoxSizer(wx.HORIZONTAL)
@@ -481,15 +480,15 @@ class ZoneMontabilite(ZoneResultats):
         cb.SetValue(analyse.demonterRltSerres)
         self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBox, cb)
         cbs.Add(cb)
-        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements montés serrés")
+        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements montÃ©s serrÃ©s")
         txt.marge = 40
         cbs.Add(txt)
         self.Add("1", cbs)
         
         #####################################################
-        # Montabilité des roulements sur l'ensemble monté "serré
+        # MontabilitÃ© des roulements sur l'ensemble montÃ© "serrÃ©
         #####################################################
-        self.MakeStaticBox("2", u"Montabilité des roulements")
+        self.MakeStaticBox("2", u"MontabilitÃ© des roulements")
         self.MakeBoutonSizer("2",0,0)
         StyleText["Titre2"].applique(self)
         if self.analyse.mtg.palier["G"].rlt.num is not None:
@@ -509,7 +508,7 @@ class ZoneMontabilite(ZoneResultats):
 #        cb.SetValue(analyse.demonterRltSerres)
 #        self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBox, cb)
 #        self.Add("3", cb)
-#        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements montés sérrés")
+#        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements montÃ©s sÃ©rrÃ©s")
 #        txt.marge = 40
 #        self.Add("3", txt)#, flag = wx.ALIGN_CENTRE_VERTICAL|wx.ALIGN_LEFT|wx.TOP|wx.BOTTOM|wx.LEFT)
 
@@ -585,7 +584,7 @@ class ZoneMontabilite(ZoneResultats):
                 self.boutons[tag].SetInitialSize()
     #                self.SetBitmapLabel(Images.Img_BoutonMont(tag+self.rad))
                 self.AddBouton("2", self.boutons[tag], (2,c), (1,2), flag = wx.ALIGN_CENTRE)
-                self.boutons[tag].SetToolTipString(u"Cliquer pour visualiser la bague de roulement qui ne peut pas être démontée.")
+                self.boutons[tag].SetToolTipString(u"Cliquer pour visualiser la bague de roulement qui ne peut pas Ãªtre dÃ©montÃ©e.")
                 self.Bind(wx.EVT_BUTTON, self.montrerBaguesIsolee, self.boutons[tag])
             c += 2
         self.gererActivationBoutons()
@@ -619,7 +618,7 @@ class ZoneMontabilite(ZoneResultats):
 #        print "Init affichage ZoneMont"
         self.initAffichageSurbrillance()
         self.analyse.elemDemonte = []
-        # On remonte tout instantanément
+        # On remonte tout instantanÃ©ment
         for i in zoneMtg.lstItemMtg:
             if hasattr(i,"x"):
                 i.pos = (i.x,i.pos[1])
@@ -643,7 +642,7 @@ class ZoneMontabilite(ZoneResultats):
 
     #############################################################################
     def gererActivationBoutons(self):
-        """ Change l'état normal des boutons d'animation de la montabilité """
+        """ Change l'Ã©tat normal des boutons d'animation de la montabilitÃ© """
 #        print
 #        print "Gestion Activation Boutons", self.analyse.elemDemonte,self.boutons["AnimEnsb1"].GetValue()
 
@@ -688,7 +687,7 @@ class ZoneMontabilite(ZoneResultats):
 
 #    #############################################################################
 #    def activerDesactiverBoutons_Montage(self):
-#        """ Activation ou Désactivation des boutons lors d'un démontage """
+#        """ Activation ou DÃ©sactivation des boutons lors d'un dÃ©montage """
 #
 #        if self.master.analyse.elemDemonte == []:
 #            state = 'normal'
@@ -723,14 +722,14 @@ class ZoneMontabilite(ZoneResultats):
             p = "G"
         else:
             p = "D"
-#        print "Bagues isolées", self.analyse.obstacleBagueIsolee[p]
+#        print "Bagues isolÃ©es", self.analyse.obstacleBagueIsolee[p]
         self.parent.montrerBagueIsolee(self.analyse.obstacleBagueIsolee[p], 
                                        self.boutons["BagueIsolee"+p].GetValue())
 
 
 
 #####################################################
-# Etanchéité ########################################
+# EtanchÃ©itÃ© ########################################
 #####################################################
 class ZoneEtancheite(ZoneResultats):
     def __init__(self, parent, analyse):
@@ -738,9 +737,9 @@ class ZoneEtancheite(ZoneResultats):
         
         self.Freeze()
 
-        # Etancheité statique
+        # EtancheitÃ© statique
         #####################################################
-        self.MakeStaticBox("1", u"Etanchéité statique")
+        self.MakeStaticBox("1", u"EtanchÃ©itÃ© statique")
 
         # Resultat principal
         message = analyse.resultatEtancheite["SB"]
@@ -754,10 +753,10 @@ class ZoneEtancheite(ZoneResultats):
         StyleText["Titre2"].applique(self)
         
         table = Tableau(self)
-        table.SetColLabelValue(0, u"Coté\ngauche")
-        table.SetColLabelValue(1, u"Coté\ndroit")
+        table.SetColLabelValue(0, u"CotÃ©\ngauche")
+        table.SetColLabelValue(1, u"CotÃ©\ndroit")
         table.SetRowLabelValue(0, u"Sur Arbre")
-        table.SetRowLabelValue(1, u"Sur Alésage")
+        table.SetRowLabelValue(1, u"Sur AlÃ©sage")
         
         l, c = 0, 0
         for p in ["G","D"]:
@@ -779,13 +778,13 @@ class ZoneEtancheite(ZoneResultats):
         self.tableStat = table
         
         
-        # Etanchéité Dynamique
+        # EtanchÃ©itÃ© Dynamique
         ########################################################################
-        self.MakeStaticBox("2", u"Etanchéité dynamique")
+        self.MakeStaticBox("2", u"EtanchÃ©itÃ© dynamique")
 
         if "DB" in analyse.resultatEtancheite:
             
-            # Résultat principal
+            # RÃ©sultat principal
             message = analyse.resultatEtancheite["DB"]
             self.Add("2", self.StaticTextMessage(message))
             if "DB+" in analyse.resultatEtancheite.keys():
@@ -793,8 +792,8 @@ class ZoneEtancheite(ZoneResultats):
                     self.Add("2", self.StaticTextMessage(mess, style = 'Message'))
             
             table = Tableau(self)
-            table.SetColLabelValue(0, u"Coté\ngauche")
-            table.SetColLabelValue(1, u"Coté\ndroit")
+            table.SetColLabelValue(0, u"CotÃ©\ngauche")
+            table.SetColLabelValue(1, u"CotÃ©\ndroit")
             table.SetRowLabelValue(0, u"Vitesse")
             table.SetRowLabelValue(1, u"Facteur PV")
         
@@ -820,7 +819,7 @@ class ZoneEtancheite(ZoneResultats):
             self.tableDyn = table
 #            self.MakeBoutonSizer("2",5,5) 
 #            StyleText["Titre2"].applique(self)
-#            self.AddBouton("2", wx.StaticText(self, -1,u"Coté",style = wx.ALIGN_CENTRE), (0,1), (1,2), wx.ALIGN_CENTRE|wx.EXPAND)
+#            self.AddBouton("2", wx.StaticText(self, -1,u"CotÃ©",style = wx.ALIGN_CENTRE), (0,1), (1,2), wx.ALIGN_CENTRE|wx.EXPAND)
 #            if not analyse.resultatEtancheite["J"]["G"]["Ar"]:
 #                self.AddBouton("2", wx.StaticText(self, -1,"gauche",style = wx.ALIGN_CENTRE), (1,1), (1,1), wx.ALIGN_CENTRE|wx.EXPAND)
 #            if not analyse.resultatEtancheite["J"]["D"]["Ar"]:
@@ -848,9 +847,9 @@ class ZoneEtancheite(ZoneResultats):
 #                    l = 2
         else:
             pass
-        # Compatibilité lubrifiant
+        # CompatibilitÃ© lubrifiant
         ########################################################################
-        self.MakeStaticBox("3", u"Compatibilité lubrifiant")
+        self.MakeStaticBox("3", u"CompatibilitÃ© lubrifiant")
 
         message = analyse.resultatEtancheite["C"]
         self.Add("3", self.StaticTextMessage(message))
@@ -938,7 +937,7 @@ class ZoneDevis(ZoneResultats):
         devisMtg = self.parent.mtgComplet.mtg.devis
 #        print devisMtg
         self.devis.SetColLabelValue(0,u'Element')
-        self.devis.SetColLabelValue(1,u'Coût')
+        self.devis.SetColLabelValue(1,u'CoÃ»t')
         self.devis.SetLabelFont(wx.Font(8, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
 #        self.devis.SetLabelBackgroundColour(wx.WHITE)
         self.devis.SetColLabelAlignment(wx.ALIGN_LEFT, wx.ALIGN_CENTRE)
@@ -997,7 +996,7 @@ class ZoneDevis(ZoneResultats):
         
         self.devis.AppendRows()
         self.devis.SetRowAttr(i, attrS)
-        self.devis.SetCellValue(i, 0, u"Etanchéité")
+        self.devis.SetCellValue(i, 0, u"EtanchÃ©itÃ©")
         self.devis.SetCellValue(i, 1, u" ")
         i += 1
         
@@ -1066,7 +1065,7 @@ class ZoneDevis(ZoneResultats):
         self.parent.zoneMtg.surImage()
         
 #########################################################
-# Remarques générales ###################################
+# Remarques gÃ©nÃ©rales ###################################
 #########################################################
 #class ZoneRemarques(wx.Panel):
 #    def __init__(self, parent):
@@ -1162,7 +1161,7 @@ class Tableau(gridlib.Grid):
 ##############################################################################                
 ##############################################################################
 #
-#     Fenêtre d'Analyse     #
+#     FenÃªtre d'Analyse     #
 #
 ##############################################################################
 ##############################################################################
@@ -1174,10 +1173,10 @@ class TBAnalyse(wx.Treebook):
                              style = wx.NB_TOP|wx.BORDER_NONE|wx.TR_HAS_BUTTONS)
         
         self.dicTypeAnalyse = ([u"Structure du Montage",    ZoneImmobAx,         Icones.Icon_AnalysArret.GetBitmap()],
-                               [u"Résistance aux Charges",              ZoneResistance,      Icones.Icon_AnalysEffort.GetBitmap()],
-                               [u"Montabilité des Eléments",            ZoneMontabilite,     Icones.Icon_AnalysMonta.GetBitmap()],
-                               [u"Etanchéité du montage",               ZoneEtancheite,      Icones.Icon_AnalysEtanch.GetBitmap()],
-                               [u"Devis : coût indicatif",              ZoneDevis,           Icones.Icon_AnalysDevis.GetBitmap()])
+                               [u"RÃ©sistance aux Charges",              ZoneResistance,      Icones.Icon_AnalysEffort.GetBitmap()],
+                               [u"MontabilitÃ© des ElÃ©ments",            ZoneMontabilite,     Icones.Icon_AnalysMonta.GetBitmap()],
+                               [u"EtanchÃ©itÃ© du montage",               ZoneEtancheite,      Icones.Icon_AnalysEtanch.GetBitmap()],
+                               [u"Devis : coÃ»t indicatif",              ZoneDevis,           Icones.Icon_AnalysDevis.GetBitmap()])
         
         self.parent = parent
         self.nbCdCF = nbCdCF
@@ -1310,7 +1309,7 @@ class TBAnalyse(wx.Treebook):
         
     #############################################################################                
     def animerElemNonArretes(self, sens):
-        # On efface la chaine opposée si besoin ...
+        # On efface la chaine opposÃ©e si besoin ...
         sensOpp = 1-sens
         chopp = self.analyse.chaineTracee[sensOpp]
         if chopp is not None:
@@ -1324,7 +1323,7 @@ class TBAnalyse(wx.Treebook):
         # On effectue l'animation
         self.analyse.animerManqueArret(self.zoneMtg, sens)
         
-        # On raffiche la chaine opposée si besoin ...
+        # On raffiche la chaine opposÃ©e si besoin ...
         if effchopp:
             self.analyse.chaineTracee[sensOpp] = True #self.analyse.chaineAct[sensOpp].lstLignes
             self.zoneMtg.Redessiner(self.analyse)
@@ -1353,7 +1352,7 @@ class TBAnalyse(wx.Treebook):
 
     #############################################################################                
     def animerMontage(self, tag, remonter):
-        # On efface la chaine opposée si besoin ...
+        # On efface la chaine opposÃ©e si besoin ...
 #        sensOpp = 1-sens
 #        chopp = self.zoneMtg.chaineTracee[sensOpp]
 #        if chopp is not None:
@@ -1367,13 +1366,13 @@ class TBAnalyse(wx.Treebook):
 #        if remonter:
 #            print "Remontage",
 #        else:
-#            print "Démontage",
+#            print "DÃ©montage",
 #        print tag
         
         
         
         def collision(tag, tagOpp, remonter):
-            # Cas ou l'opération de montage/démontage sur le palier opposée est déja faite ...
+            # Cas ou l'opÃ©ration de montage/dÃ©montage sur le palier opposÃ©e est dÃ©ja faite ...
             if remonter != (tagOpp in self.analyse.elemDemonte):
                 return False
             
@@ -1405,7 +1404,7 @@ class TBAnalyse(wx.Treebook):
 
 
         if tag[4] == "E" and remonter:
-##            print " ... déja démontés = ",self.analyse.elemDemonte
+##            print " ... dÃ©ja dÃ©montÃ©s = ",self.analyse.elemDemonte
             while len(self.analyse.elemDemonte) > 1:
                 t = self.analyse.elemDemonte[1]
                 if t[4] == "R":
@@ -1426,7 +1425,7 @@ class TBAnalyse(wx.Treebook):
         self.GetCurrentPage().gererActivationBoutons()
         
         
-#        # On raffiche la chaine opposée si besoin ...
+#        # On raffiche la chaine opposÃ©e si besoin ...
 #        if effchopp:
 #            self.zoneMtg.chaineTracee[sensOpp] = self.analyse.chaineAct[sensOpp].lstLignes
 #            self.zoneMtg.InitBuffer()
@@ -1635,7 +1634,7 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
 
     ############################################################################
     def Active(self, etat):
-        """ Active (ou désactive) le bouton
+        """ Active (ou dÃ©sactive) le bouton
         """
 #        if state == 'normal':
 #            etat = self.type
@@ -1672,7 +1671,7 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
 ##        self.img = img
 ##        
 ##        if img is not None and img[:4] == "Anim":
-##            if master.master.analyse.cdcf.bagueTournante == u"Intérieure":
+##            if master.master.analyse.cdcf.bagueTournante == u"IntÃ©rieure":
 ##                self.rad = "Ar"
 ##            else:
 ##                self.rad = "Al"
@@ -1680,7 +1679,7 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
 ##        else:
 ##            self.rad = ""
 ##        
-####        print "Création boutonAction : type", typeBulle," tag",img
+####        print "CrÃ©ation boutonAction : type", typeBulle," tag",img
 ####        if typeBulle == 'normal':
 ####            self.bulle = Const.infoBulle(self, lstClef = [clefBulle], temps = 0)
 ##            
@@ -1821,7 +1820,7 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
 ##class FrameDetails(Toplevel):
 ##    def __init__(self, master = None, lstObstacles = None, sens = None, palier = None):
 ##        Toplevel.__init__(self, master, bd = 2, bg = 'lightyellow', relief = RIDGE)
-####        print "Détails pour palier",palier,"obs =",lstObstacles,"sens ",sens
+####        print "DÃ©tails pour palier",palier,"obs =",lstObstacles,"sens ",sens
 ##        self.parent = master
 ##        self.withdraw()
 ##        self.overrideredirect(1)
@@ -1976,7 +1975,7 @@ class ChainesAction:
 ##        self.result = []
         self.sens = sens
 
-        # liste des numéros des parcours valides
+        # liste des numÃ©ros des parcours valides
         self.valid = []
 
         # Liste des parcours
@@ -2014,7 +2013,7 @@ class ChainesAction:
 #        print mtg                                  
 
 
-        # Analyse depuis l'extrémité du montage :
+        # Analyse depuis l'extrÃ©mitÃ© du montage :
         #----------------------------------------
         pos = Montage.PositionDansPivot(typelem = "A",
                                         radiale = "Ar",
@@ -2033,7 +2032,7 @@ class ChainesAction:
         self.parcoursElemEntr.append([])
         self.maillonElemEntraines(mtg,pos,len(self.parcoursElemEntr)-1)
 
-        # Analyse depuis le roulement extrémité :
+        # Analyse depuis le roulement extrÃ©mitÃ© :
         #----------------------------------------
         if serrage:
             pos = Montage.PositionDansPivot(typelem = "R",
@@ -2065,7 +2064,7 @@ class ChainesAction:
                    and pos.typelem == "A":
                     self.valid.append(i)
 
-        # Détermination des lignes :
+        # DÃ©termination des lignes :
         #---------------------------
         self.determinerLignes(mtg, zoneMtg, self.sens)     
         
@@ -2092,8 +2091,8 @@ class ChainesAction:
         
     ##########################################################################
     def nouveauParcours(self, num, dernPos = None):
-        "Crée un nouveau parcours à partir du parcour <num> et retourne son numéro"
-        # On crée le nouveau parcours ...
+        "CrÃ©e un nouveau parcours Ã  partir du parcour <num> et retourne son numÃ©ro"
+        # On crÃ©e le nouveau parcours ...
         self.parcoursElemEntr.append([])
         numSuiv = len(self.parcoursElemEntr)-1
 ##        print "dernpos",dernPos
@@ -2120,7 +2119,7 @@ class ChainesAction:
 #         print "**** sens",self.sens,"*************"
 #         print ">> Num",num
 #         print ">> Position",pos
-#         print ">> Eléments",self.parcoursElemEntr[num]
+#         print ">> ElÃ©ments",self.parcoursElemEntr[num]
         
         if pos == None:
             return False
@@ -2135,39 +2134,39 @@ class ChainesAction:
 #             print "prem maillon = entretoise"
             return False    
             
-        ### si l'élément est une entretoise
+        ### si l'Ã©lÃ©ment est une entretoise
         if maillon.estEntretoise() or maillonOpp.estEntretoise():
 #             print "  > Entretoise"
-            # Ajout de l'entretoise et séparation éventuelle des parcours
+            # Ajout de l'entretoise et sÃ©paration Ã©ventuelle des parcours
             if not maillon.estEntretoise() and pos.radiale == "Al":
-                # Si double contact entretoise / épaulement
-#                 print "  > Nouveau parcours : cas 3 = double contact entretoise/épaulement"
+                # Si double contact entretoise / Ã©paulement
+#                 print "  > Nouveau parcours : cas 3 = double contact entretoise/Ã©paulement"
                 numSuiv = self.nouveauParcours(num)
                 self.ajouterMaillonElemEntre(pos.opposee(),numSuiv)
             else:
                 numSuiv = num
                 self.ajouterMaillonElemEntre(pos,numSuiv)
 
-            # Ajout du roulement suivant si entretoise sur alésage
+            # Ajout du roulement suivant si entretoise sur alÃ©sage
             if pos.radiale == "Al":
 #                 print "  > Ajout rlt",pos.suivant("RoultSuiv",self.sens).code()
                 self.ajouterMaillonElemEntre(pos.suivant("RoultSuiv",self.sens),numSuiv)
 
             # On continue par l'entretoise ...    
             if not self.maillonElemEntraines(mtg,pos.suivant("SauteEntre",self.sens),numSuiv):
-#                 print "  > num",numSuiv," Echec après entretoise !"
+#                 print "  > num",numSuiv," Echec aprÃ¨s entretoise !"
                 if num == numSuiv:
                     return False
             if num == numSuiv:
                 return True
 
                 
-        ### si l'élément supporte
+        ### si l'Ã©lÃ©ment supporte
 #        ss =  maillon.supporteEffortAxial(self.sens,pos)
 #        print ss
         if (maillon.num is not None) and maillon.supporteEffortAxial(self.sens,pos):
 ##            print "  > num",num," Supporte"
-            # On ajoute l'élément ...  
+            # On ajoute l'Ã©lÃ©ment ...  
             self.ajouterMaillonElemEntre(pos,num)
 ##            print self.__repr__(num)
             if pos.radiale == "Al":
@@ -2181,19 +2180,19 @@ class ChainesAction:
                     pass
 ##                    return False
 
-                # 2ème parcours : cas 1 = traverse bague int rlt
+                # 2Ã¨me parcours : cas 1 = traverse bague int rlt
                 if pos.radiale == "Ar" and pos.typelem == "A":
 ##                    print "  > num",num," Nouveau parcours cas 1 = traverse bague int rlt"
-##                    print "  >  reprise à",pos
+##                    print "  >  reprise Ã ",pos
                     numSuiv = self.nouveauParcours(num,pos)
-                    # On ajoute le roulement sauté ...
+                    # On ajoute le roulement sautÃ© ...
                     self.ajouterMaillonElemEntre(pos.suivant("RoultSaute",self.sens),numSuiv)
                     if not self.maillonElemEntraines(mtg,pos.suivant("SauteRoult",self.sens),numSuiv):
-##                        print "  > num",numSuiv," Echec après cas 1 !"
+##                        print "  > num",numSuiv," Echec aprÃ¨s cas 1 !"
                         return False
 
         
-        ### si l'élément NE supporte PAS
+        ### si l'Ã©lÃ©ment NE supporte PAS
         else:
 ##            print "  > num",num," Supporte pas"
             # On ajoute le dernier maillon ...
@@ -2201,14 +2200,14 @@ class ChainesAction:
                 self.ajouterMaillonElemEntre(pos,num)
             
 
-            # 2ème parcours : cas 2 = palier suivant
+            # 2Ã¨me parcours : cas 2 = palier suivant
             if (self.sens == 0 and pos.palier == "G") \
                and (self.sens == 1 and pos.palier == "D"):
 ##                print "  > num",num,"Nouveau parcours : cas 2 = palier suivant"
                 self.parcoursElemEntr.append([])
                 numSuiv = len(self.parcoursElemEntr)-1
                 if not self.maillonElemEntraines(mtg,pos.suivant("SautePalier",self.sens),numSuiv):
-##                    print "  > num",numSuiv," Echec après cas 2 !"
+##                    print "  > num",numSuiv," Echec aprÃ¨s cas 2 !"
                     return False
             
 ##            print "  > num",num," Echec supporte pas !"
@@ -2221,7 +2220,7 @@ class ChainesAction:
     #############################################################################                
     def determinerLignes(self, mtg, zoneMtg,  sens):
         """ Rempli une liste de points <self.lstLignes>
-            pour le tracé des chaines d'action.
+            pour le tracÃ© des chaines d'action.
         """
             
         def ajouterPoints(x , y, ligne, sgnSens, ecartement = 5):
@@ -2239,7 +2238,7 @@ class ChainesAction:
 ##        print
 ##        print "Chaine d'action : sens =",sens
 
-        # Préparation des parcours :
+        # PrÃ©paration des parcours :
         #--------------------------
         lstParcours = []
         for nParcours in self.valid:
@@ -2278,12 +2277,12 @@ class ChainesAction:
                             
                 # Cas des roulements
                 elif posParcours.typelem == "R":
-                    # On l'ajoute s'il est "traversé" radialement ...
+                    # On l'ajoute s'il est "traversÃ©" radialement ...
                     if (self.parcoursElemEntr[nParcours][i-1].radiale \
                         <> self.parcoursElemEntr[nParcours][i+1].radiale):
                         parcours.append(posParcours)
 
-#            print "  Parcours modifié :",parcours
+#            print "  Parcours modifiÃ© :",parcours
 
         # Fabrication des lignes :
         #-------------------------
@@ -2294,7 +2293,7 @@ class ChainesAction:
             ligne = []
             lstLignes.append(ligne)
 
-            # Points de départ
+            # Points de dÃ©part
             ajouterPoints(zoneMtg.milieuX - sgnsens * (zoneMtg.milieuX - 40) ,
                                0 ,
                                ligne, sgnsens, ecartement = 20)
@@ -2328,7 +2327,7 @@ class ChainesAction:
                     x , y = zoneMtg.coordsBordElem(mtg, posParcours)
                     ajouterPoints(x , y , ligne, sgnsens)
 
-            # Points d'arrivée
+            # Points d'arrivÃ©e
             ajouterPoints(x + sgnsens*40, -200, ligne, sgnsens,
                                ecartement = 20)
             ajouterPoints(zoneMtg.milieuX + sgnsens * (zoneMtg.milieuX - 40) ,
@@ -2354,16 +2353,16 @@ class Analyse:
     def __init__(self):
         
         # Options :
-        # ... ne pas tenir compte des ajustements sérrés des roulements
+        # ... ne pas tenir compte des ajustements sÃ©rrÃ©s des roulements
         self.demonterRltSerres = False
         
         # Etat de l'analyse
         self.estPerimee = True
         
-        # Par défaut : pas de roulements
+        # Par dÃ©faut : pas de roulements
         self.montageVide = True
         
-        # Liste des tags des éléments démontés
+        # Liste des tags des Ã©lÃ©ments dÃ©montÃ©s
         self.elemDemonte = []
 
         # Flag pour annoncer si animation en cours
@@ -2372,7 +2371,7 @@ class Analyse:
         self.mobileTrace = None
         self.lstItemAles, self.lstItemArbre = [], []
         
-        # Chaines d'actions à tracer lors d'un "DessineTout"
+        # Chaines d'actions Ã  tracer lors d'un "DessineTout"
         self.chaineTracee = {0 : None, 
                              1 : None}
 
@@ -2380,10 +2379,10 @@ class Analyse:
 
     ##########################################################################
     def lancerAnalyse(self, mtgComplet, zoneMtg):
-        """ Lance la procédure d'analyse du montage
+        """ Lance la procÃ©dure d'analyse du montage
            """
 #            
-#         print "Début analyse ..."
+#         print "DÃ©but analyse ..."
 #         print mtgComplet.mtg
         
         tm = time.clock()
@@ -2403,11 +2402,11 @@ class Analyse:
         # Structure ....
         self.analyserStructure()
         
-        # Résistance aux charges ( dans cet ordre !! )
+        # RÃ©sistance aux charges ( dans cet ordre !! )
         self.analyserResistanceRlt()
         self.analyserResistanceAxialeMtg()
 
-        # Montabilité
+        # MontabilitÃ©
         self.analyserMontabilite(self.demonterRltSerres, zoneMtg)
         
         if self.mtg.palier["G"].rlt.num is not None \
@@ -2417,7 +2416,7 @@ class Analyse:
         else:
             self.montageVide = True
             
-        # Etanchéité
+        # EtanchÃ©itÃ©
         self.analyserEtancheite()
         
         self.estPerimee = False
@@ -2428,12 +2427,12 @@ class Analyse:
     ##########################################################################
     def analyserStructure(self):
         """ Analyser la structure du montage :
-            --> ddl supprimés
-            --> Schéma de strucure
+            --> ddl supprimÃ©s
+            --> SchÃ©ma de strucure
         """
         
         def definirddlSupprimes(palier):
-            """ Détermination des ddl supprimés par le <palier>
+            """ DÃ©termination des ddl supprimÃ©s par le <palier>
                  0 : aucuns
                  1 : x+
                  2 : x-
@@ -2441,7 +2440,7 @@ class Analyse:
                  8 : n (rotation /z)
             """
 
-#            print "Définition des ddl, palier",palier
+#            print "DÃ©finition des ddl, palier",palier
             d = 0
             
             if self.mtg.palier[palier].rlt.num == None:
@@ -2461,14 +2460,14 @@ class Analyse:
                             d = d|(2**sens)
     #                            print ddlSupprimes[cote]
                             if not self.mtg.elemPos(pos).estButee() and not self.mtg.elemPos(pos).estButeeDbl():
-    #                            print palier,"pas butée_"
+    #                            print palier,"pas butÃ©e_"
                                 d = d|4
             if not self.mtg.palier[palier].rlt.estButee() and not self.mtg.palier[palier].rlt.estButeeDbl():
-    #                print cote,"pas butée"
+    #                print cote,"pas butÃ©e"
                 d = d|4 
                 
             if self.mtg.palier[palier].rlt.num == 10 or self.mtg.palier[palier].rlt.num == 11:
-    #                print cote,"pas butée"
+    #                print cote,"pas butÃ©e"
                 d = d|8
 #            print "  ddl suppr :",d
             
@@ -2480,20 +2479,20 @@ class Analyse:
         self.schemaStructure = SchemaStructure()
         self.schemaStructure.determiner(self.mtg, self.ddlSupprimes)
         
-        # Image du Schéma de Structure
+        # Image du SchÃ©ma de Structure
         #------------------------------
         self.imageSchema = self.schemaStructure.bitmap()
 
 
 
     ##########################################################################
-    #  Analyse : Remarques générales  #
+    #  Analyse : Remarques gÃ©nÃ©rales  #
     ##########################################################################
     def analyserRemarques(self):
-        """ Analyser si les regles de montage axial des roulements est respectée
+        """ Analyser si les regles de montage axial des roulements est respectÃ©e
         """
 
-        # Résultats
+        # RÃ©sultats
         self.resultatRemarques = []
         
 
@@ -2513,7 +2512,7 @@ class Analyse:
                     self.resultatRemarques.append(Const.MessageAnalyse('OrientIncorr'))
 
 
-        # Teste si les roulements à bague séparable sont maintenus #####################
+        # Teste si les roulements Ã  bague sÃ©parable sont maintenus #####################
         clefResultRem = ""
         for i in ["G","D"]:
             if self.mtg.palier[i].rlt.estSeparable() \
@@ -2529,7 +2528,7 @@ class Analyse:
             self.resultatRemarques.append(Const.MessageAnalyse('RltPasMaintenu',[clefResultRem]))
 
             
-        # Teste si les roulements sont arrétés sur la bague "tournante" ################
+        # Teste si les roulements sont arrÃ©tÃ©s sur la bague "tournante" ################
         clefResultRem = ""
         for i in ["G","D"]:
             if self.cdcf.bagueTournante == "I":
@@ -2555,7 +2554,7 @@ class Analyse:
     ##########################################################################
     def analyserImmobilisationAxiale(self, zoneMtg):
         """ Analyse de l'immobilisation axiale du montage
-            ==> résultats dans des chaines d'action
+            ==> rÃ©sultats dans des chaines d'action
         """
         
         # Immobilisation axiale du montage ...
@@ -2565,9 +2564,9 @@ class Analyse:
         # --> chaines d'action : une  par sens ...
         self.chaineAct = [ChainesAction(0), \
                           ChainesAction(1)]
-        # --> Liste des éléments qui ne sont par arrétée : une par sens ...
+        # --> Liste des Ã©lÃ©ments qui ne sont par arrÃ©tÃ©e : une par sens ...
         self.listeElementsNonArretes = [[],[]]
-        # --> Image du Schéma de structure
+        # --> Image du SchÃ©ma de structure
         self.imageSchema = None
         # --> Message principal
         self.messageImmobilisation = None
@@ -2575,7 +2574,7 @@ class Analyse:
 #        print self.chaineAct[0]
         
         def listeElementsNonArretes(sens):
-            """ Renvoie la liste des éléments non arrêtés dans le sens <sens>
+            """ Renvoie la liste des Ã©lÃ©ments non arrÃªtÃ©s dans le sens <sens>
             """
     
             lst = []
@@ -2600,7 +2599,7 @@ class Analyse:
                     if po.typelem == "R":
     
                         radialePreced = lst[len(lst)-1][3:]
-                        # On ajoute les 2 bagues du roulement poussé
+                        # On ajoute les 2 bagues du roulement poussÃ©
 #                        print po, radialePreced, self.mtg.elemPos(po).supporteEffortAxial(sens)
                         if (radialePreced == "Ar" \
                                and self.mtg.elemPos(po).supporteEffortAxial(sens)) \
@@ -2611,7 +2610,7 @@ class Analyse:
                             lst.append(po.code()[0:3]+'--')
 #                            print po.code()[0:3]+'--'
                             
-                        # On ajoute la bague du roulement poussée
+                        # On ajoute la bague du roulement poussÃ©e
                         else:
                             po.palier = lst[len(lst)-1][1]
                             lst.append(po.code(radialePreced))
@@ -2631,7 +2630,7 @@ class Analyse:
     
     
                           
-            # On ajoute les arrets fixés à l'arbre
+            # On ajoute les arrets fixÃ©s Ã  l'arbre
             for p in [Montage.PositionDansPivot("G","A","G","Ar"),
                         Montage.PositionDansPivot("G","A","D","Ar"),
                         Montage.PositionDansPivot("D","A","G","Ar"),
@@ -2643,7 +2642,7 @@ class Analyse:
                     and not el.estEpaulement():
     ##                    lst.append(mtg.elemPos(p).codeTag(p))
                     lst.append(p.code())
-                    # Ajout bague intérieure si entrainée
+                    # Ajout bague intÃ©rieure si entrainÃ©e
     #                if p.cotelem <> sensstr:
     #                    lst.append("BI"+p.palier+sensstr)
     
@@ -2654,7 +2653,7 @@ class Analyse:
                 if not lst[i] in lst2:
                     lst2.append(lst[i])
             
-    ##        print "  Liste des éléments non arrétés :",lst2
+    ##        print "  Liste des Ã©lÃ©ments non arrÃ©tÃ©s :",lst2
             return lst2
         
         
@@ -2664,13 +2663,13 @@ class Analyse:
             self.chaineAct[s].determiner(self.mtg, zoneMtg)
             self.listeElementsNonArretes[s] = listeElementsNonArretes(s)
             print self.listeElementsNonArretes[s]
-            # Résultats :
+            # RÃ©sultats :
             
-                # Arbre pas arrêté !
+                # Arbre pas arrÃªtÃ© !
             if len(self.chaineAct[s].valid) == 0:
                 self.resultatImmobilisation[s].append(Const.MessageAnalyse('ArretArbreSens', [s]))
 
-                # Arbre arrêté !
+                # Arbre arrÃªtÃ© !
             else:
                 self.resultatImmobilisation[s].append(Const.MessageAnalyse('ImmobCorrect'))
 
@@ -2690,10 +2689,10 @@ class Analyse:
         
     
     ##########################################################################
-    #  Analyse : résistance axiale du montage #
+    #  Analyse : rÃ©sistance axiale du montage #
     ##########################################################################
     def analyserResistanceAxialeMtg(self):
-        """ Analyse la résistance axiale du montage complet 
+        """ Analyse la rÃ©sistance axiale du montage complet 
         """
         
         #############################################################################                
@@ -2705,12 +2704,12 @@ class Analyse:
             return lst
         
         
-        # Résistance axiale du montage ...
-        # --> Résultats :
+        # RÃ©sistance axiale du montage ...
+        # --> RÃ©sultats :
         self.resultatEffortAxialMtg = [[],[]]
-        # --> Eléments ne résistant : par sens ...
+        # --> ElÃ©ments ne rÃ©sistant : par sens ...
         self.lstElemResistePas = [[],[]]
-        # --> Image du Schéma de structure (avec charges)
+        # --> Image du SchÃ©ma de structure (avec charges)
         self.imageSchemaCharges = None
         # --> Message principal
         self.messageResistanceAxiale = None
@@ -2759,7 +2758,7 @@ class Analyse:
         else:
             self.messageResistanceAxiale = Const.MessageAnalyse('ChargeAxNo')
              
-        # Image du Schéma de Structure
+        # Image du SchÃ©ma de Structure
         #------------------------------
         def charge(cote):
             return [self.typeCharge[cote], 
@@ -2772,10 +2771,10 @@ class Analyse:
     
     
     ##########################################################################
-    #  Analyse : résistance aux charges des roulements #
+    #  Analyse : rÃ©sistance aux charges des roulements #
     ##########################################################################
     def analyserResistanceRlt(self):
-        """ Analyse la résistance aux charges des roulements
+        """ Analyse la rÃ©sistance aux charges des roulements
                 * Type de charge subie par un roulement :
                     0 : aucune
                     1 : x+
@@ -2784,8 +2783,8 @@ class Analyse:
                 * 
         """
         
-        # Résistance des roulements ...
-        # --> Résultats : un par palier ...
+        # RÃ©sistance des roulements ...
+        # --> RÃ©sultats : un par palier ...
         self.resultatResistanceRlt = {"G" : None,
                                       "D" : None}
         
@@ -2797,7 +2796,7 @@ class Analyse:
 
         
         def definirTypeChargeCdCF(palier):
-            """ Type de charge que doit supporter le <palier> d'après le CdCF
+            """ Type de charge que doit supporter le <palier> d'aprÃ¨s le CdCF
             """
             
             t = 0
@@ -2817,13 +2816,13 @@ class Analyse:
     
         # Analyse des roulements ...
         for i in ["G","D"]:
-            # Type de charge suportée par le palier
+            # Type de charge suportÃ©e par le palier
             typeChargeCdCF = definirTypeChargeCdCF(i)
             self.typeCharge[i] = (self.ddlSupprimes[i]|4) & typeChargeCdCF
             
             rlt = self.mtg.palier[i].rlt
 
-            # Détermination de l'intensité de la charge axiale (s'il y en a une ...)
+            # DÃ©termination de l'intensitÃ© de la charge axiale (s'il y en a une ...)
             chargeAxiale = 0
             ls = []
             if self.typeCharge[i]&1 :
@@ -2833,10 +2832,10 @@ class Analyse:
             for sens in ls:
                 chargeAxiale = max(chargeAxiale, self.cdcf.effortAxial[sens].get())
 
-            # Détermination de l'intensité de la charge radiale (s'il y en a une ...)
+            # DÃ©termination de l'intensitÃ© de la charge radiale (s'il y en a une ...)
             chargeRadiale = self.cdcf.effortRadial[i].get()
 
-            # On teste si le roulement résiste ...
+            # On teste si le roulement rÃ©siste ...
             if rlt.num is not None:
                 if self.typeCharge[i]&4:
                     typeCharge = "radial"
@@ -2882,14 +2881,14 @@ class Analyse:
     #  Analyse : Etancheite #
     ##########################################################################
     def analyserEtancheite(self):
-        """ Analyse l'étanchéité du montage
+        """ Analyse l'Ã©tanchÃ©itÃ© du montage
         """
 #        print "Analyse etancheite"
 
         #
-        # Etanchéité du montage
+        # EtanchÃ©itÃ© du montage
         #
-        # --> Résultats :
+        # --> RÃ©sultats :
         self.resultatEtancheite = {"M" : None,
                                    "G" : {'vitt' : None,
                                           'pres' : None},
@@ -2898,7 +2897,7 @@ class Analyse:
         
         pasEtanchStat = {"G" : {"Ar" : False,            # 
                                 "Al" : False},           # Localisation 
-                         "D" : {"Ar" : False,            #  du défaut 
+                         "D" : {"Ar" : False,            #  du dÃ©faut 
                                 "Al" : False},           #
                          "B" : []}                # 
         
@@ -2915,7 +2914,7 @@ class Analyse:
                       "B" : False}
         
         for p in ["G","D"]:
-            # Etanchéité statique
+            # EtanchÃ©itÃ© statique
             #--------------------
             for r in ["Ar","Al"]:
                 if  self.mtg.palier[p].jnt[r].num is None:
@@ -2936,14 +2935,14 @@ class Analyse:
                 
 #                print "Pr",self.cdcf.pression.get(), "PrAdm",pressAdm 
                 if  pressAdm < self.cdcf.pression.get():
-#                    print "pas étanche !", pressAdm, "<", self.cdcf.pression.get()
+#                    print "pas Ã©tanche !", pressAdm, "<", self.cdcf.pression.get()
                     pasEtanchStat[p][r] = True
                     if not ('PressTrop'+p in pasEtanchStat["B"]):
                         pasEtanchStat["B"].append('PressTrop'+p)
 #                else: print
                     
             
-            # Etanchéité dynamique
+            # EtanchÃ©itÃ© dynamique
             #---------------------
             # Calcul du facteur PV
             if self.mtg.palier[p].taille == "P" :
@@ -2965,7 +2964,7 @@ class Analyse:
                 facteurPVAdm = self.mtg.palier[p].jnt["Ar"].facteurPV
             
 #            print "PVAdm", facteurPVAdm
-            # Test à la vitesse
+            # Test Ã  la vitesse
             if vittAdm < self.cdcf.vitesse.get():
                 pasEtanchDyn[p]["P"] = True
                 pasEtanchDyn["B"].append('VitesseTrop'+p)
@@ -2975,7 +2974,7 @@ class Analyse:
                 pasEtanchDyn["B"].append('FactPVTrop'+p)
         
         #
-        # Compatibilité lubrifiant
+        # CompatibilitÃ© lubrifiant
         #
         compatible = True
         if self.cdcf.lubrifiant.get() == 0 :
@@ -3039,17 +3038,17 @@ class Analyse:
     ###########################################################################
     def montrerCollision(self, zoneMtg, lstCode, palier = None,
                          active = True, deuxCouleurs = True):
-        """ Met en évidence les obstacles au démontage """
+        """ Met en Ã©vidence les obstacles au dÃ©montage """
         
         
 #        print "Montrer collision :",lstCode,
         obstaclesRoulements = len(lstCode) == 1
         
-#        # On quitte si déja démonté ...
+#        # On quitte si dÃ©ja dÃ©montÃ© ...
 #        if not obstaclesRoulements and self.elemDemonte <> []:
 #            return
 
-#        # On quitte si déja démonté ...
+#        # On quitte si dÃ©ja dÃ©montÃ© ...
 #        if obstaclesRoulements and not ("AnimEnsb0" in self.elemDemonte \
 #                                   or "AnimEnsb1" in self.elemDemonte):
 #            return
@@ -3067,7 +3066,7 @@ class Analyse:
 #            lstCode = lstCode
             
 #        print lstCode
-        # Liste des position pour la flêche
+        # Liste des position pour la flÃªche
         lstPos = []
         
         # Couleurs d'affichage
@@ -3106,25 +3105,25 @@ class Analyse:
 
     ##########################################################################
     def animerManqueArret(self, zoneMtg, sens, position = None):
-        "Animation des éléments non arrêtés axialement"
+        "Animation des Ã©lÃ©ments non arrÃªtÃ©s axialement"
         
-#        print "Animation des éléments non arrêtés axialement"
+#        print "Animation des Ã©lÃ©ments non arrÃªtÃ©s axialement"
 #        print "listeElementsNonArretes",self.listeElementsNonArretes[sens]
 
         wx.BeginBusyCursor()
         
         lstItemAnim = []
 
-        # signe du sens de déplacement ##############################
+        # signe du sens de dÃ©placement ##############################
         sgn = 1 - sens*2
 
-        # Préparation des éléments non arêtés #####################
-        for i in zoneMtg.lstItemMtg:     # On parcours tous les items affichés
-            # On inclus tous les éléments d'arbres
+        # PrÃ©paration des Ã©lÃ©ments non arÃªtÃ©s #####################
+        for i in zoneMtg.lstItemMtg:     # On parcours tous les items affichÃ©s
+            # On inclus tous les Ã©lÃ©ments d'arbres
             if TAG_ARBRE in i.tag:
                 lstItemAnim.append(i)
                 continue
-            # On inclus les éléments de la liste (sans les éléments d'alésage)
+            # On inclus les Ã©lÃ©ments de la liste (sans les Ã©lÃ©ments d'alÃ©sage)
             else:
 #                print i.tag,
                 for t in self.listeElementsNonArretes[sens]:
@@ -3139,7 +3138,7 @@ class Analyse:
 
         # Lancement de l'animation
         #=========================
-        # Durée (en seconde) & amplitude (en pixels)
+        # DurÃ©e (en seconde) & amplitude (en pixels)
         duree, amplitude  = 2, 4
         # Nombre de positions
         nbPos = duree * 25
@@ -3192,33 +3191,33 @@ class Analyse:
        
        
     ##########################################################################
-    #  Analyse : montabilité  #
+    #  Analyse : montabilitÃ©  #
     ##########################################################################
     def analyserMontabilite(self, demonterRltSerres, zoneMtg):
-        """ Analyse de la montabilité du montage
+        """ Analyse de la montabilitÃ© du montage
         """
     
         self.demonterRltSerres = demonterRltSerres
         
-        # Montabilité du montage
-        # --> Rélultat général :
+        # MontabilitÃ© du montage
+        # --> RÃ©lultat gÃ©nÃ©ral :
         self.resultatMontabilite = None
-        # --> Liste des éléments mobiles : une par sens ...
+        # --> Liste des Ã©lÃ©ments mobiles : une par sens ...
         self.listeElemArbre = [[],[]]
-        # --> Liste des éléments fixes : une par sens ...
+        # --> Liste des Ã©lÃ©ments fixes : une par sens ...
         self.listeElemAlesage = [[],[]]
-        # --> Liste des éléments à démonter pour le démontage : une par sens ...
+        # --> Liste des Ã©lÃ©ments Ã  dÃ©monter pour le dÃ©montage : une par sens ...
         self.lstArretsAEnleverEns = [[],[]]
-        # --> Liste des éléments à démonter pour le démontage des roulements : une par sens et par palier...
+        # --> Liste des Ã©lÃ©ments Ã  dÃ©monter pour le dÃ©montage des roulements : une par sens et par palier...
         self.lstArretsAEnleverRlt = {"G" : [[],[]],
                                      "D" : [[],[]]}
-        # --> Liste des obstacles au Montage/Démontage de l'ensemble: une par sens ...
+        # --> Liste des obstacles au Montage/DÃ©montage de l'ensemble: une par sens ...
         self.obstacleEnsble = [[],[]]
 
-        # --> Liste des obstacles au Montage/Démontage des roulements: une par sens et par palier ...
+        # --> Liste des obstacles au Montage/DÃ©montage des roulements: une par sens et par palier ...
         self.obstacleRoults = {"G" : [[],[]],
                                "D" : [[],[]]}
-        # --> Liste des obstacles au Montage/Démontage des bagues isolées : une par sens et par palier ...
+        # --> Liste des obstacles au Montage/DÃ©montage des bagues isolÃ©es : une par sens et par palier ...
         self.obstacleBagueIsolee = {"G" : [[],[]],
                                     "D" : [[],[]]}
         
@@ -3284,14 +3283,14 @@ class Analyse:
                 return False
 
         def listeElementsArbre(sens):
-            """ Renvoie la liste des éléments liés à l'arbre 
+            """ Renvoie la liste des Ã©lÃ©ments liÃ©s Ã  l'arbre 
                 sur leur logement dans le sens <sens>
                 PROVISOIRE !!
             """
             
-#            print "Etabli la listedes éléments liés à l'arbre"
+#            print "Etabli la listedes Ã©lÃ©ments liÃ©s Ã  l'arbre"
 #            print ">>> Sens",sens
-#            print ">>> Démonter Rlts serrés :",self.demonterRltSerres
+#            print ">>> DÃ©monter Rlts serrÃ©s :",self.demonterRltSerres
           
             grp = groupeMontage()
                     
@@ -3303,7 +3302,7 @@ class Analyse:
                     ["-D-Ar"],
                     ["-D-Ar"]]        
             
-            # On met les arrêts d'arbre
+            # On met les arrÃªts d'arbre
             for pos in [0,2,3,5]:
                 p = lst[pos][0][1]
                 if pos == 0 or pos == 3:
@@ -3316,7 +3315,7 @@ class Analyse:
                         lst[pos].append("A"+p+c+"Ar")
                             
             
-            # On met les roulements (si sérrés sur l'arbre)
+            # On met les roulements (si sÃ©rrÃ©s sur l'arbre)
             for pos in [1,4]:
                 p = lst[pos][0][1]
                 elem = self.mtg.palier[p].rlt
@@ -3329,13 +3328,13 @@ class Analyse:
                             
                     
             
-            # On retourne pour mettre dans le sens du démontage
+            # On retourne pour mettre dans le sens du dÃ©montage
             if sens == 1:
                 lst.reverse()
                 
             grp.lst = lst
             
-            # On défini les "niveaux" minimum ...
+            # On dÃ©fini les "niveaux" minimum ...
             for p in [0,1,4,5]:
                 grp.min[p] = len(grp.lst[p])
                 
@@ -3345,8 +3344,8 @@ class Analyse:
             return grp
 
         def listeElementsAlesage(lstAr, sens):
-            """ Renvoie la liste des éléments "libres"
-                 = complémentaire de <lMob> !
+            """ Renvoie la liste des Ã©lÃ©ments "libres"
+                 = complÃ©mentaire de <lMob> !
             """
             
             def ccote(pos):
@@ -3366,11 +3365,11 @@ class Analyse:
                     ["-D-Al", "RD---", "RD-Al", "RD-Ar"],
                     ["-D-Al", "ADDAl", "ADDAr"]]
     
-            # On retourne pour mettre dans le sens du démontage
+            # On retourne pour mettre dans le sens du dÃ©montage
             if sens == 1:
                 lst.reverse()
     
-            # On ote ceux qui sont déja dans lstAr
+            # On ote ceux qui sont dÃ©ja dans lstAr
             for pos in range(6):
                 for p in lstAr[pos]:
                     if p in lst[pos]:
@@ -3392,7 +3391,7 @@ class Analyse:
                     if elem.num is None:
                         lst[pos].remove(p)
                     
-            # On ajoute les entretoises sur épaulement
+            # On ajoute les entretoises sur Ã©paulement
             for r in ["Ar","Al"]:
                 if sens == 0:
                     pG, pD = 2,3
@@ -3433,8 +3432,8 @@ class Analyse:
             
             grp.lst = lst
             
-            # On défini les "niveaux" minimum ...
-                # On compte les arrêts d'alésage
+            # On dÃ©fini les "niveaux" minimum ...
+                # On compte les arrÃªts d'alÃ©sage
             for pos in [0,2,3,5]:
                 p = lst[pos][0][1]
                 c = ccote(pos)
@@ -3444,7 +3443,7 @@ class Analyse:
                     if not elem.estEntretoise():
                         grp.min[pos] +=1
             
-                # On met les roulements (si sérrés sur l'arbre)
+                # On met les roulements (si sÃ©rrÃ©s sur l'arbre)
             for pos in [1,4]:
                 p = lst[pos][0][1]
                 elem = self.mtg.palier[p].rlt
@@ -3455,7 +3454,7 @@ class Analyse:
             return grp
 
         def listeElementsAEnleverRlt(sens, palier):
-            "Etabli la liste des éléments à enlever pour le démontage des roulements"
+            "Etabli la liste des Ã©lÃ©ments Ã  enlever pour le dÃ©montage des roulements"
             lst = []
     
             if (sens == 0 and palier == "G") \
@@ -3487,14 +3486,14 @@ class Analyse:
             # 
             # On s'occupe des joints
             #
-            # Listes des éléments libres et fixes
+            # Listes des Ã©lÃ©ments libres et fixes
 #            if self.cdcf.bagueTournante == "I":
 #                lstElemLibres = self.listeElemAlesage[sens]
 #            else:
 #                lstElemLibres = self.listeElemArbre[sens]
 #            self.lstArretsAEnleverEns[sens]
             lstElemEnleve = self.lstArretsAEnleverEns[0] + self.lstArretsAEnleverEns[1]
-#            print "Liste élem enlevés", lstElemEnleve
+#            print "Liste Ã©lem enlevÃ©s", lstElemEnleve
             code = "J"+p+"-Ar"
             if self.mtg.clefElemPosCode(code)[0].num is not None and not code in lstElemEnleve:
                 lst.append(code)
@@ -3505,18 +3504,18 @@ class Analyse:
     
 #            print lst
             
-    ##        print ">>> à enlever",palier , lst
+    ##        print ">>> Ã  enlever",palier , lst
             return lst
 
         def estDemontable(sens):
-            "Teste si le montage est démontable dans le sens <sens>"
+            "Teste si le montage est dÃ©montable dans le sens <sens>"
     
             def demontagePossible(sens, posAr, posAl):
 
                 def dimension(int_ext, pcode, fix = False):
-                    """Renvoie la dimension de l'élément à la position <pcode>
-                        mesurée depuis l'<int_ext>
-                        parmis les éléments <fix> ou pas"""
+                    """Renvoie la dimension de l'Ã©lÃ©ment Ã  la position <pcode>
+                        mesurÃ©e depuis l'<int_ext>
+                        parmis les Ã©lÃ©ments <fix> ou pas"""
             ##        print "Dimension pcode =",pcode
                     if pcode[3:] == "--":
                         dicElem = {"Ar" : self.mtg.clefElemPosCode(pcode[0:3]+"Ar")[0],
@@ -3536,24 +3535,24 @@ class Analyse:
                             radiale = "Al"
                         else:
                             radiale = "Ar"
-            ##        print " --> élém =",elem,elem.pos,elem.taille
+            ##        print " --> Ã©lÃ©m =",elem,elem.pos,elem.taille
                     dim = elem.dimensions(radiale, int_ext, self.mtg.palier[pcode[1]].taille)
             ##        print " --> dimension =",dim
-                    # Choix de la dimension appropriée :
+                    # Choix de la dimension appropriÃ©e :
                     #-----------------------------------
                     
-                    # Cas roulements séparés
+                    # Cas roulements sÃ©parÃ©s
                     if pcode <> "" and pcode[0] == "R" and pcode[3] == "A":
                         return dim['demonte']
             
-                    # Cas des arrêts démontables
+                    # Cas des arrÃªts dÃ©montables
                     if elem.num <> None \
                        and not elem.pasDemontable(not self.mtg.deuxrlt(),elem.pos) \
                        and fix:
-            ##            print "Démontage élément",elem.num,pcode,elem.pos
+            ##            print "DÃ©montage Ã©lÃ©ment",elem.num,pcode,elem.pos
                         return dim['demonte']
             
-                    # Cas des Arrêts mobiles
+                    # Cas des ArrÃªts mobiles
                     if int_ext == "E" and pcode[0] == "A":
                         return dim['entier']
                         
@@ -3598,7 +3597,7 @@ class Analyse:
 #                        print "--"
                         return [posAr, posAl]
                 
-#            print "Test Montabilité Ensemble ...", sens
+#            print "Test MontabilitÃ© Ensemble ...", sens
             
             self.lstArretsAEnleverEns[sens] = []
             
@@ -3612,10 +3611,10 @@ class Analyse:
             if obs is not True:
                 self.obstacleEnsble[sens] = [lAr[obs[0]][-1:][0],lAl[obs[1]][-1:][0]]
             
-            # Compilation et mise à jour des listes
+            # Compilation et mise Ã  jour des listes
             #--------------------------------------
 #            print ">>> Arbre   :\n",listeElemArbre
-#            print ">>> Alésage :\n",listeElemAlesage
+#            print ">>> AlÃ©sage :\n",listeElemAlesage
             lst = []
             for l in listeElemArbre.lst:
                 lst += l[1:]
@@ -3632,7 +3631,7 @@ class Analyse:
             
             # Traitement des joints
             #-----------------------
-            # On s'occupe de ceux qui sont associée à un arret alésage
+            # On s'occupe de ceux qui sont associÃ©e Ã  un arret alÃ©sage
             for p in ["G","D"]:
                 for r in ["Ar","Al"]:
                     if self.mtg.palier[p].jnt[r].num is not None:
@@ -3642,10 +3641,10 @@ class Analyse:
                         else:
                             self.listeElemAlesage[sens].append("J"+p+"-"+r)
             
-            # On s'occupe de ceux qui gènent de toute façon ... si démontage possible !
+            # On s'occupe de ceux qui gÃ¨nent de toute faÃ§on ... si dÃ©montage possible !
             if self.obstacleEnsble[sens] == [] :
                 
-                # On déterminer le coté qui gène ...
+                # On dÃ©terminer le cotÃ© qui gÃ¨ne ...
 #                if (sens == 0 and self.cdcf.bagueTournante == "I")\
 #                    or (sens == 1 and self.cdcf.bagueTournante == "E"):
 #                    p = "G"
@@ -3655,15 +3654,15 @@ class Analyse:
                     p = "G"
                 else:
                     p = "D"
-#                print "Coté qui gène :", p, sens, self.cdcf.bagueTournante
-                # On enlève le(s) joint(s) qui gène(nt) ...
+#                print "CotÃ© qui gÃ¨ne :", p, sens, self.cdcf.bagueTournante
+                # On enlÃ¨ve le(s) joint(s) qui gÃ¨ne(nt) ...
                 enleveJnt = False
                 for r in ["Ar","Al"]:
                     if self.mtg.palier[p].jnt[r].num is not None: 
                         self.lstArretsAEnleverEns[sens].append("J"+p+"-"+r)
                         enleveJnt = True
                 
-                # On enlève l'arrêt qui est sur le même chapeau ...
+                # On enlÃ¨ve l'arrÃªt qui est sur le mÃªme chapeau ...
                 if enleveJnt:
                     enleveJnt = False
                     codeArrAssocie = "A"+p+p+"Al"
@@ -3672,25 +3671,25 @@ class Analyse:
                         
             
 #            print ">>> Arbre   :",self.listeElemArbre[sens]
-#            print ">>> Alésage :",self.listeElemAlesage[sens]
+#            print ">>> AlÃ©sage :",self.listeElemAlesage[sens]
 #            print ">>> Obstacles :", self.obstacleEnsble[sens]
-#            print ">>> Eléments à enlever :", self.lstArretsAEnleverEns[sens]
+#            print ">>> ElÃ©ments Ã  enlever :", self.lstArretsAEnleverEns[sens]
 #            print
             
             return
         
         
         def estDemontableRlt(sens, palier, bagueLibre):
-            "Teste si le roulement <palier> est démontable dans le sens <sens>"
+            "Teste si le roulement <palier> est dÃ©montable dans le sens <sens>"
     
     #        print
-#            print "Test Montabilité Roulements"
+#            print "Test MontabilitÃ© Roulements"
 #            print ">>> Sens",sens
 #            print ">>> Roulement",palier
 #            print ">>> Bague libre",bagueLibre
     
             
-            # Détermination des arrets concernés pour le démontage du roulement
+            # DÃ©termination des arrets concernÃ©s pour le dÃ©montage du roulement
             lstArrets = []
             if (self.cdcf.bagueTournante == "I" and bagueLibre) \
                or (self.cdcf.bagueTournante == "E" and not bagueLibre):
@@ -3713,7 +3712,7 @@ class Analyse:
                     lstArrets.append("AGD"+radiale)
                     lstArrets.append("AGG"+radiale)
     
-    ##        print ">>> Arrêts",lstArrets
+    ##        print ">>> ArrÃªts",lstArrets
     
             tailleRlt = self.mtg.palier[palier].rlt.taille
     
@@ -3769,44 +3768,44 @@ class Analyse:
                     self.obstacleBagueIsolee[palier] = obsBagueIsolee[palier]
                 else:
                     del self.obstacleBagueIsolee[palier]
-#            print "Obstacles Bagues isolées :",self.obstacleBagueIsolee
+#            print "Obstacles Bagues isolÃ©es :",self.obstacleBagueIsolee
            
         #
         # On lance l'analyse ...
         #
         for sens in [0,1]:
-            # Etabli les listes des éléments libres et des éléments sérrés
+            # Etabli les listes des Ã©lÃ©ments libres et des Ã©lÃ©ments sÃ©rrÃ©s
             
             listeElemArbre = listeElementsArbre(sens)
-#            print ">>> Eléments Arbre   :\n", listeElemArbre
+#            print ">>> ElÃ©ments Arbre   :\n", listeElemArbre
             listeElemAlesage = listeElementsAlesage(listeElemArbre.lst, sens)
-#            print ">>> Eléments Alésage :\n", listeElemAlesage
+#            print ">>> ElÃ©ments AlÃ©sage :\n", listeElemAlesage
             
 #            self.listeElemArbre[sens] = listeElementsArbre(sens)
 #            self.listeElemAlesage[sens] = listeElementsAlesage(self.listeElemArbre[sens],sens)
             
-            # Teste si le montage est démontable
+            # Teste si le montage est dÃ©montable
             estDemontable(sens)
         
             
-            # Etabli la liste des éléments à enlever pour le démontage
+            # Etabli la liste des Ã©lÃ©ments Ã  enlever pour le dÃ©montage
 #            self.lstArretsAEnleverEns[sens] = listeElementsAEnleverEns(sens)
             
         for sens in [0,1]:
-            # Teste si les roulements sont démontables
+            # Teste si les roulements sont dÃ©montables
             for p in ["G","D"]:
                 self.obstacleRoults[p][sens] = estDemontableRlt(sens,p,True)
 
-            # Teste si les bagues isolées sont démontables
+            # Teste si les bagues isolÃ©es sont dÃ©montables
             for p in ["G","D"]:
                 self.obstacleBagueIsolee[p][sens] = estDemontableRlt(sens,p,False)
                 
 
-            # Etabli la liste des éléments à enlever pour le démontage des roulements
+            # Etabli la liste des Ã©lÃ©ments Ã  enlever pour le dÃ©montage des roulements
             for p in ["G","D"]:
                 self.lstArretsAEnleverRlt[p][sens] = listeElementsAEnleverRlt(sens,p)
 
-        # On inserse le sens de démontage si bague tournante extérieure
+        # On inserse le sens de dÃ©montage si bague tournante extÃ©rieure
         if self.cdcf.bagueTournante == "E":
 #            print "Retournement sens montage ..."
             self.listeElemArbre.reverse()
@@ -3814,11 +3813,11 @@ class Analyse:
             self.lstArretsAEnleverEns.reverse()
             self.obstacleEnsble.reverse()
             
-        # Traitement des bagues isolées
+        # Traitement des bagues isolÃ©es
         traiterBaguesIsolees()
-##        print "Bagues isolées :",self.obstacleBagueIsolee
+##        print "Bagues isolÃ©es :",self.obstacleBagueIsolee
 
-#        # On prépare les item pour les animations
+#        # On prÃ©pare les item pour les animations
 #        for sens in [0,1]:
 #            self.preparerMontageDemontageEns(sens)
 #            for p in ["G","D"]:
@@ -3826,7 +3825,7 @@ class Analyse:
 
 ##        print "Obsacles roulements 1 :",self.obstacleRoults
         
-        # Montabilité Général :
+        # MontabilitÃ© GÃ©nÃ©ral :
         #----------------------
         montables = {}
 
@@ -3835,7 +3834,7 @@ class Analyse:
             obs = self.obstacleRoults[p]
             montables[p] = (obs[0] == []) or (obs[1] == [])
 
-        # bagues isolées
+        # bagues isolÃ©es
         for p in self.obstacleBagueIsolee:
             obs = self.obstacleBagueIsolee[p]
             montables["I"+p] = obs == []
@@ -3898,12 +3897,12 @@ class Analyse:
 
     ##########################################################################
     def afficher_cacherArretsAEnlever(self, zoneMtg, sens, objet, afficher, instant):
-        """ Affiche ou cache les éléments à enlever pour le montage/démontage
-            sens du démontage : <sens>
-            objet à enlever : <objet> = "E" ou "G" ou "D"
-            instantanément : <instant>
+        """ Affiche ou cache les Ã©lÃ©ments Ã  enlever pour le montage/dÃ©montage
+            sens du dÃ©montage : <sens>
+            objet Ã  enlever : <objet> = "E" ou "G" ou "D"
+            instantanÃ©ment : <instant>
         """
-#        print "  Afficher/Cacher éléments à enlever :",tag
+#        print "  Afficher/Cacher Ã©lÃ©ments Ã  enlever :",tag
 
 #        sens = eval(tag[8])
         ensemble = objet == "E"
@@ -3924,14 +3923,14 @@ class Analyse:
             lst = self.lstArretsAEnleverRlt[objet][sens]
 ##            else:
 ##                lst = []
-#        print "   ... élém à enlever :",sens, lst
+#        print "   ... Ã©lÃ©m Ã  enlever :",sens, lst
         
         if len(lst) == 0:
             return
         
         
         
-        # Préparation des paramètres de "fondu"
+        # PrÃ©paration des paramÃ¨tres de "fondu"
         if instant:
             rng = range(0,101, 100)
         else:
@@ -3945,13 +3944,13 @@ class Analyse:
             o = 'imag'
             rng.reverse()
         
-#        # Préparation des éléments non arêtés #####################
-#        for i in zoneMtg.lstItemMtg:     # On parcours tous les items affichés
-#            # On inclus tous les éléments d'arbres
+#        # PrÃ©paration des Ã©lÃ©ments non arÃªtÃ©s #####################
+#        for i in zoneMtg.lstItemMtg:     # On parcours tous les items affichÃ©s
+#            # On inclus tous les Ã©lÃ©ments d'arbres
 #            if TAG_ARBRE in i.tag:
 #                lstItemAnim.append(i)
 #                continue
-#            # On inclus les éléments de la liste (sans les éléments d'alésage)
+#            # On inclus les Ã©lÃ©ments de la liste (sans les Ã©lÃ©ments d'alÃ©sage)
 #            else:
 #                print i.tag,
 #                for t in self.listeElementsNonArretes[sens]:
@@ -3963,12 +3962,12 @@ class Analyse:
         for itemTag in lst:
             e = self.mtg.clefElemPosCode(itemTag)[0]
 #            lstItemEff.append(e.item['imag'])
-            for i in zoneMtg.lstItemMtg:     # On parcours tous les items affichés
+            for i in zoneMtg.lstItemMtg:     # On parcours tous les items affichÃ©s
                 for t in e.item['imag'].tag:
                     if t in i.tag:
-                        lstItemEff.append(i)  # On rajoute tous les item qui ont le même tag
+                        lstItemEff.append(i)  # On rajoute tous les item qui ont le mÃªme tag
         
-#        print "   ... items effacés :",lstItemEff
+#        print "   ... items effacÃ©s :",lstItemEff
         
         lstItemEch = []
         for i in lstItemEff:
@@ -3977,7 +3976,7 @@ class Analyse:
             else:
                 lstItemEch.append(None)    
         
-#        print "   ... items échangés :",lstItemEch 
+#        print "   ... items Ã©changÃ©s :",lstItemEch 
         
         # Le fondu ...
         for niv in rng[1:]:
@@ -3992,11 +3991,11 @@ class Analyse:
 
     ############################################################
     def GetListeItemLibres(self, zoneMtg, sens):
-        """ Préparation du Montage/Démontage de l'ensemble "Alésage"
-            renvoie la liste des items qui vont se déplacer ...
+        """ PrÃ©paration du Montage/DÃ©montage de l'ensemble "AlÃ©sage"
+            renvoie la liste des items qui vont se dÃ©placer ...
         """
 ##        print
-#        print "Préparation du Montage/Démontage ""Ensemble"""
+#        print "PrÃ©paration du Montage/DÃ©montage ""Ensemble"""
 #        print ">>> sens",sens
 #        tag = "AnimEnsb" + str(sens)
 ##        print "   ... tag =",tag
@@ -4014,7 +4013,7 @@ class Analyse:
             return lst
         
         #
-        # On selectionne les éléments libres
+        # On selectionne les Ã©lÃ©ments libres
         #
         if self.cdcf.bagueTournante == "I":
             rad = TAG_ALESAGE
@@ -4033,14 +4032,14 @@ class Analyse:
         lstItemAnim = []
         for i in zoneMtg.lstItemMtg:
             #
-            # On inclus les éléments d'arbres ou bien d'alésage
+            # On inclus les Ã©lÃ©ments d'arbres ou bien d'alÃ©sage
             #
             if rad in i.tag:
                 lstItemAnim.append(i)
                 continue
             
             #
-            # On inclus les éléments de la liste 'lstElemLibres'
+            # On inclus les Ã©lÃ©ments de la liste 'lstElemLibres'
             #
             else:
 #                print i.tag,
@@ -4054,7 +4053,7 @@ class Analyse:
 #        print "1",lstItemAnim
 
         #
-        # On ajoute les suppléments d'arrêts à enlever qui peuvent être démontés/montés
+        # On ajoute les supplÃ©ments d'arrÃªts Ã  enlever qui peuvent Ãªtre dÃ©montÃ©s/montÃ©s
         #
 #        for itemTag in self.lstArretsAEnleverEns[sens]:
 #            e = self.mtg.clefElemPosCode(itemTag[0:])[0]
@@ -4069,9 +4068,9 @@ class Analyse:
                 
     ############################################################
     def GetListeItemRoult(self, zoneMtg, sens, palier):
-        """Préparation du Montage/Démontage des roulements"""
+        """PrÃ©paration du Montage/DÃ©montage des roulements"""
 #        print 
-#        print "Préparation du Montage/Démontage ""Roulement"""
+#        print "PrÃ©paration du Montage/DÃ©montage ""Roulement"""
 #        print ">>> sens",sens
 #        print ">>> palier",palier
 #        tag = "AnimRlt" + palier + str(sens)
@@ -4085,7 +4084,7 @@ class Analyse:
             radiale = "Al"
             radopp = "Ar"
 
-        # Ensemble déja démonté
+        # Ensemble dÃ©ja dÃ©montÃ©
         if "AnimEnsb0" in self.elemDemonte:
             te = "AnimEnsb0"
         elif "AnimEnsb1" in self.elemDemonte:
@@ -4093,7 +4092,7 @@ class Analyse:
         else:
             te = None
 
-        # Listes des éléments libres et fixes
+        # Listes des Ã©lÃ©ments libres et fixes
         if self.cdcf.bagueTournante == "I":
             lstElemLibres = self.listeElemAlesage[sens]
             lstElemFixes = self.listeElemArbre[sens]
@@ -4101,7 +4100,7 @@ class Analyse:
             lstElemLibres = self.listeElemArbre[sens]
             lstElemFixes = self.listeElemAlesage[sens]
             
-        # Liste des éléments à démonter ###########################
+        # Liste des Ã©lÃ©ments Ã  dÃ©monter ###########################
         lst = []
         
           # Le roulement ...
@@ -4112,7 +4111,7 @@ class Analyse:
             if tr in lstElemFixes:
                 lst.append(tr)
     
-          # Autres éléments à démonter ...
+          # Autres Ã©lÃ©ments Ã  dÃ©monter ...
         if   (palier == "G" and sens == 0) \
           or (palier == "D" and sens == 1):
             for tr in ["AGD"+radiale,
@@ -4122,7 +4121,7 @@ class Analyse:
                 if tr in lstElemFixes:
                     lst.append(tr)
         
-#        print "   ... elem à démonter ? =",lst
+#        print "   ... elem Ã  dÃ©monter ? =",lst
         
 #        for tr in ["J"+palier+"-Ar",
 #                   "J"+palier+"-Al"]:
@@ -4130,55 +4129,55 @@ class Analyse:
 #                lst.append(tr)
         
         
-          # On finalise la liste des éléments à démonter
+          # On finalise la liste des Ã©lÃ©ments Ã  dÃ©monter
         lst2 = []
         for c in lst:
 ##            print "tag",c," : ",frameMtg.gettags(c)
             pasDejaDemonte = not c in lstElemLibres
 ##            print "pas deja demonte =",pasDejaDemonte,frameMtg.gettags(c)
             pasAEnlever = not (c in self.lstArretsAEnleverRlt[palier][sens])
-##            print "pas à enlever =",pasAEnlever
+##            print "pas Ã  enlever =",pasAEnlever
             if (pasDejaDemonte or c == "R"+palier+"---" ) and (pasAEnlever or c[0] == "R"): #and frameMtg.gettags(c) <> () \
                 lst2.append(c)
 
 
-        # On met les tags ... sans les épaulements
+        # On met les tags ... sans les Ã©paulements
         for i in zoneMtg.lstItemMtg:
             for t in lst2:
                 if t in i.tag and not TAG_ARBRE in i.tag and not TAG_ALESAGE in i.tag:
                     lstItemAnim.append(i)
 
 
-#        # On enlève les épaulements
+#        # On enlÃ¨ve les Ã©paulements
 #        frameMtg.dtag(TAG_ARBRE,tag)
 #        frameMtg.dtag(TAG_ALESAGE,tag)
         
-##        if self.cdcf.bagueTournante <> u"Extérieure":
+##        if self.cdcf.bagueTournante <> u"ExtÃ©rieure":
 ##            for t in self.lstArretsAEnleverRlt[sens]:
 ##                frameMtg.addtag_withtag(tag,t)        
 
-##        print "   ... elem à démonter =",lst2
+##        print "   ... elem Ã  dÃ©monter =",lst2
 #        print "Roulement",palier,"sens",sens
-#        print "   ... elem à démonter =",lst2
-#        print "   ... item à démonter =",lstItemAnim
+#        print "   ... elem Ã  dÃ©monter =",lst2
+#        print "   ... item Ã  dÃ©monter =",lstItemAnim
         return lstItemAnim
                 
            
                 
     ############################################################
     def animerMontageDemontage(self, zoneMtg, tag, remonter, instant = False):
-        """ Animation du Montage/Démontage
+        """ Animation du Montage/DÃ©montage
         
         """
         
         def animer():
-            # Durée (en seconde)
+            # DurÃ©e (en seconde)
             duree = globdef.DUREE_ANIMATION_MONTAGE
     
-            # Calcul du nombre de positions (à 20 img/s)
+            # Calcul du nombre de positions (Ã  20 img/s)
             nbPos = duree * globdef.FRAME_RATE
             
-            # Paramètre de la fonction x(t) = ax²
+            # ParamÃ¨tre de la fonction x(t) = axÂ²
             a = 1.0*sensdep*dist/nbPos**2
             
             oldx = 0
@@ -4194,7 +4193,7 @@ class Analyse:
                 if dt > 0:
                     time.sleep(dt)
 
-#        if remonter: t = "Démontage"
+#        if remonter: t = "DÃ©montage"
 #        else : t = "Montage"
 #        print 
 #        print "  Animation ",tag
@@ -4218,7 +4217,7 @@ class Analyse:
 #            return bmp
         
         #
-        # Réglage de la distance (en pixels)
+        # RÃ©glage de la distance (en pixels)
         #
         if tag[4] == "E":
             dist = DISTANCE_DEMONTAGE_ENSEMBLE
@@ -4229,7 +4228,7 @@ class Analyse:
             else:
                 dist = DISTANCE_DEMONTAGE_RLT_COURT
         #
-        # On établi la liste des item à animer
+        # On Ã©tabli la liste des item Ã  animer
         #
         sens = eval(tag[8])
         if tag[4] == "E":
@@ -4237,20 +4236,20 @@ class Analyse:
         else:
             lstItemAnim = self.ListeItemRoult[tag[7]][sens]
             
-#        print "   ... elem à démonter =",self.listeElemAlesage[sens]
-#        print "   ... item à démonter =",lstItemAnim
+#        print "   ... elem Ã  dÃ©monter =",self.listeElemAlesage[sens]
+#        print "   ... item Ã  dÃ©monter =",lstItemAnim
         
         #
         # Lancement de l'animation
         #=========================
         #
-        # signe du sens de déplacement ##############################
+        # signe du sens de dÃ©placement ##############################
         if not remonter:
             sgn = 1
         else:
             sgn = -1
 
-        # sens du déplacement (demontage) ##############################
+        # sens du dÃ©placement (demontage) ##############################
         # ( 1 = vers la droite
         #   -1 = vers la gauche )
         sensdep = 1 - eval(tag[8]) * 2
@@ -4260,7 +4259,7 @@ class Analyse:
         else:
             n = 0
         
-        # On ote les arrêt à enlever
+        # On ote les arrÃªt Ã  enlever
         if tag[4] == "E":
             objet = "E"
         else:
@@ -4283,7 +4282,7 @@ class Analyse:
         else:
             animer()
             
-        # On affiche les arrêt à enlever
+        # On affiche les arrÃªt Ã  enlever
         if remonter:
             self.afficher_cacherArretsAEnlever(zoneMtg, sens, objet, remonter, instant)
         
@@ -4305,7 +4304,7 @@ class Analyse:
 #            t = None
 
     def reinitialiserAffichage(self, zoneMtg):
-#        print "Réinitialisation affichage analyse"
+#        print "RÃ©initialisation affichage analyse"
         if self.mobileTrace is not None:
             self.tracerSurBrillanceMobiles(zoneMtg, self.mobileTrace, False)
         self.initTraceResultats(zoneMtg)
@@ -4317,10 +4316,10 @@ class Analyse:
 
     #############################################################################
     def tracerResultats(self, dc, zoneMtg):
-#        print "Tracé résultats analyse",self.chaineTracee.items()
+#        print "TracÃ© rÃ©sultats analyse",self.chaineTracee.items()
         for s,t in self.chaineTracee.items():
             if t is not None:
-#                print "  Tracé chaine",s
+#                print "  TracÃ© chaine",s
                 self.tracerChaineAct(dc, zoneMtg, s)
             
         if self.mobileTrace is not None:
@@ -4331,7 +4330,7 @@ class Analyse:
        
     ##############################################################################################
     def tracerSurbrillanceArrets(self, zoneMtg, sens, action = True, montrer = True): 
-        """ Met les arrets ne résistant pas en surbrillance
+        """ Met les arrets ne rÃ©sistant pas en surbrillance
         """
         for p in self.lstElemResistePas[sens]:
             elem = self.mtg.clefElemPosCode(p)[0]
@@ -4357,7 +4356,7 @@ class Analyse:
     ###############################################################################
     def tracerSurBrillanceMobiles(self, zoneMtg, sens, active = True):
         """ Met en surbrillance Bleu et Noir 
-            les ensembles entrant en collision (indémontable) 
+            les ensembles entrant en collision (indÃ©montable) 
         """
 #        print "Surbrillance collision"
 #        sens = eval(tag[8])
@@ -4373,8 +4372,8 @@ class Analyse:
                 i.normale()
 
 #        print "SurBrillance mobiles : sens",sens
-#        print ">>> Eléments serrés :",self.listeElemArbre[sens]
-#        print ">>> Eléments libres :",self.listeElemAlesage[sens]
+#        print ">>> ElÃ©ments serrÃ©s :",self.listeElemArbre[sens]
+#        print ">>> ElÃ©ments libres :",self.listeElemAlesage[sens]
 
         self.lstItemArbre = []
         self.lstItemAles = []
@@ -4385,30 +4384,30 @@ class Analyse:
         listeSerres = self.listeElemArbre[sens]
         listeLibres = self.listeElemAlesage[sens]
         
-        # Cas des éléments liés à l'alésage
+        # Cas des Ã©lÃ©ments liÃ©s Ã  l'alÃ©sage
         #-----------------------------------
         for pcode in self.listeElemAlesage[sens]:
             elem,lstclef = self.mtg.clefElemPosCode(pcode)
             for clef in lstclef:
                 self.lstItemAles.append(elem.item[clef])
 
-        # Cas des éléments liés à l'arbre
+        # Cas des Ã©lÃ©ments liÃ©s Ã  l'arbre
         #---------------------------------
         for pcode in self.listeElemArbre[sens]:
             elem,lstclef = self.mtg.clefElemPosCode(pcode)
             for clef in lstclef:
                 self.lstItemArbre.append(elem.item[clef])
             
-        # Cas des morceaux d'arbre ou d'alésage
+        # Cas des morceaux d'arbre ou d'alÃ©sage
         #--------------------------------------
         for i in zoneMtg.lstItemMtg:
-            # On inclus les éléments d'arbres
+            # On inclus les Ã©lÃ©ments d'arbres
             if TAG_ARBRE in i.tag:
                 self.lstItemArbre.append(i)
             elif TAG_ALESAGE in i.tag:
                 self.lstItemAles.append(i)
        
-        # Cas des éléments à enlever
+        # Cas des Ã©lÃ©ments Ã  enlever
         #----------------------------
         for pcode in self.lstArretsAEnleverEns[sens]:
             elem,lstclef = self.mtg.clefElemPosCode(pcode)
@@ -4433,7 +4432,7 @@ class Analyse:
         self.lstItemAles = list(set(self.lstItemAles))
         
         
-        #   On cache ou affiche les éléments à démonter (instantanément !)
+        #   On cache ou affiche les Ã©lÃ©ments Ã  dÃ©monter (instantanÃ©ment !)
         #-----------------------------------------------------------------
         self.afficher_cacherArretsAEnleverEns(zoneMtg, sens, not active, instant = True)
         
@@ -4453,23 +4452,23 @@ class Analyse:
             
     #############################################################################    
     def tracerFlechesObstacleEnsemble(self, dc, zoneMtg, sens):
-        """ Trace des fleches illustrant le sens de collision des ensembles mobiles (indémontable) 
+        """ Trace des fleches illustrant le sens de collision des ensembles mobiles (indÃ©montable) 
         """
         def Fleche(long, sens, texte):
             """ Fleche avec texte dedans ...
             """
-            # épaisseur (en pixel)
+            # Ã©paisseur (en pixel)
             e = 41
             
-            # décalage de l'ombre
+            # dÃ©calage de l'ombre
             o = 4
             
-            # Pen de la flèche
+            # Pen de la flÃ¨che
             pen = wx.Pen(wx.Colour(159,0,0), e)
 #            pen = wx.Pen("red", e)
             pen.SetCap(wx.CAP_BUTT)
           
-            # Points extrémités de la Fleche
+            # Points extrÃ©mitÃ©s de la Fleche
             x1,y1,x2,y2 = 0, e/2, long, e/2
     
             bmp = wx.EmptyBitmap(long+o, e+o)
@@ -4505,8 +4504,8 @@ class Analyse:
 
     #############################################################################                
     def tracerObstacle(self, dc, zoneMtg, obsTrace):
-        """ Met en évidence un obstacle au démontage
-            par une double flèche les éméments en collision
+        """ Met en Ã©vidence un obstacle au dÃ©montage
+            par une double flÃ¨che les Ã©mÃ©ments en collision
         """
         if obsTrace is None:
             return
@@ -4515,7 +4514,7 @@ class Analyse:
         obs, rad = obsTrace[0], obsTrace[1]
         lien = []
 
-#        print "Tracé flèche entre :",obs, rad
+#        print "TracÃ© flÃ¨che entre :",obs, rad
 #        print obs[0].posX(), obs[1].posX()
         # On met la liste dans l'ordre "D" "G"
         if obs[0].posX() > obs[1].posX():
@@ -4526,13 +4525,13 @@ class Analyse:
 
 #        print lstPosX, obs[0].posX(), obs[1].posX()
 
-        # Calcul des coordonnées
+        # Calcul des coordonnÃ©es
         for posX in lstPosX:
             x , y = zoneMtg.coordsBordElem(self.mtg, posX[0], posX[1], rad)
 #            print x
             lien.append((x,zoneMtg.milieuY + y))
         
-        #On met tout à la même hauteur ...
+        #On met tout Ã  la mÃªme hauteur ...
         
         
         def fleche(sens, pt):
@@ -4549,7 +4548,7 @@ class Analyse:
             dc.DrawPolygon(fleche(1, lien[len(lien)-1]), fillStyle = wx.WINDING_RULE)
             dc.DrawPolygon(fleche(0, lien[0]), fillStyle = wx.WINDING_RULE)
         
-        # Tracé de la flêche
+        # TracÃ© de la flÃªche
         if len(lien)>1:
 #                print lien
 #                lien[0][1] = (lien[0][1] + lien[1][1]) / 2
@@ -4581,7 +4580,7 @@ class Analyse:
         # Epaisseur en pixel
         epaisseur = 4
         
-        # Une Couleur différente selon le sens
+        # Une Couleur diffÃ©rente selon le sens
         if sens == 0: 
             coul = "red"
             dc.SetBrush(wx.RED_BRUSH)
@@ -4592,7 +4591,7 @@ class Analyse:
         
         dc.BeginDrawing()
         
-        # Tracé des chaînes
+        # TracÃ© des chaÃ®nes
         for ligne in lstLignes:
             ligneBas = []
 #            impair = True
@@ -4832,7 +4831,7 @@ class SchemaStructure():
         
         
     def determiner(self, mtg, ddlSupprimes):
-        # Degrés de liberte supprimés par chacuns des paliers
+        # DegrÃ©s de liberte supprimÃ©s par chacuns des paliers
         # 0 : aucuns
         # 1 : x+
         # 2 : x-
@@ -4842,7 +4841,7 @@ class SchemaStructure():
 #        print "Determination de la structure", ddlSupprimes
         
         #
-        # Associe des laisons normalisées à chaque palier
+        # Associe des laisons normalisÃ©es Ã  chaque palier
         #
         for cote, ddlSuppr in ddlSupprimes.items():
             if ddlSuppr & 8 == 8:

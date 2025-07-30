@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: ISO-8859-1 -*-
 
 ##This file is part of PyVot
 #############################################################################
@@ -10,7 +9,7 @@
 #############################################################################
 #############################################################################
 
-## Copyright (C) 2006-2009 Cédrick FAURY
+## Copyright (C) 2006-2009 CÃ©drick FAURY
 
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -42,11 +41,11 @@ import wx.lib.customtreectrl as CT
 #      Options     #
 ##############################################################################
 class Options:
-    "Définit les options de PyVot"
+    "DÃ©finit les options de PyVot"
     def __init__(self):
         #
         # Toutes les options ...
-        # Avec leurs valeurs par défaut.
+        # Avec leurs valeurs par dÃ©faut.
         #
         self.optElements = {"ProprietesDefaut"   : 0,
                             "FichierProprietes"  : ""}
@@ -74,12 +73,12 @@ class Options:
                               "ImpAnStruc" : True,
                               "ImpAnCout" : True} #os.path.dirname(os.path.abspath(sys.argv[0]))+"\\ModeleRapport.txt"}
         
-        self.typesOptions = {u"Général" : self.optGenerales,
-                             u"Eléments" : self.optElements,
+        self.typesOptions = {u"GÃ©nÃ©ral" : self.optGenerales,
+                             u"ElÃ©ments" : self.optElements,
                              u"Rapport" : self.optImpression,
                              u"Analyse" : self.optAnalyse}
         
-        # Le fichier où seront sauvées les options
+        # Le fichier oÃ¹ seront sauvÃ©es les options
         self.fichierOpt = "ConfigPyVot.cfg"
 
     def __repr__(self):
@@ -96,7 +95,7 @@ class Options:
     
     ############################################################################
     def fichierExiste(self):
-        """ Vérifie si le fichier "options" existe
+        """ VÃ©rifie si le fichier "options" existe
         """
 #        PATH=os.path.dirname(os.path.abspath(sys.argv[0]))
         os.chdir(globdef.PATH)
@@ -199,10 +198,10 @@ class Options:
         return chemin[:p+1]
         
 ##############################################################################
-#     Fenêtre Options     #
+#     FenÃªtre Options     #
 ##############################################################################
 class FenOptions(wx.Dialog):
-#   "Fenêtre des options"      
+#   "FenÃªtre des options"      
     def __init__(self, parent, options):
         wx.Dialog.__init__(self, parent, -1, u"Options de PyVot")#, style = wx.RESIZE_BORDER)
         
@@ -243,24 +242,24 @@ class pnlGenerales(wx.Panel):
         ns = wx.BoxSizer(wx.VERTICAL)
         
         #
-        # Choix du dossier de sauvegarde par défaut
+        # Choix du dossier de sauvegarde par dÃ©faut
         #
-        sb1 = wx.StaticBox(self, -1, u"Dossier de sauvegarde par défaut", size = (200,-1))
+        sb1 = wx.StaticBox(self, -1, u"Dossier de sauvegarde par dÃ©faut", size = (200,-1))
         sbs1 = wx.StaticBoxSizer(sb1,wx.VERTICAL)
         fs = DirSelectorCombo(self, -1)
         fs.SetValueWithEvent(self.opt["RepCourant"])
-        fs.SetToolTip(wx.ToolTip(u"Permet de selectionner le dossier\ndans lequel seront sauvegardés les fichiers *.pyv\naprès le lancement de PyVot.\nPar la suite, le dossier de sauvegarde proposé\nest le dernier dossier utilisé pour un enregistrement."))
+        fs.SetToolTip(wx.ToolTip(u"Permet de selectionner le dossier\ndans lequel seront sauvegardÃ©s les fichiers *.pyv\naprÃ¨s le lancement de PyVot.\nPar la suite, le dossier de sauvegarde proposÃ©\nest le dernier dossier utilisÃ© pour un enregistrement."))
         sbs1.Add(fs, flag = wx.EXPAND|wx.ALL, border = 5)
         fs.Bind(wx.EVT_TEXT, self.EvtComboCtrl)
         ns.Add(sbs1, flag = wx.EXPAND|wx.ALL)
         
         #
-        # Choix du type de fichier d'aide à afficher
+        # Choix du type de fichier d'aide Ã  afficher
         #
         rb1 = wx.RadioBox(self, -1, u"Type de fichier d'aide", wx.DefaultPosition, wx.DefaultSize,
                           ["CHM","HTML"], 1, wx.RA_SPECIFY_COLS)
         rb1.SetSelection(self.opt["TypeAide"])
-        rb1.SetToolTip(wx.ToolTip(u"Selon les systèmes,\nl'aide peut ne pas s'afficher correctement.\nCette option peut résoudre le problème."))
+        rb1.SetToolTip(wx.ToolTip(u"Selon les systÃ¨mes,\nl'aide peut ne pas s'afficher correctement.\nCette option peut rÃ©soudre le problÃ¨me."))
         self.Bind(wx.EVT_RADIOBOX, self.EvtRadioBox, rb1)
         ns.Add(rb1, flag = wx.EXPAND|wx.ALL)
         
@@ -270,7 +269,7 @@ class pnlGenerales(wx.Panel):
         sb2 = wx.StaticBox(self, -1, u'Onglet "Projet"', size = (200,-1))
         sbs2 = wx.StaticBoxSizer(sb2,wx.VERTICAL)
         cb1 = wx.CheckBox(self, -1, u'Afficher un onglet "Projet"')
-        cb1.SetToolTip(wx.ToolTip(u'Si vous cochez cette option,\nun onglet "Projet" sera affiché\nà gauche du montage.'))
+        cb1.SetToolTip(wx.ToolTip(u'Si vous cochez cette option,\nun onglet "Projet" sera affichÃ©\nÃ  gauche du montage.'))
         cb1.SetValue(self.opt["OngletMontage"])
         sbs2.Add(cb1, flag = wx.EXPAND|wx.ALL, border = 5)
         self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBoxOnglet, cb1)
@@ -282,7 +281,7 @@ class pnlGenerales(wx.Panel):
         sb3 = wx.StaticBox(self, -1, u"Affichage", size = (200,-1))
         sbs3 = wx.StaticBoxSizer(sb3,wx.VERTICAL)
         cb2 = wx.CheckBox(self, -1, u"Hachurer pendant la pose")
-        cb2.SetToolTip(wx.ToolTip(u"Si vous décochez cette option,\nles pièces ne seront pas hachurées pendant la pose,\nmais seulement après avoir cliqué.\n\nCela peut améliorer les performances à l'affichage."))
+        cb2.SetToolTip(wx.ToolTip(u"Si vous dÃ©cochez cette option,\nles piÃ¨ces ne seront pas hachurÃ©es pendant la pose,\nmais seulement aprÃ¨s avoir cliquÃ©.\n\nCela peut amÃ©liorer les performances Ã  l'affichage."))
         cb2.SetValue(self.opt["Hachurer"])
         sbs3.Add(cb2, flag = wx.EXPAND|wx.ALL, border = 5)
         self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBoxHachurer, cb2)
@@ -300,7 +299,7 @@ class pnlGenerales(wx.Panel):
         self.opt["RepCourant"] = event.GetEventObject().GetValue()
         
     def EvtCheckBoxOnglet(self, event):
-        dlg = wx.MessageDialog(self, u"L'option ne sera effective qu'au redémarrage de l'application",
+        dlg = wx.MessageDialog(self, u"L'option ne sera effective qu'au redÃ©marrage de l'application",
                                u'Option "Arbre de structure"',
                                wx.OK | wx.ICON_INFORMATION
                                #wx.YES_NO | wx.NO_DEFAULT | wx.CANCEL | wx.ICON_INFORMATION
@@ -324,9 +323,9 @@ class pnlElements(wx.Panel):
         ns = wx.BoxSizer(wx.VERTICAL)
         
         #
-        # Choix du fichier de propriété des éléments
+        # Choix du fichier de propriÃ©tÃ© des Ã©lÃ©ments
         #
-        self.sb2 = wx.StaticBox(self, -1, u"Propriétés personnalisées")
+        self.sb2 = wx.StaticBox(self, -1, u"PropriÃ©tÃ©s personnalisÃ©es")
         sbs2 = wx.StaticBoxSizer(self.sb2,wx.VERTICAL)
         
         fileList = ElementTable.listeFichiersElem()
@@ -338,7 +337,7 @@ class pnlElements(wx.Panel):
                          )
         
         self.Bind(wx.EVT_COMBOBOX, self.EvtComboBox, self.cb)
-        self.cb.SetToolTip(wx.ToolTip(u"Selection du fichier de propriétés des éléments"))
+        self.cb.SetToolTip(wx.ToolTip(u"Selection du fichier de propriÃ©tÃ©s des Ã©lÃ©ments"))
         sbs2.Add(self.cb)
         
         bs1 = wx.BoxSizer(wx.HORIZONTAL)
@@ -352,21 +351,21 @@ class pnlElements(wx.Panel):
         sbs2.Layout()
         
         #
-        # Choix de l'origine des propriétés
+        # Choix de l'origine des propriÃ©tÃ©s
         #
-        sb1 = wx.StaticBox(self, -1, u"Propriétés des éléments", size = (200,-1))
+        sb1 = wx.StaticBox(self, -1, u"PropriÃ©tÃ©s des Ã©lÃ©ments", size = (200,-1))
         sbs1 = wx.StaticBoxSizer(sb1,wx.VERTICAL)
         
         self.group1_ctrls = []
-        radio1 = wx.RadioButton( self, 0, u"Par défaut", style = wx.RB_GROUP )
-        radio2 = wx.RadioButton( self, 1, u"Personnalisées")
+        radio1 = wx.RadioButton( self, 0, u"Par dÃ©faut", style = wx.RB_GROUP )
+        radio2 = wx.RadioButton( self, 1, u"PersonnalisÃ©es")
         radio2.SetValue(self.opt["ProprietesDefaut"])
 
         self.group1_ctrls.append((radio1,None))
         self.group1_ctrls.append((radio2, self.sb2))
         
 #        rb1.SetSelection(self.opt["ProprietesDefaut"])
-        sb1.SetToolTip(wx.ToolTip(u"Défaut : PyVot utilise les propriétés par défaut pour les éléments.\nPersonnalisées : permet de choisir ses propres propriétés pour les éléments."))
+        sb1.SetToolTip(wx.ToolTip(u"DÃ©faut : PyVot utilise les propriÃ©tÃ©s par dÃ©faut pour les Ã©lÃ©ments.\nPersonnalisÃ©es : permet de choisir ses propres propriÃ©tÃ©s pour les Ã©lÃ©ments."))
         
         grid2 = wx.GridBagSizer()
         grid2.Add( radio1, (0,0), (1,1), wx.ALIGN_LEFT|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
@@ -436,7 +435,7 @@ class pnlImpression(wx.Panel):
         
 #        print tree.GetVirtualSize()[1], tree.GetBestSize()[1]
         
-        cb2 = wx.CheckBox(self, -1, u"Demander ce qu'il faut inclure\nà chaque création de rapport")
+        cb2 = wx.CheckBox(self, -1, u"Demander ce qu'il faut inclure\nÃ  chaque crÃ©ation de rapport")
         cb2.SetValue(self.opt["DemanderImpr"])
         
         sbs1.Add(cb2, flag = wx.EXPAND|wx.ALL, border = 5)
@@ -461,9 +460,9 @@ class pnlAnalyse(wx.Panel):
         sb1 = wx.StaticBox(self, -1, u"Outils visuels d'analyse")
         sbs1 = wx.StaticBoxSizer(sb1,wx.VERTICAL)
         
-        label = {"AnimMontage"  : u"Proposer l'animation du démontage/remontage",
-                 "AnimArrets"   : u"Proposer l'animation du manque d'arrêt axial",
-                 "ChaineAction" : u"Proposer le tracé des chaînes d'action"}
+        label = {"AnimMontage"  : u"Proposer l'animation du dÃ©montage/remontage",
+                 "AnimArrets"   : u"Proposer l'animation du manque d'arrÃªt axial",
+                 "ChaineAction" : u"Proposer le tracÃ© des chaÃ®nes d'action"}
 
         self.cb = {}
         for titre, opt in options.items():
@@ -485,8 +484,8 @@ class nbOptions(wx.Notebook):
     def __init__(self, parent, options):
         wx.Notebook.__init__(self, parent, -1)
         
-        self.AddPage(pnlGenerales(self, options.optGenerales), u"Général")
-        self.AddPage(pnlElements(self, options.optElements), u"Eléments")
+        self.AddPage(pnlGenerales(self, options.optGenerales), u"GÃ©nÃ©ral")
+        self.AddPage(pnlElements(self, options.optElements), u"ElÃ©ments")
         self.AddPage(pnlImpression(self, options.optImpression), u"Rapport")
         self.AddPage(pnlAnalyse(self, options.optAnalyse), u"Analyse")
         self.SetMinSize((350,-1))
@@ -524,7 +523,7 @@ class DirSelectorCombo(wx.combo.ComboCtrl):
     # Overridden from ComboCtrl, called when the combo button is clicked
     def OnButtonClick(self):
         # In this case we include a "New directory" button. 
-#        dlg = wx.FileDialog(self, "Choisir un fichier modèle", path, name,
+#        dlg = wx.FileDialog(self, "Choisir un fichier modÃ¨le", path, name,
 #                            "Rich Text Format (*.rtf)|*.rtf", wx.FD_OPEN)
         dlg = wx.DirDialog(self, "Choisir un dossier",
                            defaultPath = globdef.SAMPLEPATH,
@@ -587,7 +586,7 @@ class FileSelectorCombo(wx.combo.ComboCtrl):
         mesFormats = "Texte brut (*.txt)|*.txt|" \
                      "Rich Text Format (*.rtf)|*.rtf" 
                      
-        dlg = wx.FileDialog(self, u"Choisir un fichier modèle", path, name,
+        dlg = wx.FileDialog(self, u"Choisir un fichier modÃ¨le", path, name,
                             mesFormats, wx.FD_OPEN)
 
         # If the user selects OK, then we process the dialog's data.
@@ -607,7 +606,7 @@ class FileSelectorCombo(wx.combo.ComboCtrl):
         pass
 
 ##############################################################################
-#     Choix des trucs à mettre dans le rapport     #
+#     Choix des trucs Ã  mettre dans le rapport     #
 ##############################################################################
 class ChoixRapportTreeCtrl(CT.CustomTreeCtrl):
 
@@ -623,16 +622,16 @@ class ChoixRapportTreeCtrl(CT.CustomTreeCtrl):
         
         self.structure = [[u"Montage", "ImpMontage"],
                           [u"CdCF",    [[u"Efforts sur l'arbre",         "ImpCdCFCharge"], 
-                                        [u"Lubrification & Etanchéité",  "ImpCdCFEtanch"],
-                                        [u"Coût admissible",             "ImpCdCFCout"]]],
+                                        [u"Lubrification & EtanchÃ©itÃ©",  "ImpCdCFEtanch"],
+                                        [u"CoÃ»t admissible",             "ImpCdCFCout"]]],
                           [u"Analyse", [[u"Structure", [[u"Mise en position axiale", "ImpAnImmob"],
-                                                        [u"Schéma","ImpAnStruc"]]], 
+                                                        [u"SchÃ©ma","ImpAnStruc"]]], 
                                         [u"Resistance",[[u"Axiale", "ImpAnResistAx"],
                                                         [u"Roulements","ImpAnResistRl"]]], 
-                                        [u"Montabilité",[[u"Ensemble", "ImpAnMontabEns"],
+                                        [u"MontabilitÃ©",[[u"Ensemble", "ImpAnMontabEns"],
                                                          [u"Roulements","ImpAnMontabRlt"]]],
-                                        [u"Etanchéité", "ImpAnEtanch"], 
-                                        [u"Coût", "ImpAnCout"]]]
+                                        [u"EtanchÃ©itÃ©", "ImpAnEtanch"], 
+                                        [u"CoÃ»t", "ImpAnCout"]]]
                           ]
 
         self.root = self.AddRoot("")
@@ -712,9 +711,9 @@ class ChoixRapportTreeCtrl(CT.CustomTreeCtrl):
         
         
 class FenOptionsImpression(wx.Dialog):
-#   "Fenêtre des options"      
+#   "FenÃªtre des options"      
     def __init__(self, parent, optionsImpr):
-        wx.Dialog.__init__(self, parent, -1, u"Création du rapport d'analyse")#, style = wx.RESIZE_BORDER)
+        wx.Dialog.__init__(self, parent, -1, u"CrÃ©ation du rapport d'analyse")#, style = wx.RESIZE_BORDER)
         self.SetMinSize((400,300))
         
         sizer = wx.BoxSizer(wx.VERTICAL)
@@ -732,12 +731,12 @@ class FenOptionsImpression(wx.Dialog):
 #            btnsizer.AddButton(btn)
         
         btn = wx.Button(self, wx.ID_OK, "Continuer")
-        btn.SetHelpText(u"Continuer la création du rapport")
+        btn.SetHelpText(u"Continuer la crÃ©ation du rapport")
         btn.SetDefault()
         btnsizer.AddButton(btn)
 
         btn = wx.Button(self, wx.ID_CANCEL, "Annuler")
-        btn.SetHelpText(u"Annuler la création du rapport")
+        btn.SetHelpText(u"Annuler la crÃ©ation du rapport")
         btnsizer.AddButton(btn)
         btnsizer.Realize()
         
@@ -748,10 +747,10 @@ class FenOptionsImpression(wx.Dialog):
         self.SetSizer(sizer)
 
 ##############################################################################
-#     Fenêtre Options     #
+#     FenÃªtre Options     #
 ##############################################################################
 #class FenOptions(Toplevel):
-#    "Fenêtre des options"
+#    "FenÃªtre des options"
 #    def __init__(self, master, options):
 #        Toplevel.__init__(self,master)
 #        self.withdraw()
@@ -770,17 +769,17 @@ class FenOptionsImpression(wx.Dialog):
 #        self.optionsProv.copie(self.options)
 #       
 #        ################################################################################
-#        zoneOptionsGenerales = gui.ZoneAffichage(self, titre = u"Options Générales", bg = "SystemButtonFace")
+#        zoneOptionsGenerales = gui.ZoneAffichage(self, titre = u"Options GÃ©nÃ©rales", bg = "SystemButtonFace")
 #        zoneOptionsGenerales.grid(row = 0, column = 0, padx = 5, pady = 5, columnspan = 2)
 #        
-###        Label(zoneOptionsGenerales, text = u"Options Générales",
+###        Label(zoneOptionsGenerales, text = u"Options GÃ©nÃ©rales",
 ###                    font = Const.Font_Titre[0],
 ###                    fg = Const.Font_Titre[1]) \
 ###            .grid(column = 1, row = 0, padx = 2, pady = 2,  columnspan = 2, \
 ###                  sticky = W)
 #
 ###        Checkbutton(zoneOptionsGenerales, \
-###                    text = u"Autoriser les montages à un seul roulement", \
+###                    text = u"Autoriser les montages Ã  un seul roulement", \
 ###                    variable = self.optionsProv.roulementUnique) \
 ###                    .grid(column = 1, row = 1, columnspan = 2, \
 ###                                  padx = 4, pady = 2, sticky = W)
@@ -797,19 +796,19 @@ class FenOptionsImpression(wx.Dialog):
 ###                  sticky = W)
 #
 #        Checkbutton(zoneOptionsAnalyse, \
-#                    text = u"Proposer l'animation des éléments non arrêtés", \
+#                    text = u"Proposer l'animation des Ã©lÃ©ments non arrÃªtÃ©s", \
 #                    variable = self.optionsProv.proposerAnimArret) \
 #                    .grid(column = 1, row = 1, columnspan = 2, \
 #                                  padx = 4, pady = 2, sticky = W)
 #        
 #        Checkbutton(zoneOptionsAnalyse, \
-#                    text = u"Proposer le tracé des chaînes d'action", \
+#                    text = u"Proposer le tracÃ© des chaÃ®nes d'action", \
 #                    variable = self.optionsProv.proposerChaines) \
 #                    .grid(column = 1, row = 2, columnspan = 2, \
 #                                  padx = 4, pady = 2, sticky = W)
 #        
 #        Checkbutton(zoneOptionsAnalyse, \
-#                    text = u"Proposer l'animation du Montage/Démontage", \
+#                    text = u"Proposer l'animation du Montage/DÃ©montage", \
 #                    variable = self.optionsProv.proposerAnimMont) \
 #                    .grid(column = 1, row = 3, columnspan = 2, \
 #                                  padx = 4, pady = 2, sticky = W)

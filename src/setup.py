@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: iso-8859-1 -*-
 
 import sys, os
 import globdef
@@ -12,7 +11,7 @@ shutil.rmtree("build", ignore_errors=True)
 #    sys.argv += ['--install-script', 'install.py']
 
 
-# Inculsion des fichiers de donn�es
+# Inculsion des fichiers de données
 #################################################################################################
 includefiles = []
 includefiles.extend([#('Microsoft.VC90.CRT', "Microsoft.VC90.CRT"),
@@ -57,7 +56,7 @@ if sys.platform == "win32":
 
 name = u"pyVot"
 version = globdef.VERSION
-author = u"C�drick FAURY"
+author = u"Cédrick FAURY"
 author_email = "cedrick.faury@ac-clermont.fr"
 description = u"pyVot"
 url = "https://github.com/cedrick-f/pyVot"
