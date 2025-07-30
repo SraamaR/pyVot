@@ -435,7 +435,7 @@ class CdCF:
     def tradGD_PI(self):
         p = 10 * ( self.effortRadial["D"].val - self.effortRadial["G"].val)
         som = self.effortRadial["D"].val + self.effortRadial["G"].val
-        if som <> 0 :
+        if som != 0 :
             p = p / som
         self.radialePourCent.val = (p)
         self.radialeIntensite.val = som * 100 / ( 2 * self.echelleEffort )
@@ -798,7 +798,7 @@ class SchemaCdCF(wx.Panel):
     #############################################################################            
     def OnEnter(self, event):
         # le pointeur entre dans la zone du schéma
-        if self.app.nbGauche.GetSelection() <> 2:
+        if self.app.nbGauche.GetSelection() != 2:
             self.montrerSliders()
 
     #############################################################################            
@@ -859,7 +859,7 @@ class SchemaCdCF(wx.Panel):
 #        if id is not None:
 #            self.sliderCritere[id].SetValueCrit(self.cdcf._tree._treeData[id])
             
-        if id is None or self.sliderCritere[id].maj <> '':
+        if id is None or self.sliderCritere[id].maj != '':
             for id, item in self.sliderCritere.items():
                 item.SetValueCrit(self.cdcf._tree._treeData[id])
             for id, item in self.flecheCritere.items():
@@ -1367,7 +1367,7 @@ class ZoneCdCFCout(wx.Panel):
                 item.SetSelection(self.cdcf._tree._treeData[id].val)
         
         
-#        if id is None or self.sliderCritere[id].maj <> '':
+#        if id is None or self.sliderCritere[id].maj != '':
 #            for id, item in self.sliderCritere.items():
 #                item.SetValueCrit(self.cdcf._tree._treeData[id])
 #            for id, item in self.flecheCritere.items():
@@ -1591,7 +1591,7 @@ class ZoneCdCFEtancheite(wx.Panel):
         
         self.MaJImage()
         
-#        if id is None or self.sliderCritere[id].maj <> '':
+#        if id is None or self.sliderCritere[id].maj != '':
 #            for id, item in self.sliderCritere.items():
 #                item.SetValueCrit(self.cdcf._tree._treeData[id])
 #            for id, item in self.flecheCritere.items():

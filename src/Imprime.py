@@ -720,7 +720,7 @@ class RapportRTF(rt.RichTextCtrl):
         for palier in ["G","D"]:
             for sensR in [0,1]:
                 lstObs = analyse.obstacleRoults[palier][sensR]
-                if lstObs <> []:
+                if lstObs != []:
                     analyse.montrerCollision(zoneMtg, lstObs, palier, True, True)
                     lstImages.append(self.GetImageMontage(zoneMtg, analyse, 6))
                     analyse.montrerCollision(zoneMtg, lstObs, palier, False, True)
@@ -740,7 +740,7 @@ class RapportRTF(rt.RichTextCtrl):
         lstImagesEns = []
         for sens in [0,1]:
             lstObs = analyse.obstacleEnsble[sens]
-            if lstObs <> []: 
+            if lstObs != []: 
                 analyse.tracerSurBrillanceMobiles(zoneMtg, sens , True)
                 analyse.montrerCollision(zoneMtg, lstObs, None, True, True)
                 lstImagesEns.append(self.GetImageMontage(zoneMtg, analyse, 3))

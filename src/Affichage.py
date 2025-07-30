@@ -279,7 +279,7 @@ class Arbre:
             if clef[1] == "M":
                 bout = "R"
             else:
-                if mtg.palier["G"].taille <> mtg.palier["D"].taille:
+                if mtg.palier["G"].taille != mtg.palier["D"].taille:
                     if mtg.palier[clef[0]].taille == "P":
                         bout = "E"
                     else:
@@ -1266,7 +1266,7 @@ class ZoneMontage(wx.Panel):
 
 #    ###########################################################################
 #    def afficherCacherRondelle(self, cotelem, afficher):
-#        if self.gettags("Rondelle"+cotelem) <> ():
+#        if self.gettags("Rondelle"+cotelem) != ():
 #            if cotelem == "G":
 #                s = 1
 #            else:
@@ -1384,7 +1384,7 @@ class ZoneMontage(wx.Panel):
             else:
                 elem.item[clef].ajout_tag(TAG_ARBRE)
     
-            if clef == 'opp' and pos <> elem.pos:
+            if clef == 'opp' and pos != elem.pos:
                 elem.item[clef].ajout_tag(elem.pos.opposee().code())
 
 
@@ -1474,7 +1474,7 @@ class ZoneMontage(wx.Panel):
 ##            print "ajout Rondelle"+pos.cotelem
 ##            print "   rondelles :",self.find_withtag("Rondelle"+pos.cotelem)
             self.rondelle = elem.item[clef]
-            if pos.palier <> elem.pos.palier:
+            if pos.palier != elem.pos.palier:
                 cle = 'opp'
             else:
                 cle = 'imag'
@@ -1503,7 +1503,7 @@ class ZoneMontage(wx.Panel):
             
             # Hachurage des entretoises
             #===========================
-            elif elem.estEntretoise() and clef <> 'rond':
+            elif elem.estEntretoise() and clef != 'rond':
                 if pos.radiale == "Ar":
                     h = wx.BDIAGONAL_HATCH
                 else:
@@ -1548,7 +1548,7 @@ class ZoneMontage(wx.Panel):
 ###            print "ajout Rondelle"+pos.cotelem
 ###            print "   rondelles :",self.find_withtag("Rondelle"+pos.cotelem)
 #            elem.item[clef].ajout_tag("Rondelle"+pos.cotelem)
-#            if pos.palier <> elem.pos.palier:
+#            if pos.palier != elem.pos.palier:
 #                cle = 'opp'
 #            else:
 #                cle = 'imag'
@@ -1901,7 +1901,7 @@ class ZoneMontage(wx.Panel):
             self.lstItemSousPointeur = self.LstItemSousPointeur(evt.GetPosition())
             
             # Pour débuggage :
-#            if  self.lstItemSousPointeur <> self.lstItemSousPointeurCourant:
+#            if  self.lstItemSousPointeur != self.lstItemSousPointeurCourant:
 ##                print
 #                try:
 #                    i = self.lstItemSousPointeur[0]
@@ -2025,7 +2025,7 @@ class ZoneMontage(wx.Panel):
 #        print "point ZoneVirt :",pt
         for i in self.lstItemMtg:
             rect = wx.Rect(i.pos[0], i.pos[1], i.GetWidth(), i.GetHeight())
-            if rect.Contains(pt) and i.GetImg().img.GetAlpha(pt[0]-i.pos[0], pt[1]-i.pos[1]) <> 0:
+            if rect.Contains(pt) and i.GetImg().img.GetAlpha(pt[0]-i.pos[0], pt[1]-i.pos[1]) != 0:
                 lst.append(i)
         lst.reverse()
         return lst

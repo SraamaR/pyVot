@@ -702,7 +702,7 @@ class Montage:
     ############################################################################
     def existe(self,pcode):
         elem = self.elemPos(PositionDansPivot().posCode(pcode))
-        if elem.num <> None:
+        if elem.num != None:
             return True
         else:
             return False
@@ -772,7 +772,7 @@ class Montage:
         el = self.elemPos(pos)
         p =     (el.num is None) \
             or  (el is None) \
-            or  (el.estEntretoise() and el.taille <> self.palier[pos.palier].taille)
+            or  (el.estEntretoise() and el.taille != self.palier[pos.palier].taille)
         return p
 
 
@@ -790,8 +790,8 @@ class Montage:
 
 
         # mauvais type d'élément
-        if self.typeNum(num) <> pos.typelem:
-#            print " ** mauvais type :",self.typeNum(num),"<>",pos.typelem
+        if self.typeNum(num) != pos.typelem:
+#            print " ** mauvais type :",self.typeNum(num),"!=",pos.typelem
             return False
 
 
@@ -821,7 +821,7 @@ class Montage:
 ##            return False
 
 ##        # S'il y a déja une entretoise
-##        if self.elemPos(pos).item.has_key('imag') and self.elemPos(pos).item['imag'] <> None \
+##        if self.elemPos(pos).item.has_key('imag') and self.elemPos(pos).item['imag'] != None \
 ##           and self.elemPos(pos).estEntretoise() and not self.estEpaulement(num):
 ##            print " ** pas autorisé sous entretoise"
 ##            return False
@@ -856,7 +856,7 @@ class Montage:
                 p = False
             
             if p and ((p.cotelem == self.palier[p.palier].rlt.orientation and p.radiale == "Al") \
-                  or (p.cotelem <> self.palier[p.palier].rlt.orientation and p.radiale == "Ar")):
+                  or (p.cotelem != self.palier[p.palier].rlt.orientation and p.radiale == "Ar")):
 #                print " ** butée en",p," : "
                 return False
 
@@ -890,7 +890,7 @@ class Montage:
 
         ### Affectation de la position et Retournement entretoises ...
         if self.estEntretoise(num) \
-           and self.palier[pos.palier].taille <> taille:
+           and self.palier[pos.palier].taille != taille:
             pass
 #            print "Retournement entretoise"
 #            pos = pos.opposee()
@@ -1016,7 +1016,7 @@ class Montage:
 
         ### Affectation de la position et Retournement entretoises ...
 #        if elem.estEntretoise() \
-#           and self.palier[pos.palier].taille <> elem.taille:
+#           and self.palier[pos.palier].taille != elem.taille:
 #            print "Retournement entretoise"
 #            elem.pos = pos.opposee()
 ##            img = elem.item['imag']
@@ -1123,7 +1123,7 @@ class Montage:
 #        fichPyv.add_section('Montage')
 #        for p in ["G","D"]:
 #            fichPyv.set('Montage', "taille "+p, self.palier[p].taille)
-#            if self.palier[p].rlt.num <> None and self.palier[p].rlt.estOblique():
+#            if self.palier[p].rlt.num != None and self.palier[p].rlt.estOblique():
 #                fichPyv.set('Montage', "orient "+p, self.palier[p].rlt.orientation)
 #
 ###        for elem in self.tousLesElem():
@@ -1157,11 +1157,11 @@ class Montage:
 #
 #        # Roulements et orientation
 #        self.palier["G"].rlt.__init__(self.conv03(pickle.load(fichier)))
-#        if self.palier["G"].rlt.num <> None and self.palier["G"].rlt.estOblique():
+#        if self.palier["G"].rlt.num != None and self.palier["G"].rlt.estOblique():
 #            self.palier["G"].rlt.orientation = pickle.load(fichier)
 #
 #        self.palier["D"].rlt.__init__(self.conv03(pickle.load(fichier)))
-#        if self.palier["D"].rlt.num <> None and self.palier["D"].rlt.estOblique():
+#        if self.palier["D"].rlt.num != None and self.palier["D"].rlt.estOblique():
 #            self.palier["D"].rlt.orientation = pickle.load(fichier)
 #
 #        # Arrets arbre
@@ -1455,7 +1455,7 @@ class Montage:
 ##            print self.elemPos(pos).num
             if self.elemPos(pos).num is not None \
                and ((pos.cotelem == orient and pos.radiale == "Al") \
-                or (pos.cotelem <> orient and pos.radiale == "Ar")):
+                or (pos.cotelem != orient and pos.radiale == "Ar")):
                 arrets.append(pos.code())
                 
 ##        print "Arrets à supprimer :",arrets
@@ -2029,7 +2029,7 @@ class PositionDansPivot:
                or  (self.palier  != pos.palier) \
                or  (self.cotelem != pos.cotelem and self.cotelem != None and pos.cotelem != None ) \
                or  (self.radiale != pos.radiale and self.radiale != None and pos.radiale != None \
-                    and self.typelem <> "R")
+                    and self.typelem != "R")
 
 
 #############################################################################

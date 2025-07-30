@@ -182,7 +182,7 @@ class MessageAnalyse:
         if "GD" in lstArg or "DG" in lstArg:
             clef += "s"
             
-        if clef <> '':
+        if clef != '':
             self.mess = messagesAnalyse[clef][0] %strArg
             self.coul = messagesAnalyse[clef][1]
         else:
@@ -371,7 +371,7 @@ class InfoBulleElem:
     def __init__(self, zone, numElem, taille = ["P","G"]):
         bulle = InfoBulle(zone)
         
-        if type(taille) <> list: taille = [taille]
+        if type(taille) != list: taille = [taille]
             
         Label(bulle, text = listeElements[numElem]['nom'],
               bg = bulle['bg'],
@@ -501,16 +501,16 @@ class InfoBulleElem:
 ##    def __init__(self, parent, lstMess = [], lstClef = [], numElem = None,
 ##                 frameSpec = None, temps = 400, side = LEFT, position = "bord"):
 ##
-####        if lstMess <> []:
+####        if lstMess != []:
 ####            t = "lstMess ="
 ####            a = lstMess
-####        elif lstClef <> []:
+####        elif lstClef != []:
 ####            t = "lstClef ="
 ####            a = lstClef
-####        elif elemMess <> None:
+####        elif elemMess != None:
 ####            t = "elemMess ="
 ####            a = elemMess
-####        elif frameSpec <> None:
+####        elif frameSpec != None:
 ####            t = "frameSpec ="
 ####            a = frameSpec
 ####        
@@ -534,9 +534,9 @@ class InfoBulleElem:
 ##        self.tipwidth = 0
 ##        self.tipheight = 0
 ##            
-##        if numElem <> None:
+##        if numElem != None:
 ##            self.ajouterFrame(numElem)
-##        elif frameSpec <> None:
+##        elif frameSpec != None:
 ##            self.ajouterFrameSpec(frameSpec)  
 ##        else:
 ##            self.ajouterLabel()

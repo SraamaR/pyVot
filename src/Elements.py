@@ -252,7 +252,7 @@ class Element:
 
         
 ##        print u">Initialisation élément",num
-        if num <> None:
+        if num != None:
             self.nom = listeElements[num]['nom']
             self.type = listeElements[num]['type']
             if self.type == "J":
@@ -336,7 +336,7 @@ class Element:
             self.taille = taille
         else:
             if self.estEntretoise() \
-               and mtg.palier[pos.palier].taille <> mtg.palier[pos.opposee().palier].taille:
+               and mtg.palier[pos.palier].taille != mtg.palier[pos.opposee().palier].taille:
                 if pos.radiale == "Ar":
                     self.taille = "G"
                 else:
@@ -508,7 +508,7 @@ class Element:
         if self.type == "A":
             if self.estEntretoise():
                 return False
-            elif self.chargeAdm["axial"] <> 0 \
+            elif self.chargeAdm["axial"] != 0 \
                 and (pos == None \
                 or  (sens == 0 and pos.cotelem == "D" and pos.radiale == "Al") \
                 or  (sens == 1 and pos.cotelem == "G" and pos.radiale == "Al") \
@@ -521,7 +521,7 @@ class Element:
         if self.type == "R":
             if not self.estOblique():
 #                print self.chargeAdm["axial"],
-                if self.chargeAdm["axial"] <> 0:
+                if self.chargeAdm["axial"] != 0:
                     return True
                 else:
                     return False
@@ -778,7 +778,7 @@ class Element:
                      'demonte' : 0}
 
         # Coefficient de taille
-        if taille is None and self.num <> None:
+        if taille is None and self.num != None:
             taille = self.taille
         elif self.estEntretoise() and radiale == "Ar":
             taille = self.taille 
@@ -814,7 +814,7 @@ class Element:
             # Dimension relative de base arret
             if self.estEcrou():
                 a = 3
-            elif self.estEntretoise() and self.taille <> taille:
+            elif self.estEntretoise() and self.taille != taille:
                 a = 2
             else:
                 a = 1

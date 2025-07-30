@@ -1,5 +1,3 @@
-# -*- coding: ISO-8859-1 -*-
-
 #    This file is part of PyVot
 #   
 #    Copyright (C) 2001-2006 Thomas Paviot

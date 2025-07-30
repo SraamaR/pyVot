@@ -277,7 +277,7 @@ class ZoneResistance(ZoneResultats):
 #            if parent.master.options.proposerChaines.get() == 1 \
             if analyse.resultatEffortAxialMtg[s][0].clef == 'ElemResistPas':
                 tag = "_Chaine"+ str(s)
-                if True:#master.master.options.proposerChaines.get() <> 0 :
+                if True:#master.master.options.proposerChaines.get() != 0 :
                     self.boutons["_"+tag] = buttons.ThemedGenBitmapToggleButton(self, 30+s, 
                                                                                 Images.Img_BoutonMont(tag), 
                                                                                 style = wx.BORDER_NONE)
@@ -297,7 +297,7 @@ class ZoneResistance(ZoneResultats):
 #            elif parent.master.options.proposerChaines.get() == 1 \
             elif analyse.resultatEffortAxialMtg[s][0].clef in ['ChargeAxOk']:
                 tag = "Chaine"+ str(s)
-                if True:#parent.master.options.proposerChaines.get() <> 0 :
+                if True:#parent.master.options.proposerChaines.get() != 0 :
                     self.boutons["_"+tag] = buttons.ThemedGenBitmapToggleButton(self, 20+s, 
                                                                                 None, 
                                                                                 style = wx.BORDER_NONE)
@@ -352,7 +352,7 @@ class ZoneResistance(ZoneResultats):
             if analyse.resultatResistanceRlt[p] is not None:
                 table.SetCellValue(1,c, Const.typeCharge[analyse.typeCharge[p]])
                 table.SetCellTextColour(1,c, wx.BLACK)
-                if analyse.typeCharge[p] <> 0:
+                if analyse.typeCharge[p] != 0:
                     table.SetCellValue(0,c, analyse.resultatResistanceRlt[p].mess)
                 table.SetCellTextColour(0,c, Couleur[analyse.resultatResistanceRlt[p].coul])
             c += 1
@@ -392,7 +392,7 @@ class ZoneResistance(ZoneResultats):
 #
 #                # Label "Résultat"
 #                #----------------
-#                if analyse.typeCharge[p] <> 0:
+#                if analyse.typeCharge[p] != 0:
 #                    StyleText["Messag"].applique(self, Couleur[analyse.resultatResistanceRlt[p].coul])
 #                    txt = wx.StaticText(self, -1, analyse.resultatResistanceRlt[p].mess,
 #                                        style = wx.ALIGN_CENTRE)
@@ -522,12 +522,12 @@ class ZoneMontabilite(ZoneResultats):
                          ["AnimEnsb0", (0,2)]]:
             
             lstObs = analyse.obstacleEnsble[eval(tag[8])]
-#            if analyse.obstacleEnsble[eval(tag[8])] <> []:
+#            if analyse.obstacleEnsble[eval(tag[8])] != []:
 #                lstObs.append(analyse.obstacleEnsble[eval(tag[8])])
 #            for p in ["G","D"]:
-#                if analyse.obstacleEnsble[eval(tag[8])][p] <> ():
+#                if analyse.obstacleEnsble[eval(tag[8])][p] != ():
 #                    lstObs.append(analyse.obstacleEnsble[eval(tag[8])][p])
-            if lstObs <> []: typeAction = 'obstacle'
+            if lstObs != []: typeAction = 'obstacle'
             else: typeAction = 'demonte'
             
             # Le bouton ...
@@ -554,7 +554,7 @@ class ZoneMontabilite(ZoneResultats):
                          ["AnimRltD1",(1,2)]] :
             
             lstObs = analyse.obstacleRoults[tag[7]][eval(tag[8])]
-            if lstObs <> []: typeAction = 'obstacle'
+            if lstObs != []: typeAction = 'obstacle'
             else: typeAction = 'demonte'
             
             # Le bouton ...
@@ -695,7 +695,7 @@ class ZoneMontabilite(ZoneResultats):
 #            state = 'disabled'
 #        
 #        for b in self.boutons.keys():
-#            if b[:4] <> "Anim":
+#            if b[:4] != "Anim":
 #                if state == 'normal':
 #                    e = state
 #                else:
@@ -971,7 +971,7 @@ class ZoneDevis(ZoneResultats):
         
         i = 1
         for l in devisMtg[0:2]:
-            if l[1] <>0:
+            if l[1] !=0:
                 self.devis.AppendRows()
                 self.devis.SetRowAttr(i, attrN)
                 self.devis.SetCellValue(i, 0, l[0].nom)
@@ -986,7 +986,7 @@ class ZoneDevis(ZoneResultats):
         i += 1
         
         for l in devisMtg[2:10]:
-            if l[1] <>0:
+            if l[1] !=0:
                 self.devis.AppendRows()
                 self.devis.SetRowAttr(i, attrN)
                 self.devis.SetCellValue(i, 0, l[0].nom)
@@ -1001,7 +1001,7 @@ class ZoneDevis(ZoneResultats):
         i += 1
         
         for l in devisMtg[10:14]:
-            if l[1] <>0:
+            if l[1] !=0:
                 self.devis.AppendRows()
                 self.devis.SetRowAttr(i, attrN)
                 self.devis.SetCellValue(i, 0, l[0].nom)
@@ -1010,7 +1010,7 @@ class ZoneDevis(ZoneResultats):
                 i += 1
         
         for l in devisMtg[14:]:
-            if l[1] <>0:
+            if l[1] !=0:
                 self.devis.AppendRows()
                 self.devis.SetRowAttr(i, attrN)
                 self.devis.SetCellValue(i, 0, u"Chapeau support "+Const.cote2text[l[0]])
@@ -1447,7 +1447,7 @@ class TBAnalyse(wx.Treebook):
 ##        print "SurBrillance arrets: sens",sens
 ###        print self.lstElemResistePas[sens]
 
-        if self.analyse.elemDemonte <> []:
+        if self.analyse.elemDemonte != []:
             return
         
         self.analyse.tracerSurbrillanceArrets(self.zoneMtg, sens, action)
@@ -1501,7 +1501,7 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
         """ Simule l'action d'un Click
             ... avec evenement ... """
 #        print self.tag,self.GetValue(), state
-        if self.GetValue() <> state:
+        if self.GetValue() != state:
             self.SetToggle(state)
             self.OnClick(state = state)
                     
@@ -1514,11 +1514,11 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
             self.parent.initAffichageSurbrillance()
             self.parent.parent.animerMontage(self.tag, not state)
             self.appliquerBulle(state)
-        elif self.tag[4] <> "R":# and self.GetValue():
+        elif self.tag[4] != "R":# and self.GetValue():
 #            self.listeActive.Montrer(state)
             self.parent.parent.surbrillanceMobiles(eval(self.tag[8]), state)
 #            if hasattr(self, "typeAction"):
-#                if self.tag[4] <> "R":
+#                if self.tag[4] != "R":
 #                    surBrill = False
 #                else:
 #                    surBrill = True
@@ -1769,7 +1769,7 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
 ##    ############################################################################
 ##    def changerBulle(self):
 ##        
-##        if self.typeBulle <> 'mont':
+##        if self.typeBulle != 'mont':
 ##            return
 ##        if self.etat == 'disabled':
 ##            return
@@ -2279,7 +2279,7 @@ class ChainesAction:
                 elif posParcours.typelem == "R":
                     # On l'ajoute s'il est "traversé" radialement ...
                     if (self.parcoursElemEntr[nParcours][i-1].radiale \
-                        <> self.parcoursElemEntr[nParcours][i+1].radiale):
+                        != self.parcoursElemEntr[nParcours][i+1].radiale):
                         parcours.append(posParcours)
 
 #            print "  Parcours modifié :",parcours
@@ -2456,7 +2456,7 @@ class Analyse:
                         ap = parcours[2:][n]
     #                    for [av, pos, ap] in [parcours[:-2], parcours[1:-1], parcours[2:]]:
     #                    print av, pos, ap,
-                        if pos.typelem == "R" and pos.palier == palier and av.radiale <> ap.radiale:
+                        if pos.typelem == "R" and pos.palier == palier and av.radiale != ap.radiale:
                             d = d|(2**sens)
     #                            print ddlSupprimes[cote]
                             if not self.mtg.elemPos(pos).estButee() and not self.mtg.elemPos(pos).estButeeDbl():
@@ -2524,7 +2524,7 @@ class Analyse:
                     clefResultRem += i
 
             
-        if clefResultRem <> "":
+        if clefResultRem != "":
             self.resultatRemarques.append(Const.MessageAnalyse('RltPasMaintenu',[clefResultRem]))
 
             
@@ -2544,7 +2544,7 @@ class Analyse:
                     or not self.mtg.palier[i].arr['Al']['D'].estDefini()):
                     clefResultRem += i
 
-        if clefResultRem <> "":    
+        if clefResultRem != "":    
             self.resultatRemarques.append(Const.MessageAnalyse('RltPasArrete', (clefResultRem, codBag)))
          
          
@@ -2643,7 +2643,7 @@ class Analyse:
     ##                    lst.append(mtg.elemPos(p).codeTag(p))
                     lst.append(p.code())
                     # Ajout bague intérieure si entrainée
-    #                if p.cotelem <> sensstr:
+    #                if p.cotelem != sensstr:
     #                    lst.append("BI"+p.palier+sensstr)
     
     
@@ -2729,7 +2729,7 @@ class Analyse:
                        chaine.parcoursElemEntr[nParcours][n-1].radiale == chaine.parcoursElemEntr[nParcours][n+1].radiale):
                         if elem.effortAxialSupporte() < self.cdcf.effortAxial[sens].val:
 ##                            print posParcours,self.resultatResistanceRlt[posParcours.palier].clef =='RltSupportePas'
-                            if posParcours.typelem <> "R" \
+                            if posParcours.typelem != "R" \
                                or self.resultatResistanceRlt[posParcours.palier].clef == 'RltSupportePas':
                                 lstElemResistePas[sens].append(posParcours.code())
 
@@ -2740,7 +2740,7 @@ class Analyse:
                 if not e in self.lstElemResistePas[sens]:
                     self.lstElemResistePas[sens].append(e)
 
-            if lstElemResistePas[sens] <> []:
+            if lstElemResistePas[sens] != []:
                 self.resultatEffortAxialMtg[sens].append(Const.MessageAnalyse('ElemResistPas'))
                 self.resultatEffortAxialMtg[sens].extend(nomsElem(sens))
                 
@@ -2803,12 +2803,12 @@ class Analyse:
 #            self.sensChargeAx[palier] = []
     ##        print
     #        print "Definition type de charge CdCF",palier, "-->",
-            if self.cdcf.effortRadial[palier].get() <> 0:
+            if self.cdcf.effortRadial[palier].get() != 0:
                 t += 4
                 
             for sens in [0,1]:
 #                print self.cdcf.effortAxial[sens].get(),"-->",
-                if self.cdcf.effortAxial[sens].get() <> 0:
+                if self.cdcf.effortAxial[sens].get() != 0:
                     t = t|(1+sens)
     #        print t
             return t
@@ -2852,7 +2852,7 @@ class Analyse:
                     
 #                print self.typeCharge[i]
 #                print "test rlt",i , typeCharge, intensite,
-                if typeCharge <> "" and rlt.coefTaille(rlt.chargeAdm[typeCharge]) < intensite:
+                if typeCharge != "" and rlt.coefTaille(rlt.chargeAdm[typeCharge]) < intensite:
 #                if    (self.typeCharge[i]&4 and (rlt.coefTaille(rlt.chargeAdm["radial"]) < chargeRadiale)) \
 #                   or (self.typeCharge[i]&3 and (rlt.coefTaille(rlt.chargeAdm["axial"]) < chargeAxiale)) \
 #                   or (self.typeCharge[i]&3 and self.typeCharge[i]&4 and (rlt.coefTaille(rlt.chargeAdm["combi"]) < max(chargeRadiale,chargeAxiale))):
@@ -2995,7 +2995,7 @@ class Analyse:
         else:
             self.resultatEtancheite["C"] = Const.MessageAnalyse('LubrifPasComp')
         
-        if pasEtanchStat["B"] <> []:
+        if pasEtanchStat["B"] != []:
             self.resultatEtancheite["SB"] = Const.MessageAnalyse('PasEtanchStat')
             self.resultatEtancheite["SB+"] = []
             for m in pasEtanchStat["B"]:
@@ -3004,7 +3004,7 @@ class Analyse:
             self.resultatEtancheite["SB"] = Const.MessageAnalyse('EtanchStat')
 
             self.resultatEtancheite["D"] = pasEtanchDyn
-            if pasEtanchDyn["B"] <> []:
+            if pasEtanchDyn["B"] != []:
                 self.resultatEtancheite["DB"] = Const.MessageAnalyse('PasEtanchDyn')
                 self.resultatEtancheite["DB+"] = []
                 for m in pasEtanchDyn["B"]:
@@ -3045,7 +3045,7 @@ class Analyse:
         obstaclesRoulements = len(lstCode) == 1
         
 #        # On quitte si déja démonté ...
-#        if not obstaclesRoulements and self.elemDemonte <> []:
+#        if not obstaclesRoulements and self.elemDemonte != []:
 #            return
 
 #        # On quitte si déja démonté ...
@@ -3174,7 +3174,7 @@ class Analyse:
             for c in range(nbPos):
                 tm = time.clock()
                 x = int(round(-amplitude*cos(pi*2*c/nbPos)+amplitude))
-                if x <> oldx:
+                if x != oldx:
                     for i in lstItemAnim:
                         i.pos = (i.x + sgn*x, i.pos[1])
                     oldx = x
@@ -3542,11 +3542,11 @@ class Analyse:
                     #-----------------------------------
                     
                     # Cas roulements séparés
-                    if pcode <> "" and pcode[0] == "R" and pcode[3] == "A":
+                    if pcode != "" and pcode[0] == "R" and pcode[3] == "A":
                         return dim['demonte']
             
                     # Cas des arrêts démontables
-                    if elem.num <> None \
+                    if elem.num != None \
                        and not elem.pasDemontable(not self.mtg.deuxrlt(),elem.pos) \
                        and fix:
             ##            print "Démontage élément",elem.num,pcode,elem.pos
@@ -3725,11 +3725,11 @@ class Analyse:
                     pa = "-"+pa[1]+"-"+pa[3:5]
                 else:
                     tailleArret = ar.taille
-                if tailleRlt <> tailleArret \
+                if tailleRlt != tailleArret \
                    and     ((radiale == "Ar" and tailleArret == "G") \
                         or (radiale == "Al" and tailleArret == "P")):
                     if ar.estEntretoise():
-                        if pa[1] <> palier:
+                        if pa[1] != palier:
                             passPas.append("-"+pa[1]+"-"+pa[3:5])
                     else:
                         passPas.append(pa)
@@ -3762,7 +3762,7 @@ class Analyse:
             
             for palier in ["G","D"]:
                 for sens in [0,1]:
-                    if self.obstacleBagueIsolee[palier][sens] <> []:
+                    if self.obstacleBagueIsolee[palier][sens] != []:
                         obsBagueIsolee[palier].append(self.obstacleBagueIsolee[palier][sens][0])
                 if len(obsBagueIsolee[palier]) >= 2:
                     self.obstacleBagueIsolee[palier] = obsBagueIsolee[palier]
@@ -3849,7 +3849,7 @@ class Analyse:
                 s = 1
             obs = self.obstacleRoults[p]
             ropp = self.obstacleRoults[o]
-            if ropp[0] <> [] and ropp[1] <> [] and obs[s] == []:
+            if ropp[0] != [] and ropp[1] != [] and obs[s] == []:
                 obs[s].append("R"+o+"---")
 ##                print "Correction obstacle rlt",p,"sens",s," : ",obs[s]
 
@@ -4137,7 +4137,7 @@ class Analyse:
 ##            print "pas deja demonte =",pasDejaDemonte,frameMtg.gettags(c)
             pasAEnlever = not (c in self.lstArretsAEnleverRlt[palier][sens])
 ##            print "pas à enlever =",pasAEnlever
-            if (pasDejaDemonte or c == "R"+palier+"---" ) and (pasAEnlever or c[0] == "R"): #and frameMtg.gettags(c) <> () \
+            if (pasDejaDemonte or c == "R"+palier+"---" ) and (pasAEnlever or c[0] == "R"): #and frameMtg.gettags(c) != () \
                 lst2.append(c)
 
 
@@ -4152,7 +4152,7 @@ class Analyse:
 #        frameMtg.dtag(TAG_ARBRE,tag)
 #        frameMtg.dtag(TAG_ALESAGE,tag)
         
-##        if self.cdcf.bagueTournante <> u"Extérieure":
+##        if self.cdcf.bagueTournante != u"Extérieure":
 ##            for t in self.lstArretsAEnleverRlt[sens]:
 ##                frameMtg.addtag_withtag(tag,t)        
 
@@ -4184,7 +4184,7 @@ class Analyse:
             for c in range(nbPos):
                 tm = time.clock()
                 x = int(round(a*(c-n*nbPos)**2))
-                if x <> oldx:
+                if x != oldx:
                     for i in lstItemAnim:
                         i.pos = (i.x + x, i.pos[1])
                     oldx = x
@@ -4378,7 +4378,7 @@ class Analyse:
         self.lstItemArbre = []
         self.lstItemAles = []
 
-        if self.elemDemonte <> []:
+        if self.elemDemonte != []:
             return
 
         listeSerres = self.listeElemArbre[sens]
@@ -4694,7 +4694,7 @@ class ListeActive(wx.Panel):
 #        print n    
         if hasattr(self.bouton, "typeAction"):
             action = self.lBox[n].IsChecked()
-            if self.bouton.tag[4] <> "R":
+            if self.bouton.tag[4] != "R":
                 surBrill = False
             else:
                 surBrill = True     
@@ -4908,7 +4908,7 @@ class SchemaStructure():
                         Xcentres[cote]+s*decaler*DimLiaison*2, Ycentres+DimLiaison*4)
             dc.DrawLine(Xcentres[cote]-DimLiaison*2+s*decaler*DimLiaison*2, Ycentres+DimLiaison*4, 
                         Xcentres[cote]+DimLiaison*2+s*decaler*DimLiaison*2, Ycentres+DimLiaison*4)
-            if decaler <> 0:
+            if decaler != 0:
                 dc.DrawLine(Xcentres[cote]+s*decaler*DimLiaison*2, Ycentres, 
                             Xcentres[cote]+s*decaler*DimLiaison/2, Ycentres)
             for i in range(5):
@@ -5029,7 +5029,7 @@ class SchemaStructure():
 #        memdc.SetBrush(wx.TRANSPARENT_BRUSH)
         memdc.SetBrush(memdc.GetBackground())
         for cote, l in self.liaisons.items():
-            if l <> "Aucune":
+            if l != "Aucune":
                 if l == "AppPlan" or l[:-1] == "AppPlan":
                     dec = 1
                 else:
@@ -5038,7 +5038,7 @@ class SchemaStructure():
                 dessinerLiaison(memdc, l, cote)
         dessinerArbr(memdc, self.liaisons.values())
         for cote, l in self.liaisons.items():
-            if l <> "Aucune":
+            if l != "Aucune":
                 if charges is not None:
                     dessinerFlecheCharge(memdc, cote, charges[cote][0],charges[cote][1])
         memdc.SelectObject(wx.NullBitmap)
