@@ -95,8 +95,8 @@ pression = {-1 : u"(extérieur)",
 #                  61  : u"Vitesse",
 #                  62  : u"Lubrifiant",
 #                  
-#                  7   : u"CoÃ»t",
-#                  70  : u"CoÃ»t maximum",
+#                  7   : u"Coût",
+#                  70  : u"Coût maximum",
 #                  }
 
 class nbCdCF(wx.Panel):
@@ -116,7 +116,7 @@ class nbCdCF(wx.Panel):
 #        self.ovr = wx.html.HtmlWindow(panel, -1, size=(400, 400))
 
         self.nb.AddPage(self.CdCF_Charges, u"Efforts sur l'arbre")#, imageId=0)
-        self.nb.AddPage(self.CdCF_Cout, u"CoÃ»t admissible")#, imageId=1)
+        self.nb.AddPage(self.CdCF_Cout, u"Coût admissible")#, imageId=1)
         self.nb.AddPage(self.CdCF_Etancheite, u"Lubrification - Etanchéité")#, imageId=2)
         
         # Set up a wx.html.HtmlWindow on the Overview Notebook page
@@ -164,7 +164,7 @@ class CdCF:
         lstCdCF = ((0,0,            #effort axial (sens 0 , sens 1)
                     0,0,            #effort radial (rlt G , rlt D)
                     "I",            #bague tournante
-                    100,            #coÃ»t maximum
+                    100,            #coût maximum
                     0,))            #sens de montage
         
         self.effortAxial  = { 0  : Indice(),
@@ -257,8 +257,8 @@ class CdCF:
                           61  : u"Vitesse",
                           62  : u"Lubrifiant",
                   
-                          7   : u"CoÃ»t",
-                          70  : u"CoÃ»t maximum",
+                          7   : u"Coût",
+                          70  : u"Coût maximum",
                           },
                             
         # Répartition des données dans l'arbre
@@ -1307,12 +1307,12 @@ class ZoneCdCFCout(wx.Panel):
 
         # Création de la boite contenant le slider "coÃ¼t"
         #=================================================
-        self.controls[70] = Slider_Spin(self, u"CoÃ»t indicatif maximum", self.critere, 70,
+        self.controls[70] = Slider_Spin(self, u"Coût indicatif maximum", self.critere, 70,
                            (0, self.cdcf.echelleCout), 2, 5)
-        self.controls[70].SetToolTip(u"Réglage du coÃ»t indicatif maximum du montage")
+        self.controls[70].SetToolTip(u"Réglage du coût indicatif maximum du montage")
         
-#        self.boxSchema = wx.StaticBox(self, -1, u"CoÃ»t indicatif maximum")
-#        self.boxSchema.SetToolTip(wx.ToolTip(u"Réglage du coÃ»t indicatif maximum du montage"))
+#        self.boxSchema = wx.StaticBox(self, -1, u"Coût indicatif maximum")
+#        self.boxSchema.SetToolTip(wx.ToolTip(u"Réglage du coût indicatif maximum du montage"))
 #        self.bsizer = wx.StaticBoxSizer(self.boxSchema, wx.VERTICAL)
 #                           
 ##        self.st = wx.StaticText(self, -1, str(self.critere))
@@ -1328,7 +1328,7 @@ class ZoneCdCFCout(wx.Panel):
 #                            style = wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS | wx.SL_TOP)
 #        self.sl.SetTickFreq(5)
 #        self.sl.SetThumbLength(self.cdcf.echelleCout*2)
-#        self.sl.SetToolTip(wx.ToolTip(u"Faire glisser pour modifier le coÃ»t indicatif maximum"))
+#        self.sl.SetToolTip(wx.ToolTip(u"Faire glisser pour modifier le coût indicatif maximum"))
 #        self.bsizer.Add(self.sl)
         
         border.Add(self.controls[70], (0,0), flag = wx.EXPAND)
@@ -1406,7 +1406,7 @@ class ZoneCdCFCout(wx.Panel):
 #    ###############################################################################
 #    def MiseAJour(self, val):
 #        self.critere.set(val)
-##        print "Mise à jour coÃ»t :", val, self.cdcf.coutMax  
+##        print "Mise à jour coût :", val, self.cdcf.coutMax  
 ##        self.st.SetLabel(str(self.cdcf.coutMax))
 #        
 #        
