@@ -85,8 +85,8 @@ class Alesage:
                 self.itemFix[clef].afficher(hachurer = hachurer)
 
     def affecterItem(self, mtg):
-##        print
-##        print "Affectation des items arbres :"
+#        print()
+#        print("Affectation des items arbres :")
         
         # Affectation des items "fixes" ...
         for palier in ["G","D"]:
@@ -119,7 +119,7 @@ class ListeItemMtg(list):
         self.trie()
         for item in self:
             item.affiche(dc, offsetX = offsetX)
-#        print "AFFICHAGE",self
+#        print("AFFICHAGE",self)
     
     def oterDoublons(self):
         s = set(self)
@@ -130,7 +130,7 @@ class ListeItemMtg(list):
         try:
             self.remove(item)
         except ValueError: 
-#            print "!!! erreur effacement !!!"
+#            print("!!! erreur effacement !!!")
             pass
     
     def trie(self):
@@ -258,8 +258,8 @@ class Arbre:
 
     def affecterItem(self, mtg):
         """ Affecte des items aux éléments de structure de l'arbre """
-##        print
-##        print "Affectation des items arbres :"
+#        print()
+#        print("Affectation des items arbres :")
         
         # Affectation des items "fixes" ...
         ####################################

@@ -2662,7 +2662,7 @@ class Analyse:
             # Analyse :
             self.chaineAct[s].determiner(self.mtg, zoneMtg)
             self.listeElementsNonArretes[s] = listeElementsNonArretes(s)
-            print self.listeElementsNonArretes[s]
+            print(self.listeElementsNonArretes[s])
             # Résultats :
             
                 # Arbre pas arrêté !
