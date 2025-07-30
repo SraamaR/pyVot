@@ -674,7 +674,7 @@ class RapportRTF(rt.RichTextCtrl):
         self.parent = parent   
          
     def GetImageMontage(self, zoneMtg, analyse = None, reduc = 2, offsetX = 0, agrandi = 0):
-        bmp = wx.EmptyBitmap(zoneMtg.maxWidth + agrandi, zoneMtg.maxHeight)
+        bmp = wx.Bitmap(zoneMtg.maxWidth + agrandi, zoneMtg.maxHeight)
         memdc = wx.MemoryDC(bmp)
         memdc.SetBackground(wx.WHITE_BRUSH)
         memdc.Clear()
@@ -1196,7 +1196,7 @@ class RTPrinting(rt.RichTextPrinting):
 #        dc.SetBackground(wx.TRANSPARENT_BRUSH)
 #        #-------------------------------------------
 #        print "Taille rapport", self.canvas.GetVirtualSize()[0] ,self.canvas.GetVirtualSize()[1]+50
-#        bmp = wx.EmptyBitmap(self.canvas.GetVirtualSize()[0] ,self.canvas.GetVirtualSize()[1]+50)
+#        bmp = wx.Bitmap(self.canvas.GetVirtualSize()[0] ,self.canvas.GetVirtualSize()[1]+50)
 #        memdc = wx.MemoryDC(bmp)
 #        memdc.SetBackground(wx.WHITE_BRUSH)
 #        memdc.SetBackgroundMode(wx.TRANSPARENT)

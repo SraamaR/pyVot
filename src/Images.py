@@ -93,13 +93,13 @@ def Img_IconesEns(key):
 def Img_BoutonMont(key, ajout = False):
     
     def ajouteSensInterdit(ico):
-        bmp = wx.EmptyBitmap(ico.GetWidth(),(ico.GetHeight()))
+        bmp = wx.Bitmap(ico.GetWidth(),(ico.GetHeight()))
 #        msk = ico.GetMask()
 #        bmp.SetMask(msk)
         mdc = wx.MemoryDC(bmp)
         mdc.SetBackground(wx.Brush(wx.Colour(254, 254, 254)))
         mdc.Clear()
-        si = wx.BitmapFromImage(wx.ImageFromBitmap(lst["SensInterditR"]).AdjustChannels(1.0, 1.0, 1.0, 0.8))
+        si = wx.Bitmap(wx.ImageFromBitmap(lst["SensInterditR"]).AdjustChannels(1.0, 1.0, 1.0, 0.8))
         mdc.DrawBitmap(ico, 0, 0, True)
         mdc.DrawBitmap(si, (ico.GetWidth() - si.GetWidth())/2,(ico.GetHeight() - si.GetHeight())/2, True)
         mdc.SelectObject(wx.NullBitmap)
@@ -175,19 +175,21 @@ class ImagePlus:
     """
     
     def __init__(self, dossier, lstFichiersImage, offset = 0):
-
         # Ouverture des fichiers
-        #-----------------------
         self.orig = []
         for fich in lstFichiersImage:
-#            print os.path.splitext(fich)
-            if os.path.splitext(fich)[1] == ".png":
-                self.orig.append(wx.Image(os.path.join(dossier,fich), wx.BITMAP_TYPE_PNG))
+            fullpath = os.path.join(dossier, fich)
+            ext = os.path.splitext(fich)[1].lower()
+            if ext == ".png":
+                img = wx.Image(fullpath, wx.BITMAP_TYPE_PNG)
             else:
-                self.orig.append(wx.Image(os.path.join(dossier,fich), wx.BITMAP_TYPE_GIF))
+                img = wx.Image(fullpath, wx.BITMAP_TYPE_GIF)
+            self.orig.append(img)
 
+        # Initialisation du canal alpha uniquement si nécessaire
         for img in self.orig:
-            img.InitAlpha()
+            if not img.HasAlpha():
+                img.InitAlpha()
 
         # Affectation image courante
         #---------------------------
@@ -213,7 +215,7 @@ class ImagePlus:
         return self.img.GetWidth()
         
     def conv2Bmp(self):
-        self.bmp = wx.BitmapFromImage(self.img)
+        self.bmp = wx.Bitmap(self.img)
         self.sauveBmp()
         
     def sauveBmp(self):
@@ -230,7 +232,7 @@ class ImagePlus:
 #        self.conv2Bmp()
         
 #    def estomper(self, niv):
-#        self.bmp = wx.BitmapFromImage(wx.ImageFromBitmap(self.bmp).AdjustChannels(1.0, 1.0, 1.0, (1.0*niv)/100))
+#        self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(1.0, 1.0, 1.0, (1.0*niv)/100))
 
     
 
@@ -238,11 +240,11 @@ class ImagePlus:
         """ Renvoie une image fondue à <niv> % avec <bmp>
         """
         def AdjustAlpha(bmp, alpha):
-            return wx.BitmapFromImage(wx.ImageFromBitmap(bmp).AdjustChannels(1.0, 1.0, 1.0, alpha))
+            return wx.Bitmap(wx.ImageFromBitmap(bmp).AdjustChannels(1.0, 1.0, 1.0, alpha))
         
-#        bmp0 = wx.BitmapFromImage(wx.ImageFromBitmap(self.bmp).Copy().AdjustChannels(1.0, 1.0, 1.0, (1.0*niv)/100))
+#        bmp0 = wx.Bitmap(wx.ImageFromBitmap(self.bmp).Copy().AdjustChannels(1.0, 1.0, 1.0, (1.0*niv)/100))
 #        img = wx.ImageFromBitmap(self.bmp).AdjustChannels(1.0, 1.0, 1.0, alpha)
-#        bmp0 = wx.BitmapFromImage(img)
+#        bmp0 = wx.Bitmap(img)
 
         alpha = (1.001*niv)/100
         bmp0 = AdjustAlpha(bmp1, alpha)
@@ -264,11 +266,11 @@ class ImagePlus:
 #        self.bmp = self.img.Copy().SetAlpha(0.5).ConvertToBitmap()
         
         if effet == 0:
-            self.bmp = wx.BitmapFromImage(wx.ImageFromBitmap(self.bmp).AdjustChannels(1.0, 1.0, 1.0, 0.5))
-#            self.bmp = wx.BitmapFromImage(self.img.Copy().AdjustChannels(1.0, 1.0, 1.0, 0.5))
+            self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(1.0, 1.0, 1.0, 0.5))
+#            self.bmp = wx.Bitmap(self.img.Copy().AdjustChannels(1.0, 1.0, 1.0, 0.5))
         else:
-            self.bmp = wx.BitmapFromImage(wx.ImageFromBitmap(self.bmp).AdjustChannels(2.0, 2.0, 2.0, 1.0))
-#            self.bmp = wx.BitmapFromImage(self.img.Copy().AdjustChannels(2.0, 2.0, 2.0, 1.0))
+            self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(2.0, 2.0, 2.0, 1.0))
+#            self.bmp = wx.Bitmap(self.img.Copy().AdjustChannels(2.0, 2.0, 2.0, 1.0))
 #        self.bmp = self.img.Copy().AdjustChannels(1.0, 1.0, 1.0, 0.5)
 
 
@@ -301,8 +303,8 @@ class ImagePlus:
 #        self.tk = ImageTk.PhotoImage(img)
         
     def changerCouleur(self, coul):
-#        self.bmp = wx.BitmapFromImage(wx.ImageFromBitmap(self.bmp).AdjustChannels(2.0, 2.0, 2.0, 1.0))
-        self.bmp = wx.BitmapFromImage(wx.ImageFromBitmap(self.bmp).AdjustChannels(0.5, 0.5, 0.5, 1.0))
+#        self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(2.0, 2.0, 2.0, 1.0))
+        self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(0.5, 0.5, 0.5, 1.0))
         r,v,b = 1.0, 1.0, 1.0
         if coul == "blanc":
             r,v,b = 1.5, 1.5, 1.5
@@ -315,7 +317,7 @@ class ImagePlus:
         else:
             r,v,b = 0.5, 0.5, 3.0
         
-        self.bmp = wx.BitmapFromImage(wx.ImageFromBitmap(self.bmp).AdjustChannels(r, v, b, 1.0))
+        self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(r, v, b, 1.0))
         
 #        self.tk = ImageTk.PhotoImage(img)
 ##        dt = time.time() -t
@@ -460,14 +462,14 @@ def charger_imageElem():
     # Roulements (petits)
     #############################################################################################
     imageElem["0P"]       = ImagePlus(dosrlt ,( 'Rlt_BilleRadial.gif',)                        )
-    imageElem["1PAl"]     = ImagePlus(dosrlt ,( 'Rlt_BillesOblique G(BE).gif',)                )
-    imageElem["1PAr"]     = ImagePlus(dosrlt ,( 'Rlt_BillesOblique G(BI).gif',)                )
+    imageElem["1PAl"]     = ImagePlus(dosrlt ,( 'Rlt_BillesOblique G_BE.gif',)                )
+    imageElem["1PAr"]     = ImagePlus(dosrlt ,( 'Rlt_BillesOblique G_BI.gif',)                )
     imageElem["2P"]       = ImagePlus(dosrlt ,( 'Rlt_RotuleBilles.gif',)                       )
     imageElem["3P"]       = ImagePlus(dosrlt ,( 'Rlt_ButeeBilles.gif',)                        )
-    imageElem["4PAr"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxCyl(BI).gif',)                    )
-    imageElem["4PAl"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxCyl(BE).gif',)                    )
-    imageElem["5PAr"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxConiq_G(BI).gif',)        ,7      )
-    imageElem["5PAl"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxConiq_G(BE).gif',)        ,9      )
+    imageElem["4PAr"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxCyl_BI.gif',)                    )
+    imageElem["4PAl"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxCyl_BE.gif',)                    )
+    imageElem["5PAr"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxConiq_G_BI.gif',)        ,7      )
+    imageElem["5PAl"]     = ImagePlus(dosrlt ,( 'Rlt_RouleauxConiq_G_BE.gif',)        ,9      )
     imageElem["6P"]       = ImagePlus(dosrlt ,( 'Rlt_RotuleRouleaux.gif',)                     )
     imageElem["7P"]       = ImagePlus(dosrlt ,( 'Rlt_ButeeRouleaux.gif',)                      )
     imageElem["8P"]       = ImagePlus(dosrlt ,( 'Rlt_ButeeBillesDbl.png',)                     )
@@ -479,23 +481,23 @@ def charger_imageElem():
     # Arrets (petits)
     #############################################################################################
     imageElem["100PArE"]  = ImagePlus(dosarr ,( 'Arret_Ecrou_G.png',
-                                                'Arret_Ecrou_D.png')                ,82     )
-    imageElem["100PArV"]  = ImagePlus(dosarr ,( 'Arret_Ecrou_G(Vide).png',
-                                                'Arret_Ecrou_D(Vide).png')          ,82     )
-    imageElem["100PAlE"]  = ImagePlus(dosarr ,( 'Arret_Chapeau_G.png',)                      )
-#    imageElem["100PAlV"]  = ImagePlus(dosarr ,( 'Arret_Chapeau_G(Vide).png',)        ,74     )
-    imageElem["101PAr"]   = ImagePlus(dosarr ,( 'Arret_Anneau_G.gif',)               ,4      )
-    imageElem["101PArV"]  = ImagePlus(dosarr ,( 'Arret_Anneau(Vide).gif',)           ,4      )
-    imageElem["101PAl"]   = ImagePlus(dosarr ,( 'Arret_Anneau_Ales_G.gif',)          ,3      )
-    imageElem["101PAlV"]  = ImagePlus(dosarr ,( 'Arret_Anneau_Ales(Vide).gif',)      ,3      )
-    imageElem["102PArE"]  = ImagePlus(dosarr ,( 'Arret_Epaul_G.gif',)                        )
-    imageElem["102PArI"]  = ImagePlus(dosarr ,( 'Arret_Epaul.gif',)                          )
-    imageElem["102PAlE"]  = ImagePlus(dosarr ,( 'Arret_Epaul_Ales_G.png',)                   )
-    imageElem["102PAlI"]  = ImagePlus(dosarr ,( 'Arret_Epaul_Ales_GD.png',)    ,              )
-#    imageElem["102PAlI"]  = ImagePlus(dosarr ,( 'Arret_Epaul_Ales_Bout.png',)                  )
-    imageElem["103PAr"]   = ImagePlus(dosarr ,( 'Arret_Entret_G.png',)                       )
-    imageElem["103PAlR"]  = ImagePlus(dosarr ,( 'Rondelle.gif',)                             )
-    imageElem["103PAl"]   = ImagePlus(dosarr ,( 'Arret_Entret_Ales_G.png',)                  )
+                                                'Arret_Ecrou_D.png')               ,82      )
+    imageElem["100PArV"]  = ImagePlus(dosarr ,( 'Arret_Ecrou_G_Vide.png',
+                                                'Arret_Ecrou_D_Vide.png')          ,82      )
+    imageElem["100PAlE"]  = ImagePlus(dosarr ,( 'Arret_Chapeau_G.png',)                     )
+#    imageElem["100PAlV"]  = ImagePlus(dosarr ,( 'Arret_Chapeau_G_Vide.png',)        ,74     )
+    imageElem["101PAr"]   = ImagePlus(dosarr ,( 'Arret_Anneau_G.gif',)              ,4      )
+    imageElem["101PArV"]  = ImagePlus(dosarr ,( 'Arret_Anneau_Vide.gif',)           ,4      )
+    imageElem["101PAl"]   = ImagePlus(dosarr ,( 'Arret_Anneau_Ales_G.gif',)         ,3      )
+    imageElem["101PAlV"]  = ImagePlus(dosarr ,( 'Arret_Anneau_Ales_Vide.gif',)      ,3      )
+    imageElem["102PArE"]  = ImagePlus(dosarr ,( 'Arret_Epaul_G.gif',)                       )
+    imageElem["102PArI"]  = ImagePlus(dosarr ,( 'Arret_Epaul.gif',)                         )
+    imageElem["102PAlE"]  = ImagePlus(dosarr ,( 'Arret_Epaul_Ales_G.png',)                  )
+    imageElem["102PAlI"]  = ImagePlus(dosarr ,( 'Arret_Epaul_Ales_GD.png',)    ,            )
+#    imageElem["102PAlI"]  = ImagePlus(dosarr ,( 'Arret_Epaul_Ales_Bout.png',)               )
+    imageElem["103PAr"]   = ImagePlus(dosarr ,( 'Arret_Entret_G.png',)                      )
+    imageElem["103PAlR"]  = ImagePlus(dosarr ,( 'Rondelle.gif',)                            )
+    imageElem["103PAl"]   = ImagePlus(dosarr ,( 'Arret_Entret_Ales_G.png',)                 )
 
     # Joints (petits)
     #############################################################################################
@@ -514,20 +516,20 @@ def charger_imageElem():
     imageElem["204PAl"]   = ImagePlus(dosjnt ,( 'Joint_Plat.png',)         ,-31    )
 
     imageElem["SupPAl"]   = ImagePlus(dosarr ,( 'Support_Chapeau_G.png',)            ,74     )
-    imageElem["SupPAlV"]  = ImagePlus(dosarr ,( 'Arret_Chapeau_G(Vide).png',)        ,74     )
+    imageElem["SupPAlV"]  = ImagePlus(dosarr ,( 'Arret_Chapeau_G_Vide.png',)        ,74     )
 
     
     # Roulements (grands)
     #############################################################################################
     imageElem["0G"]       = ImagePlus(dosrlt ,( 'g_Rlt_BilleRadial.gif',)                      )
-    imageElem["1GAl"]     = ImagePlus(dosrlt ,( 'g_Rlt_BillesOblique G(BE).gif',)              )
-    imageElem["1GAr"]     = ImagePlus(dosrlt ,( 'g_Rlt_BillesOblique G(BI).gif',)              )
+    imageElem["1GAl"]     = ImagePlus(dosrlt ,( 'g_Rlt_BillesOblique G_BE.gif',)              )
+    imageElem["1GAr"]     = ImagePlus(dosrlt ,( 'g_Rlt_BillesOblique G_BI.gif',)              )
     imageElem["2G"]       = ImagePlus(dosrlt ,( 'g_Rlt_RotuleBilles.gif',)                     )
     imageElem["3G"]       = ImagePlus(dosrlt ,( 'g_Rlt_ButeeBilles.gif',)                      )
-    imageElem["4GAr"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxCyl(BI).gif',)                  )
-    imageElem["4GAl"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxCyl(BE).gif',)                  )
-    imageElem["5GAr"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxConiq_G(BI).gif',)      ,12     )
-    imageElem["5GAl"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxConiq_G(BE).gif',)      ,11     )
+    imageElem["4GAr"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxCyl_BI.gif',)                  )
+    imageElem["4GAl"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxCyl_BE.gif',)                  )
+    imageElem["5GAr"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxConiq_G_BI.gif',)      ,12     )
+    imageElem["5GAl"]     = ImagePlus(dosrlt ,( 'g_Rlt_RouleauxConiq_G_BE.gif',)      ,11     )
     imageElem["6G"]       = ImagePlus(dosrlt ,( 'g_Rlt_RotuleRouleaux.gif',)                   )
     imageElem["7G"]       = ImagePlus(dosrlt ,( 'g_Rlt_ButeeRouleaux.gif',)                    )
     imageElem["8G"]       = ImagePlus(dosrlt ,( 'g_Rlt_ButeeBillesDbl.png',)                   )
@@ -540,14 +542,14 @@ def charger_imageElem():
     #############################################################################################
     imageElem["100GArE"]  = ImagePlus(dosarr ,( 'g_Arret_Ecrou_G.png',
                                                 'g_Arret_Ecrou_D.png')              ,100    )
-    imageElem["100GArV"]  = ImagePlus(dosarr ,( 'g_Arret_Ecrou_G(Vide).png',
-                                                'g_Arret_Ecrou_D(Vide).png')        ,100    )
+    imageElem["100GArV"]  = ImagePlus(dosarr ,( 'g_Arret_Ecrou_G_Vide.png',
+                                                'g_Arret_Ecrou_D_Vide.png')        ,100    )
     imageElem["100GAlE"]  = ImagePlus(dosarr ,( 'g_Arret_Chapeau_G.png',)                    )
-#    imageElem["100GAlV"]  = ImagePlus(dosarr ,( 'g_Arret_Chapeau_G(Vide).png',)      ,74     )
+#    imageElem["100GAlV"]  = ImagePlus(dosarr ,( 'g_Arret_Chapeau_G_Vide.png',)      ,74     )
     imageElem["101GAr"]   = ImagePlus(dosarr ,( 'g_Arret_Anneau_G.gif',)             ,3      )
-    imageElem["101GArV"]  = ImagePlus(dosarr ,( 'g_Arret_Anneau(Vide).gif',)         ,3      )
+    imageElem["101GArV"]  = ImagePlus(dosarr ,( 'g_Arret_Anneau_Vide.gif',)         ,3      )
     imageElem["101GAl"]   = ImagePlus(dosarr ,( 'g_Arret_Anneau_Ales_G.gif',)        ,3      )
-    imageElem["101GAlV"]  = ImagePlus(dosarr ,( 'g_Arret_Anneau_Ales(Vide).gif',)    ,3      )
+    imageElem["101GAlV"]  = ImagePlus(dosarr ,( 'g_Arret_Anneau_Ales_Vide.gif',)    ,3      )
     imageElem["102GArE"]  = ImagePlus(dosarr ,( 'g_Arret_Epaul_G.gif',)                      )
     imageElem["102GArI"]  = ImagePlus(dosarr ,( 'g_Arret_Epaul.gif',)                        )
     imageElem["102GAlE"]  = ImagePlus(dosarr ,( 'g_Arret_Epaul_Ales_G.png',)                 )
@@ -573,7 +575,7 @@ def charger_imageElem():
     imageElem["204GAl"]   = ImagePlus(dosjnt ,( 'g_Joint_Plat.png',)         ,-32    )
 
     imageElem["SupGAl"]   = ImagePlus(dosarr ,( 'g_Support_Chapeau_G.png',)          ,74     )
-    imageElem["SupGAlV"]  = ImagePlus(dosarr ,( 'g_Arret_Chapeau_G(Vide).png',)      ,74     )
+    imageElem["SupGAlV"]  = ImagePlus(dosarr ,( 'g_Arret_Chapeau_G_Vide.png',)      ,74     )
 
 
 #####################################################################################################
@@ -658,10 +660,10 @@ def charger_imagesSchema():
 #    Fle.SetMask(True)
     Fba = wx.Image(os.path.join(dos, 'FlecheBarree.png'), wx.BITMAP_TYPE_PNG)
 #    Fba.SetMask(True)
-    imageSchema ["Fle"] = wx.BitmapFromImage(Fle, depth=-1)
-    imageSchema ["Sch"] = wx.BitmapFromImage(wx.Image(os.path.join(dos, 'Schema CdCF.png'), wx.BITMAP_TYPE_PNG), depth=-1) 
+    imageSchema ["Fle"] = wx.Bitmap(Fle, depth=-1)
+    imageSchema ["Sch"] = wx.Bitmap(wx.Image(os.path.join(dos, 'Schema CdCF.png'), wx.BITMAP_TYPE_PNG), depth=-1) 
     
-    imageSchema ["Fba"] = wx.BitmapFromImage(Fba, depth=-1)
+    imageSchema ["Fba"] = wx.Bitmap(Fba, depth=-1)
 
 
 ## Curseurs ? ######################################################################
@@ -697,14 +699,14 @@ def charger_imagesSchema():
 def ombrer(bmp, e = 4):
     
 #    dc.SetBackground(wx.Brush(wx.Colour(255,255,254)))
-#    bmp = wx.BitmapFromImage(img)
+#    bmp = wx.Bitmap(img)
     
-#    ombr = wx.BitmapFromImage(imgOmbr)
+#    ombr = wx.Bitmap(imgOmbr)
 #    mask = bmp.GetMask()
 #    maskBrush = wx.BrushFromBitmap(ombr)
     
     # Création du masque
-    bmpMask = wx.EmptyBitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
+    bmpMask = wx.Bitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
     maskDC = wx.MemoryDC(bmpMask)
     maskDC.SetBackground(wx.Brush(wx.WHITE))
     maskDC.Clear()
@@ -718,7 +720,7 @@ def ombrer(bmp, e = 4):
     imageBmp = bmpMask.ConvertToImage().ConvertToMono(255, 255, 255).ConvertToBitmap()
     imageBmp.SetMask(wx.Mask(imageBmp, wx.WHITE))
 #    imageBmp.InitAlpha()
-    bmpMask = wx.EmptyBitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
+    bmpMask = wx.Bitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
     maskDC = wx.MemoryDC(bmpMask)
     maskDC.SetBackground(wx.Brush(wx.WHITE))
     maskDC.Clear()
@@ -741,7 +743,7 @@ def ombrer(bmp, e = 4):
     
     # Création de l'image ombrée
 #    ombr = bmp.ConvertToImage().AdjustChannels(0.5, 0.5, 0.5, 0.5).Blur(e).ConvertToBitmap()
-    bmpOmbr = wx.EmptyBitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
+    bmpOmbr = wx.Bitmap(bmp.GetWidth()+2*e, bmp.GetHeight()+2*e)
     dc = wx.MemoryDC(bmpOmbr)
     dc.SetBackground(wx.Brush(wx.BLACK))
     dc.Clear()
@@ -763,8 +765,8 @@ def ombrer(bmp, e = 4):
 
 def negatif(bmp):
     mask = bmp.GetMask()
-    bmpPos = wx.EmptyBitmap(bmp.GetWidth(), bmp.GetHeight())
-    bmpNeg = wx.EmptyBitmap(bmp.GetWidth(), bmp.GetHeight())
+    bmpPos = wx.Bitmap(bmp.GetWidth(), bmp.GetHeight())
+    bmpNeg = wx.Bitmap(bmp.GetWidth(), bmp.GetHeight())
     
     srcDC = wx.MemoryDC(bmpPos)
     srcDC.SetBackground(wx.Brush(wx.WHITE))
@@ -786,5 +788,5 @@ def negatif(bmp):
 
 
 def ombre(bmp, e = 4):
-    ombr = wx.BitmapFromImage(wx.ImageFromBitmap(bmp).AdjustChannels(0.5, 0.5, 0.5, 0.5).Blur(e))
+    ombr = wx.Bitmap(wx.ImageFromBitmap(bmp).AdjustChannels(0.5, 0.5, 0.5, 0.5).Blur(e))
     return ombr

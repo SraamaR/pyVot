@@ -85,9 +85,9 @@ class ElementsDataTable(gridlib.PyGridTableBase):
                 if dataType == gridlib.GRID_VALUE_NUMBER:
                     lst.append(eval(val))
                 elif dataType == gridlib.GRID_VALUE_STRING:
-                    if type(val) == str:
-                        lst.append(unicode(val,'latin_1'))
-                    elif type(val) == unicode:
+                    if isinstance(val, bytes):
+                        lst.append(val.decode('latin_1'))
+                    elif isinstance(val, str):
                         lst.append(val)
                 elif dataType == gridlib.GRID_VALUE_BOOL:
                     lst.append(val == '1')
@@ -755,8 +755,6 @@ class ElementParser(cp.ConfigParser):
             if e == None or e == '':
                 return "0"
             elif type(e) == str:
-                return e
-            elif type(e) == unicode:
                 return e
             elif type(e) == int:
                 return str(e)

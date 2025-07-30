@@ -39,11 +39,11 @@ import Icones
 ################################################################################
 #     Constantes     #
 ################################################################################
-lstLubrif = [u"huile", u"graisse", u"aucune"]
+lstLubrif = ["huile", "graisse", "aucune"]
 
-pression = {-1 : u"(extérieur)",
-             0 : u"",
-             1 : u"(interieur)"}
+pression = {-1 : "(extérieur)",
+             0 : "",
+             1 : "(interieur)"}
 
 ## Structure de l'arbre
 ##---------------------
@@ -81,22 +81,22 @@ pression = {-1 : u"(extérieur)",
 #                  }
 ## Images de l'arbre
 ##-------------------
-#_treeLabelList = {5   : u"Efforts dans la liaison",
-#                  50  : u"Charge Axiale",
-#                  500 : u"gauche",
-#                  501 : u"droite",
-#                  51  : u"Charge Radiale",
-#                  510 : u"gauche",
-#                  511 : u"droite",
-#                  52  : u"Bague tournante par rapport à la Charge Radiale",
+#_treeLabelList = {5   : "Efforts dans la liaison",
+#                  50  : "Charge Axiale",
+#                  500 : "gauche",
+#                  501 : "droite",
+#                  51  : "Charge Radiale",
+#                  510 : "gauche",
+#                  511 : "droite",
+#                  52  : "Bague tournante par rapport à la Charge Radiale",
 #                  
-#                  6   : u"Etanchéité / Lubrification",
-#                  60  : u"Pression",
-#                  61  : u"Vitesse",
-#                  62  : u"Lubrifiant",
+#                  6   : "Etanchéité / Lubrification",
+#                  60  : "Pression",
+#                  61  : "Vitesse",
+#                  62  : "Lubrifiant",
 #                  
-#                  7   : u"Coût",
-#                  70  : u"Coût maximum",
+#                  7   : "Coût",
+#                  70  : "Coût maximum",
 #                  }
 
 class nbCdCF(wx.Panel):
@@ -105,7 +105,7 @@ class nbCdCF(wx.Panel):
         wx.Panel.__init__(self, parent, -1, style = wx.CLIP_CHILDREN)
 #         imgList = wx.ImageList(16, 16)
 #         self.AssignImageList(imgList)
-        self.MaxSize = None
+        self.MaxSize = wx.DefaultSize
         self.nb = wx.Notebook(self, -1, style = wx.CLIP_CHILDREN)
         # Première page du NoteBook
         #--------------------------
@@ -115,9 +115,9 @@ class nbCdCF(wx.Panel):
         
 #        self.ovr = wx.html.HtmlWindow(panel, -1, size=(400, 400))
 
-        self.nb.AddPage(self.CdCF_Charges, u"Efforts sur l'arbre")#, imageId=0)
-        self.nb.AddPage(self.CdCF_Cout, u"Coût admissible")#, imageId=1)
-        self.nb.AddPage(self.CdCF_Etancheite, u"Lubrification - Etanchéité")#, imageId=2)
+        self.nb.AddPage(self.CdCF_Charges, "Efforts sur l'arbre")#, imageId=0)
+        self.nb.AddPage(self.CdCF_Cout, "Coût admissible")#, imageId=1)
+        self.nb.AddPage(self.CdCF_Etancheite, "Lubrification - Etanchéité")#, imageId=2)
         
         # Set up a wx.html.HtmlWindow on the Overview Notebook page
         # we put it in a panel first because there seems to be a
@@ -241,24 +241,24 @@ class CdCF:
                           },
         # Labels de l'arbre
         #-------------------
-        _treeLabelList = {5   : u"Efforts dans la liaison",
-                          50  : u"Charge Axiale",
-                          500 : u"gauche",
-                          501 : u"droite",
-                          51  : u"Charge Radiale",
-                          510 : u"gauche",
-                          511 : u"droite",
-                          512 : u"intensité",
-                          513 : u"répartition",
-                          52  : u"Bague tournante par rapport à la Charge Radiale",
+        _treeLabelList = {5   : "Efforts dans la liaison",
+                          50  : "Charge Axiale",
+                          500 : "gauche",
+                          501 : "droite",
+                          51  : "Charge Radiale",
+                          510 : "gauche",
+                          511 : "droite",
+                          512 : "intensité",
+                          513 : "répartition",
+                          52  : "Bague tournante par rapport à la Charge Radiale",
                   
-                          6   : u"Etanchéité / Lubrification",
-                          60  : u"Pression",
-                          61  : u"Vitesse",
-                          62  : u"Lubrifiant",
+                          6   : "Etanchéité / Lubrification",
+                          60  : "Pression",
+                          61  : "Vitesse",
+                          62  : "Lubrifiant",
                   
-                          7   : u"Coût",
-                          70  : u"Coût maximum",
+                          7   : "Coût",
+                          70  : "Coût maximum",
                           },
                             
         # Répartition des données dans l'arbre
@@ -388,19 +388,20 @@ class CdCF:
 
     ############################################################################
     def nomBagueTournante(self, cod):
-        if cod == "I" : return u"Intérieure"
-        else : return u"Extérieure"
+        if cod == "I" :
+            return "Intérieure"
+        else :
+            return "Extérieure"
 
     #############################################################################
     def __repr__(self):
-        t = u"CdCF :\n"
-        t += u"Charges Axiales  : " + unicode(str(self.effortAxial[0].val)) + unicode(str(self.effortAxial[1].val)) + u"\n"
-        t += u"Charges Radiales : " + unicode(str(self.effortRadial["G"].val)) + unicode(str(self.effortRadial["D"].val)) + u"\n"
-        t += u"Bague tournante  : " + unicode(self.bagueTournante) + u"\n"
-        t += u"Cout  : " + unicode(self.coutMax.val) + u"\n"
-        t += u"Pression  : " + unicode(self.pression.val) + u"\n"
+        t = "CdCF :\n"
+        t += "Charges Axiales  : " + str(self.effortAxial[0].val) + str(self.effortAxial[1].val) + "\n"
+        t += "Charges Radiales : " + str(self.effortRadial["G"].val) + str(self.effortRadial["D"].val) + "\n"
+        t += "Bague tournante  : " + str(self.bagueTournante) + "\n"
+        t += "Cout  : " + str(self.coutMax.val) + "\n"
+        t += "Pression  : " + str(self.pression.val) + "\n"
         return t
-        
 
     ##########################################################################
     def code2critere(self,code):
@@ -415,38 +416,31 @@ class CdCF:
         elif code == "EffortRadialI":
             return self.radialeIntensite
 
-
-
     ##########################################################################
     def tradPI_GD(self):
-        self.effortRadial["D"].val = (self.radialeIntensite.val * (10 + self.radialePourCent.val) * self.echelleEffort + 500)/1000
-        self.effortRadial["G"].val = (self.radialeIntensite.val * (10 - self.radialePourCent.val) * self.echelleEffort + 500)/1000 
+        self.effortRadial["D"].val = (self.radialeIntensite.val * (10 + self.radialePourCent.val) * self.echelleEffort + 500)//1000
+        self.effortRadial["G"].val = (self.radialeIntensite.val * (10 - self.radialePourCent.val) * self.echelleEffort + 500)//1000 
         for k,c in self.effortRadial.items():
             if c.val > self.echelleEffort:
                 c.val = self.echelleEffort
         self.effortRadial["D"].conv()
         self.effortRadial["G"].conv()
-#        print "  P  I  -->  G  D  "
-#        print self.radialePourCent.val,self.radialeIntensite.val,self.effortRadial["G"].val,self.effortRadial["D"].val
-
-
+#        print("  P  I  -->  G  D  ")
+#        print(self.radialePourCent.val, self.radialeIntensite.val, self.effortRadial["G"].val, self.effortRadial["D"].val)
 
     ##########################################################################
     def tradGD_PI(self):
         p = 10 * ( self.effortRadial["D"].val - self.effortRadial["G"].val)
         som = self.effortRadial["D"].val + self.effortRadial["G"].val
         if som != 0 :
-            p = p / som
+            p = p // som
         self.radialePourCent.val = (p)
-        self.radialeIntensite.val = som * 100 / ( 2 * self.echelleEffort )
+        self.radialeIntensite.val = som * 100 // ( 2 * self.echelleEffort )
 
         self.effortRadial["D"].conv()
         self.effortRadial["G"].conv()
-#        print "  G  D  -->  P  I  "
-#        print self.effortRadial["G"].val,self.effortRadial["D"].val,self.radialePourCent.val,self.radialeIntensite.val
-
-
-
+#        print("  G  D  -->  P  I  ")
+#        print(self.effortRadial["G"].val, self.effortRadial["D"].val, self.radialePourCent.val, self.radialeIntensite.val)
 
 #    ############################################################################
 #    def copie(self,cdcf):
@@ -470,8 +464,6 @@ class CdCF:
 ##        else:
 ##            return 1
 
-
-
     ##########################################################################
     def ouvrir02(self,fichier):
         "Ouvrir un CdCF"
@@ -489,14 +481,13 @@ class CdCF:
         self.coutMax.set(pickle.load(fichier))
 
         self.miseAjour()
-        
-        
+
     ##########################################################################
     def ouvrir(self, fichier):
         """ Ouvrir un CdCF depuis un fichier ConfigParser
             - version 0.3 -
         """
-#        print "ouverture CdCF"
+#        print("ouverture CdCF")
         self.effortAxial[0].val = fichier.getint('CdCF', 'effortAxial0')
         self.effortAxial[1].val = fichier.getint('CdCF', 'effortAxial1')
         self.effortAxial[0].conv()
@@ -519,7 +510,6 @@ class CdCF:
 
 #        self.miseAjour()
 
-
     ##########################################################################
 #    def enregistrer(self,fichPyv):
 #        "Enregistrer le CdCF dans un fichier ConfigParser"
@@ -538,8 +528,8 @@ class CdCF:
 #    def miseAjour(self):
 ##        self.zone.afficherTousLesCriteres()
 ##        self.tradGD_PI()
-#        print "Fin ouverture cdcf :"
-#        print self
+#        print("Fin ouverture cdcf :")
+#        print(self)
 
     def RAZ(self):
         self.__init__(0)
@@ -551,12 +541,11 @@ class CdCF:
 class Indice:
     def __init__(self, val = 0):
         self.val = val
-        self.ch = u""
+        self.ch = ""
         self.conv()
     
     def __repr__(self):
         return self.val
-#        return unicode(self.val)+"("+self.ch#.encode('cp1252','replace')+")"
 
     def conv(self):
         ch = {0 : u'très faible',
@@ -597,7 +586,6 @@ class Indice:
     
     def get(self):
         return self.val
-    
 
 #############################################################################
 #    Variable  Int  #
@@ -626,9 +614,6 @@ class IntVar:
     def copy(self):
         return IntVar(self.val)
 
-
-
-
 ###############################################################################
 # Evenement indiquant que des données ont été modifiées dans le CdCF
 ###############################################################################
@@ -648,8 +633,6 @@ class CdCFModifiedEvent(wx.PyCommandEvent):
 myEVT_CDCF_MODIFIED = wx.NewEventType()
 EVT_CDCF_MODIFIED = wx.PyEventBinder(myEVT_CDCF_MODIFIED,1)
 
-
-   
 ##############################################################################
 #     Canvas Schéma CdCF     #
 ##############################################################################
@@ -690,7 +673,7 @@ class SchemaCdCF(wx.Panel):
         
         # Création de la boite contenant le schema et les sliders
         #=========================================================
-        self.boxSchema = wx.StaticBox(self, -1, u"Intensité et répartition",
+        self.boxSchema = wx.StaticBox(self, -1, "Intensité et répartition",
                                  size = (self.x_Schema, self.y_Schema) )
         self.bsizer1 = wx.StaticBoxSizer(self.boxSchema, wx.VERTICAL)
         
@@ -714,8 +697,8 @@ class SchemaCdCF(wx.Panel):
                                                deb = 0,
                                                fin = self.cdcf.echelleEffort,
                                                orient = "V", 
-                                               numCrit = 510+abs(s+1)/2,
-                                               pos = (self.x_Schema/2+(2*s-1)*44, imgSchema.GetHeight()+16),
+                                               numCrit = 510+abs(s+1)//2,
+                                               pos = (self.x_Schema//2+(2*s-1)*44, imgSchema.GetHeight()+16),
                                                ancre = s,
                                                maj = "GD",
                                                align = ali[s])
@@ -724,7 +707,7 @@ class SchemaCdCF(wx.Panel):
                                             fin = 100,
                                             orient = "V",
                                             numCrit = 512,
-                                            pos = (self.x_Schema/2, 90),
+                                            pos = (self.x_Schema//2, 90),
                                             ancre = -1,
                                             maj = "PI",lg = 54)
         # Répartition
@@ -732,23 +715,23 @@ class SchemaCdCF(wx.Panel):
                                             fin = 10,
                                             orient = "H",
                                             numCrit = 513,
-                                            pos = (self.x_Schema/2, 140),
+                                            pos = (self.x_Schema//2, 140),
                                             ancre = -1,
                                             maj = "PI",lg = 54)
         
         
         # Création de la boite "Bague tournante" ##################################
         #=========================================================================
-        sb = wx.StaticBox(self, -1, u"Mobilité bagues/charge radiale")
+        sb = wx.StaticBox(self, -1, "Mobilité bagues/charge radiale")
         rsb = wx.StaticBoxSizer(sb, wx.VERTICAL)
-        st = wx.StaticText(self, -1, u"Bague tournante par rapport à la charge Radiale")
+        st = wx.StaticText(self, -1, "Bague tournante par rapport à la charge Radiale")
         
         rsb.Add(st)
         gbs = wx.GridBagSizer()
         radio1 = wx.RadioButton( self, 0, u'Intérieure', style = wx.RB_GROUP )
         radio2 = wx.RadioButton( self, 1, u'Extérieure' )
-        radio1.SetToolTip(wx.ToolTip(u"à choisir si la bague intérieure est tournante\npar rapport à la charge radiale"))
-        radio2.SetToolTip(wx.ToolTip(u"à choisir si la bague extérieure est tournante\npar rapport à la charge radiale"))
+        radio1.SetToolTip(wx.ToolTip("à choisir si la bague intérieure est tournante\npar rapport à la charge radiale"))
+        radio2.SetToolTip(wx.ToolTip("à choisir si la bague extérieure est tournante\npar rapport à la charge radiale"))
         gbs.Add(radio1, (0,0), flag = wx.ALIGN_CENTER_VERTICAL)
         gbs.Add(radio2, (1,0), flag = wx.ALIGN_CENTER_VERTICAL)
         im1 = wx.StaticBitmap(self, -1, Icones.BagueTournInt.GetBitmap())
@@ -767,7 +750,7 @@ class SchemaCdCF(wx.Panel):
         # Initialisation affichage
         self.afficherTousCriteres()
 
-        border.Add(self.boxSchema, (0,0), flag = wx.EXPAND)
+        border.Add(self.bsizer1, (0,0), flag = wx.EXPAND)
         border.Add(rsb, (0,1), flag = wx.EXPAND)
         border.AddGrowableCol(1)
         
@@ -787,8 +770,7 @@ class SchemaCdCF(wx.Panel):
         self.Bind(wx.EVT_SIZE, self.OnSize)
 #        self.Bind(wx.EVT_BUTTON, self.miseAJourSchema)
 #        self.Bind(wx.EVT_PAINT, self.OnPaint)
-    
-    
+
     #############################################################################            
     def OnSize(self, event):    
         self.montrerSliders()
@@ -881,10 +863,7 @@ class SchemaCdCF(wx.Panel):
         self.Fit()
         self.Refresh()
         self.Layout()
-        
-   
-   
-            
+    
     ###########################################################################
     def afficherTousCriteres(self, event = None):
         ali = {0 : wx.ALIGN_RIGHT,
@@ -905,12 +884,11 @@ class SchemaCdCF(wx.Panel):
                                                       id,
                                                       orient = "V", sens = s*2-1)
 
-        
         # Image du schéma
         #=================
         imgSchema = self.BitmapSchema(0)
         self.bmpSchema = wx.StaticBitmap(self, -1, imgSchema, 
-                                         pos = ((self.x_Schema-imgSchema.GetWidth())/2, 14)
+                                         pos = ((self.x_Schema-imgSchema.GetWidth())//2, 14)
                                          )
         self.bsizer1.Add(self.bmpSchema)
         self.bmpSchema.Bind(wx.EVT_LEAVE_WINDOW, self.OnLeave)
@@ -945,44 +923,44 @@ class SchemaCdCF(wx.Panel):
             imageFleche = Images.imageSchema ["Fba"]
  
         dx, dy = imageFleche.GetSize()
-        x,y = (l-dx)/2 , (h-dy)/2
+        x,y = (l-dx)//2 , (h-dy)//2
         
-        bmp = wx.EmptyBitmap(l, h)
+        bmp = wx.Bitmap(l, h)
         dc = wx.MemoryDC(bmp)
         dc.SetBackground(wx.Brush(self.GetBackgroundColour()))
         dc.Clear()
         dc.DrawBitmap(imageSchema, 0, 0, True)
-        dc.DrawBitmap(imageFleche,x,y, True)
+        dc.DrawBitmap(imageFleche, x, y, True)
         dc.SelectObject(wx.NullBitmap)
         
         return bmp
 
     def BitmapSchemaAvecFleches(self, bagueTournante):
         l,h = self.boxSchema.GetSize()
-        bmp = wx.EmptyBitmap(l, h)
+        bmp = wx.Bitmap(l, h)
         dc = wx.MemoryDC(bmp)
         dc.SetBackground(wx.Brush(self.GetBackgroundColour()))
         dc.Clear()
         
         sch = self.BitmapSchema(bagueTournante)
         ls, hs = sch.GetWidth(), sch.GetHeight()
-        x, y = l/2 - ls/2, 0
+        x, y = l//2 - ls//2, 0
         dc.DrawBitmap(sch, x, y, True)
    
         dc.SetFont(wx.Font(8, wx.FONTFAMILY_DEFAULT , wx.FONTSTYLE_ITALIC, wx.NORMAL))
         for id in [500, 501]:
             bmpf = self.flecheCritere[id].bmp.GetBitmap()
             lf = bmpf.GetWidth()
-            x, y = l/2 + (2 * (id-500) - 1)*ls/2 - (501-id)* lf,  34
+            x, y = l//2 + (2 * (id-500) - 1)*ls//2 - (501-id)* lf,  34
             dc.DrawBitmap(bmpf, x, y, True)
             txtf = self.flecheCritere[id].txt.GetLabel()
             lt, ht = dc.GetTextExtent(txtf)
-            dc.DrawText(txtf, l/2 + (2 * (id-500) - 1)*ls/2 - (501-id)*lt, y+15)
+            dc.DrawText(txtf, l//2 + (2 * (id-500) - 1)*ls//2 - (501-id)*lt, y+15)
             
         for id in [510, 511]:
             bmpf = self.flecheCritere[id].bmp.GetBitmap()
             lf = bmpf.GetWidth()
-            x, y = l/2 + (2 * (id-510) - 1)*46 - (511-id)* lf,  hs
+            x, y = l//2 + (2 * (id-510) - 1)*46 - (511-id)* lf,  hs
             dc.DrawBitmap(bmpf, x, y, True)
             txtf = self.flecheCritere[id].txt.GetLabel()
             lt, ht = dc.GetTextExtent(txtf)
@@ -996,83 +974,88 @@ class SchemaCdCF(wx.Panel):
 #     Flèche CdCF     #
 ##############################################################################
 class FlecheCdcfLegend(wx.Panel):
-    def __init__(self, parent, indice, id, orient = "H", sens = 1):
-        
+    def __init__(self, parent, indice, id, orient="H", sens=1):
         # Bit d'orientation
-        if orient == "H": 
+        if orient == "H":
             v = 0
             o = wx.VERTICAL
-        else: 
+        else:
             v = 1
             o = wx.HORIZONTAL
         
         # Bit de sens
-        s = (-sens+1)/2
+        s = (-sens + 1) // 2
         
         # Calcul de la dimension
-        lg = parent.lgSlider #- 4
+        lg = parent.lgSlider  # - 4
         if orient == "H":
-            dim = (lg,30)
+            dim = (lg, 30)
         else:
-            dim = (lg+15,lg)
-        
+            dim = (lg + 15, lg)
         
         # Calcul de la position
         posSlider = parent.sliderCritere[id].GetPosition()
-        dimSlider = parent.sliderCritere[id].GetSizeTuple()
+        dimSlider = parent.sliderCritere[id].GetSize()
         if orient == "H":
-            pos = (posSlider[0], posSlider[1] + dimSlider[1] -2)
+            pos = (posSlider[0], posSlider[1] + dimSlider[1] - 2)
         else:
-            pos = (posSlider[0] + sens*((1-s)*dimSlider[0]+s*dim[0]), posSlider[1])
+            pos = (posSlider[0] + sens * ((1 - s) * dimSlider[0] + s * dim[0]), posSlider[1])
         
-        wx.Panel.__init__(self, parent, id, pos, dim)#, style = wx.BORDER_SIMPLE)
-        
+        wx.Panel.__init__(self, parent, id, pos, dim)  # , style = wx.BORDER_SIMPLE)
         self.SetMinSize(dim)
         self.SetToolTip(wx.ToolTip(parent.sliderCritere[id].GetToolTip().GetTip()))
         
         sizer = wx.BoxSizer(o)
-        
         self.indice = indice
         self.parent = parent
         self.orient = orient
         self.sens = sens
         
         # Flag de positionnement du texte
-        if s: flagtxt = wx.ALIGN_LEFT
-        else: flagtxt = wx.ALIGN_RIGHT
-        if v:
-            if flagtxt == wx.ALIGN_LEFT:
-                flagtxt = wx.ALIGN_RIGHT
-            else: 
+        if orient == "H":
+            if s:
                 flagtxt = wx.ALIGN_LEFT
+            else:
+                flagtxt = wx.ALIGN_RIGHT
+        else:
+            flagtxt = wx.ALIGN_CENTER_VERTICAL
         
         # Flag de positionnement de la fleche
-        if s: flagbmp = wx.ALIGN_LEFT
-        else: flagbmp = wx.ALIGN_RIGHT
+        if orient == "H":
+            if s:
+                flagbmp = wx.ALIGN_LEFT
+            else:
+                flagbmp = wx.ALIGN_RIGHT
+        else:
+            flagbmp = wx.ALIGN_CENTER_VERTICAL
         
-        if not v:
-            flagbmp = flagbmp|wx.ALIGN_CENTER_VERTICAL
-            
         self.bmp = wx.StaticBitmap(self, -1, self.FlecheCdcf(self.indice.val, orient, sens))
         self.bmp.SetToolTip(wx.ToolTip(parent.sliderCritere[id].GetToolTip().GetTip()))
-        self.txt = wx.StaticText(self, -1, self.indice.ch, size = (lg, 14), style = flagtxt)
-        self.txt.SetFont(wx.Font(8, wx.FONTFAMILY_DEFAULT , wx.FONTSTYLE_ITALIC, wx.NORMAL))
+        
+        self.txt = wx.StaticText(self, -1, self.indice.ch, size=(lg, 14), style=flagtxt)
+        self.txt.SetFont(wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_ITALIC, wx.NORMAL))
         self.txt.SetForegroundColour('gray')
         self.txt.SetToolTip(wx.ToolTip(parent.sliderCritere[id].GetToolTip().GetTip()))
+        
         # Mise en place dans le sizer
-        sizer.Add(self.bmp,  flag = flagbmp)
-        if v and s:
-            sizer.Prepend(self.txt,  flag = flagtxt)
+        if orient == "H":
+            sizer.Add(self.bmp, flag=flagbmp)
+            if s:
+                sizer.Prepend(self.txt, flag=flagtxt)
+            else:
+                sizer.Add(self.txt, flag=flagtxt)
         else:
-            sizer.Add(self.txt,  flag = flagtxt)
+            if s:
+                sizer.Add(self.txt, flag=flagtxt)
+                sizer.Add(self.bmp, flag=flagbmp)
+            else:
+                sizer.Add(self.bmp, flag=flagbmp)
+                sizer.Add(self.txt, flag=flagtxt)
         
         self.SetSizer(sizer)
-        
         parent.bsizer1.Add(self)
-        
         self.Bind(wx.EVT_LEAVE_WINDOW, self.parent.OnLeave)
         self.Bind(wx.EVT_ENTER_WINDOW, self.parent.OnEnter)
-        
         
     def MaJ(self, indice = None):
         if indice is not None:
@@ -1091,7 +1074,7 @@ class FlecheCdcfLegend(wx.Panel):
         # Pas
         p = 4
         # Bit de sens
-        s = (-sens+1)/2 # vers la droite : 0 ; vers la gauche : 1
+        s = (-sens+1)//2 # vers la droite : 0 ; vers la gauche : 1
         # Bit d'orientation
         if orient == "V": 
             v = 1
@@ -1105,14 +1088,14 @@ class FlecheCdcfLegend(wx.Panel):
         
         # Position du texte    
         lt, ht = dc.GetTextExtent(str(long))
-        xt,yt = s*(lf+5)*(1-v) + v*lt/2, v*(lf+2)
+        xt,yt = s*(lf+5)*(1-v) + v*lt//2, v*(lf+2)
         
         # Dimension totale
         l,h = lf + lt + 2 + v*ht, e
         
         # Points extrémités de la Fleche
-        x1,y1 = 1 + (1-v)*(1-s)*lt, e/2
-        x2,y2 = x1 + lf, e/2
+        x1,y1 = 1 + (1-v)*(1-s)*lt, e//2
+        x2,y2 = x1 + lf, e//2
         
         if orient == "V":
             l,h = h,l
@@ -1130,7 +1113,7 @@ class FlecheCdcfLegend(wx.Panel):
                 x2 = x2 - 3
             poly = [(xb,yb),(xb-sens*lb, yb+eb), (xb-sens*lb, yb-eb)]
         
-        bmp = wx.EmptyBitmap(l , h)
+        bmp = wx.Bitmap(l , h)
         dc.SelectObject(bmp)
         dc.SetBackground(wx.Brush(self.parent.GetBackgroundColour()))
         dc.Clear()
@@ -1169,11 +1152,11 @@ class ScaleCdcf(wx.Slider):
         
         if orient == "H":
             orient = wx.SL_HORIZONTAL 
-            dim = (lg,lg/3)
+            dim = (lg,lg//3)
             w = lg
         else:
             orient = wx.SL_VERTICAL
-            dim = (lg/3,lg)
+            dim = (lg//3,lg)
             w = 20
             if align == wx.ALIGN_LEFT:
                 orient = orient|wx.SL_RIGHT
@@ -1192,12 +1175,12 @@ class ScaleCdcf(wx.Slider):
         elif ancre == 1:
             posit = (pos[0] - w ,pos[1])
         elif ancre == -1:
-            posit = (pos[0] - w/2 ,pos[1])
+            posit = (pos[0] - w//2 ,pos[1])
         
 #        print self.numCrit, type(self.critere)
     
         wx.Slider.__init__( self, parent, numCrit, self.critere.val, deb, fin,
-                            point = posit, size = dim,
+                            pos = posit, size = dim,
                             style = orient)
         self.MiseAJour(self.critere.val)
         
@@ -1211,7 +1194,7 @@ class ScaleCdcf(wx.Slider):
         
         
         # Info bulle ###
-        self.InfoBulle = wx.ToolTip(parent.cdcf._tree._treeLabelList[numCrit/10] + " : " + parent.cdcf._tree._treeLabelList[numCrit])
+        self.InfoBulle = wx.ToolTip(parent.cdcf._tree._treeLabelList[numCrit//10] + " : " + parent.cdcf._tree._treeLabelList[numCrit])
         self.SetToolTip(self.InfoBulle)
         
         # Evenements ##
@@ -1307,12 +1290,12 @@ class ZoneCdCFCout(wx.Panel):
 
         # Création de la boite contenant le slider "coÃ¼t"
         #=================================================
-        self.controls[70] = Slider_Spin(self, u"Coût indicatif maximum", self.critere, 70,
+        self.controls[70] = Slider_Spin(self, "Coût indicatif maximum", self.critere, 70,
                            (0, self.cdcf.echelleCout), 2, 5)
-        self.controls[70].SetToolTip(u"Réglage du coût indicatif maximum du montage")
+        self.controls[70].SetToolTip("Réglage du coût indicatif maximum du montage")
         
-#        self.boxSchema = wx.StaticBox(self, -1, u"Coût indicatif maximum")
-#        self.boxSchema.SetToolTip(wx.ToolTip(u"Réglage du coût indicatif maximum du montage"))
+#        self.boxSchema = wx.StaticBox(self, -1, "Coût indicatif maximum")
+#        self.boxSchema.SetToolTip(wx.ToolTip("Réglage du coût indicatif maximum du montage"))
 #        self.bsizer = wx.StaticBoxSizer(self.boxSchema, wx.VERTICAL)
 #                           
 ##        self.st = wx.StaticText(self, -1, str(self.critere))
@@ -1328,7 +1311,7 @@ class ZoneCdCFCout(wx.Panel):
 #                            style = wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS | wx.SL_TOP)
 #        self.sl.SetTickFreq(5)
 #        self.sl.SetThumbLength(self.cdcf.echelleCout*2)
-#        self.sl.SetToolTip(wx.ToolTip(u"Faire glisser pour modifier le coût indicatif maximum"))
+#        self.sl.SetToolTip(wx.ToolTip("Faire glisser pour modifier le coût indicatif maximum"))
 #        self.bsizer.Add(self.sl)
         
         border.Add(self.controls[70], (0,0), flag = wx.EXPAND)
@@ -1464,21 +1447,21 @@ class ZoneCdCFEtancheite(wx.Panel):
         
         # Pression relative
         #-------------------
-        self.controls[60] = Slider_Spin(self, u"Pression relative", self.critere[60], 60,
+        self.controls[60] = Slider_Spin(self, "Pression relative", self.critere[60], 60,
                            (0, self.cdcf.echellePression),
                            10, 1)
-        self.controls[60].SetToolTip(u"Réglage de la pression relative intérieur/extérieur")
+        self.controls[60].SetToolTip("Réglage de la pression relative intérieur/extérieur")
 
         
 #       # Lubrification
         #---------------
-        box = wx.StaticBox(self, -1, u"Type de lubrification", size = self.controls[60].box.GetSize())
+        box = wx.StaticBox(self, -1, "Type de lubrification", size = self.controls[60].box.GetSize())
         bsizer = wx.StaticBoxSizer(box, wx.VERTICAL)
         
         pnl = wx.Panel(self, -1)
         self.controls[62] = wx.Choice(pnl, 62, choices = lstLubrif, size = (100,-1) )
         self.controls[62].SetSelection(self.critere[62].val)
-        self.controls[62].SetToolTip(wx.ToolTip(u"Choix du type de lubrification"))
+        self.controls[62].SetToolTip(wx.ToolTip("Choix du type de lubrification"))
         self.Bind(wx.EVT_CHOICE, self.EvtChoice, self.controls[62])
         
         self.img = wx.StaticBitmap(self, -1, wx.NullBitmap)
@@ -1491,10 +1474,10 @@ class ZoneCdCFEtancheite(wx.Panel):
         
         # Vitesse de rotation
         #---------------------
-        self.controls[61] = Slider_Spin(self, u"Vitesse de rotation", self.critere[61], 61,
+        self.controls[61] = Slider_Spin(self, "Vitesse de rotation", self.critere[61], 61,
                            (0, self.cdcf.echelleVitesse),
                            10, 1)
-        self.controls[61].SetToolTip(u"Réglage de la vitesse de rotation")
+        self.controls[61].SetToolTip("Réglage de la vitesse de rotation")
         
         border.Add(self.controls[60], (0,0), flag = wx.EXPAND)
         border.Add(bsizer, (0,1), flag = wx.EXPAND)
@@ -1555,7 +1538,7 @@ class ZoneCdCFEtancheite(wx.Panel):
             self.img.SetBitmap(Icones.LubrifGraisse.GetBitmap())
         else :
             x,y = Icones.LubrifGraisse.GetBitmap().GetSize()
-            imgVide = wx.EmptyBitmap(x,y)
+            imgVide = wx.Bitmap(x, y, 1)
             imgVide.SetMask(wx.Mask(imgVide))
             self.img.SetBitmap(imgVide)
 #        self.Fit()
@@ -1627,7 +1610,7 @@ class ZoneCdCFEtancheite(wx.Panel):
 #        self.zoneEtanch.grid(row = 1, column = 1, sticky = SW)
 #
 #        #  Pression ###########################
-#        t = Label(self.zoneEtanch, text = u"Pression relative", \
+#        t = Label(self.zoneEtanch, text = "Pression relative", \
 #              font = Const.Font_CdCFTitre[0],
 #              fg = Const.Font_CdCFTitre[1],
 #              justify = LEFT, 
@@ -1655,7 +1638,7 @@ class ZoneCdCFEtancheite(wx.Panel):
 #              .grid(row = 0,column = 2,  sticky = NW)
 #
 #        #  Vitesse ###########################
-#        t = Label(self.zoneEtanch, text = u"Vitesse angulaire", \
+#        t = Label(self.zoneEtanch, text = "Vitesse angulaire", \
 #              font = Const.Font_CdCFTitre[0],
 #              fg = Const.Font_CdCFTitre[1],
 #              justify = LEFT, 
@@ -1673,7 +1656,7 @@ class ZoneCdCFEtancheite(wx.Panel):
 #              .grid(row = 2,column = 1,  sticky = NW)
 #
 #        #  Lubrifiant  ###########################
-#        t = Label(self.zoneEtanch, text = u"Type de lubrifiant", \
+#        t = Label(self.zoneEtanch, text = "Type de lubrifiant", \
 #              font = Const.Font_CdCFTitre[0],
 #              fg = Const.Font_CdCFTitre[1],
 #              justify = LEFT, 

@@ -134,18 +134,14 @@ class ListeItemMtg(list):
             pass
     
     def trie(self):
-        self.sort(cmp=lambda x,y: cmp(x.prof, y.prof))
-    
-    
-        
+        self.sort(key=lambda x: x.prof)
+
     def get(self, tag):
         lstItem = []
         for i in self:
             if tag in i.tag:
                 lstItem.append(i)
         return lstItem
-    
-    
 
 class PositArAl:
     def __init__(self, palier, posit):
@@ -245,13 +241,13 @@ class Arbre:
         self.afficher(hachurer = hachurer)
 
     def effacer(self):
-        for item in self.itemFix.values() + self.itemMob.values():
+        for item in list(self.itemFix.values()) + list(self.itemMob.values()):
             if item is not None:
                 item.efface()
 
 
     def afficher(self, hachurer = True):
-        for item in self.itemFix.values() + self.itemMob.values():
+        for item in list(self.itemFix.values()) + list(self.itemMob.values()):
             if item is not None:
                 item.afficher(hachurer = hachurer)
 
@@ -447,8 +443,8 @@ class ItemMtg():
         if xancre != None:
             self.xancre = xancre
         
-        self.pos = (self.xancre + sensOffset * (self.GetImg().ofst+1) - ((sensOffset+1)*self.GetWidth())/2,
-                    self.zoneMtg.milieuY - self.GetHeight()/2)
+        self.pos = (self.xancre + sensOffset * (self.GetImg().ofst+1) - ((sensOffset+1)*self.GetWidth())//2,
+                    self.zoneMtg.milieuY - self.GetHeight()//2)
         
     def affiche(self, dc, tag = None, prof = None, inverser = False, offsetX = 0):
         """ Affiche l'image bmp dans le DC
@@ -471,7 +467,7 @@ class ItemMtg():
         """
         
         # On crée une image à la taille de la zone entière pour une bonne superposition des hachures ...
-        bmp = wx.EmptyBitmap(self.zoneMtg.maxWidth, self.zoneMtg.maxHeight)
+        bmp = wx.Bitmap(self.zoneMtg.maxWidth, self.zoneMtg.maxHeight)
         memdc = wx.MemoryDC(bmp)
         memdc.SetBackground(wx.Brush(wx.Colour(255,255,254, 255))) #
         memdc.Clear()
@@ -480,7 +476,7 @@ class ItemMtg():
         memdc.SetPen(wx.BLACK_PEN)
 #        memdc.SetPen(wx.TRANSPARENT_PEN)
 #        memdc.DrawRectangle(0, 0, self.GetWidth(), self.GetHeight())
-        
+
         memdc.DrawBitmap(self.GetBmp(), self.pos[0], self.pos[1])
         
         for pt in pts:
@@ -709,10 +705,10 @@ class ItemElem(ItemMtg):
 ##            ecart = self.canvas.ecartRoultEpaul[taille][pos.radiale]
             if joint:
                 self.xancre = self.zoneMtg.milieuPalier[pos.palier] \
-                              + s * (largRlt/2+self.zoneMtg.ecartRoultJnt)
+                              + s * (largRlt//2+self.zoneMtg.ecartRoultJnt)
             else:
                 self.xancre = self.zoneMtg.milieuPalier[pos.palier] \
-                              + s * (self.zoneMtg.positElemFixe[taille][pos.radiale])# + largRlt/2)
+                              + s * (self.zoneMtg.positElemFixe[taille][pos.radiale])# + largRlt//2)
                 
             self.ancre = pos.opposee().cotelem
 #            print s
@@ -831,8 +827,8 @@ class ItemArAl(ItemMtg):
         self.place()
         self.zoneMtg.lstItemMtg.append(self)
         if  hachurer and 'GrpAlesage' in self.tag:
-            self.hachurer(wx.BrushFromBitmap(Images.imageAl["H"].bmp))
-        
+            self.hachurer(wx.Brush(Images.imageAl["H"].bmp))
+
     #########################################################################
     def get_xbordElem(self, cote, palier = None, elem = None, ecarter = False):
         """ Renvoie la position en X en pixel (absolue)
@@ -846,7 +842,7 @@ class ItemArAl(ItemMtg):
             return elem.item['imag'].get_xbord(cote)+s
         else:
             taille = self.taille
-            ecart = self.zoneMtg.largeurRltDefaut[taille]/2
+            ecart = self.zoneMtg.largeurRltDefaut[taille]//2
             if ecarter:
                 ecart = self.zoneMtg.positElemFixe[taille][self.rad]# - ecart
                 
@@ -996,7 +992,7 @@ class ZoneMontage(wx.Panel):
         self.milieuPalier = {"G":180,
                              "D":500}
         #  centre du montage
-        self.milieuX , self.milieuY = size[0]/2, size[1]/2
+        self.milieuX , self.milieuY = size[0]//2, size[1]//2
 
         #  positions et dimensions des éléments (pour chaine)
         self.centreRoult_Y = {"P":99,
@@ -1128,7 +1124,7 @@ class ZoneMontage(wx.Panel):
         
     def InitBuffer(self):
         w,h = self.GetVirtualSize()
-        self.buffer = wx.EmptyBitmap(w,h)
+        self.buffer = wx.Bitmap(w,h)
         self.Redessiner()
         
     def Redessiner(self, analyse = None):  
@@ -1142,7 +1138,6 @@ class ZoneMontage(wx.Panel):
     def DessineTout(self, dc, analyse = None, offsetX = 0):
         # Affichage "Arbre" et "Alésage"
 #        print "/",
-        dc.BeginDrawing()
         dc.SetBackground(wx.Brush(self.GetBackgroundColour()))
         dc.Clear()
         self.lstItemMtg.affiche(dc, offsetX = offsetX)
@@ -1151,8 +1146,6 @@ class ZoneMontage(wx.Panel):
         #=============================
         if analyse is not None:
             analyse.tracerResultats(dc, self)
-        
-        dc.EndDrawing()
         
 #        # Tracé de la chaine d'action 
 #        #=============================
@@ -1609,7 +1602,7 @@ class ZoneMontage(wx.Panel):
 #            taille = elemOpp.taille
 
         py = self.centreRoult_Y[taille]
-        dpy = self.dimRoult_Y[taille]/2 - decalage
+        dpy = self.dimRoult_Y[taille]//2 - decalage
         
         if (pos.typelem == "A" and pos.radiale == "Ar") or (rad == "Ar"):
             y = - py + dpy
@@ -1634,17 +1627,17 @@ class ZoneMontage(wx.Panel):
 ##            print " c = ",c
             palierOpp = pos.opposee().palier
             x = self.milieuPalier[palierOpp] \
-                + c * (self.positElemFixe[taille][pos.radiale])# - self.largeurRltDefaut[taille]/2)
+                + c * (self.positElemFixe[taille][pos.radiale])# - self.largeurRltDefaut[taille]//2)
             
 ##            x = self.milieuPalier[palierOpp] \
-##                + c * (mtg.palier[palierOpp].rlt.largeur()/2 \
+##                + c * (mtg.palier[palierOpp].rlt.largeur()//2 \
 ##                       + self.ecartRoultEpaul[taille][pos.radiale])
             
           # Arrets ...
         elif pos.typelem == "A":
             if cote is None or cote == p or cote != pos.cotelem:
                 x = self.milieuPalier[p] \
-                    + c * (mtg.palier[p].rlt.largeur()/2)
+                    + c * (mtg.palier[p].rlt.largeur()//2)
             else:
                 if p == "D":
                     c = 1
@@ -1658,9 +1651,9 @@ class ZoneMontage(wx.Panel):
         elif pos.typelem == "R":
             x = self.milieuPalier[p]
             if cote == "G":
-                x += -mtg.palier[p].rlt.largeur()/2
+                x += -mtg.palier[p].rlt.largeur()//2
             elif cote == "D":
-                x += mtg.palier[p].rlt.largeur()/2
+                x += mtg.palier[p].rlt.largeur()//2
 
 ##        print pos,x,y
         return x,y
@@ -2094,10 +2087,10 @@ class Point:
                 
             if cote == 'I':
                 self.x = self.zone.milieuPalier[pos.palier] \
-                         + sgnCotelem * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]/2
+                         + sgnCotelem * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]//2
             else:
                 self.x = self.zone.milieuPalier[pos.palier] \
-                         + sgnCotelem * (mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]/2 \
+                         + sgnCotelem * (mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]//2 \
                                          +mtg.elemPos(pos).imagePlus[0].img.size[0])
 
             self.y = self.zone.milieuY + sgnHautBas * self.dim2y(dim,bague)
@@ -2107,9 +2100,9 @@ class Point:
                 sgn = 1
             else:
                 sgn = -1
-            self.x = self.zone.milieuPalier[pos.palier] + sgn * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]/2
+            self.x = self.zone.milieuPalier[pos.palier] + sgn * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]//2
             if bague == "Al":
-                self.y = self.zone.milieuY + sgnHautBas * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[1]/2
+                self.y = self.zone.milieuY + sgnHautBas * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[1]//2
             else:
                 if mtg.palier[pos.palier].taille == "G":
                     self.y = self.zone.milieuY + sgnHautBas * 60
@@ -2125,10 +2118,10 @@ class Point:
 #                sgnCotelem = 1
 #            if cote == 'I':
 #                self.x = zone.milieuPalier[pos.palier] \
-#                         + sgnCotelem * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]/2
+#                         + sgnCotelem * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]//2
 #            else:
 #                self.x = zone.milieuPalier[pos.palier] \
-#                         + sgnCotelem * (mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]/2 \
+#                         + sgnCotelem * (mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]//2 \
 #                                         +mtg.elemPos(pos).imagePlus[0].img.size[0])
 #            self.y = zone.milieuY + sgnHautBas * dim2y(dim,bague)
 #        else:
@@ -2136,9 +2129,9 @@ class Point:
 #                sgn = 1
 #            else:
 #                sgn = -1
-#            self.x = zone.milieuPalier[pos.palier] + sgn * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]/2
+#            self.x = zone.milieuPalier[pos.palier] + sgn * mtg.palier[pos.palier].rlt.imagePlus[0].img.size[0]//2
 #            if bague == "Al":
-#                self.y = zone.milieuY + sgnHautBas * mtg.palier[pos.palier].rlt.imagePlus[1].img.size[0]/2
+#                self.y = zone.milieuY + sgnHautBas * mtg.palier[pos.palier].rlt.imagePlus[1].img.size[0]//2
 #            else:
 #                if mtg.palier[pos.palier].taille == "G":
 #                    self.y = zone.milieuY + sgnHautBas * 60
@@ -2404,7 +2397,7 @@ class DCPlus(wx.MemoryDC):
         pen = self.GetPen()
         brush = self.GetBrush()
         ep = pen.GetWidth()
-        lf = (taille+ep/2)/tanF
+        lf = (taille+ep//2)/tanF
 #        print "ep =",ep, "lf =", lf
         
         def SinCos(pt1, pt2):
@@ -2426,8 +2419,8 @@ class DCPlus(wx.MemoryDC):
 #            print lstpoint[0].x,lstpoint[0].y
 #            lstpoint[0] = LocToGlob(lstpoint[0], wx.Point(-ep/2, 0), sinA, cosA)
             fl1 = [lstpoint[0], 
-                   LocToGlob(lstpoint[0], wx.Point(lf,  taille+ep/2), sinA, cosA),
-                   LocToGlob(lstpoint[0], wx.Point(lf, -taille-ep/2), sinA, cosA),
+                   LocToGlob(lstpoint[0], wx.Point(lf,  taille+ep//2), sinA, cosA),
+                   LocToGlob(lstpoint[0], wx.Point(lf, -taille-ep//2), sinA, cosA),
                    lstpoint[0]]
             self.SetPen(wx.Pen(pen.GetColour(), 1))
             self.SetBrush(wx.Brush(pen.GetColour()))
@@ -2440,10 +2433,10 @@ class DCPlus(wx.MemoryDC):
             sinB, cosB = SinCos(lstpoint[nbPt-1], lstpoint[nbPt-2])
 #            print "sinB =", sinB, "cosB =", cosB
 #            print lstpoint[nbPt-1].x,lstpoint[nbPt-1].y
-#            lstpoint[nbPt-1] = LocToGlob(lstpoint[nbPt-1], wx.Point(-ep/2, 0), sinB, cosB)
+#            lstpoint[nbPt-1] = LocToGlob(lstpoint[nbPt-1], wx.Point(-ep//2, 0), sinB, cosB)
             fl2 = [lstpoint[nbPt-1], 
-                   LocToGlob(lstpoint[nbPt-1], wx.Point(lf,  taille+ep/2), sinB, cosB),
-                   LocToGlob(lstpoint[nbPt-1], wx.Point(lf,  -taille-ep/2), sinB, cosB),
+                   LocToGlob(lstpoint[nbPt-1], wx.Point(lf,  taille+ep//2), sinB, cosB),
+                   LocToGlob(lstpoint[nbPt-1], wx.Point(lf,  -taille-ep//2), sinB, cosB),
                    lstpoint[nbPt-1]]
             self.SetPen(wx.Pen(pen.GetColour(), 1))
             self.SetBrush(wx.Brush(pen.GetColour()))

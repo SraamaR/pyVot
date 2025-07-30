@@ -3150,7 +3150,7 @@ class Analyse:
         
 #        def GroupeBmp(lstItem):
 #            # Regroupement des images
-#            bmp = wx.EmptyBitmap(zoneMtg.maxWidth, zoneMtg.maxHeight)
+#            bmp = wx.Bitmap(zoneMtg.maxWidth, zoneMtg.maxHeight)
 #            memdc = wx.MemoryDC(bmp)
 #            memdc.SetBackground(wx.Brush(wx.Colour(255,255,254))) #wx.TRANSPARENT_BRUSH)
 #            memdc.Clear()
@@ -4202,7 +4202,7 @@ class Analyse:
         
 #        def GroupeBmp(lstItem):
 #            # Regroupement des images
-#            bmp = wx.EmptyBitmap(zoneMtg.maxWidth, zoneMtg.maxHeight)
+#            bmp = wx.Bitmap(zoneMtg.maxWidth, zoneMtg.maxHeight)
 #            memdc = wx.MemoryDC(bmp)
 #            memdc.SetBackground(wx.Brush(wx.Colour(255,255,254))) #wx.TRANSPARENT_BRUSH)
 #            memdc.Clear()
@@ -4471,7 +4471,7 @@ class Analyse:
             # Points extrémités de la Fleche
             x1,y1,x2,y2 = 0, e/2, long, e/2
     
-            bmp = wx.EmptyBitmap(long+o, e+o)
+            bmp = wx.Bitmap(long+o, e+o)
             dc = DCPlus(bmp)
             dc.SetBackground(wx.TRANSPARENT_BRUSH)
             dc.Clear()
@@ -4660,7 +4660,7 @@ class ListeActive(wx.Panel):
 #        self.FitInside()
 
         def SymboleDevelop(taille):
-            bmp = wx.EmptyBitmap(taille, 10)
+            bmp = wx.Bitmap(taille, 10)
             dc = wx.MemoryDC(bmp)
             dc.SetBackground(wx.Brush(wx.Colour(255,255,254))) #wx.TRANSPARENT_BRUSH)
             dc.Clear()
@@ -4981,7 +4981,7 @@ class SchemaStructure():
 #                dc.SetBrush(wx.TRANSPARENT_BRUSH)
              
         def dessinerFlecheCharge(dc, cote, typeCharge, resiste):
-#            bm = wx.EmptyBitmap(bmp.GetWidth(), bmp.GetHeight())
+#            bm = wx.Bitmap(bmp.GetWidth(), bmp.GetHeight())
 #            dc = DCPlus(bm)
 #            dc.Clear()
             tanA_ = 1
@@ -5022,7 +5022,7 @@ class SchemaStructure():
 
         
         # Regroupement des images
-        bmp = wx.EmptyBitmap(200, 100)
+        bmp = wx.Bitmap(200, 100)
         memdc = DCPlus(bmp)
         memdc.SetBackground(wx.Brush(wx.Colour(255,255,254))) #wx.TRANSPARENT_BRUSH)
         memdc.Clear()

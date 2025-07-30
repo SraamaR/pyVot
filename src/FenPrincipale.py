@@ -61,44 +61,59 @@ DEFAULT_PERSPECTIVE = "Default Perspective"
 #    return st
 
 def val2str(d):
-#    print d
-    if type(d) == int : return str(d)
-    elif type(d) == unicode : return d
-    elif type(d) == str : return unicode(d,'cp1252')
-    elif isinstance(d,CdCF.Indice) \
-        or isinstance(d,CdCF.IntVar): 
+    if isinstance(d, int):
+        return str(d)
+    
+    elif isinstance(d, str):
+        return d
+
+    elif isinstance(d, bytes):
+        return d.decode('cp1252')
+
+    elif isinstance(d, (CdCF.Indice, CdCF.IntVar)):
         if hasattr(d, 'ch'):
-            return d.ch+" ("+unicode(d.val)+")"
+            return f"{d.ch} ({d.val})"
         else:
-            return unicode(d.val)
-    elif isinstance(d,Elements.Element) :
-#        print d.num
-        s = unicode(d.num)
-        if d.num is not None and d.type == "R" :
-            s = d.taille+s
+            return str(d.val)
+
+    elif isinstance(d, Elements.Element):
+        s = str(d.num)
+        if d.num is not None and d.type == "R":
+            s = d.taille + s
             if d.estOblique():
                 s += d.orientation
         return s
-    else: return u""
+
+    else:
+        return ""
 
 def val2strn(d):
-    if type(d) == int : return str(d)
-    elif type(d) == str or type(d) == unicode : return d 
-    elif isinstance(d,CdCF.Indice) \
-        or isinstance(d,CdCF.IntVar): 
-            return unicode(d.val)
-    elif isinstance(d,Elements.Element) :
-        s = unicode(d.num)
-        if d.num is not None and d.type == "R" :
-            s = d.taille+s
+    if isinstance(d, int):
+        return str(d)
+    
+    elif isinstance(d, str):
+        return d
+
+    elif isinstance(d, bytes):
+        return d.decode('cp1252')
+
+    elif isinstance(d, (CdCF.Indice, CdCF.IntVar)):
+        return str(d.val)
+
+    elif isinstance(d, Elements.Element):
+        s = str(d.num)
+        if d.num is not None and d.type == "R":
+            s = d.taille + s
             if d.estOblique():
                 s += d.orientation
         return s
-    else: return ""
+
+    else:
+        return ""
 
 def val2val(d):
     if type(d) == int : return d
-    elif type(d) == str or type(d) == unicode: return eval(d)
+    elif type(d) == str: return eval(d)
     elif isinstance(d,CdCF.Indice)  \
         or isinstance(d,CdCF.IntVar) : return d.val
     elif isinstance(d,Elements.Element) : return d.num
@@ -118,7 +133,7 @@ def str2val(s, d):
           
     if type(d) == int : 
         d = evalN(ss)
-    elif type(d) == str or type(d) == unicode: 
+    elif type(d) == str:
         d = ss
     elif isinstance(d, CdCF.Indice)  \
         or isinstance(d, CdCF.IntVar) : 
@@ -382,7 +397,7 @@ class wxPyVot(wx.Frame):
         # Fenetre de montage
         ###############################################################################################
         self.panelCentral = wx.ScrolledWindow(pnl, -1, style=wx.HSCROLL | wx.VSCROLL | wx.RETAINED|wx.BORDER_SUNKEN)
-        sizerCentral = wx.GridSizer(1,1)
+        sizerCentral = wx.GridSizer(rows=1, cols=1, vgap=0, hgap=0)
         self.zMont = Affichage.ZoneMontage(self.panelCentral, self, self.mtgComplet.mtg)
         
         self.panelCentral.SetVirtualSize(self.zMont.GetSize())
@@ -916,7 +931,7 @@ class wxPyVot(wx.Frame):
 #                           "Load user perspective %d"%(len(self.auiConfigurations)+1),
 #                           wx.ITEM_RADIO)
 #        self.Bind(wx.EVT_MENU, self.OnAUIPerspectives, item)                
-#        self.perspectives_menu.AppendItem(item)
+#        self.perspectives_menu.Append(item)
 #        item.Check(True)
 #        self.auiConfigurations.update({dlg.GetValue(): self.mgr.SavePerspective()})
 #
@@ -1547,19 +1562,19 @@ class Panel_ArbreElements(wx.Panel):
 #
 #
 #        for x in range(15):
-#            child = self.tree.AppendItem
+#            child = self.tree.Append
 #            self.tree.SetPyData(child, None)
 #            self.tree.SetItemImage(child, fldridx, wx.TreeItemIcon_Normal)
 #            self.tree.SetItemImage(child, fldropenidx, wx.TreeItemIcon_Expanded)
 #
 #            for y in range(5):
-#                last = self.tree.AppendItem(child, "item %d-%s" % (x, chr(ord("a")+y)))
+#                last = self.tree.Append(child, "item %d-%s" % (x, chr(ord("a")+y)))
 #                self.tree.SetPyData(last, None)
 #                self.tree.SetItemImage(last, fldridx, wx.TreeItemIcon_Normal)
 #                self.tree.SetItemImage(last, fldropenidx, wx.TreeItemIcon_Expanded)
 #
 #                for z in range(5):
-#                    item = self.tree.AppendItem(last,  "item %d-%s-%d" % (x, chr(ord("a")+y), z))
+#                    item = self.tree.Append(last,  "item %d-%s-%d" % (x, chr(ord("a")+y), z))
 #                    self.tree.SetPyData(item, None)
 #                    self.tree.SetItemImage(item, fileidx, wx.TreeItemIcon_Normal)
 #                    self.tree.SetItemImage(item, smileidx, wx.TreeItemIcon_Selected)
@@ -1696,16 +1711,11 @@ class BarreOutils(wx.ToolBar):
     def OnToolRClick(self, event):
         self.parent.OnRClick(event)
 
-
-
-
-
         # Gestion des boutons ...
 #        self.definirNomFichierCourant(nomFichier)
 #        self.menu.activerMenuEnregistrer(True)
 ##        self.barreElements.activer_desactiverBoutons(self.mtg.deuxrlt())
 ##        self.mtg.frame["cursor"] = 'arrow'
-
 
 class pnlBoutonsElem(scrolled.ScrolledPanel):
     def __init__(self, parent, master, lstNumElem):
@@ -1715,7 +1725,7 @@ class pnlBoutonsElem(scrolled.ScrolledPanel):
         
         self.dicBoutons = {}
         ls = 0
-#        n = len(lstNumElem)/2
+#        n = len(lstNumElem)//2
         n=2
         gbs = self.gbs = wx.GridBagSizer(2, 2)
         
@@ -1729,7 +1739,7 @@ class pnlBoutonsElem(scrolled.ScrolledPanel):
             self.dicBoutons[nb].Bind(wx.EVT_LEFT_DCLICK, self.OnDClick)
             self.dicBoutons[nb].Bind(wx.EVT_RIGHT_UP, self.OnRClick)
 #            self.Bind(EVT_BUTTON_DCLICK, self.OnDClick, self.dicBoutons[nb])
-            c = cnt / n
+            c = cnt // n
             l = cnt % n
             gbs.Add(self.dicBoutons[nb],(c+ls, l))
             self.dicBoutons[nb].SetDefault()
@@ -1745,8 +1755,7 @@ class pnlBoutonsElem(scrolled.ScrolledPanel):
         if not self.master.DClick:
             if nb in self.dicBoutons:
                 self.dicBoutons[nb].SetValue(False)
-        
-    
+
 #        for child in self.GetChildren():
 #            if child.GetId() == nb:
 ##                print "...",nb
@@ -1792,38 +1801,38 @@ class MenuPrincipal(wx.MenuBar):
         item = wx.MenuItem(menu, 1010, '&Nouveau projet',
                            'Créer un nouveau montage')
         item.SetBitmap(lstImg['BRAZ'])
-        menu.AppendItem(item)
+        menu.Append(item)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnNewClick, item)
         
         item = wx.MenuItem(menu, 1020, '&Ouvrir un projet',
                            'Ouvrir un montage depuis un fichier .pyv')
         item.SetBitmap(lstImg['BOuvrir'])
-        menu.AppendItem(item)
+        menu.Append(item)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnOpenClick, item)
  
         item = wx.MenuItem(menu,1030, '&Enregistrer',
                            'Enregistre le projet dans le fichier courant')
         item.SetBitmap(lstImg['BEnregi'])
-        menu.AppendItem(item)
+        menu.Append(item)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnSaveClick, item)
         
         item = wx.MenuItem(menu,1035, '&Enregistrer sous ...',
                            'Enregistre le projet dans un fichier .pyv')
-        menu.AppendItem(item)
+        menu.Append(item)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnSaveClick, item)
         
         menu.AppendSeparator()
         
         optItem = wx.MenuItem(menu, 1095, 'Options ...', u"Options de PyVot")
 #        imprItem.SetBitmap(Icones.getexitBitmap())
-        menu.AppendItem(optItem)
+        menu.Append(optItem)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnOptionClick, optItem)
         
         menu.AppendSeparator()
         
         exitItem = wx.MenuItem(menu, 1100, '&Quitter\tCtrl-Q', u"Quitter l'application")
 #         exitItem.SetBitmap(Icones.getexitBitmap())
-        menu.AppendItem(exitItem)
+        menu.Append(exitItem)
         # à faire ...
         self.parent.Bind(wx.EVT_MENU, self.parent.OnFileExit, exitItem)
         
@@ -1834,18 +1843,14 @@ class MenuPrincipal(wx.MenuBar):
         # Menu "Affichage"
         #---------------
         menu = wx.Menu()
-        
-        item = wx.MenuItem(menu, 50, '&Afficher le CdCF',
-                           'Afficher le CdCF', wx.ITEM_CHECK)
+
+        item = wx.MenuItem(menu, 50, '&Afficher le CdCF', 'Afficher le CdCF', wx.ITEM_CHECK)
 #        item.SetBitmap(lstImg['BCdCF'])
-        menu.AppendItem(item)
+        menu.Append(item)
         menu.Check(50, True)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnCdCFClick, item)
 
         self.Append(menu, '&Affichage')
-        
-        
-        
         
         # Menu "Insertion"
         #-----------------
@@ -1871,11 +1876,10 @@ class MenuPrincipal(wx.MenuBar):
                                   u"Insérer un "+Elements.listeElements[e]['nom'])
                 img = Images.Img_Elem(e).ConvertToImage()
                 item.SetBitmap(img.Rescale(30,30,wx.IMAGE_QUALITY_HIGH).ConvertToBitmap())
-                sub.AppendItem(item)
+                sub.Append(item)
                 self.parent.Bind(wx.EVT_MENU, self.parent.OnElemClick, item)
-            menu.AppendMenu(-1,famille[0],sub)
-            
-        
+            menu.Append(-1,famille[0],sub)
+
         def ajoutMenu(menu, famille):
 #            print "Ajout menu :",famille[0].encode('cp437','replace')
 #            sMenu = menu.Append(-1, famille[0], famille[0])
@@ -1884,16 +1888,14 @@ class MenuPrincipal(wx.MenuBar):
                 for m in famille[1]:
 #                    print "  ",
                     ajoutMenu(sub, m)
-                menu.AppendMenu(-1,famille[0],sub)
+                menu.Append(-1,famille[0],sub)
             else:
                 ajoutFamElem(menu, famille)
-            
-        
+
         nn = 1
         for fam in Elements.listeFamilles:
             ajoutMenu(menu, fam)
-            
-        
+
 #        for indx, item in enumerate(Montage._treeList[:-1]):
 #            menuItem = wx.MenuItem(menu, -1, item[0])
 #            submenu = wx.Menu()
@@ -1902,7 +1904,7 @@ class MenuPrincipal(wx.MenuBar):
 #                self.Bind(wx.EVT_MENU, self.OnDemoMenu, mi)
 #            menuItem.SetBitmap(Images.Img_Icones(Montage._Pngs[indx]))
 #            menuItem.SetSubMenu(submenu)
-#            menu.AppendItem(menuItem)
+#            menu.Append(menuItem)
         self.Append(menu, '&Insertion')
 
         # Menu "Options"
@@ -1915,32 +1917,32 @@ class MenuPrincipal(wx.MenuBar):
 #            perspectivesMenu = wx.Menu()
 #            item = wx.MenuItem(perspectivesMenu, -1, DEFAULT_PERSPECTIVE, "Load startup default perspective", wx.ITEM_RADIO)
 #            self.parent.Bind(wx.EVT_MENU, self.OnAUIPerspectives, item)
-#            perspectivesMenu.AppendItem(item)
+#            perspectivesMenu.Append(item)
 #            for indx, key in enumerate(auiPerspectives):
 #                if key == DEFAULT_PERSPECTIVE:
 #                    continue
 #                item = wx.MenuItem(perspectivesMenu, -1, key, "Load user perspective %d"%indx, wx.ITEM_RADIO)
-#                perspectivesMenu.AppendItem(item)
+#                perspectivesMenu.Append(item)
 #                self.Bind(wx.EVT_MENU, self.OnAUIPerspectives, item)
 #
-#            menu.AppendMenu(wx.ID_ANY, "&AUI Perspectives", perspectivesMenu)
+#            menu.Append(wx.ID_ANY, "&AUI Perspectives", perspectivesMenu)
 #            self.perspectives_menu = perspectivesMenu
 #
 #            item = wx.MenuItem(menu, -1, 'Save Perspective', 'Save AUI perspective')
 #            item.SetBitmap(images.catalog['saveperspective'].getBitmap())
-#            menu.AppendItem(item)
+#            menu.Append(item)
 #            self.parent.Bind(wx.EVT_MENU, self.OnSavePerspective, item)
 #
 #            item = wx.MenuItem(menu, -1, 'Delete Perspective', 'Delete AUI perspective')
 #            item.SetBitmap(images.catalog['deleteperspective'].getBitmap())
-#            menu.AppendItem(item)
+#            menu.Append(item)
 #            self.parent.Bind(wx.EVT_MENU, self.OnDeletePerspective, item)
 #
 #            menu.AppendSeparator()
 #
 #            item = wx.MenuItem(menu, -1, 'Restore Tree Expansion', 'Restore the initial tree expansion state')
 #            item.SetBitmap(images.catalog['expansion'].getBitmap())
-#            menu.AppendItem(item)
+#            menu.Append(item)
 #            self.parent.Bind(wx.EVT_MENU, self.OnTreeExpansion, item)
 #
 #            self.Append(menu, '&Options')
@@ -1950,17 +1952,17 @@ class MenuPrincipal(wx.MenuBar):
         menu = wx.Menu()
         retItem = wx.MenuItem(menu, 1041, 'Re&tourner le montage', u"Retourne le montage droite<>gauche")
         retItem.SetBitmap(lstImg['BRet'])
-        menu.AppendItem(retItem)
+        menu.Append(retItem)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnRetourneClick, retItem)
         
         retItem = wx.MenuItem(menu, 1042, '&Analyser montage', u"Execute l'analyse complète du montage")
         retItem.SetBitmap(lstImg['BAnalys'])
-        menu.AppendItem(retItem)
+        menu.Append(retItem)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnAnalysClick, retItem)
         
         imprItem = wx.MenuItem(menu, 1090, 'Afficher un &rapport', u"Afficher un rapport d'analyse")
         imprItem.SetBitmap(lstImg['BRapport'])
-        menu.AppendItem(imprItem)
+        menu.Append(imprItem)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnPrintClick, imprItem)
 #        self.parent.Bind(wx.EVT_MENU, self.parent.OnHelpAbout, aproposItem)
         
@@ -1975,7 +1977,7 @@ class MenuPrincipal(wx.MenuBar):
         #------------
         menu = wx.Menu()
         aideItem = wx.MenuItem(menu, -1, '&Aide', u"Ouvre l'aide de PyVot")
-        menu.AppendItem(aideItem)
+        menu.Append(aideItem)
         self.parent.Bind(wx.EVT_MENU, self.parent.OnHelpClick, aideItem)
         
         menu.AppendSeparator()
@@ -1983,7 +1985,7 @@ class MenuPrincipal(wx.MenuBar):
         aproposItem = wx.MenuItem(menu, -1, 'A propos de PyVot',
                                 'Information sur Pyvot : version, licence, auteurs, lien web, ...')
         wx.App.SetMacAboutMenuItemId(aproposItem.GetId())
-        menu.AppendItem(aproposItem)
+        menu.Append(aproposItem)
         
         # à faire ...
         self.parent.Bind(wx.EVT_MENU, self.parent.OnAboutClick, aproposItem)
@@ -1996,23 +1998,21 @@ class MenuPrincipal(wx.MenuBar):
 #        self.Bind(wx.EVT_UPDATE_UI, self.OnUpdateFindItems, findNextItem)
         self.Append(menu, '&Aide')
 
-
 #    def OnMenuClick(self, event):
 #        self.parent.OnClick(event)
         
     def OnMenuRClick(self, event):
         self.parent.OnRClick(event)
 
-        
 class MontageComplet(object):
     def __init__(self, parent, mtg = None, cdcf = None):
-        
+
         #Instanciation d'un Montage
         if mtg == None:
             self.mtg = Montage.Montage(parent)
         else:
             self.mtg = mtg
-            
+
         #Instanciation d'un CdCF    
         if cdcf == None:
             self.CdCF = CdCF.CdCF(1)
@@ -2020,16 +2020,10 @@ class MontageComplet(object):
             self.CdCF = cdcf
             
         self.estModifie = False
-    
-        
-        
+
     def RAZ(self):
         self.mtg.RAZ()
         self.CdCF.RAZ()
-        
-
-    
-
 
 class ArbreMontage(ExpansionState, wx.TreeCtrl):
     
@@ -2164,7 +2158,7 @@ class StructureArbre(object):
         for key,dat in self._treeData.items():
             if dat is None:
                 d = dat
-            elif type(dat) == str or type(dat) == int or type(dat) == unicode or type(dat) == float:
+            elif type(dat) == str or type(dat) == int or type(dat) == float:
                 d = dat
             else:
                 d = dat.copy()
@@ -2216,19 +2210,19 @@ class StructureArbre(object):
                 dat = u''
             
             if len(e[1]) > 1:
-                item = arbre.AppendItem(parent, text+dat, data = None)
+                item = arbre.Append(parent, text+dat, data = None)
                 if type(e[1][1]) is dict:
                     for sube in e[1][1].items():
                         recurs(item, sube)
                 else:
                     e[1][1].construitArbre(arbre, item)
             else:
-                item = arbre.AppendItem(parent, text+dat, data = None)
+                item = arbre.Append(parent, text+dat, data = None)
             
             # On affiche en GRAS les informations présentes dans le CdCF
             if   (isinstance(d,Elements.Element) and (d.num is not None)) \
                 or (isinstance(d,CdCF.Indice)) or (isinstance(d,CdCF.IntVar)) \
-                or type(d) == unicode :                                     
+                or type(d) == str :                                     
                 arbre.SetItemBold(item, True)
             # On n'affiche pas les informations absentes
             elif (isinstance(d,Elements.Element) and (d.num is None)):

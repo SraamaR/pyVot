@@ -495,7 +495,7 @@ class DirSelectorCombo(wx.ComboCtrl):
 
         # make a custom bitmap showing "..."
         bw, bh = 14, 16
-        bmp = wx.EmptyBitmap(bw,bh)
+        bmp = wx.Bitmap(bw,bh)
         dc = wx.MemoryDC(bmp)
 
         # clear to a specific background colour
@@ -509,7 +509,7 @@ class DirSelectorCombo(wx.ComboCtrl):
         font.SetWeight(wx.FONTWEIGHT_BOLD)
         dc.SetFont(font)
         tw,th = dc.GetTextExtent(label)
-        dc.DrawText(label, (bw-tw)/2, (bw-tw)/2)
+        dc.DrawText(label, (bw-tw)//2, (bw-tw)//2)
         del dc
 
         # now apply a mask using the bgcolor
@@ -552,7 +552,7 @@ class FileSelectorCombo(wx.ComboCtrl):
 
         # make a custom bitmap showing "..."
         bw, bh = 14, 16
-        bmp = wx.EmptyBitmap(bw,bh)
+        bmp = wx.Bitmap(bw,bh)
         dc = wx.MemoryDC(bmp)
 
         # clear to a specific background colour
