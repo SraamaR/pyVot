@@ -29,7 +29,7 @@ import wx,os
 import Images
 import FenPrincipale
 from Elements import *
-import ConfigParser
+import configparser
 import xml.etree.ElementTree as ET
 
 # pour tester optimisation

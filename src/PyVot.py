@@ -27,6 +27,7 @@
 
 
 import wx
+import wx.adv
 import Icones
 import sys, os, getpass
 
@@ -55,15 +56,15 @@ import FenPrincipale
 
 #---------------------------------------------------------------------------
 #---------------------------------------------------------------------------
-class MySplashScreen(wx.SplashScreen):
+class MySplashScreen(wx.adv.SplashScreen):
     def __init__(self):
         bmp = Icones.getLogoSplashBitmap()
-        wx.SplashScreen.__init__(self, bmp,
-                                 wx.SPLASH_CENTRE_ON_SCREEN | wx.SPLASH_TIMEOUT,
+        wx.adv.SplashScreen.__init__(self, bmp,
+                                 wx.adv.SPLASH_CENTRE_ON_SCREEN | wx.adv.SPLASH_TIMEOUT,
                                  5000, None, -1,
                                  style = wx.BORDER_NONE|wx.FRAME_NO_TASKBAR)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
-        self.fc = wx.FutureCall(2000, self.ShowMain)
+        self.fc = wx.CallLater(2000, self.ShowMain)
 
     def OnClose(self, evt):
         # Make sure the default handler runs too so this window gets
@@ -79,7 +80,7 @@ class MySplashScreen(wx.SplashScreen):
 
     def ShowMain(self):
         NomFichier = None
-        if len(sys.argv)>1: #un paramètre a été passé
+        if len(sys.argv) > 1: #un paramètre a été passé
             parametre=sys.argv[1]
             # on verifie que le fichier passé en paramètre existe
             if os.path.isfile(parametre):
@@ -101,11 +102,11 @@ class PyVotApp(wx.App):
         """
         self.version = VERSION
 #        try:
-        self.auteur = unicode(getpass.getuser(),'cp1252')
+        self.auteur = getpass.getuser()
 #        except:
 #            self.auteur = ""
         
-        wx.SystemOptions.SetOptionInt("mac.window-plain-transition", 1)
+        wx.SystemOptions.SetOption("mac.window-plain-transition", 1)
         self.SetAppName("PyVot")
         
         # For debugging

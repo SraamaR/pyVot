@@ -26,15 +26,14 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 
-import ConfigParser
+import configparser
 import Const
 import os,os.path,sys
 import wx
-import wx.combo
 import globdef
 import ElementTable
 import Elements
-import wx.lib.customtreectrl as CT
+import wx.lib.agw.customtreectrl as CT
 
 
 ##############################################################################
@@ -490,9 +489,9 @@ class nbOptions(wx.Notebook):
         self.AddPage(pnlAnalyse(self, options.optAnalyse), u"Analyse")
         self.SetMinSize((350,-1))
             
-class DirSelectorCombo(wx.combo.ComboCtrl):
+class DirSelectorCombo(wx.ComboCtrl):
     def __init__(self, *args, **kw):
-        wx.combo.ComboCtrl.__init__(self, *args, **kw)
+        wx.ComboCtrl.__init__(self, *args, **kw)
 
         # make a custom bitmap showing "..."
         bw, bh = 14, 16
@@ -547,9 +546,9 @@ class DirSelectorCombo(wx.combo.ComboCtrl):
     def DoSetPopupControl(self, popup):
         pass
 
-class FileSelectorCombo(wx.combo.ComboCtrl):
+class FileSelectorCombo(wx.ComboCtrl):
     def __init__(self, *args, **kw):
-        wx.combo.ComboCtrl.__init__(self, *args, **kw)
+        wx.ComboCtrl.__init__(self, *args, **kw)
 
         # make a custom bitmap showing "..."
         bw, bh = 14, 16

@@ -178,7 +178,7 @@ listeElements = {0 : {'nom'  : u'Roulement à billes à contact radial',
 def dictCopy(dic):
     newDic = {}
     for k,v in dic.items():
-        if type(v) == str or type(v) == unicode or type(v) == int:
+        if isinstance(v, (str, int)):
             newDic[k] = v
         elif type(v) == list:
             newDic[k] = listCopy(v)

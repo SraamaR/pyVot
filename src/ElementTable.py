@@ -28,7 +28,7 @@
 import  wx
 import  wx.grid as gridlib
 import Icones
-import ConfigParser as cp
+import configparser as cp
 import globdef
 import os, os.path
 
@@ -738,13 +738,11 @@ def Exporter(fichier, lstElements):
     tableRlt.Export(lstElements)
     tableArr.Export(lstElements)
     tableJnt.Export(lstElements)
-    
-    
 
 
-class ElementParser(cp.SafeConfigParser):
+class ElementParser(cp.ConfigParser):
     def __init__(self, *args, **kw):
-        cp.SafeConfigParser.__init__(self, *args, **kw)
+        cp.ConfigParser.__init__(self, *args, **kw)
         
         self.sect = ["Roulements", "Arrets", "Joints"]
         for s in self.sect:

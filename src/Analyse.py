@@ -2979,7 +2979,7 @@ class Analyse:
         compatible = True
         if self.cdcf.lubrifiant.get() == 0 :
             for p in ["G","D"]:
-                if  self.mtg.palier[p].jnt["Ar"].num is 203:
+                if self.mtg.palier[p].jnt["Ar"].num == 203:
                     compatible = False
                     continue
         

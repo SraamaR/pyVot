@@ -30,7 +30,6 @@ import wx.aui
 import wx.html
 import wx.richtext as rt
 import wx.lib.buttons as buttons
-import wx.lib.hyperlink as hl
 import wx.lib.scrolledpanel as scrolled
 
 from wx.lib.mixins.treemixin import ExpansionState
@@ -43,7 +42,7 @@ import Icones, Images, Imprime
 import sys, os, traceback, xml
 
 import Montage, Elements, Affichage, CdCF, Options, Analyse
-import ConfigParser
+import configparser
 import globdef
 import xml.etree.ElementTree as ET
 import xml.parsers
@@ -147,7 +146,7 @@ def str2val(s, d):
             try:
                 n = evalN(ss)
             except:
-                print "ERREUR :",s,ss,t,o
+                print("ERREUR :",s,ss,t,o)
 
         d.__init__(n,t,o)
     else:
@@ -350,7 +349,7 @@ class wxPyVot(wx.Frame):
             try :
                 options.ouvrir()
             except:
-                print "Fichier d'options corrompus ou inexistant !! Initialisation ..."
+                print("Fichier d'options corrompus ou inexistant !! Initialisation ...")
                 options.defaut()
         
         # On applique les options ...
@@ -1118,7 +1117,7 @@ au format de la version 0.6 !!' %nomFichier
             path = dlg.GetPath()
             self.enregistrer(path)
             self.DossierSauvegarde = os.path.split(path)[0]
-            print "Nouveau dossier de sauvegarde", self.DossierSauvegarde
+            print("Nouveau dossier de sauvegarde", self.DossierSauvegarde)
         dlg.Destroy()
             
     def commandeEnregistrer(self):
@@ -1190,7 +1189,7 @@ au format de la version 0.6 !!' %nomFichier
         try:
             self.options.enregistrer()
         except:
-            print "Erreur enregistrement options"
+            print("Erreur enregistrement options")
 #        self.Destroy()
         evt.Skip()
         sys.exit()
@@ -1759,7 +1758,7 @@ class pnlBoutonsElem(scrolled.ScrolledPanel):
 
     def OnDClick(self, event):
         self.master.DClick = True
-        print "DClick"
+        print("DClick")
 #        event.Skip()
 
     def OnClick(self, event):
@@ -2571,9 +2570,9 @@ class A_propos(wx.Dialog):
         nb.AddPage(auteurs, "Auteurs")
         nb.AddPage(licence, "Licence")
         
-        sizer.Add(hl.HyperLinkCtrl(self, wx.ID_ANY, "Site web de PyVot",
-                                   URL="https://github.com/cedrick-f/pyVot"),  
-                  flag=wx.ALIGN_RIGHT)
+        link = wx.adv.HyperlinkCtrl(self, wx.ID_ANY, "Site web de PyVot", "https://github.com/cedrick-f/pyVot")
+
+        sizer.Add(link, flag=wx.ALIGN_RIGHT)
         sizer.Add(nb)
         
         self.SetSizerAndFit(sizer)
