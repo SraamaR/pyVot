@@ -130,13 +130,9 @@ Styles["Tableau"].SetFontSize(10)
 #Styles["Tableau"].SetParagraphSpacingAfter(10)
 #Styles["Tableau"].SetParagraphSpacingBefore(10)
 
-
-
 Styles["Sous titre"].SetFontSize(8)
 Styles["Sous titre"].SetFontStyle(wx.ITALIC)#rt.TEXT_ATTR_FONT_ITALIC)
 Styles["Sous titre"].SetAlignment(wx.TEXT_ALIGNMENT_CENTRE)
-
-
 
 class FrameRapport(wx.Frame):
     def __init__(self, parent, options, fichierCourant, analyse, zoneMtg, CdCF, 
@@ -1041,7 +1037,7 @@ class RapportRTF(rt.RichTextCtrl):
     def AddParagraphStyled(self, texte, style, couleur = None):
         
 #        if style == "MessSens":
-#            print  Styles[style].GetTextColour(), texte.encode('cp437','replace')
+#            print(Styles[style].GetTextColour(), texte)
         
         if couleur is not None:
             if isinstance(couleur, wx.Colour):
@@ -1480,5 +1476,3 @@ _rt_underline = PyEmbeddedImage(
     "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAFdJ"
     "REFUOI1jZGRiZqAEMFGkmxoGsKAL/P/39z8yn5GJmRGbGE4XIEvC2NjEcBpAKhg1gIABS5cs"
     "/o9MYwOMuJIyetwzMGBGIV4DiAUEUyI2gJKwBjw3AgDOdhYrghF5ggAAAABJRU5ErkJggg==")
-
-

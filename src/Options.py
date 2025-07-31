@@ -111,11 +111,9 @@ class Options:
         
 #        PATH=os.path.dirname(os.path.abspath(sys.argv[0]))
         os.chdir(globdef.PATH)
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
 
         for titre,dicopt in self.typesOptions.items():
-            titre = titre.encode('utf-8')
-#            print titre
             config.add_section(titre)
             for opt in dicopt.items():
                 config.set(titre, opt[0],opt[1])
@@ -144,19 +142,18 @@ class Options:
 ##        print "Ouvre Options"
 #        PATH=os.path.dirname(os.path.abspath(sys.argv[0]))
         os.chdir(globdef.PATH)
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.read(self.fichierOpt)
         
         for titre in self.typesOptions.keys():
-            titreUtf = titre.encode('utf-8')
             for titreopt in self.typesOptions[titre].keys():
                 opt = self.typesOptions[titre][titreopt] 
                 if type(opt) == int:
-                    opt = config.getint(titreUtf, titreopt)
+                    opt = config.getint(titre, titreopt)
                 elif type(opt) == bool:
-                    opt = config.getboolean(titreUtf, titreopt)
+                    opt = config.getboolean(titre, titreopt)
                 elif type(opt) == str:
-                    opt = config.get(titreUtf, titreopt)
+                    opt = config.get(titre, titreopt)
                 self.typesOptions[titre][titreopt] = opt
                 
 #        print "Ouverture",self
@@ -167,7 +164,6 @@ class Options:
         """ Retourne une copie des options """
         options = Options()
         for titre,dicopt in self.typesOptions.items():
-            titre.encode('utf-8')
             for opt in dicopt.items():
                 options.typesOptions[titre][opt[0]] = opt[1]
         return options
@@ -246,7 +242,7 @@ class pnlGenerales(wx.Panel):
         sb1 = wx.StaticBox(self, -1, u"Dossier de sauvegarde par défaut", size = (200,-1))
         sbs1 = wx.StaticBoxSizer(sb1,wx.VERTICAL)
         fs = DirSelectorCombo(self, -1)
-        fs.SetValueWithEvent(self.opt["RepCourant"])
+        fs.SetValue(self.opt["RepCourant"])
         fs.SetToolTip(wx.ToolTip(u"Permet de selectionner le dossier\ndans lequel seront sauvegardés les fichiers *.pyv\naprès le lancement de PyVot.\nPar la suite, le dossier de sauvegarde proposé\nest le dernier dossier utilisé pour un enregistrement."))
         sbs1.Add(fs, flag = wx.EXPAND|wx.ALL, border = 5)
         fs.Bind(wx.EVT_TEXT, self.EvtComboCtrl)

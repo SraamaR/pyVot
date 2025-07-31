@@ -160,9 +160,6 @@ def Img_BoutonMont(key, ajout = False):
         return ajouteSensInterdit(lst[key])
     else:  
         return lst[key] 
-    
-    
-
 
 #####################################################################################
 #####################################################################################
@@ -233,8 +230,6 @@ class ImagePlus:
         
 #    def estomper(self, niv):
 #        self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(1.0, 1.0, 1.0, (1.0*niv)/100))
-
-    
 
     def fondu(self, bmp1, bmp2, niv):
         """ Renvoie une image fondue à <niv> % avec <bmp>
@@ -637,18 +632,11 @@ def charger_imagesAr():
     imageAr["GRE"] = ImagePlus(dos, ('g_BordLogementArbre_Exter.png',)        )
     imageAr["PRE"] = ImagePlus(dos, ('BordLogementArbre_Exter.png',)          )
 
-#
-#
-#
-#
-#
 ## Logos ############################################################################################
 #           
 #Logo_Principal = Image.open(dosImg['root'] + 'logo 0.3.png')
 #
 #
-
-
 
 ###################################################################################################
 # Images du Schéma de CdCF ##################################################################################
@@ -695,7 +683,6 @@ def charger_imagesSchema():
 #    
 #    return img
 
-
 def ombrer(bmp, e = 4):
     
 #    dc.SetBackground(wx.Brush(wx.Colour(255,255,254)))
@@ -713,8 +700,6 @@ def ombrer(bmp, e = 4):
     maskDC.DrawBitmap(bmp, e, e, True)
     maskDC.SelectObject(wx.NullBitmap)
 #    bmpMask.SetMask(wx.Mask(bmpMask, wx.WHITE))
-    
-    
 
     ombreBmp = bmpMask.ConvertToImage().ConvertToMono(255, 255, 255).Blur(e/2).ConvertToBitmap()
     imageBmp = bmpMask.ConvertToImage().ConvertToMono(255, 255, 255).ConvertToBitmap()
@@ -784,8 +769,6 @@ def negatif(bmp):
     dstDC.SelectObject(wx.NullBitmap)
     
     return bmpNeg
-
-
 
 def ombre(bmp, e = 4):
     ombr = wx.Bitmap(wx.ImageFromBitmap(bmp).AdjustChannels(0.5, 0.5, 0.5, 0.5).Blur(e))

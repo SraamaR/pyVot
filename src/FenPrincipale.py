@@ -999,7 +999,7 @@ class wxPyVot(wx.Frame):
                                 defaultDir=defautDir, 
                                 defaultFile="",
                                 wildcard = mesFormats,
-                                style=wx.OPEN | wx.MULTIPLE | wx.CHANGE_DIR
+                                style=wx.FD_OPEN | wx.FD_MULTIPLE
                                 )
                 
             # Show the dialog and retrieve the user response. If it is the OK response, 
@@ -1034,7 +1034,7 @@ class wxPyVot(wx.Frame):
         
         def ouvrir03():
 #            try:
-            fichier = ConfigParser.ConfigParser()
+            fichier = configparser.ConfigParser()
             fichier.read(nomFichier)    
             self.mtgComplet.mtg.ouvrir(fichier)
             self.mtgComplet.CdCF.ouvrir(fichier)
@@ -1125,7 +1125,7 @@ au format de la version 0.6 !!' %nomFichier
 #        mesFormats = "Projet PyVot (*.pyv)|*.pyv;Tous les fichiers|*.*"
         dlg = wx.FileDialog(
             self, message="Enregistrer le projet sous ...", defaultDir=self.DossierSauvegarde , 
-            defaultFile="", wildcard=mesFormats, style=wx.SAVE|wx.OVERWRITE_PROMPT|wx.CHANGE_DIR
+            defaultFile="", wildcard=mesFormats, style=wx.FD_SAVE|wx.FD_OVERWRITE_PROMPT
             )
         dlg.SetFilterIndex(0)
         if dlg.ShowModal() == wx.ID_OK:
@@ -1143,11 +1143,8 @@ au format de la version 0.6 !!' %nomFichier
             self.dialogEnregistrer()
 
     def enregistrer(self, nomFichier):
-        fichier = file(nomFichier, 'w')
-        self.tree.enregistrer(fichier)
-        fichier.close()
+        self.tree.enregistrer(nomFichier)
         self.definirNomFichierCourant(nomFichier)
-
 
     def changerCurseur(self, curs = wx.CURSOR_ARROW, elem = None):    
         if elem is not None:
@@ -1176,49 +1173,46 @@ au format de la version 0.6 !!' %nomFichier
         self.statusBar.SetStatusText(texte, 0)
         
 
-#############################################################################
-    def quitterPyVot(self, event = None):
-#        print "Quitter !!!!!!"
-#        self.options.enregistrer()
-#        event.Skip()
+    #############################################################################
+    def quitterPyVot(self, event=None):
         if not self.fichierCourantModifie:
             self.fermerPyVot(event)
             return
-        
-        texte = u"Le projet à été modifié.\nVoulez vous enregistrer les changements ?"
+
+        texte = "Le projet a été modifié.\nVoulez-vous enregistrer les changements ?"
         if self.fichierCourant != '':
-            texte += "\n\n\t"+self.fichierCourant+"\n"
-            
-        dialog = wx.MessageDialog(self, texte, 
-                                  "Confirmation", wx.YES_NO | wx.CANCEL | wx.ICON_WARNING)
+            texte += f"\n\n\t{self.fichierCourant}\n"
+
+        dialog = wx.MessageDialog(
+            self,
+            message=texte,
+            caption="Confirmation",
+            style=wx.YES_NO | wx.CANCEL | wx.ICON_WARNING
+        )
+
         retCode = dialog.ShowModal()
+        dialog.Destroy()  # Always destroy modal dialogs after use
+
         if retCode == wx.ID_YES:
             self.commandeEnregistrer()
             self.fermerPyVot(event)
         elif retCode == wx.ID_NO:
             self.fermerPyVot(event)
-#        else:
-#            print 'skipping quit'
+        # If CANCEL, do nothing
 
-    def fermerPyVot(self, evt):
+    def fermerPyVot(self, evt=None):
         try:
             self.options.enregistrer()
-        except:
-            print("Erreur enregistrement options")
-#        self.Destroy()
-        evt.Skip()
-        sys.exit()
+        except Exception as e:
+            #print("Erreur enregistrement options:", e)
+            pass
 
 
-#        self.Destroy()
-#        self.Hide()
-        
-#        try:
-#            sys.exit()
-#        except:
-###            print "Erreur !"
-#            pass
+        if evt is not None:
+            evt.Skip()
 
+        # Properly close the application
+        self.Close()
 
 ######################################################################################################
 # Arbre présentant les boutons de selection d'élément
@@ -1271,7 +1265,8 @@ class NbGauche(wx.Notebook):
         # TreeBook des éléments (boutons) (page 0)
         #-----------------------------------------
         self.tbElem = Panel_ArbreElements(self, app)
-        self.AddPage(self.tbElem, self.NomPages[0], imageId=0)
+        #self.AddPage(self.tbElem, self.NomPages[0], imageId=0)
+        self.AddPage(self.tbElem, self.NomPages[0])
         self.IdPages[0] = num
         num += 1
         
@@ -1281,7 +1276,8 @@ class NbGauche(wx.Notebook):
         self.tree = ArbreMontage(self, mtgComplet)
         self.tree.RecreateTree()
         if self.AfficherArbre:
-            self.AddPage(self.tree, self.NomPages[1], imageId=1)
+            #self.AddPage(self.tree, self.NomPages[1], imageId=1)
+            self.AddPage(self.tree, self.NomPages[1])
             self.IdPages[1] = num
             num += 1
         else:
@@ -1292,7 +1288,8 @@ class NbGauche(wx.Notebook):
         # TreeBook d'Analyse (page 2)
         #----------------------------
         self.tbAnalys = Analyse.TBAnalyse(self, self.mtgComplet, self.zMont, analyse, self.nbCdCF)
-        self.AddPage(self.tbAnalys, self.NomPages[2], imageId=2)
+        #self.AddPage(self.tbAnalys, self.NomPages[2], imageId=2)
+        self.AddPage(self.tbAnalys, self.NomPages[2])
         self.IdPages[2] = num
         num += 1
         
@@ -1448,7 +1445,7 @@ class ListBookElements(wx.Listbook):
 #        self.Bind(wx.EVT_LISTBOOK_PAGE_CHANGED, self.OnPageChanged)
         self.lv = self.GetListView()
         sz = self.lv.GetSize()
-        self.lastHPage = self.GetSizeTuple()[1]-self.lv.GetSize()[1]
+        self.lastHPage = self.GetSize()[1]-self.lv.GetSize()[1]
 #        lv.__init__(parent, -1, style = wx.LC_REPORT 
 #                                 #| wx.BORDER_SUNKEN
 #                                 | wx.BORDER_NONE
@@ -1473,8 +1470,8 @@ class ListBookElements(wx.Listbook):
         event.Skip()
         self.lv.SetSize((-1,150))
         return
-        w,h = self.GetClientSizeTuple()
-        hPage = self.GetSizeTuple()[1]-self.lv.GetSize()[1]
+        w,h = self.GetClientSize()
+        hPage = self.GetSize()[1]-self.lv.GetSize()[1]
 #        print "Resize",self.lastHPage,"-->",hPage," (",hPage-self.lastHPage,")"
         sz = self.lv.GetSize()
         self.lv.SetSize((sz[0],sz[1]-hPage+self.lastHPage))
@@ -1562,19 +1559,19 @@ class Panel_ArbreElements(wx.Panel):
 #
 #
 #        for x in range(15):
-#            child = self.tree.Append
+#            child = self.tree.AppendItem
 #            self.tree.SetPyData(child, None)
 #            self.tree.SetItemImage(child, fldridx, wx.TreeItemIcon_Normal)
 #            self.tree.SetItemImage(child, fldropenidx, wx.TreeItemIcon_Expanded)
 #
 #            for y in range(5):
-#                last = self.tree.Append(child, "item %d-%s" % (x, chr(ord("a")+y)))
+#                last = self.tree.AppendItem(child, "item %d-%s" % (x, chr(ord("a")+y)))
 #                self.tree.SetPyData(last, None)
 #                self.tree.SetItemImage(last, fldridx, wx.TreeItemIcon_Normal)
 #                self.tree.SetItemImage(last, fldropenidx, wx.TreeItemIcon_Expanded)
 #
 #                for z in range(5):
-#                    item = self.tree.Append(last,  "item %d-%s-%d" % (x, chr(ord("a")+y), z))
+#                    item = self.tree.AppendItem(last,  "item %d-%s-%d" % (x, chr(ord("a")+y), z))
 #                    self.tree.SetPyData(item, None)
 #                    self.tree.SetItemImage(item, fileidx, wx.TreeItemIcon_Normal)
 #                    self.tree.SetItemImage(item, smileidx, wx.TreeItemIcon_Selected)
@@ -1600,8 +1597,9 @@ class Panel_ArbreElements(wx.Panel):
 
 
     def OnSize(self, event):
-        w,h = self.GetClientSizeTuple()
-        self.tree.SetDimensions(0, 0, w, h)
+        w,h = self.GetClientSize()
+        self.tree.SetPosition((0, 0))
+        self.tree.SetSize((w, h))
         
 
     def OnPageChanged(self, event):
@@ -1649,7 +1647,7 @@ class BarreOutils(wx.ToolBar):
 
         self.SetToolBitmapSize(tsize)
         
-        self.AddLabelTool(1010, "Nouveau", lstImg['BRAZ'], shortHelp="Nouveau montage",
+        self.AddLabelTool(1010, "Nouveau", lstImg['BRAZ'],shortHelp="Nouveau montage",
                           longHelp="Efface tout !!")
         self.Bind(wx.EVT_TOOL, self.parent.OnNewClick, id=1010)
 
@@ -1679,7 +1677,7 @@ class BarreOutils(wx.ToolBar):
         
         self.AddSeparator()
         
-        self.AddCheckLabelTool(1050, "CdCF", lstImg['BCdCF'])
+        self.AddCheckTool(1050, "CdCF", lstImg['BCdCF'])
         self.ToggleTool(1050,True)
 #        self.defToolCdCFHelp()
         self.Bind(wx.EVT_TOOL, self.parent.OnCdCFClick, id=1050)
@@ -1745,7 +1743,7 @@ class pnlBoutonsElem(scrolled.ScrolledPanel):
             self.dicBoutons[nb].SetDefault()
             self.dicBoutons[nb].SetInitialSize()
 #             self.dicBoutons[nb].SetSize(self.dicBoutons[nb].GetBestSize())
-            self.dicBoutons[nb].SetToolTipString(Elements.listeElements[nb]['nom'])
+            self.dicBoutons[nb].SetToolTip(Elements.listeElements[nb]['nom'])
             
             cnt += 1
             
@@ -2058,12 +2056,12 @@ class ArbreMontage(ExpansionState, wx.TreeCtrl):
                           },
         # Images de l'arbre
         #-------------------
-        _treeLabelList = {1  : u"Propriétés",
-                          10 : u"Version",
-                          11 : u"Auteur",
-                          2  : u"Montage",
-                          3  : u"CdCF",
-                          4  : u"Spécifications",
+        _treeLabelList = {1  : "Propriétés",
+                          10 : "Version",
+                          11 : "Auteur",
+                          2  : "Montage",
+                          3  : "CdCF",
+                          4  : "Spécifications",
                          },
         _treeData = {1  : None,
                      10 : wx.GetApp().version,
@@ -2108,16 +2106,11 @@ class ArbreMontage(ExpansionState, wx.TreeCtrl):
 #        self.SetItemText(arbre.listItem[critId], "")
         self.ExpandAll()  
         self.Thaw()
-        
-        
-    def enregistrer(self, fichier):
+
+    def enregistrer(self, nomFichier):
         self.RecreateTree()
         Etree = self._tree.ConvertirEnET("M")
-        ET.ElementTree(Etree).write(fichier)
-        
-
-
-
+        ET.ElementTree(Etree).write(nomFichier, encoding="utf-8", xml_declaration=True)
 
 #####################################################################################################
 #####################################################################################################
@@ -2210,14 +2203,14 @@ class StructureArbre(object):
                 dat = u''
             
             if len(e[1]) > 1:
-                item = arbre.Append(parent, text+dat, data = None)
+                item = arbre.AppendItem(parent, text+dat, data = None)
                 if type(e[1][1]) is dict:
                     for sube in e[1][1].items():
                         recurs(item, sube)
                 else:
                     e[1][1].construitArbre(arbre, item)
             else:
-                item = arbre.Append(parent, text+dat, data = None)
+                item = arbre.AppendItem(parent, text+dat, data = None)
             
             # On affiche en GRAS les informations présentes dans le CdCF
             if   (isinstance(d,Elements.Element) and (d.num is not None)) \
@@ -2500,7 +2493,7 @@ class A_propos(wx.Dialog):
         sizer = wx.BoxSizer(wx.VERTICAL)
         titre = wx.StaticText(self, -1, "PyVot")
         titre.SetFont(wx.Font(14, wx.DEFAULT, wx.NORMAL, wx.BOLD, False))
-        titre.SetForegroundColour(wx.NamedColour("BROWN"))
+        titre.SetForegroundColour(wx.Colour("brown"))
         sizer.Add(titre, border = 10)
         sizer.Add(wx.StaticText(self, -1, "Version : "+str(wx.GetApp().version)), 
                   flag=wx.ALIGN_RIGHT)

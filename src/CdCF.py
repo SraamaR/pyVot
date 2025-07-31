@@ -33,7 +33,7 @@ import xml.etree.ElementTree as ET
 import FenPrincipale as FP
 import Icones
 ##import gui
-##import ConfigParser
+##import configparser
 
 
 ################################################################################
@@ -598,7 +598,7 @@ class IntVar:
         self.ch = ""
         
     def __repr__(self):
-        return str(self.val)+ self.ch.encode('cp1252','replace')
+        return str(self.val)+ self.ch
 
     def get(self):
         return self.val

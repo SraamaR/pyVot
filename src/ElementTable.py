@@ -774,7 +774,7 @@ class ElementParser(cp.ConfigParser):
             for l in valeur:
 #                print l[0]
 #                print type(lstToStr(l[1:]))
-                uni = lstToStr(l[1:]).encode('latin_1')#('iso8859_2')
+                uni = lstToStr(l[1:])
                 self.set(section, str(l[0]), uni)
 #        else:
 #            self.set(section, clef, valeur)

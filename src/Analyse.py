@@ -25,10 +25,10 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import wx                  # This module uses the new wx namespace
+import wx
 import wx.lib.buttons as buttons
 import wx.lib.stattext as st
-import  wx.grid as gridlib
+import wx.grid as gridlib
 #from wx.lib.wordwrap import wordwrap
 #from textwrap import fill
 import Const
@@ -221,10 +221,10 @@ class ZoneImmobAx(ZoneResultats):
                 b.SetToggle(False)
     
 #    def OnSize(self, event = None):
-##        print self.GetClientSizeTuple()[0]
+##        print self.GetClientSize()[0]
 #        self.txt.SetLabel(self.txt.GetLabel().replace('\n',' '))
 ##        self.txt.SetLabel(self.mess)
-#        self.txt.Wrap(self.GetClientSizeTuple()[0])
+#        self.txt.Wrap(self.GetClientSize()[0])
 ##        self.txt.Wrap(-1)
 #        self.Fit()
 #        event.Skip()
@@ -880,12 +880,12 @@ class ZoneEtancheite(ZoneResultats):
 
 #    def OnSize(self, event = None):
 #        print "Resize ZoneResistance",
-#        print self.GetClientSizeTuple(),
+#        print self.GetClientSize(),
 #        print self.GetSize()
-##        print self.GetClientSizeTuple()[0]
+##        print self.GetClientSize()[0]
 ##        for txt in [self.txt1,self.txt2]:
 ##            txt.SetLabel(txt.GetLabel().replace('\n',' '))
-##            txt.Wrap(self.GetClientSizeTuple()[0])
+##            txt.Wrap(self.GetClientSize()[0])
 #        self.Fit()
 #        event.Skip()
        
@@ -1602,7 +1602,7 @@ class BoutonMontage(buttons.ThemedGenBitmapToggleButton):
             elif self.label == 'bague':
                 strObstacles += Const.cote2text[i]
             lst.append(strObstacles)
-#        print lst[0].encode('cp437','replace')
+#        print(lst[0])
         return {'mess' : message, 'lst' : lst}
 
 
@@ -2336,11 +2336,6 @@ class ChainesAction:
 
 
         self.lstLignes = lstLignes
-         
-
-
-
-
 
 ##############################################################################
 ##############################################################################
@@ -2385,8 +2380,6 @@ class Analyse:
 #         print "Début analyse ..."
 #         print mtgComplet.mtg
         
-        tm = time.clock()
-        
         self.cdcf = mtgComplet.CdCF
         self.mtg = mtgComplet.mtg
         
@@ -2420,7 +2413,6 @@ class Analyse:
         self.analyserEtancheite()
         
         self.estPerimee = False
-#        print "Fin analyse", time.clock()- tm
 
     ##########################################################################
     #  Analyse : Structure du montage  #
@@ -3172,14 +3164,14 @@ class Analyse:
             # Mouvement
             oldx = 0
             for c in range(nbPos):
-                tm = time.clock()
+                tm = time.perf_counter()
                 x = int(round(-amplitude*cos(pi*2*c/nbPos)+amplitude))
                 if x != oldx:
                     for i in lstItemAnim:
                         i.pos = (i.x + sgn*x, i.pos[1])
                     oldx = x
                     zoneMtg.Redessiner()
-                dt = 0.05 - time.clock() + tm
+                dt = 0.05 - time.perf_counter() + tm
                 if dt > 0:
                     time.sleep(dt)
         else:
@@ -4182,14 +4174,14 @@ class Analyse:
             
             oldx = 0
             for c in range(nbPos):
-                tm = time.clock()
+                tm = time.perf_counter()
                 x = int(round(a*(c-n*nbPos)**2))
                 if x != oldx:
                     for i in lstItemAnim:
                         i.pos = (i.x + x, i.pos[1])
                     oldx = x
                     zoneMtg.Redessiner()
-                dt = 1.0/globdef.FRAME_RATE - time.clock() + tm
+                dt = 1.0/globdef.FRAME_RATE - time.perf_counter() + tm
                 if dt > 0:
                     time.sleep(dt)
 
@@ -4476,7 +4468,7 @@ class Analyse:
             dc.SetBackground(wx.TRANSPARENT_BRUSH)
             dc.Clear()
             dc.SetBrush(wx.Brush(wx.BLACK))
-            dc.SetTextForeground(wx.NamedColour('LIGHT GREY'))
+            dc.SetTextForeground(wx.Colour("light grey"))
             dc.SetPen(pen)
             dc.DrawLineArrow(x1,y1,x2,y2, 
                              style = 1+(sens+1)/2, tanF = 1)
@@ -4618,7 +4610,7 @@ class Analyse:
 ###################################################################################################################
 class ListeActive(wx.Panel):
     def __init__(self, parent, listeNom, bouton, actions = None, wrap = 20):
-        self.coul = wx.NamedColour("PINK")
+        self.coul = wx.Colour("pink")
         wx.Panel.__init__(self, parent, -1 )
         self.SetBackgroundColour(self.coul)
         
@@ -4756,7 +4748,7 @@ class StaticTextWrapped(wx.StaticText):
         lines = []
 
         # get the maximum width (that of our parent)
-        max_width = self.GetParent().GetVirtualSizeTuple()[0]-self.marge
+        max_width = self.GetParent().GetVirtualSize()[0]-self.marge
         # On applique un facteur pour le cas ou il y a plusieurs colonnes de texte
         if hasattr(self, "WrapFact"):
             max_width = max_width/self.WrapFact
@@ -4790,7 +4782,7 @@ class StaticTextWrapped(wx.StaticText):
 
     def OnParentSize(self, event):
         txt = self.__label[:6]+"..."+self.__label[-6:]
-#        print txt.encode('cp437','replace'),
+#        print(txt)
         self.__wrap()
 #        w,h = self.GetParent().GetClientSize()
 #        w += -8
@@ -4816,7 +4808,7 @@ class StaticTextWrapped(wx.StaticText):
 #        if sz < self.GetSize()[0]:
 #            self.Wrap(sz)
 #            self.Update()
-##            print self.GetLabel().encode('cp437','replace'), self.GetSize()
+##            print(self.GetLabel(), self.GetSize())
 #        self.GetParent().Refresh()
 #        self.GetParent().Update()
 #        self.GetParent().Update()
@@ -4881,9 +4873,9 @@ class SchemaStructure():
         Ycentres = 30
         Xcentres = {"G" : 50,
                     "D" : 150}
-        couleurBati = wx.NamedColour("GOLD")
+        couleurBati = wx.Colour("gold")
         couleurArbr = wx.BLUE
-        couleurOk = wx.NamedColour("FOREST GREEN")
+        couleurOk = wx.Colour("forest green")
         couleurNo = wx.RED
         epaiss = 3
         epaisCharg = 17
@@ -5036,18 +5028,14 @@ class SchemaStructure():
                     dec = 0
                 dessinerBati(memdc, cote, dec)
                 dessinerLiaison(memdc, l, cote)
-        dessinerArbr(memdc, self.liaisons.values())
+        dessinerArbr(memdc, list(self.liaisons.values()))
         for cote, l in self.liaisons.items():
             if l != "Aucune":
                 if charges is not None:
                     dessinerFlecheCharge(memdc, cote, charges[cote][0],charges[cote][1])
         memdc.SelectObject(wx.NullBitmap)
-        img = wx.ImageFromBitmap(bmp)
+        img = bmp.ConvertToImage()
         img.SetMaskColour(255,255,254)
         img.SetMask(True)
-        bmp = wx.BitmapFromImage(img)
+        bmp = wx.Bitmap(img)
         return bmp
-
-
-
-        

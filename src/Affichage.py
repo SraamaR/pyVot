@@ -1501,7 +1501,7 @@ class ZoneMontage(wx.Panel):
                     h = wx.BDIAGONAL_HATCH
                 else:
                     h = wx.FDIAGONAL_HATCH
-                b = wx.Brush(wx.NamedColour("dark green") , h)    
+                b = wx.Brush(wx.Colour("dark green") , h)    
                 elem.item[clef].hachurer(b, pts = ((6,6),))
             
             # Hachurage des écrous
@@ -1509,7 +1509,7 @@ class ZoneMontage(wx.Panel):
             elif elem.estEcrou():
                 elem.item[clef].hachurer(wx.Brush(wx.BLUE , wx.BDIAGONAL_HATCH), pts = ((70,74),), simple = True)
                 pts = ((40,45),)
-                elem.item[clef].hachurer(wx.Brush(wx.NamedColour("dark green") , wx.FDIAGONAL_HATCH), pts = pts)
+                elem.item[clef].hachurer(wx.Brush(wx.Colour("dark green") , wx.FDIAGONAL_HATCH), pts = pts)
             
             # Hachurage des chapeaux
             #========================

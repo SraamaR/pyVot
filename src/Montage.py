@@ -1195,7 +1195,7 @@ class Montage:
             if poscode[0] == "R":
                 try:
                     orient = fichier.get('Montage', "orient "+poscode[1])
-                except (ConfigParser.NoSectionError,ConfigParser.NoOptionError):
+                except (configparser.NoSectionError,configparser.NoOptionError):
                     orient = ''
                     pass
 
