@@ -482,11 +482,11 @@ class FrameRapport(wx.Frame):
         doBind( fileMenu.Append(-1, "&Enregistrer sous...\tF12", "Enregistrer le rapport"),
                 self.OnFileSaveAs )
         fileMenu.AppendSeparator()
-        doBind( fileMenu.Append(-1, "&Mise en Page...", u"Règle la mise en page de l'impression"),
+        doBind( fileMenu.Append(-1, "&Mise en Page...", "Règle la mise en page de l'impression"),
                 self.OnPageSetup )
-        doBind( fileMenu.Append(-1, "&Aperçu avant impression...", u"Affiche un aperçu de ce qui sera imprimé"),
+        doBind( fileMenu.Append(-1, "&Aperçu avant impression...", "Affiche un aperçu de ce qui sera imprimé"),
                 self.OnPrintPreview )
-        doBind( fileMenu.Append(-1, "&Imprimer\tCtrl+S", u"Affiche un aperçu de ce qui sera imprimé"),
+        doBind( fileMenu.Append(-1, "&Imprimer\tCtrl+S", "Affiche un aperçu de ce qui sera imprimé"),
                 self.OnDoPrint )
         fileMenu.AppendSeparator()
         doBind( fileMenu.Append(-1, "&Quitter\tCtrl+Q", "Quitter le visualisateur de rapport"),
@@ -497,18 +497,18 @@ class FrameRapport(wx.Frame):
 
         
         editMenu = wx.Menu()
-        doBind( editMenu.Append(wx.ID_UNDO, u"&Annuler\tCtrl+Z"),
+        doBind( editMenu.Append(wx.ID_UNDO, "&Annuler\tCtrl+Z"),
                 self.ForwardEvent, self.ForwardEvent)
-        doBind( editMenu.Append(wx.ID_REDO, u"&Rétablir\tCtrl+Y"),
+        doBind( editMenu.Append(wx.ID_REDO, "&Rétablir\tCtrl+Y"),
                 self.ForwardEvent, self.ForwardEvent )
         editMenu.AppendSeparator()
-        doBind( editMenu.Append(wx.ID_CUT, u"Co&uper\tCtrl+X"),
+        doBind( editMenu.Append(wx.ID_CUT, "Co&uper\tCtrl+X"),
                 self.ForwardEvent, self.ForwardEvent )
-        doBind( editMenu.Append(wx.ID_COPY, u"&Copier\tCtrl+C"),
+        doBind( editMenu.Append(wx.ID_COPY, "&Copier\tCtrl+C"),
                 self.ForwardEvent, self.ForwardEvent)
-        doBind( editMenu.Append(wx.ID_PASTE, u"Co&ller\tCtrl+V"),
+        doBind( editMenu.Append(wx.ID_PASTE, "Co&ller\tCtrl+V"),
                 self.ForwardEvent, self.ForwardEvent)
-        doBind( editMenu.Append(wx.ID_CLEAR, u"&E&ffacer\tDel"),
+        doBind( editMenu.Append(wx.ID_CLEAR, "&E&ffacer\tDel"),
                 self.ForwardEvent, self.ForwardEvent)
         editMenu.AppendSeparator()
         doBind( editMenu.Append(wx.ID_SELECTALL, "Selectionner tout\tCtrl+A"),
@@ -519,33 +519,31 @@ class FrameRapport(wx.Frame):
         #doBind( editMenu.Append(-1, "&Replace...\tCtrl+R"),  )
 
         formatMenu = wx.Menu()
-        doBind( formatMenu.AppendCheckItem(-1, u"&Gras\tCtrl+B"),
+        doBind( formatMenu.AppendCheckItem(-1, "&Gras\tCtrl+B"),
                 self.OnBold, self.OnUpdateBold)
-        doBind( formatMenu.AppendCheckItem(-1, u"&Italic\tCtrl+I"),
+        doBind( formatMenu.AppendCheckItem(-1, "&Italic\tCtrl+I"),
                 self.OnItalic, self.OnUpdateItalic)
-        doBind( formatMenu.AppendCheckItem(-1, u"&Souligné\tCtrl+U"),
+        doBind( formatMenu.AppendCheckItem(-1, "&Souligné\tCtrl+U"),
                 self.OnUnderline, self.OnUpdateUnderline)
         formatMenu.AppendSeparator()
-        doBind( formatMenu.AppendCheckItem(-1, u"Aligner à &gauche"),
+        doBind( formatMenu.AppendCheckItem(-1, "Aligner à &gauche"),
                 self.OnAlignLeft, self.OnUpdateAlignLeft)
-        doBind( formatMenu.AppendCheckItem(-1, u"&Centrer"),
+        doBind( formatMenu.AppendCheckItem(-1, "&Centrer"),
                 self.OnAlignCenter, self.OnUpdateAlignCenter)
-        doBind( formatMenu.AppendCheckItem(-1, u"Aligner à &droite"),
+        doBind( formatMenu.AppendCheckItem(-1, "Aligner à &droite"),
                 self.OnAlignRight, self.OnUpdateAlignRight)
         formatMenu.AppendSeparator()
-        doBind( formatMenu.Append(-1, u"&Indenter"), self.OnIndentMore)
-        doBind( formatMenu.Append(-1, u"&Desindenter"), self.OnIndentLess)
+        doBind( formatMenu.Append(-1, "&Indenter"), self.OnIndentMore)
+        doBind( formatMenu.Append(-1, "&Desindenter"), self.OnIndentLess)
         formatMenu.AppendSeparator()
-        doBind( formatMenu.Append(-1, u"&Augmenter l'espace entre paragraphe"), self.OnParagraphSpacingMore)
-        doBind( formatMenu.Append(-1, u"&Diminuer l'espace entre paragraphe"), self.OnParagraphSpacingLess)
+        doBind( formatMenu.Append(-1, "&Augmenter l'espace entre paragraphe"), self.OnParagraphSpacingMore)
+        doBind( formatMenu.Append(-1, "&Diminuer l'espace entre paragraphe"), self.OnParagraphSpacingLess)
         formatMenu.AppendSeparator()
-        doBind( formatMenu.Append(-1, u"Interligne &simple"), self.OnLineSpacingSingle)
-        doBind( formatMenu.Append(-1, u"Interligne &x1.5"), self.OnLineSpacingHalf)
-        doBind( formatMenu.Append(-1, u"Interligne &double"), self.OnLineSpacingDouble)
+        doBind( formatMenu.Append(-1, "Interligne &simple"), self.OnLineSpacingSingle)
+        doBind( formatMenu.Append(-1, "Interligne &x1.5"), self.OnLineSpacingHalf)
+        doBind( formatMenu.Append(-1, "Interligne &double"), self.OnLineSpacingDouble)
         formatMenu.AppendSeparator()
-        doBind( formatMenu.Append(-1, u"&Police..."), self.OnFont)
-        
-
+        doBind( formatMenu.Append(-1, "&Police..."), self.OnFont)
 
         mb = wx.MenuBar()
         mb.Append(fileMenu, "&Fichier")
@@ -553,67 +551,100 @@ class FrameRapport(wx.Frame):
         self.SetMenuBar(mb)
 
     def MakeToolBar(self):
-        def doBind(item, handler, updateUI=None):
-            self.Bind(wx.EVT_TOOL, handler, item)
+        def doBind(tool, handler, updateUI=None):
+            self.Bind(wx.EVT_TOOL, handler, tool)
             if updateUI is not None:
-                self.Bind(wx.EVT_UPDATE_UI, updateUI, item)
-        
+                self.Bind(wx.EVT_UPDATE_UI, updateUI, tool)
+
         tbar = self.CreateToolBar()
-        doBind( tbar.AddTool(-1, _rt_save.GetBitmap(),
-                            shortHelpString=u"Enregistrer"), self.OnFileSave)
-        bmp = Icones.getBout_ImprimerBitmap().ConvertToImage().Rescale(17,17,wx.IMAGE_QUALITY_HIGH).ConvertToBitmap()
-        doBind( tbar.AddTool(-1, bmp,
-                            shortHelpString=u"Imprimer le rapport"), self.OnDoPrint)
-        
-        tbar.AddSeparator()
-        doBind( tbar.AddTool(wx.ID_UNDO, _rt_undo.GetBitmap(),
-                            shortHelpString=u"Annuler"), self.ForwardEvent, self.ForwardEvent)
-        doBind( tbar.AddTool(wx.ID_REDO, _rt_redo.GetBitmap(),
-                            shortHelpString=u"Rétablir"), self.ForwardEvent, self.ForwardEvent)
-        
-        tbar.AddSeparator()
-        doBind( tbar.AddTool(wx.ID_CUT, _rt_cut.GetBitmap(),
-                            shortHelpString=u"Couper dans le presse-papier"), self.ForwardEvent, self.ForwardEvent)
-        doBind( tbar.AddTool(wx.ID_COPY, _rt_copy.GetBitmap(),
-                            shortHelpString=u"Copier dans le presse-papier"), self.ForwardEvent, self.ForwardEvent)
-        doBind( tbar.AddTool(wx.ID_PASTE, _rt_paste.GetBitmap(),
-                            shortHelpString=u"Coller depuis le presse-papier"), self.ForwardEvent, self.ForwardEvent)
-        
-        tbar.AddSeparator()
-        doBind( tbar.AddTool(-1, _rt_bold.GetBitmap(), isToggle=True,
-                            shortHelpString=u"Gras"), self.OnBold, self.OnUpdateBold)
-        doBind( tbar.AddTool(-1, _rt_italic.GetBitmap(), isToggle=True,
-                            shortHelpString=u"Italic"), self.OnItalic, self.OnUpdateItalic)
-        doBind( tbar.AddTool(-1, _rt_underline.GetBitmap(), isToggle=True,
-                            shortHelpString=u"Souligné"), self.OnUnderline, self.OnUpdateUnderline)
-        tbar.AddSeparator()
-        doBind( tbar.AddTool(-1, _rt_alignleft.GetBitmap(), isToggle=True,
-                            shortHelpString=u"Aligner à gauche"), self.OnAlignLeft, self.OnUpdateAlignLeft)
-        doBind( tbar.AddTool(-1, _rt_centre.GetBitmap(), isToggle=True,
-                            shortHelpString=u"Centrer"), self.OnAlignCenter, self.OnUpdateAlignCenter)
-        doBind( tbar.AddTool(-1, _rt_alignright.GetBitmap(), isToggle=True,
-                            shortHelpString=u"Aligner à droite"), self.OnAlignRight, self.OnUpdateAlignRight)
-        
-        tbar.AddSeparator()
-        doBind( tbar.AddTool(-1, _rt_indentless.GetBitmap(),
-                            shortHelpString="Indenter"), self.OnIndentLess)
-        doBind( tbar.AddTool(-1, _rt_indentmore.GetBitmap(),
-                            shortHelpString="Desindenter"), self.OnIndentMore)
-        tbar.AddSeparator()
-        doBind( tbar.AddTool(-1, _rt_font.GetBitmap(),
-                            shortHelpString="Police"), self.OnFont)
-        doBind( tbar.AddTool(-1, _rt_colour.GetBitmap(),
-                            shortHelpString="Couleur de police"), self.OnColour)
+
+        tool = tbar.AddTool(wx.NewIdRef(), "Enregistrer", _rt_save.GetBitmap())
+        tool.SetShortHelp("Enregistrer")
+        doBind(tool, self.OnFileSave)
+
+        bmp = Icones.getBout_ImprimerBitmap().ConvertToImage().Rescale(17, 17, wx.IMAGE_QUALITY_HIGH).ConvertToBitmap()
+        tool = tbar.AddTool(wx.NewIdRef(), "Imprimer", bmp)
+        tool.SetShortHelp("Imprimer le rapport")
+        doBind(tool, self.OnDoPrint)
 
         tbar.AddSeparator()
-        tbar.AddControl(
-            wx.ComboBox(
-                tbar, -1, "Styles", choices = Styles.keys(),
-                size=(150,-1), style=wx.CB_DROPDOWN
-                ))
+
+        tool = tbar.AddTool(wx.ID_UNDO, "Undo", _rt_undo.GetBitmap())
+        tool.SetShortHelp(u"Annuler")
+        doBind(tool, self.ForwardEvent, self.ForwardEvent)
+
+        tool = tbar.AddTool(wx.ID_REDO, "Redo", _rt_redo.GetBitmap())
+        tool.SetShortHelp(u"Rétablir")
+        doBind(tool, self.ForwardEvent, self.ForwardEvent)
+
+        tbar.AddSeparator()
+
+        tool = tbar.AddTool(wx.ID_CUT, "Cut", _rt_cut.GetBitmap())
+        tool.SetShortHelp(u"Couper dans le presse-papier")
+        doBind(tool, self.ForwardEvent, self.ForwardEvent)
+
+        tool = tbar.AddTool(wx.ID_COPY, "Copy", _rt_copy.GetBitmap())
+        tool.SetShortHelp(u"Copier dans le presse-papier")
+        doBind(tool, self.ForwardEvent, self.ForwardEvent)
+
+        tool = tbar.AddTool(wx.ID_PASTE, "Paste", _rt_paste.GetBitmap())
+        tool.SetShortHelp(u"Coller depuis le presse-papier")
+        doBind(tool, self.ForwardEvent, self.ForwardEvent)
+
+        tbar.AddSeparator()
+
+        # For toggle tools, use wx.ITEM_CHECK in AddTool
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_bold.GetBitmap(), kind=wx.ITEM_CHECK)
+        tool.SetShortHelp(u"Gras")
+        doBind(tool, self.OnBold, self.OnUpdateBold)
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_italic.GetBitmap(), kind=wx.ITEM_CHECK)
+        tool.SetShortHelp(u"Italic")
+        doBind(tool, self.OnItalic, self.OnUpdateItalic)
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_underline.GetBitmap(), kind=wx.ITEM_CHECK)
+        tool.SetShortHelp(u"Souligné")
+        doBind(tool, self.OnUnderline, self.OnUpdateUnderline)
+
+        tbar.AddSeparator()
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_alignleft.GetBitmap(), kind=wx.ITEM_CHECK)
+        tool.SetShortHelp(u"Aligner à gauche")
+        doBind(tool, self.OnAlignLeft, self.OnUpdateAlignLeft)
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_centre.GetBitmap(), kind=wx.ITEM_CHECK)
+        tool.SetShortHelp(u"Centrer")
+        doBind(tool, self.OnAlignCenter, self.OnUpdateAlignCenter)
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_alignright.GetBitmap(), kind=wx.ITEM_CHECK)
+        tool.SetShortHelp(u"Aligner à droite")
+        doBind(tool, self.OnAlignRight, self.OnUpdateAlignRight)
+
+        tbar.AddSeparator()
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_indentless.GetBitmap())
+        tool.SetShortHelp("Indenter")
+        doBind(tool, self.OnIndentLess)
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_indentmore.GetBitmap())
+        tool.SetShortHelp("Desindenter")
+        doBind(tool, self.OnIndentMore)
+
+        tbar.AddSeparator()
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_font.GetBitmap())
+        tool.SetShortHelp("Police")
+        doBind(tool, self.OnFont)
+
+        tool = tbar.AddTool(wx.NewIdRef(), "", _rt_colour.GetBitmap())
+        tool.SetShortHelp("Couleur de police")
+        doBind(tool, self.OnColour)
+
+        tbar.AddSeparator()
+
+        tbar.AddControl(wx.ComboBox(tbar, wx.ID_ANY, "Styles", choices=list(Styles.keys()), size=(150, -1), style=wx.CB_DROPDOWN))
         self.Bind(wx.EVT_COMBOBOX, self.OnApplyStyle)
-        
-        
+
         tbar.Realize()
 
     def OnPageSetup(self, evt):
@@ -677,7 +708,7 @@ class RapportRTF(rt.RichTextCtrl):
         zoneMtg.DessineTout(memdc, analyse, offsetX = offsetX)
         memdc.SelectObject(wx.NullBitmap)
         img = bmp.ConvertToImage()
-        img = img.Scale(bmp.GetWidth()/reduc,bmp.GetHeight()/reduc, wx.IMAGE_QUALITY_HIGH)
+        img = img.Scale(bmp.GetWidth()//reduc,bmp.GetHeight()//reduc, wx.IMAGE_QUALITY_HIGH)
         return img
     
     def GetImageChaine(self, sens, analyse, zoneMtg):
@@ -1097,7 +1128,7 @@ class Progression(wx.Frame):
         
 
     def Avancer(self, npc):
-        self.count = self.count + npc*self.max/100
+        self.count = self.count + npc*self.max//100
 
         if self.count >= self.max:
             self.Close()
@@ -1206,7 +1237,7 @@ class RTPrinting(rt.RichTextPrinting):
 ##            t = ''
 ##        else:
 ##            t = self.app.fichierCourant
-##        memdc.DrawText(t , marginX/2, maxY+marginY)
+##        memdc.DrawText(t , marginX//2, maxY+marginY)
 #        
 #        dc.Blit(0, 0, bmp.GetWidth() ,bmp.GetHeight(), 
 #                memdc, 0, 0, wx.COPY, True)

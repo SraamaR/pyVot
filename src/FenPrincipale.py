@@ -1146,32 +1146,28 @@ au format de la version 0.6 !!' %nomFichier
         self.tree.enregistrer(nomFichier)
         self.definirNomFichierCourant(nomFichier)
 
-    def changerCurseur(self, curs = wx.CURSOR_ARROW, elem = None):    
+    def changerCurseur(self, curs=wx.CURSOR_ARROW, elem=None):
         if elem is not None:
             image = Images.Img_Elem(elem).ConvertToImage()
-
             # since this image didn't come from a .cur file, tell it where the hotspot is
-            image.SetOptionInt(wx.IMAGE_OPTION_CUR_HOTSPOT_X, 1)
-            image.SetOptionInt(wx.IMAGE_OPTION_CUR_HOTSPOT_Y, 1)
-
+            image.SetOption(wx.IMAGE_OPTION_CUR_HOTSPOT_X, 1)
+            image.SetOption(wx.IMAGE_OPTION_CUR_HOTSPOT_Y, 1)
             # make the image into a cursor
-            cursor = wx.CursorFromImage(image)
-            texte = u"Choisir un emplacement pour cet élément sur le montage ..."
-            
+            cursor = wx.Cursor(image)
+            texte = "Choisir un emplacement pour cet élément sur le montage ..."
         else:
-            cursor = wx.StockCursor(curs)
+            cursor = wx.Cursor(curs)
             if curs == globdef.CURSEUR_DEFAUT:
-                texte = u""
+                texte = ""
             elif curs == globdef.CURSEUR_INTERDIT:
-                texte = u"Impossible de placer l'élément sélectionné ici ..."
+                texte = "Impossible de placer l'élément sélectionné ici ..."
             elif curs == globdef.CURSEUR_ORIENTATION:
-                texte = u"Déplacer la souris pour choisir l'orientation du roulement ... puis cliquer ..."
+                texte = "Déplacer la souris pour choisir l'orientation du roulement ... puis cliquer ..."
             elif curs == globdef.CURSEUR_OK:
-                texte = u"Cliquer pour placer l'élément sélectionné ici ..."      
+                texte = "Cliquer pour placer l'élément sélectionné ici ..."
         
         self.SetCursor(cursor)
         self.statusBar.SetStatusText(texte, 0)
-        
 
     #############################################################################
     def quitterPyVot(self, event=None):
@@ -1617,10 +1613,7 @@ class Panel_ArbreElements(wx.Panel):
         for pnl in self.listPnlBoutons:
             pnl.desactiverTout()
         self.app.OnElemDeclick()
-
-
-        
-        
+       
 #####################################################################################################
 #####################################################################################################
 class BarreOutils(wx.ToolBar):
@@ -1647,32 +1640,38 @@ class BarreOutils(wx.ToolBar):
 
         self.SetToolBitmapSize(tsize)
         
-        self.AddLabelTool(1010, "Nouveau", lstImg['BRAZ'],shortHelp="Nouveau montage",
-                          longHelp="Efface tout !!")
+        tool = self.AddTool(1010, "Nouveau", lstImg['BRAZ'])
+        tool.SetShortHelp("Nouveau montage")
+        tool.SetLongHelp("Efface tout !!")
         self.Bind(wx.EVT_TOOL, self.parent.OnNewClick, id=1010)
 
-        self.AddLabelTool(1020, "Ouvrir", lstImg['BOuvrir'], shortHelp="Ouvrir un fichier .pyv",
-                          longHelp="Ouvrir un projet depuis un fichier .pyv")
+        tool = self.AddTool(1020, "Ouvrir", lstImg['BOuvrir'])
+        tool.SetShortHelp("Ouvrir un fichier .pyv")
+        tool.SetLongHelp("Ouvrir un projet depuis un fichier .pyv")
         self.Bind(wx.EVT_TOOL, self.parent.OnOpenClick, id=1020)
-        
-        self.AddLabelTool(1030, "Enregistrer", lstImg['BEnregi'], shortHelp="Enregistrer dans un fichier .pyv",
-                          longHelp="Enregistrer le projet dans un fichier .pyv")
+
+        tool = self.AddTool(1030, "Enregistrer", lstImg['BEnregi'])
+        tool.SetShortHelp("Enregistrer dans un fichier .pyv")
+        tool.SetLongHelp("Enregistrer le projet dans un fichier .pyv")
         self.Bind(wx.EVT_TOOL, self.parent.OnSaveClick, id=1030)
-        
+
         self.AddSeparator()
-        
-        self.AddLabelTool(1032, "Imprimer", lstImg['BRapport'], shortHelp="Afficher un rapport",
-                          longHelp="Afficher un rapport")
+
+        tool = self.AddTool(1032, "Imprimer", lstImg['BRapport'])
+        tool.SetShortHelp("Afficher un rapport")
+        tool.SetLongHelp("Afficher un rapport")
         self.Bind(wx.EVT_TOOL, self.parent.OnPrintClick, id=1032)
-        
+
         self.AddSeparator()
-        
-        self.AddLabelTool(1040, "Analyser", lstImg['BAnalys'], shortHelp="Analyser le montage",
-                          longHelp="Analyser le montage")
+
+        tool = self.AddTool(1040, "Analyser", lstImg['BAnalys'])
+        tool.SetShortHelp("Analyser le montage")
+        tool.SetLongHelp("Analyser le montage")
         self.Bind(wx.EVT_TOOL, self.parent.OnAnalysClick, id=1040)
-        
-        self.AddLabelTool(1041, "Retourner", lstImg['BRet'], shortHelp=u"Retourner le montage droite<>gauche",
-                          longHelp=u"Retourner le montage droite<>gauche")
+
+        tool = self.AddTool(1041, "Retourner", lstImg['BRet'])
+        tool.SetShortHelp(u"Retourner le montage droite<>gauche")
+        tool.SetLongHelp(u"Retourner le montage droite<>gauche")
         self.Bind(wx.EVT_TOOL, self.parent.OnRetourneClick, id=1041)
         
         self.AddSeparator()

@@ -256,21 +256,16 @@ class ImagePlus:
         return bmpf
 
     def surbrillance(self, effet = 0):
-#        img = self.img.Copy()
-#        print img.HasAlpha()
-#        self.bmp = self.img.Copy().SetAlpha(0.5).ConvertToBitmap()
-        
         if effet == 0:
-            self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(1.0, 1.0, 1.0, 0.5))
-#            self.bmp = wx.Bitmap(self.img.Copy().AdjustChannels(1.0, 1.0, 1.0, 0.5))
+            # Reduce opacity (make semi-transparent)
+            image = self.bmp.ConvertToImage()
+            image = image.AdjustChannels(1.0, 1.0, 1.0, 0.5)
+            self.bmp = wx.Bitmap(image)
         else:
-            self.bmp = wx.Bitmap(wx.ImageFromBitmap(self.bmp).AdjustChannels(2.0, 2.0, 2.0, 1.0))
-#            self.bmp = wx.Bitmap(self.img.Copy().AdjustChannels(2.0, 2.0, 2.0, 1.0))
-#        self.bmp = self.img.Copy().AdjustChannels(1.0, 1.0, 1.0, 0.5)
-
-
-##    def surbrillanceTk(self):
-##        self.changerCouleur(0)
+            # Increase brightness
+            image = self.bmp.ConvertToImage()
+            image = image.AdjustChannels(2.0, 2.0, 2.0, 1.0)
+            self.bmp = wx.Bitmap(image)
 
 #
 #    def ajouterSensInterdit(self):

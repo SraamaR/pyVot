@@ -99,7 +99,7 @@ class ZoneResultats(wx.Panel):
         StyleText["Titre1"].applique(self)
         self.statBox[id] = wx.StaticBox(self, -1, titre)
         self.statBoxSizer[id] = wx.StaticBoxSizer(self.statBox[id], style)
-        self.sizer.Add(self.statBoxSizer[id], flag = wx.ALIGN_CENTRE|wx.EXPAND)
+        self.sizer.Add(self.statBoxSizer[id], flag=wx.EXPAND)
         
     def MakeBoutonSizer(self, id, h = 1, v = 1):
         self.boutonSizer[id] = wx.GridBagSizer(h,v)
@@ -113,12 +113,11 @@ class ZoneResultats(wx.Panel):
             stw.SetWrapFact(wrapFact)
         return stw
         
-    def Add(self, id, objet, flag = wx.ALIGN_CENTRE_VERTICAL|wx.ALIGN_LEFT|wx.TOP|wx.BOTTOM, border = 10):
+    def Add(self, id, objet, flag = wx.ALIGN_LEFT|wx.TOP|wx.BOTTOM, border = 10):
         self.statBoxSizer[id].Add(objet, flag = flag, border = border)
         
     def AddBouton(self, id, objet, pos, span = (1,1), flag = wx.ALIGN_CENTRE):
         self.boutonSizer[id].Add(objet, pos, span, flag = flag)
-
 
 #####################################################
 # Immobilisation axiale #############################
@@ -4461,7 +4460,7 @@ class Analyse:
             pen.SetCap(wx.CAP_BUTT)
           
             # Points extrémités de la Fleche
-            x1,y1,x2,y2 = 0, e/2, long, e/2
+            x1,y1,x2,y2 = 0, e//2, long, e//2
     
             bmp = wx.Bitmap(long+o, e+o)
             dc = DCPlus(bmp)
@@ -4471,13 +4470,13 @@ class Analyse:
             dc.SetTextForeground(wx.Colour("light grey"))
             dc.SetPen(pen)
             dc.DrawLineArrow(x1,y1,x2,y2, 
-                             style = 1+(sens+1)/2, tanF = 1)
+                             style = 1+(sens+1)//2, tanF = 1)
             
             dc.SetFont(wx.Font(14, wx.DEFAULT, wx.ITALIC, wx.BOLD, False))
             lt, ht = dc.GetTextExtent(texte)
             if sens == -1:
                 x1 = x2-lt
-            dc.DrawText(texte, x1, y1 - ht/2)
+            dc.DrawText(texte, x1, y1 - ht//2)
             dc.SelectObject(wx.NullBitmap)
             bmp.SetMask(wx.Mask(bmp))
             bmp = Images.ombrer(bmp)
@@ -4489,7 +4488,7 @@ class Analyse:
         for i in [-1, 0, 1]:
             sg = (i*i*2-1)*s*(sens * 2 - 1)
             bmp = Fleche(160, -sg, " Impossible !! ")
-            y = zoneMtg.milieuY + i * dy - bmp.GetHeight()/2
+            y = zoneMtg.milieuY + i * dy - bmp.GetHeight()//2
             x = zoneMtg.milieuX - sg * 150 
             dc.DrawBitmap(bmp, x, y, True)
 
@@ -4658,7 +4657,7 @@ class ListeActive(wx.Panel):
             dc.Clear()
             dc.SetPen(wx.Pen("PINK", 0))
             dc.SetBrush(wx.Brush(self.coul))
-            poly = ((taille/2, 0),(0,10),(taille,10))
+            poly = ((taille//2, 0),(0,10),(taille,10))
             dc.DrawPolygon(poly, fillStyle = wx.WINDING_RULE)
             img = wx.ImageFromBitmap(bmp)
             img.SetMaskColour(255,255,254)
@@ -4751,7 +4750,7 @@ class StaticTextWrapped(wx.StaticText):
         max_width = self.GetParent().GetVirtualSize()[0]-self.marge
         # On applique un facteur pour le cas ou il y a plusieurs colonnes de texte
         if hasattr(self, "WrapFact"):
-            max_width = max_width/self.WrapFact
+            max_width = max_width//self.WrapFact
         
         index = 0
         current = []
@@ -4902,7 +4901,7 @@ class SchemaStructure():
                         Xcentres[cote]+DimLiaison*2+s*decaler*DimLiaison*2, Ycentres+DimLiaison*4)
             if decaler != 0:
                 dc.DrawLine(Xcentres[cote]+s*decaler*DimLiaison*2, Ycentres, 
-                            Xcentres[cote]+s*decaler*DimLiaison/2, Ycentres)
+                            Xcentres[cote]+s*decaler*DimLiaison//2, Ycentres)
             for i in range(5):
                 dc.DrawLine(Xcentres[cote]-DimLiaison*2+i*DimLiaison+s*decaler*DimLiaison*2, Ycentres+DimLiaison*4, 
                             Xcentres[cote]-DimLiaison*2+(i+1)*DimLiaison+s*decaler*DimLiaison*2, Ycentres+DimLiaison*5)
@@ -4913,7 +4912,7 @@ class SchemaStructure():
             if liaisons is not None:
                 for s in [0,1]:
                     if liaisons[s] == "AppPlan" or liaisons[s][:-1] == "AppPlan":
-                        decal[s] = (1-2*s) * DimLiaison/2
+                        decal[s] = (1-2*s) * DimLiaison//2
                     elif liaisons[s] == "Pivot" or liaisons[s] == "PivotGliss":
                         decal[s] = (1-2*s) * DimLiaison*5
             dc.DrawLine(Xcentres["G"]+DimLiaison+decal[1], Ycentres, 
@@ -4926,11 +4925,11 @@ class SchemaStructure():
                 else:
                     penA, penB = penBati, penArbr
                 dc.SetPen(penB)
-                dc.DrawLine(Xcentres[cote]-DimLiaison/2, Ycentres-DimLiaison*2, 
-                            Xcentres[cote]-DimLiaison/2, Ycentres+DimLiaison*2)
+                dc.DrawLine(Xcentres[cote]-DimLiaison//2, Ycentres-DimLiaison*2, 
+                            Xcentres[cote]-DimLiaison//2, Ycentres+DimLiaison*2)
                 dc.SetPen(penA)
-                dc.DrawLine(Xcentres[cote]+DimLiaison/2, Ycentres-DimLiaison*2, 
-                            Xcentres[cote]+DimLiaison/2, Ycentres+DimLiaison*2)
+                dc.DrawLine(Xcentres[cote]+DimLiaison//2, Ycentres-DimLiaison*2, 
+                            Xcentres[cote]+DimLiaison//2, Ycentres+DimLiaison*2)
             elif liaison[:-1] == "Rotule" or liaison == "LinAnn":
                 dc.SetPen(penBati)
                 dc.SetBrush(wx.TRANSPARENT_BRUSH)
@@ -4943,15 +4942,15 @@ class SchemaStructure():
                                Xcentres[cote], Ycentres+DimLiaison*2,
                                Xcentres[cote], Ycentres)
                 elif liaison == "LinAnn":
-                    dc.DrawRectangle(Xcentres[cote]-DimLiaison*2, Ycentres-DimLiaison/4, 
-                                     DimLiaison*4, DimLiaison*2+DimLiaison/4)
+                    dc.DrawRectangle(Xcentres[cote]-DimLiaison*2, Ycentres-DimLiaison//4, 
+                                     DimLiaison*4, DimLiaison*2+DimLiaison//4)
                 else:
                     if cote == "G":
                         s = -1
                     else:
                         s = 1
-                    dc.DrawArc(Xcentres[cote]-s*DimLiaison, Ycentres+s*(DimLiaison*7/4), 
-                               Xcentres[cote]-s*DimLiaison, Ycentres-s*(DimLiaison*7/4),
+                    dc.DrawArc(Xcentres[cote]-s*DimLiaison, Ycentres+s*(DimLiaison*7//4), 
+                               Xcentres[cote]-s*DimLiaison, Ycentres-s*(DimLiaison*7//4),
                                Xcentres[cote], Ycentres)
                 dc.SetBrush(dc.GetBackground())
                 dc.SetPen(penArbr)
@@ -4959,9 +4958,9 @@ class SchemaStructure():
             elif liaison == "Pivot" or liaison == "PivotGliss":
                 dc.SetPen(penBati)
                 dc.SetBrush(wx.TRANSPARENT_BRUSH)
-                dc.DrawRectangle(Xcentres[cote]-DimLiaison*2, Ycentres-DimLiaison*3/2, 
+                dc.DrawRectangle(Xcentres[cote]-DimLiaison*2, Ycentres-DimLiaison*3//2, 
                                  DimLiaison*4, DimLiaison*3)
-                dc.DrawLine(Xcentres[cote], Ycentres+DimLiaison*3/2, 
+                dc.DrawLine(Xcentres[cote], Ycentres+DimLiaison*3//2, 
                             Xcentres[cote], Ycentres+2*DimLiaison)
                 dc.SetBrush(dc.GetBackground())
                 dc.SetPen(penArbr)
