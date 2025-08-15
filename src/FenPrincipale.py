@@ -832,21 +832,13 @@ class wxPyVot(wx.Frame):
         dlg.Destroy()
         
     def OnCdCFClick(self,event):
+        state = event.GetInt()
         panCdCF = self.mgr.GetPane(self.nbCdCF)
-        if not event.GetInt():
-            mess = u"Afficher le CdCF"
-            size = (self.nbCdCF.MaxSize[0],0)
-            state = False
-        else:
-            mess = "Masquer le CdCF"
-            size = (self.nbCdCF.MaxSize[0],self.nbCdCF.MaxSize[1]+28)
-            state = True
-            
         panCdCF.Show(state)
-#        panCdCF.MinSize(size)
-#        panCdCF.MaxSize(size)
-#        panCdCF.BestSize(size)
-        self.GetToolBar().defToolCdCFHelp(event.GetInt())
+        
+        self.GetToolBar().defToolCdCFHelp(state)
+        self.GetMenuBar().Check(50, bool(state))
+        
         self.mgr.Update()
             
     def OnClick(self, event):
