@@ -264,8 +264,7 @@ def GetDataDir():
     """
     Return the standard location on this platform for application data
     """
-    sp = wx.StandardPaths.Get()
-    return sp.GetUserDataDir()
+    return wx.StandardPaths.Get().GetUserDataDir()
 
 
 def GetConfig():
@@ -1482,14 +1481,13 @@ class ListBookElements(wx.Listbook):
 class Panel_ArbreElements(wx.Panel):
     def __init__(self, parent, app):
         # Use the WANTS_CHARS style so the panel doesn't eat the Return key.
-        wx.Panel.__init__(self, parent, -1, 
-                          style=wx.CLIP_CHILDREN|wx.BORDER_NONE )
+        super().__init__(parent, id=wx.ID_ANY,
+                        style=wx.CLIP_CHILDREN | wx.BORDER_NONE)
         self.Bind(wx.EVT_SIZE, self.OnSize)
         
         self.DClick = False
         
         self.app = app
-        tID = wx.NewId()
 
         self.tree = ListBookElements(self)
 
@@ -1497,38 +1495,6 @@ class Panel_ArbreElements(wx.Panel):
         imgBout = {}
         il = wx.ImageList(isz[0], isz[1])
         self.il = il
-#        listFctGet = {}
-#        for i in Images.Img_Elem.keys():
-#            listFctGet[i] = il.Add(Images.Img_Elem[i])
-                      
-#        for idImg in ImagesPV.listFctGet.keys():
-#            imgBout[idImg] = il.Add(ImagesPV.listFctGet[idImg])
-            
-#        imgFamRlt     = il.Add(Icones.get0Bitmap())
-#        fldridx     = il.Add(wx.ArtProvider_GetBitmap(wx.ART_FOLDER,      wx.ART_OTHER, isz))
-#        fldropenidx = il.Add(wx.ArtProvider_GetBitmap(wx.ART_FILE_OPEN,   wx.ART_OTHER, isz))
-#        fileidx     = il.Add(wx.ArtProvider_GetBitmap(wx.ART_NORMAL_FILE, wx.ART_OTHER, isz))
-#        smileidx    = il.Add(images.getSmilesBitmap())
-
-#        self.tree.SetImageList(il)
-        
-        # NOTE:  For some reason tree items have to have a data object in
-        #        order to be sorted.  Since our compare just uses the labels
-        #        we don't need any real data, so we'll just use None below for
-        #        the item data.
-
-#        self.root = self.tree.AddPage("Elements")
-#        self.tree.SetPyData(self.root, None)
-#        self.tree.SetItemImage(self.root, imgFamRlt, wx.TreeItemIcon_Normal)
-#        self.tree.SetItemImage(self.root, imgFamRlt, wx.TreeItemIcon_Expanded)
-                    
-#        def construireFamille(root, lstfam):
-#            self.tree.SetPyData(Tfam, None)
-#            self.tree.SetItemImage(Tfam, imgFamRlt, wx.TreeItemIcon_Normal)
-#            self.tree.SetItemImage(Tfam, imgFamRlt, wx.TreeItemIcon_Expanded)
-#            print fam
-#            print type(fam[1][0])  
-        
         nn = 1
         for fam in Elements.listeFamilles:
             il.Add(Images.Img_IconesEns(nn))
@@ -1548,35 +1514,7 @@ class Panel_ArbreElements(wx.Panel):
             self.tree.AddPage(pnl, fam[0], imageId = nn)
             nn += 1
 
-#        self.root = self.tree.AddRoot("Roulements")
-#        self.tree.SetPyData(self.root, None)
-#        self.tree.SetItemImage(self.root, fldridx, wx.TreeItemIcon_Normal)
-#        self.tree.SetItemImage(self.root, fldropenidx, wx.TreeItemIcon_Expanded)
-#
-#
-#        for x in range(15):
-#            child = self.tree.AppendItem
-#            self.tree.SetPyData(child, None)
-#            self.tree.SetItemImage(child, fldridx, wx.TreeItemIcon_Normal)
-#            self.tree.SetItemImage(child, fldropenidx, wx.TreeItemIcon_Expanded)
-#
-#            for y in range(5):
-#                last = self.tree.AppendItem(child, "item %d-%s" % (x, chr(ord("a")+y)))
-#                self.tree.SetPyData(last, None)
-#                self.tree.SetItemImage(last, fldridx, wx.TreeItemIcon_Normal)
-#                self.tree.SetItemImage(last, fldropenidx, wx.TreeItemIcon_Expanded)
-#
-#                for z in range(5):
-#                    item = self.tree.AppendItem(last,  "item %d-%s-%d" % (x, chr(ord("a")+y), z))
-#                    self.tree.SetPyData(item, None)
-#                    self.tree.SetItemImage(item, fileidx, wx.TreeItemIcon_Normal)
-#                    self.tree.SetItemImage(item, smileidx, wx.TreeItemIcon_Selected)
-
-#        self.tree.Expand(self.root)
-
         self.tree.Bind(wx.EVT_LISTBOOK_PAGE_CHANGED, self.OnPageChanged)
-
-#        self.tree.ExpandNode(0)
 
     def OnClick(self, event):
         click = event.GetEventObject().GetValue()
@@ -1591,23 +1529,19 @@ class Panel_ArbreElements(wx.Panel):
                       0 : "P"}
         self.app.taillelem = val2taille[event.GetInt()]
 
-
     def OnSize(self, event):
         w,h = self.GetClientSize()
         self.tree.SetPosition((0, 0))
         self.tree.SetSize((w, h))
         
-
     def OnPageChanged(self, event):
         self.desactiverTousBoutons()
         self.item = event.GetSelection()
-
 
     def desactiverBouton(self, nb):
         if nb is None: return
         for pnl in self.listPnlBoutons:
             pnl.desactiver(nb)
-
 
     def desactiverTousBoutons(self):
         for pnl in self.listPnlBoutons:

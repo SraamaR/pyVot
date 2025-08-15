@@ -1919,7 +1919,7 @@ class ZoneMontage(wx.Panel):
     def mouseUp(self, event):
         """ Op. à effectuer quand le bouton gauche de la souris est relâché
         """
-#        print "MOUSE UP"
+        #print("MOUSE UP")
 #        x, y = event.m_x, event.m_y
         if self.numElemProv != None :
             if self.affichageEnCours:
@@ -1940,6 +1940,8 @@ class ZoneMontage(wx.Panel):
                 
 #            self.app.statusBar.PopStatusText()
             self.app.GetEventHandler().ProcessEvent(Montage.MtgModifiedEvent(Montage.myEVT_MTG_MODIFIED))
+            self.Redessiner()
+            self.Refresh()
             
             
     #################################################################################
@@ -2220,7 +2222,7 @@ class MenuContextuel(wx.Menu):
                     font.SetWeight(wx.BOLD)
                     titre.SetFont(font)
                     titre.SetTextColour("blue")
-                self.AppendItem(titre)
+                self.Append(titre)
 #                titre.Check(False)
 #                titre.Enable(False)
                 self.AppendSeparator()

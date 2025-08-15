@@ -272,9 +272,11 @@ class FrameRapport(wx.Frame):
     def OnFileSaveAs(self, evt):
         wildcard, types = rt.RichTextBuffer.GetExtWildcard(save=True)
 
-        dlg = wx.FileDialog(self, "Enregistrer le rapport",
-                            wildcard=wildcard,
-                            style=wx.SAVE)
+        dlg = wx.FileDialog(
+            self,
+            message="Enregistrer le rapport",
+            style=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT
+        )
         if dlg.ShowModal() == wx.ID_OK:
             path = dlg.GetPath()
             if path:
@@ -1120,20 +1122,21 @@ class Progression(wx.Frame):
         
         self.SetSizerAndFit(sizer)
         
-        
-        
 #        self.Update()
         
         self.Avancer(1)
         
 
     def Avancer(self, npc):
-        self.count = self.count + npc*self.max//100
+        self.count += npc * self.max // 100
 
         if self.count >= self.max:
+            self.count = self.max
+            self.g1.SetValue(self.count)
             self.Close()
-
-        self.g1.SetValue(self.count)
+        else:
+            self.g1.SetValue(self.count)
+        
         self.Refresh()
 
         

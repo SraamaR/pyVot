@@ -31,7 +31,7 @@ from Images import imageElem #,ImagePlus
 #import Const
 import Affichage
 import wx  
-import  wx.lib.popupctl as  pop
+import wx.lib.popupctl as pop
 
 #############################################################################
 # Liste des éléments
@@ -899,18 +899,11 @@ class Propriete(wx.Dialog):
         
         element = Element(num)
         
-        # Instead of calling wx.Dialog.__init__ we precreate the dialog
-        # so we can set an extra style that must be set before
-        # creation, and then we create the GUI object using the Create
-        # method.
-        pre = wx.PreDialog()
-        pre.SetExtraStyle(wx.DIALOG_EX_CONTEXTHELP)
-        pre.Create(parent, ID, title, pos, size, style)
+        # Add the extra style before constructing the dialog
+        style |= wx.DIALOG_EX_CONTEXTHELP
 
-        # This next step is the most important, it turns this Python
-        # object into the real wrapper of the dialog (instead of pre)
-        # as far as the wxPython extension is concerned.
-        self.PostCreate(pre)
+        # Create the GUI object directly
+        wx.Dialog.__init__(self, parent, ID, title, pos, size, style)
 
         # This extra style can be set after the UI object has been created.
         if 'wxMac' in wx.PlatformInfo and useMetal:
