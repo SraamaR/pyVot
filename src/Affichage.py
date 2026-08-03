@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -30,7 +30,6 @@ import wx
 import Montage
 import Elements
 import Images
-import FenPrincipale
 import Const
 from globdef import *
 #import wx.lib.delayedresult as delayedresult
@@ -1492,7 +1491,7 @@ class ZoneMontage(wx.Panel):
         #===================
         if hachurer:
             if 'GrpAlesage' in elem.item[clef].tag:
-                elem.item[clef].hachurer(wx.BrushFromBitmap(Images.imageAl["H"].bmp))
+                elem.item[clef].hachurer(wx.Brush(Images.imageAl["H"].bmp))
             
             # Hachurage des entretoises
             #===========================
@@ -1987,6 +1986,7 @@ class ZoneMontage(wx.Panel):
             
             
         def changertype(event):
+            import FenPrincipale
             win = FenPrincipale.FenChoixElemPopup(self, elem, self.mtg )
 #            btn = event.GetEventObject()
 #            pos = self.ClientToScreen( (0,0) )

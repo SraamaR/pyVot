@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -29,7 +29,6 @@
 #import Image, ImageTk, GifImagePlugin, PngImagePlugin, ImageFilter, ImageGrab
 from Images import imageElem #,ImagePlus
 #import Const
-import Affichage
 import wx  
 import wx.lib.popupctl as pop
 
@@ -287,7 +286,7 @@ class Element:
             if self.type == "R":
                 return self.cout*2
             elif self.type == "A" or self.type == "J":
-                return self.cout*3/2
+                return self.cout*3//2
         else:
             return self.cout
 
@@ -318,6 +317,7 @@ class Element:
 #        print type(pos)
         # Classe d'item d'élément
         def itemElem(clef):
+            import Affichage
             return Affichage.ItemElem(zoneMtg, mtg, clef)
 
 ##        print "Definition images pour ",self.type, pos

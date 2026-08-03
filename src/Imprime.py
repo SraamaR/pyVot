@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -44,7 +44,6 @@ from wx import ImageFromStream, BitmapFromImage, EmptyIcon
 from wx.lib.embeddedimage import PyEmbeddedImage 
 ##import gui
 from globdef import *
-from Analyse import Couleur
 
 #class RTFWindow(wx.TextCtrl):
 #    def __init__ (self,parent):

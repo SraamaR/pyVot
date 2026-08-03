@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -2222,7 +2222,7 @@ class StructureArbre(object):
         def actualiseSub(elem, struct):
             for nom, lstVal in struct.items():
                 id = lstVal[0]
-                subelem = elem.getiterator(nom)[0]
+                subelem = next(elem.iter(nom))
 #                print nom,"(",id,") : ",subelem.tag, subelem.text
                 if self._treeDataProv[id] is not None: 
                     txt, self._treeDataProv[id] = str2val(subelem.text,self._treeDataProv[id])

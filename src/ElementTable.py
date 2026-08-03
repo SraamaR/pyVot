@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -30,11 +30,14 @@ import  wx.grid as gridlib
 import Icones
 import configparser as cp
 import globdef
-import os, os.path
+import os, os.path, sys
 
 #---------------------------------------------------------------------------
 #FICHIER_ELEMENTS = "Elements.txt"
-PATH_ELEMENTS = os.path.join(globdef.PATH,"Donnees")
+if getattr(sys, "frozen", False):
+    PATH_ELEMENTS = os.path.join(globdef.RESOURCE_PATH, "Donnees")
+else:
+    PATH_ELEMENTS = os.path.normpath(os.path.join(globdef.PATH, "..", "Donnees"))
 EXT_ELEMENTS = '.txt'
 
 #
@@ -632,9 +635,9 @@ class ElementGridFrame(wx.Frame):
         self.parser.read(os.path.join(PATH_ELEMENTS,fichier+EXT_ELEMENTS))
         rlt, arr, jnt = self.parser.getAll()
         
-        rlt.sort(cmp=lambda x,y : cmp(x[0],y[0]))
-        arr.sort(cmp=lambda x,y : cmp(x[0],y[0]))
-        jnt.sort(cmp=lambda x,y : cmp(x[0],y[0]))
+        rlt.sort(key=lambda element: int(element[0]))
+        arr.sort(key=lambda element: int(element[0]))
+        jnt.sort(key=lambda element: int(element[0]))
         
         self.pages[0].table.SetData(rlt)
         self.pages[1].table.SetData(arr)
@@ -659,7 +662,9 @@ class ElementGridFrame(wx.Frame):
         self.parser.setAll(self.pages[0].table.data, 
                            self.pages[1].table.data,
                            self.pages[2].table.data)
-        self.parser.write(open(os.path.join(PATH_ELEMENTS,fichier+EXT_ELEMENTS), 'w'))
+        chemin = os.path.join(PATH_ELEMENTS, fichier + EXT_ELEMENTS)
+        with open(chemin, 'w', encoding='utf-8') as flux:
+            self.parser.write(flux)
         self.combo.Clear()
         myList = [1,2,3,4,5]
         for item in listeFichiersElem():
@@ -817,7 +822,7 @@ class ElementParser(cp.ConfigParser):
 
 if __name__ == '__main__':
     import sys
-    app = wx.PySimpleApp()
+    app = wx.App(False)
     frame = ElementGridFrame(None)
     frame.Show(True)
     app.MainLoop()

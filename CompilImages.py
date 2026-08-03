@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -193,7 +193,7 @@ for idFichierImage in FichiersBoutonsElem.keys():
            imgName = str(idFichierImage),
            append = True, icon = True,
            functionCompatible = True)
-    
+
 for idFichierImage in FichiersImage.keys():
     wx.tools.img2py.img2py(FichiersImage[idFichierImage], fichIcone, 
            imgName = idFichierImage,
@@ -235,4 +235,3 @@ for idFichierImage in BoutonMont.keys():
            imgName = "Bout_"+idFichierImage,
            append = True, icon = True,
            functionCompatible = True)
-    

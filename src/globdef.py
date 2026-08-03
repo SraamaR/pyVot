@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -32,14 +32,29 @@ import os,os.path,sys, wx
 # quel répertoire (par exemple : C:\python .\0.3\PyVot.py) sans que l'utilisation de chemins
 # relatifs ne soit perturbée
 #
-PATH = os.path.dirname(os.path.abspath(sys.argv[0]))
+SOURCE_PATH = os.path.dirname(os.path.abspath(__file__))
+if getattr(sys, "frozen", False):
+    PATH = os.path.dirname(os.path.abspath(sys.executable))
+    RESOURCE_PATH = getattr(sys, "_MEIPASS", SOURCE_PATH)
+else:
+    PATH = SOURCE_PATH
+    RESOURCE_PATH = SOURCE_PATH
+
+installed_resources = os.path.join(sys.prefix, "share", "pyvot")
+if not os.path.isdir(os.path.join(RESOURCE_PATH, "Images")) \
+        and os.path.isdir(os.path.join(installed_resources, "Images")):
+    RESOURCE_PATH = installed_resources
 #PATH = os.path.split(PATH)[0]
 os.chdir(PATH)
 sys.path.append(PATH)
 print("Chemin de l'application :",PATH)
 
-SAMPLEPATH = os.path.join(PATH,"../Exemples")
-HELPPATH = os.path.join(PATH,"../Aide")
+if getattr(sys, "frozen", False):
+    SAMPLEPATH = os.path.join(RESOURCE_PATH, "Exemples")
+    HELPPATH = os.path.join(RESOURCE_PATH, "Aide")
+else:
+    SAMPLEPATH = os.path.join(PATH,"../Exemples")
+    HELPPATH = os.path.join(PATH,"../Aide")
 
 #
 # Définition du numéro de version

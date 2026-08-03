@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -125,7 +125,7 @@ class ZoneResultats(wx.Panel):
 class ZoneImmobAx(ZoneResultats):
     def __init__(self, parent, analyse):
 #        print "Zone ImmobAx"
-        ZoneResultats.__init__(self, parent, analyse),
+        ZoneResultats.__init__(self, parent, analyse)
 #                          style=wx.NO_FULL_REPAINT_ON_RESIZE)
 #        print analyse.chaineAct[0]
         
@@ -180,7 +180,7 @@ class ZoneImmobAx(ZoneResultats):
 
             # On place les widgets ...
             #-------------------------
-            if self.boutons.has_key(tag):
+            if tag in self.boutons:
                 self.AddBouton("1", self.boutons[tag], (1,c), (1,2))
 #                sizerBoutons.Add(self.boutons[tag], (1,c), (1,2), flag = wx.ALIGN_CENTRE)
             
@@ -211,6 +211,8 @@ class ZoneImmobAx(ZoneResultats):
         self.Thaw()
         
         self.Refresh()
+
+
         
     
     def initAffichage(self, zmont = None):
@@ -318,7 +320,7 @@ class ZoneResistance(ZoneResultats):
 
             # On place les widgets ...
             #-------------------------
-            if self.boutons.has_key("_"+tag):
+            if tag is not None and "_" + tag in self.boutons:
                 self.AddBouton("1", self.boutons["_"+tag], (1,c), (1,1), wx.ALIGN_CENTRE)
 
             tag = None
@@ -402,6 +404,7 @@ class ZoneResistance(ZoneResultats):
         self.Thaw()
 
 
+
     def initAffichage(self, zmont = None):
 #        print "initAffichage Resistance"
         for b in self.boutons.values():
@@ -429,7 +432,7 @@ class ZoneResistance(ZoneResultats):
         if id is None: id = event.GetId()
         if id in [10,11]:
             idOpp = "__Chaine"+ str(11-id)
-            if self.boutons.has_key(idOpp):
+            if idOpp in self.boutons:
                 self.boutons[idOpp].SetToggle(False)
                 self.OnClick(id = 41-id, act = False)
             self.parent.animerElemNonArretes(id-10)
@@ -452,7 +455,9 @@ class ZoneResistance(ZoneResultats):
 class ZoneMontabilite(ZoneResultats):
     def __init__(self, parent, analyse):
         ZoneResultats.__init__(self, parent, analyse)
+        self.construire(analyse)
 
+    def construire(self, analyse):
         self.analyse = analyse
         
         if analyse.montageVide:
@@ -470,8 +475,8 @@ class ZoneMontabilite(ZoneResultats):
         # Montabilité de l'ensemble monté "libre"
         #####################################################
         if analyse.cdcf.bagueTournante == "I": ens = u"""arbre"""
-        else: ens = u"""alésage"""
-        self.MakeStaticBox("1", u"Montabilité de l'ensemble " + ens)
+        else: ens = u"""al\u00e9sage"""
+        self.MakeStaticBox("1", u"Montabilit\u00e9 de l\'ensemble " + ens)
         self.MakeBoutonSizer("1",0,0)
         StyleText["Titre2"].applique(self)
         cbs = wx.BoxSizer(wx.HORIZONTAL)
@@ -479,7 +484,7 @@ class ZoneMontabilite(ZoneResultats):
         cb.SetValue(analyse.demonterRltSerres)
         self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBox, cb)
         cbs.Add(cb)
-        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements montés serrés")
+        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements mont\u00e9s serr\u00e9s")
         txt.marge = 40
         cbs.Add(txt)
         self.Add("1", cbs)
@@ -487,7 +492,7 @@ class ZoneMontabilite(ZoneResultats):
         #####################################################
         # Montabilité des roulements sur l'ensemble monté "serré
         #####################################################
-        self.MakeStaticBox("2", u"Montabilité des roulements")
+        self.MakeStaticBox("2", u"Montabilit\u00e9 des roulements")
         self.MakeBoutonSizer("2",0,0)
         StyleText["Titre2"].applique(self)
         if self.analyse.mtg.palier["G"].rlt.num is not None:
@@ -507,7 +512,7 @@ class ZoneMontabilite(ZoneResultats):
 #        cb.SetValue(analyse.demonterRltSerres)
 #        self.Bind(wx.EVT_CHECKBOX, self.EvtCheckBox, cb)
 #        self.Add("3", cb)
-#        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements montés sérrés")
+#        txt = StaticTextWrapped(self, -1, u"Ne pas tenir compte des roulements mont\u00e9s s\u00e9rr\u00e9s")
 #        txt.marge = 40
 #        self.Add("3", txt)#, flag = wx.ALIGN_CENTRE_VERTICAL|wx.ALIGN_LEFT|wx.TOP|wx.BOTTOM|wx.LEFT)
 
@@ -590,6 +595,12 @@ class ZoneMontabilite(ZoneResultats):
         
         self.SetSizerAndFit(self.sizer)
         self.Thaw()
+
+    def Reinitialiser(self, analyse):
+        self.DestroyChildren()
+        self.construire(analyse)
+        self.Layout()
+
         
 
 
@@ -755,7 +766,7 @@ class ZoneEtancheite(ZoneResultats):
         table.SetColLabelValue(0, u"Coté\ngauche")
         table.SetColLabelValue(1, u"Coté\ndroit")
         table.SetRowLabelValue(0, u"Sur Arbre")
-        table.SetRowLabelValue(1, u"Sur Alésage")
+        table.SetRowLabelValue(1, u"Sur Al\u00e9sage")
         
         l, c = 0, 0
         for p in ["G","D"]:
@@ -783,7 +794,7 @@ class ZoneEtancheite(ZoneResultats):
 
         if "DB" in analyse.resultatEtancheite:
             
-            # Résultat principal
+            # R\u00e9sultat principal
             message = analyse.resultatEtancheite["DB"]
             self.Add("2", self.StaticTextMessage(message))
             if "DB+" in analyse.resultatEtancheite.keys():
@@ -791,8 +802,8 @@ class ZoneEtancheite(ZoneResultats):
                     self.Add("2", self.StaticTextMessage(mess, style = 'Message'))
             
             table = Tableau(self)
-            table.SetColLabelValue(0, u"Coté\ngauche")
-            table.SetColLabelValue(1, u"Coté\ndroit")
+            table.SetColLabelValue(0, u"Cot\u00e9\ngauche")
+            table.SetColLabelValue(1, u"Cot\u00e9\ndroit")
             table.SetRowLabelValue(0, u"Vitesse")
             table.SetRowLabelValue(1, u"Facteur PV")
         
@@ -818,7 +829,7 @@ class ZoneEtancheite(ZoneResultats):
             self.tableDyn = table
 #            self.MakeBoutonSizer("2",5,5) 
 #            StyleText["Titre2"].applique(self)
-#            self.AddBouton("2", wx.StaticText(self, -1,u"Coté",style = wx.ALIGN_CENTRE), (0,1), (1,2), wx.ALIGN_CENTRE|wx.EXPAND)
+#            self.AddBouton("2", wx.StaticText(self, -1,u"Cot\u00e9",style = wx.ALIGN_CENTRE), (0,1), (1,2), wx.ALIGN_CENTRE|wx.EXPAND)
 #            if not analyse.resultatEtancheite["J"]["G"]["Ar"]:
 #                self.AddBouton("2", wx.StaticText(self, -1,"gauche",style = wx.ALIGN_CENTRE), (1,1), (1,1), wx.ALIGN_CENTRE|wx.EXPAND)
 #            if not analyse.resultatEtancheite["J"]["D"]["Ar"]:
@@ -846,16 +857,18 @@ class ZoneEtancheite(ZoneResultats):
 #                    l = 2
         else:
             pass
-        # Compatibilité lubrifiant
+        # Compatibilit\u00e9 lubrifiant
         ########################################################################
-        self.MakeStaticBox("3", u"Compatibilité lubrifiant")
+        self.MakeStaticBox("3", u"Compatibilit\u00e9 lubrifiant")
 
         message = analyse.resultatEtancheite["C"]
         self.Add("3", self.StaticTextMessage(message))
         
         self.SetSizerAndFit(self.sizer)
-        
+
         self.Thaw()
+
+
 
 
     def initAffichage(self, zmont = None):
@@ -893,7 +906,7 @@ class ZoneEtancheite(ZoneResultats):
         if id is None: id = event.GetId()
         if id in [10,11]:
             idOpp = "__Chaine"+ str(11-id)
-            if self.boutons.has_key(idOpp):
+            if idOpp in self.boutons:
                 self.boutons[idOpp].SetToggle(False)
                 self.OnClick(id = 41-id, act = False)
             self.parent.animerElemNonArretes(id-10)
@@ -1256,7 +1269,20 @@ class TBAnalyse(wx.Treebook):
 #        self.mtgComplet.mtg.rafraichirAffichage(self.zoneMtg)
         self.zoneMtg.Redessiner(self.analyse)
         event.Skip()
+
+    def Reinitialiser(self):
+        self.Freeze()
+
+        # Rerun the analysis to get fresh data
+        self.InitialiserAnalyse(self.mtgComplet, self.zoneMtg, self.analyse)
+
+        # Reinitialiser each page
+        for i in range(self.GetPageCount()):
+            page = self.GetPage(i)
+            if hasattr(page, 'Reinitialiser'):
+                page.Reinitialiser(self.analyse)
         
+        self.Thaw()
 
     def OnPageChanged(self, event = None):
 #        print "Page changed"

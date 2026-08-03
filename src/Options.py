@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -82,14 +82,13 @@ class Options:
 
     def __repr__(self):
         t = "Options :\n"
-        for o in self.optAnalyse.items() + self.optGenerales.items() + self.optImpression.items():
-            if type(o[1]) == int:
-                tt = str(o[1])
-            elif type(o[1]) == bool:
-                tt = str(o[1])
-            else:
-                tt = o[1]
-            t += "\t" + o[0] + " = " + tt +"\n"
+        options = (
+            list(self.optAnalyse.items())
+            + list(self.optGenerales.items())
+            + list(self.optImpression.items())
+        )
+        for nom, valeur in options:
+            t += "\t{} = {}\n".format(nom, valeur)
         return t
     
     ############################################################################
@@ -115,8 +114,8 @@ class Options:
 
         for titre,dicopt in self.typesOptions.items():
             config.add_section(titre)
-            for opt in dicopt.items():
-                config.set(titre, opt[0],opt[1])
+            for nom, valeur in dicopt.items():
+                config.set(titre, nom, str(valeur))
             
             
 #        config.add_section('Options generales')
@@ -132,7 +131,8 @@ class Options:
 #        config.add_section('Dossiers')
 #        config.set('Dossiers', 'repcourant', self.repertoireCourant.get())
         
-        config.write(open(self.fichierOpt,'w'))
+        with open(self.fichierOpt, 'w', encoding='utf-8') as fichier:
+            config.write(fichier)
 
 
 
@@ -143,7 +143,7 @@ class Options:
 #        PATH=os.path.dirname(os.path.abspath(sys.argv[0]))
         os.chdir(globdef.PATH)
         config = configparser.ConfigParser()
-        config.read(self.fichierOpt)
+        config.read(self.fichierOpt, encoding='utf-8')
         
         for titre in self.typesOptions.keys():
             for titreopt in self.typesOptions[titre].keys():
@@ -562,7 +562,7 @@ class FileSelectorCombo(wx.ComboCtrl):
         font.SetWeight(wx.FONTWEIGHT_BOLD)
         dc.SetFont(font)
         tw,th = dc.GetTextExtent(label)
-        dc.DrawText(label, (bw-tw)/2, (bw-tw)/2)
+        dc.DrawText(label, (bw-tw)//2, (bh-th)//2)
         del dc
 
         # now apply a mask using the bgcolor

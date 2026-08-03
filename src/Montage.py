@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -27,7 +27,6 @@
 
 import wx,os
 import Images
-import FenPrincipale
 from Elements import *
 import configparser
 import xml.etree.ElementTree as ET
@@ -256,6 +255,7 @@ class Palier:
         # Taille du palier
         self.taille = taille
         
+        import FenPrincipale
         self._tree = FenPrincipale.StructureArbre(
         # Structure de l'arbre
         #---------------------
@@ -426,6 +426,7 @@ class Montage:
         # Un montage = 2 paliers
         self.palier = {"G" : Palier(), "D" : Palier()}
         
+        import FenPrincipale
         self._tree = FenPrincipale.StructureArbre(
         # Structure de l'arbre
         #---------------------
@@ -561,7 +562,7 @@ class Montage:
             if self.palier[p].jnt["Ar"].necessiteChapeauCentre() and support[p] == 0:
                 c = Element(100, self.palier[p].taille).Cout()
             elif self.palier[p].jnt["Al"].num != None and support[p] == 0:
-                c = Element(100, self.palier[p].taille).Cout()*2/3
+                c = Element(100, self.palier[p].taille).Cout()*2//3
             else:
                 c = 0
             self.devis.append((p,c))
@@ -2049,14 +2050,8 @@ class FenChoixElementaSupprimer(wx.Dialog):
         # Liste des éléments à supprimer
         self.Selection = dicElem
        
-        pre = wx.PreDialog()
-        pre.SetExtraStyle(wx.DIALOG_EX_CONTEXTHELP)
-        pre.Create(parent, -1, u"Incompatibilité")
-        self.PostCreate(pre)
-
-        # This extra style can be set after the UI object has been created.
-        if 'wxMac' in wx.PlatformInfo and useMetal:
-            self.SetExtraStyle(wx.DIALOG_EX_METAL)
+        wx.Dialog.__init__(self, parent, -1, u"Incompatibilité")
+        self.SetExtraStyle(self.GetExtraStyle() | wx.DIALOG_EX_CONTEXTHELP)
 
         sizer = wx.BoxSizer(wx.VERTICAL)
         
@@ -2150,4 +2145,3 @@ class FenChoixElementaSupprimer(wx.Dialog):
 #        self.dicElem = {"Ar" : StringVar(),
 #                        "Al" : StringVar()}
 #        self.destroy()
-

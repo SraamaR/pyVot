@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -545,7 +545,7 @@ class Indice:
         self.conv()
     
     def __repr__(self):
-        return self.val
+        return str(self.val)
 
     def conv(self):
         ch = {0 : u'très faible',

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##This file is part of PyVot
 #############################################################################
@@ -34,7 +34,7 @@ import globdef
 import os.path
 
 # Dossiers ############################################################################
-dosImg = {'root'       : "Images",
+dosImg = {'root'       : os.path.join(globdef.RESOURCE_PATH, "Images"),
           'arrets'     : "Arrets",
           'roulements' : "Roulements",
           'boutons'    : "Boutons",
@@ -101,7 +101,12 @@ def Img_BoutonMont(key, ajout = False):
         mdc.Clear()
         si = wx.Bitmap(wx.ImageFromBitmap(lst["SensInterditR"]).AdjustChannels(1.0, 1.0, 1.0, 0.8))
         mdc.DrawBitmap(ico, 0, 0, True)
-        mdc.DrawBitmap(si, (ico.GetWidth() - si.GetWidth())/2,(ico.GetHeight() - si.GetHeight())/2, True)
+        mdc.DrawBitmap(
+            si,
+            (ico.GetWidth() - si.GetWidth()) // 2,
+            (ico.GetHeight() - si.GetHeight()) // 2,
+            True,
+        )
         mdc.SelectObject(wx.NullBitmap)
         
         mask = wx.Mask(bmp, wx.Colour(255,255,254, 255))
@@ -319,7 +324,7 @@ class ImagePlus:
 #        self.conv2Bmp()
 
     def silhouetteTk(self):
-        img = self.img.point(lambda i: i / 5)
+        img = self.img.point(lambda i: i // 5)
 #        self.tk = ImageTk.PhotoImage(img)
         
     def copie(self):
@@ -696,7 +701,7 @@ def ombrer(bmp, e = 4):
     maskDC.SelectObject(wx.NullBitmap)
 #    bmpMask.SetMask(wx.Mask(bmpMask, wx.WHITE))
 
-    ombreBmp = bmpMask.ConvertToImage().ConvertToMono(255, 255, 255).Blur(e/2).ConvertToBitmap()
+    ombreBmp = bmpMask.ConvertToImage().ConvertToMono(255, 255, 255).Blur(e//2).ConvertToBitmap()
     imageBmp = bmpMask.ConvertToImage().ConvertToMono(255, 255, 255).ConvertToBitmap()
     imageBmp.SetMask(wx.Mask(imageBmp, wx.WHITE))
 #    imageBmp.InitAlpha()
